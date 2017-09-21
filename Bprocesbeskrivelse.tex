@@ -1,5 +1,3 @@
-\documentclass[main.tex]{subfiles}
-\begin{document}
 
 \chapter*{Procesbeskrivelse}
 \newpage
@@ -7,18 +5,166 @@
 
  \chapter{Forord} 
  \chapter{Indledning}
- I dette dokument er det muligt at læse om bachelor projektets opbygning og forløb. 
- \chapter{Gruppedannelse}
- \chapter{Samarbejdsaftale}
- \chapter{Udviklingsforløb}
- \chapter{Projektledelse}
- \chapter{Arbejdsfordeling}
- \chapter{Planlægning}
- \chapter{Projektadministration}
- \chapter{Møder}
- \chapter{Konflikthåndtering}
- \chapter{Referenceliste}
- \bibliography{Mendeley}
+ I dette bilag er det muligt at læse om bachelorprojektets opbygning og dens gennemførte proces. Bachelorprojektet er opbygget efter bestemte modeller fra læring igennem studietiden. Da dette er et projekt kræver det forberedelse og struktur. Derfor er der beskrevet hele processen om hvordan gruppen er opbygget, gruppens aftaler og samarbejde.
+
+\chapter{Gruppedannelse}
+Gruppen består af to gruppemedlemmer. Begge medlemmer er sundhedsteknolgistuderende. Gruppen er dannet på en fælles interesse for projektets beskrivelse og de områder der skal arbejdes med såsom udvikling af software og hardware. Hvor gruppen finder en narturlig deling af disse områder pga. forskellig interesse. 
+
+Gruppens forskellighed er et potentiale for gruppen og de er vigtig at der bliver lyttet til hinandens forslag og idèer. Så gruppen er åbne for andres meninger, men samtidigt ikke være ukritiske. Det er vigtig at man tør sige sine meninger for ellers kan det ske at nogle gode idéer og tanker går tabt.
+
+Der er for begge medlemmer været mulighed for at ytre sine forventninger til projektet og ambitionsniveau. Hvilket har skabt et fælles indtryk af projektet og hvad der forventes. Der er samtidig aftalt hvor vi skal mødes og hvornår på dagen med faste start og slut tidspunkter. Selv der  kun er to gruppemedlemmer er der delt roller ud såsom referent til møder og ordstyrer, som skifter fra gang til gang.
+
+De konkrete aftaler og roller er beskrevet i BilagXX - samarbejskontrakt. 
+
+\chapter{Samarbejdsaftale}
+På baggrund af møder i gruppen og med vejleder er der skrevet en samarbejdsaftale. SE BilagXX - Samarbejdsaftale. Her er der beskrevet i bestemte punkter hvordan gruppen skal  arbejde og skal forholde sig under hvert punkt. Denne aftale understøtter således at der ikke opstår misforståelser i gruppen. Den er blevet underskrevet af alle gruppens medlemmer.  
+
+
+\chapter{Udviklingsforløb}
+
+\tikzset{
+>=stealth',
+  punktchain/.style={
+    rectangle, 
+    rounded corners, 
+    % fill=black!10,
+    draw=black, very thick,
+    text width=10em, 
+    minimum height=3em, 
+    text centered, 
+    on chain},
+  line/.style={draw, thick, <-},
+  element/.style={
+    tape,
+    top color=white,
+    bottom color=blue!50!black!60!,
+    minimum width=8em,
+    draw=blue!40!black!90, very thick,
+    text width=10em, 
+    minimum height=3.5em, 
+    text centered, 
+    on chain},
+  every join/.style={->, thick,shorten >=1pt},
+  decoration={brace},
+  tuborg/.style={decorate},
+  tubnode/.style={midway, right=2pt},
+}
+
+\begin{tikzpicture}
+  [node distance=.8cm,
+  start chain=going below,]
+     \node[punktchain, join] (projektb) {Projektbeskrivelse};
+     \node[punktchain, join] (moscow)      {MoSCoW analyse};
+     \node[punktchain, join] (litteratur)      {Litteratursøgning};
+     \node[punktchain, join] (krav) {Kravspecifikation};
+     \node[punktchain, join] (emperi) {Accepttestspecifikation};
+      \node (asym) [punktchain ]  {Asymmetrisk information};
+      \begin{scope}[start branch=venstre,
+        %We need to redefine the join-style to have the -> turn out right
+        every join/.style={->, thick, shorten <=1pt}, ]
+        \node[punktchain, on chain=going left, join=by {<-}]
+            (risiko) {Risiko og gamble};
+      \end{scope}
+      \begin{scope}[start branch=hoejre,]
+      \node (finans) [punktchain, on chain=going right] {Det finansielle system};
+    \end{scope}
+  \node[punktchain, join,] (disk) {Det imperfekte finansielle marked};
+  \node[punktchain, join,] (makro) {InvesteringsmÃ¦ssige konsekvenser};
+  \node[punktchain, join] (konk) {Konklusion};
+  % Now that we have finished the main figure let us add some "after-drawings"
+  %% First, let us connect (finans) with (disk). We want it to have
+  %% square corners.
+  \draw[|-,-|,->, thick,] (finans.south) |-+(0,-1em)-| (disk.north);
+  \draw[|-,-|,->, thick,] (moscow.west) |-+(0,-1em)-| (krav.west);
+  % Now, let us add some braches. 
+  %% No. 1
+  \draw[tuborg] let
+    \p1=(risiko.west), \p2=(finans.east) in
+    ($(\x1,\y1+2.5em)$) -- ($(\x2,\y2+2.5em)$) node[above, midway]  {Teori};
+  %% No. 2
+  \draw[tuborg, decoration={brace}] let \p1=(disk.north), \p2=(makro.south) in
+    ($(2, \y1)$) -- ($(2, \y2)$) node[tubnode] {Analyse};
+  %% No. 3
+  \draw[tuborg, decoration={brace}] let \p1=(projektb.north), \p2=(litteratur.south) in
+    ($(2.5, \y1)$) -- ($(2.5, \y2)$) node[tubnode] {Projektformulering};
+    
+  \end{tikzpicture}
+  
+ \textbf{Forprojekt}\\
+ 
+ Efter udvælgelsen af projektet Synkerefleksmonitor er der blevet lavet et forprojekt. På bag grund af opgavebeskrivelsen blev der lavet et udkast til kravspecifikationen. Her blev der brugt MoSCow metoden. Metoden resultereret i hvilke krav vi skulle have løst i dette projekt, men også dem som vi måske ville kunne nå afhængig af tid og kompetencer og til slut dem vi ikke ville kunne lave, men kunne bruges til en fremtid og perspektivering af en videreudvikling af systemet. Revision historikken af MoSCoW analysen kan ses i BilagXX. Fra første udkast til den endelige version med ændringer undervejs. Den endelig Moscow analysen vil være en del af den endelige kravspecifikation. Efter MoSCow analysen var det nu muligt at lave en use case og et udkast til designsammensætningen af software og hardware, da vi kendte behovet igennem opgavebeskrivelsen. 
+ 
+Dernæst blev der udført et udkast til projektplan, hvor der blev overvejet hvilke eksperimenter og teknologiet projektet ville anvende igennem hele processen. Dette udkast indeholder alt fra at byggebioimdedans på fumlebræt, indsamle synkefrekvenser til brug af Latex til rapportskrivning og google drive til dokument håndtering. 
+ 
+ 
+ 
+ 
+ Udkast til projektplan - herunder beskrivelser af hvilke eksperimenter, teknologier mm, der forventes udarbejdet i løbet af afgangsprojektet.\\
+ 
+ Undersøgelse af tilsvarende projekter og relevant litteratur\\
+ 
+ Aftale om forventet arbejdsted og tid\\
+ 
+ Konklusion på det indledende arbejde med forprojektet.\\
+ 
+ Use case\\
+ 
+ Software og hardware (diagram)\\
+ 
+ skabelon til mødeindkaldelse og referat\\
+ 
+ Tidsplan i Teamgantt\\
+ 
+ samarbejdskontrakt\\
+ 
+ Konklusion\\
+ 
+ 
+ 
+  \textbf{Projektbeskrivelse}\\
+  
+  Problemformulering
+  \textbf{Moscow}\\
+  \textbf{Litteratursøgning}\\
+  \textbf{grading}\\
+  \textbf{Kravspesification (moscow)}\\
+  \textbf{use cases}\\
+  \textbf{Acceptestspecifikation}\\
+  \textbf{Projektbeskrivelse}\\
+  \textbf{Projektbeskrivelse}\\
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Projektledelse}
+\chapter{Arbejdsfordeling}
+skriv bare løs
+\chapter{Planlægning}
+logbog
+refleksion
+\chapter{Projektadministration}
+\chapter{Møder}
+\chapter{Konflikthåndtering}
+\chapter{Referenceliste}
+\bibliography{Mendeley}
 
 
 
@@ -103,4 +249,3 @@
 
 
 
-\end{document}
