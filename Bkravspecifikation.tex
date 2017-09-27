@@ -29,8 +29,19 @@
 \chapter{Indledning}
 På baggrund af krav fra Hammel Neurocenter, er denne
 kravspecifikation blevet udarbejdet. Kravspecifikationen har til formål at specificere
-kravene til synkerefleksmonitor. Dette bacelor projekt tager udgangspunkt i en BI og EMG måler, hvortil der
-er en række aktører, som interagerer med systemet. Dette er beskrevet yderligere nedenfor.
+kravene til synkerefleksmonitor. Dette bacelor projekt tager udgangspunkt i en BI og EMG måler. Disse krav er blevet prioteret i MoSCoW analyse, hvor fra det er "must" krav som i første gang vil blive realiseret. 
+
+Kravspecifikationen består af en systembeskrivelse, som beskriver det samlet system og elementer. Dernæst en beskrivelse af projektets funktionelle krav. Beskrivelse af
+aktører, samt hvordan de intergerer. Derudover også beskrivelse af de relevante use-cases
+samt systemets undtagelser. Desuden er systemets ikke-funktionelle krav også beskrevet,
+dette gennem systembeskrivelsesmetoden "(F)URPS+".
+
+Til denne kravspecifikation er der lavet en accepttest, som primært har til formål at teste
+de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten beskrives efterfølgende
+kronologisk fra use case 1 til ikke-funktionelle krav, for at i sidste ende at kunne
+dokumentere synkerefleksmonitors funktionalitet. Accepttesten kan ses i bilag X - Accepttestspecifikation.
+
+
 
 \chapter{Kravspecifikation}
 \section{Versionshistorik}
@@ -53,6 +64,7 @@ er en række aktører, som interagerer med systemet. Dette er beskrevet yderlige
 
 
 \section{Systembeskrivelse}
+
 \subsection{Aktør kontekstdiagram}
 
 \begin{figure}[H]
@@ -63,15 +75,22 @@ er en række aktører, som interagerer med systemet. Dette er beskrevet yderlige
 \label{Use case diagram}
 \end{figure}  
 
-
+\subsection{Aktørbeskrivelse}
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{l l X}
      Aktørnavn	&	Type		&	Beskrivelse \\ \midrule
-     Forsker   	& 	Primær  	& 	Forskeren starter måling, giver besked om at data ønskes gemt, navngiver målingen, samt bestemmer kalibreringskoefficient  \\ 			  \addlinespace[2mm]
-     Database	&	Sekundær	&	Databasen er hvor rådata bliver gemt \\   \addlinespace[2mm]
-     Måleobjekt	&	Sekundær	&	Måleobjektet, hvorfra blodtrykssignalet indhentes. Måleobjektet er tilkoblet transduceren.
-     I den endelige version er måleobjektet In Vitro maskinen, som findes i Cave Lab
-     Under løbende test i udviklingsprocessen benyttes Analog Discovery og Waveform \\   \addlinespace[2mm]
+     Sundhedspersonale   	& 	Primær  	& 	Sundhedspersonalet tilkobler bioimpedans måleren og EMG måleren til måleobjektet vha. elektroder, samt starter og afslutter målingen.Yderligere interagerer sundhedspersonalet med en brugergrænseflade.     \\ 			  \addlinespace[2mm]
+     Bioimpedans måler	&	Sekundær	& Bioimpedans måleren anvendes til at måle bioimpedans signaler fra måleobjektet  	 \\   \addlinespace[2mm]
+
+  EMG måler	&	Sekundær	&	EMG måleren anvendes til at måle EMG signaler fra måleobjektet.
+     \\   \addlinespace[2mm]
+    
+    Måleobjekt	&	Sekundær	&	Måleobjektet er kilden  hvorfra bioimpedans signalerne indhentes. Måleobjektet er tilkoblet til både bioimpedans måleren og EMG måleren.
+     \\   \addlinespace[2mm]
+     
+      
+    PC	&	Sekundær	&	Denne brugergrænseflade bruges til at visualisere de målte signaler i graf form.
+     \\   \addlinespace[2mm]
      
    
      \bottomrule                                                                                                                   
@@ -83,20 +102,28 @@ er en række aktører, som interagerer med systemet. Dette er beskrevet yderlige
 
 
 \section{Funktionelle krav}
-\subsection{Use case diagram}
+\subsection{Use Case diagram}
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\textwidth]
 {Figure/usecasediagram}}
-\caption{Use case diagram}
+\caption{Use Case diagram}
 \label{Use case diagram}
 \end{figure}
 
 Diagrammet i figur \ref{Use case diagram} viser systemets fire Use Cases: Start Bi måling, Start EMG måling, Beregn BI, Vis BI og EMG. Herunder følger en nærmere
 beskrivelse af de enkelte Use Cases, gennem et fully-dressed Use Case skema.
 
-\subsection{Use cases - fully dressed}
+
+
+
+Systemet består af en softwaredel, en A/D konverter, BI måler, EMG måler med tilhørende hardware.
+Systemet gør det muligt at foretage en BI og EMG måling på et måleobjekt. BI og EMG målingerne bliver sendt ind i systemet via A/D konverter, hvor signalet vises i Matlab. I softwaren er det muligt at få simultane signaler på en graf og samtidig benyttes der algoritme for at vise synkefrekvensen. Denne algoritme undersøger signalet for, ved en omregning fra den kendte spænding og strøm, impedans og dens ændringer som der ligner et synk.
+Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra systemet aktiveres.
+
+
+\subsection{Use Cases - fully dressed}
 
 \begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC1%
 	{\large \textbf{Use Case 1}} && \\
