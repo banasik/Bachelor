@@ -1,28 +1,32 @@
 \chapter{Krav}
 
 \begin{table}[H]
-  \centering
-  
-  \resizebox{\textwidth}{!}{\begin{tabular}{c|c}
-    \toprule
-    \rowcolor{Gray}
-    \textbf{Must have} & \textbf{Should have}\\
-    \midrule
-    -Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler på raske personer & -Validere bioimpedans sensoren op i mod kommercielt BI måler \\
-    -Systemet skal have EMG sensor, der kan måle EMG signaler &  \\
-    -Systemet skal kunne Vise BI og EMG signaler på en graf (offline) i Matlab &\\
-   
-    \midrule
+
+\begin{tabularx}{\textwidth}{X|X}
+\rowcolor{Gray}
+\toprule
+\textbf{Must have} & \textbf{Should have} \\
+\hline \\
+\textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{5. }Validere bioimpedans sensoren op imod kommerciel BI måler \\[5ex]
+\textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{6. }Matlab GUI, der kan præsentere BI og EMG signaler \\[3ex]
+\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \textbf{7. }Både BI og EMG målinger skal køre simultant\\[4ex]
+\textbf{4. }Systemet skal kunne beregne BI på baggrund af målte spændinger & \\[4ex]
+
+
+\midrule
     \rowcolor{Gray}
     \textbf{Could have} & \textbf{Would have}\\
-    \midrule
-    & -Mobilt synkerefleksmonitor\\
-    -Real-time visning af EMG- og BI signalerne & -EMG -og BI signalerne overføres til EPJ  \\
-    -Machine Learning for at diskriminere mellem synkerefleks og støj(tale og hoste)& -Tage højde for anatomiske forskelle mellem kønnene\\
-    \bottomrule
-  \end{tabular}}
-  \caption{MoSCoW analyse af synkerefleksmonitor}
-  \label{tab:table1}
+    \midrule \\
+\textbf{8. }Real-time visning af EMG- og BI signalerne & \textbf{10. }Mobilt synkerefleksmonitor med touch skærm\\[4ex]
+\textbf{9. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste)& \textbf{11. }EMG og BI signalerne overføres til EPJ  \\[4ex]
+& \textbf{12. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
+
+\end{tabularx}
+
+\caption{MoSCoW analyse af synkerefleksmonitor}
+  \label{tab:moscow}
 \end{table}
+
+
 
 
