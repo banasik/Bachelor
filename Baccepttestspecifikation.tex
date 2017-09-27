@@ -1,0 +1,51 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\chapter*{Bilag - Accepttestspecifikation}
+
+\section{Versionshistorik}
+\begin{longtabu} to \linewidth{@{}l l l X[l]@{}}
+    Version 	&    Dato 		&    Ansvarlig 	&    Beskrivelse\\[-1ex]
+    \midrule
+    0.1 		&  	21-09-2015 	&   MHNK og MBA 	&   Oprettelse og udfyldning af kravspecifikation \\
+	0.2			&	24-09-2015	&	DHC og ABH	&	Omskrivning af UC1 - UC5 \\
+	
+    
+\label{version_Systemark}
+\end{longtabu}
+
+
+\section{Accepttest af funktionelle krav}
+
+
+
+\section{Accepttest af Use Cases}
+
+
+%Use case 1 acceptest
+\subsection{Use Case 1}
+\textbf{Log ind}
+
+\begin{longtabu} to \linewidth{@{} c X[j] X[j] X[j] l@{}}
+    ~ &	Test &    Forventet resultat &		Faktiske observationer &    Godkendt\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+    1. &Indtast username "moh04" samt password; 1234 &   Username- og passwordboks bliver udfyldt  &   Som forventet  &		{\Huge \checkmark}
+    \\
+    2. &Tryk på "Login"\--knappen  &    Login bliver godkendt. Login-vinduet lukkes ned mens CPR-vinduet åbnes  &    Som forventet &		{\Huge \checkmark}
+	\\ \midrule
+	~ &\textit{Exentions} & ~ & ~ & 
+	\\ \midrule	
+    2a. &	Username eller password er forkert &    Besked vises på skærmen med tekst, der informerer om, at brugernavn eller password er forkert  &   Som forventet  &		{\Huge \checkmark}
+ \\ \bottomrule
+ 
+\caption{Accepttest af Use Case 1.}\\
+\label{AT_UC1}
+\end{longtabu}
+
+\section{Accepttest af ikke-funktionelle krav}
+
+
+
+
+\end{document}
