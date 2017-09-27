@@ -1,18 +1,52 @@
 \documentclass[main.tex]{subfiles}
 \begin{document}
-\chapter*{Bilag - Kravspecifikation}
+\begin{titlingpage}
+\begin{center}
 
+~ \\[3cm]
+
+%\includegraphics[width=0.6\textwidth]{figurer/ASE}~\\[1cm]
+
+\textsc{\LARGE Bilag X}\\[1.5cm]
+
+%\textsc{\Large Sundhedsteknologi}\\
+%\textsc{\Large 3. semesterprojekt}\\[0.5cm]
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}\\
+[0.5cm]{\Huge Kravspecifikation}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+\end{center}
+\vfill
+\begin{center}
+{\large 16. december 2017}
+\end{center}
+\end{titlingpage}
+
+\newpage
+\tableofcontents*
+
+
+\chapter{Indledning}
+På baggrund af krav fra Hammel Neurocenter, er denne
+kravspecifikation blevet udarbejdet. Kravspecifikationen har til formål at specificere
+kravene til synkerefleksmonitor. Dette bacelor projekt tager udgangspunkt i en BI og EMG måler, hvortil der
+er en række aktører, som interagerer med systemet. Dette er beskrevet yderligere nedenfor.
+
+\chapter{Kravspecifikation}
 \section{Versionshistorik}
+\begin{table}[H]
+
 \begin{longtabu} to \linewidth{@{}l l l X[l]@{}}
     Version 	&    Dato 		&    Ansvarlig 	&    Beskrivelse\\[-1ex]
     \midrule
-    0.1 		&  	21-09-2015 	&   MHNK og MBA 	&   Oprettelse og udfyldning af kravspecifikation \\
-	0.2			&	24-09-2015	&	DHC og ABH	&	Omskrivning af UC1 - UC5 \\
-	
+    0.1 		&  	26-09-2017 	&   MBA 	&   Oprettelse og udfyldning af UC1 og Use case diagram \\
+	0.2			&	27-09-2017	&	MBA \& MOH	&	Udfyldning af UC2 - UC4 og aktør kontekstdiagram tilføjet\\
     
 \label{version_Systemark}
 \end{longtabu}
-
+ \caption {Versionshistorik}
+    \label{tab:Versionshistorik}
+\end{table}
 
 
 
@@ -25,9 +59,27 @@
 \centering
 {\includegraphics[width=\textwidth]
 {Figure/AktoerKontextDiagram}}
-\caption{Use case diagram}
+\caption{Aktør-kontext diagram}
 \label{Use case diagram}
-\end{figure}
+\end{figure}  
+
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{l l X}
+     Aktørnavn	&	Type		&	Beskrivelse \\ \midrule
+     Forsker   	& 	Primær  	& 	Forskeren starter måling, giver besked om at data ønskes gemt, navngiver målingen, samt bestemmer kalibreringskoefficient  \\ 			  \addlinespace[2mm]
+     Database	&	Sekundær	&	Databasen er hvor rådata bliver gemt \\   \addlinespace[2mm]
+     Måleobjekt	&	Sekundær	&	Måleobjektet, hvorfra blodtrykssignalet indhentes. Måleobjektet er tilkoblet transduceren.
+     I den endelige version er måleobjektet In Vitro maskinen, som findes i Cave Lab
+     Under løbende test i udviklingsprocessen benyttes Analog Discovery og Waveform \\   \addlinespace[2mm]
+     
+   
+     \bottomrule                                                                                                                   
+    \end{tabularx}
+    \caption {Aktørbeskrivelse}
+    \label{tab:aktoerbeskrivelse}
+	
+\end{table}
 
 
 \section{Funktionelle krav}
@@ -41,12 +93,15 @@
 \label{Use case diagram}
 \end{figure}
 
+Diagrammet i figur \ref{Use case diagram} viser systemets fire Use Cases: Start Bi måling, Start EMG måling, Beregn BI, Vis BI og EMG. Herunder følger en nærmere
+beskrivelse af de enkelte Use Cases, gennem et fully-dressed Use Case skema.
+
 \subsection{Use cases - fully dressed}
 
 \begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC1%
 	{\large \textbf{Use Case 1}} && \\
 	\toprule
-	Scenarie 				&&	Hovedscenarie\\
+	Scenarie 				&&	Hovedscenarie\\  
 	Navn 					&& 	Start BI måling\\
 	Mål 					&& 	At få foretaget en BI måling\\
 	Initiering 				&& 	Startes af Sundhedspersonale\\
@@ -182,8 +237,9 @@
 \item Softwaren skal opbygges med lav kobling
 \end{enumerate}
 
-
-
-
+\newpage
+\listoffigures
+\newpage
+\listoftables
 
 \end{document}
