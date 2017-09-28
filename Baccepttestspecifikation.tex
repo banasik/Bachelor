@@ -7,7 +7,7 @@
 
 %\includegraphics[width=0.6\textwidth]{figurer/ASE}~\\[1cm]
 
-\textsc{\LARGE Bilag X}\\[1.5cm]
+\textsc{\LARGE Bilag 9}\\[1.5cm]
 
 %\textsc{\Large Sundhedsteknologi}\\
 %\textsc{\Large 3. semesterprojekt}\\[0.5cm]
@@ -63,22 +63,26 @@ det, at den ikke er godkendt.
 
 
 
-%Use case 1 acceptest
+
 \subsection{Use Case 1}
-\textbf{Start BI måling}
+\textbf{Start BI-måling}
 
 \begin{longtabu} to \linewidth{@{} c X[j] X[j] X[j] l@{}}
     ~ &	Test &    Forventet resultat &		Faktiske observationer &    Godkendt\\[-1ex]
     \midrule
     ~ &\textit{Hovedscenarie} & ~ & ~ &
     \\ \midrule
-    1. &Indtast username "moh04" samt password; 1234 &   Username- og passwordboks bliver udfyldt  &   Som forventet  &		%{\Huge \checkmark}
+    1. &Tryk på knappen "Start BI-måling". &   BI-målingen begynder.  &     &		%{\Huge \checkmark}
     \\
-    2. &Tryk på "Login"\--knappen  &    Login bliver godkendt. Login-vinduet lukkes ned mens CPR-vinduet åbnes  &    Som forventet &		%{\Huge \checkmark}
+    2. &Tryk på knappen "Stop måling" efter den ønskede måling er færdige.  &    Målingen stopper og gemmes i en fil.  &     &		%{\Huge \checkmark}
+    \\
+    3. &Verificer at filen er gemt.  &    Filen eksisterer i Matlab  &     &		%{\Huge \checkmark}
 	\\ \midrule
-	~ &\textit{Exentions} & ~ & ~ & 
+	~ &\textit{Undtagelser} & ~ & ~ &
+    \\ \midrule
+    3a. &Systemet har ikke gemt målingen  &    Filen eksisterer ikke i Matlab &     &		%{\Huge \checkmark}
 	\\ \midrule	
-    2a. &	Username eller password er forkert &    Besked vises på skærmen med tekst, der informerer om, at brugernavn eller password er forkert  &   Som forventet  &		%{\Huge \checkmark}
+    
  \\ \bottomrule
  
 \caption{Accepttest af Use Case 1.}\\
@@ -87,20 +91,22 @@ det, at den ikke er godkendt.
 
 
 \subsection{Use Case 2}
-\textbf{Start EMG måling}
+\textbf{Start EMG-måling}
 
 \begin{longtabu} to \linewidth{@{} c X[j] X[j] X[j] l@{}}
     ~ &	Test &    Forventet resultat &		Faktiske observationer &    Godkendt\\[-1ex]
     \midrule
     ~ &\textit{Hovedscenarie} & ~ & ~ &
     \\ \midrule
-    1. &Indtast username "moh04" samt password; 1234 &   Username- og passwordboks bliver udfyldt  &   Som forventet  &		%{\Huge \checkmark}
+    1. &Tryk på knappen "Start EMG-måling" &   EMG-målingen begynder  &    &		%{\Huge \checkmark}
     \\
-    2. &Tryk på "Login"\--knappen  &    Login bliver godkendt. Login-vinduet lukkes ned mens CPR-vinduet åbnes  &    Som forventet &		%{\Huge \checkmark}
+    2. &Tryk på knappen "Stop måling" efter den ønskede måling er færdige.  &    Måling stopper og gemmes i en fil  &     &		%{\Huge \checkmark}
+     \\
+    3. &Verificer at filen er gemt.  &    Filen eksisterer i Matlab  &     &		%{\Huge \checkmark}
 	\\ \midrule
 	~ &\textit{Exentions} & ~ & ~ & 
 	\\ \midrule	
-    2a. &	Username eller password er forkert &    Besked vises på skærmen med tekst, der informerer om, at brugernavn eller password er forkert  &   Som forventet  &		%{\Huge \checkmark}
+    
  \\ \bottomrule
  
 \caption{Accepttest af Use Case 2}\\
@@ -116,13 +122,12 @@ det, at den ikke er godkendt.
     \midrule
     ~ &\textit{Hovedscenarie} & ~ & ~ &
     \\ \midrule
-    1. &Indtast username "moh04" samt password; 1234 &   Username- og passwordboks bliver udfyldt  &   Som forventet  &		%{\Huge \checkmark}
+    1. &Tryk på Beregn BI-knap &   Username- og passwordboks bliver udfyldt  &   Som forventet  &		%{\Huge \checkmark}
     \\
     2. &Tryk på "Login"\--knappen  &    Login bliver godkendt. Login-vinduet lukkes ned mens CPR-vinduet åbnes  &    Som forventet &		%{\Huge \checkmark}
 	\\ \midrule
 	~ &\textit{Exentions} & ~ & ~ & 
 	\\ \midrule	
-    2a. &	Username eller password er forkert &    Besked vises på skærmen med tekst, der informerer om, at brugernavn eller password er forkert  &   Som forventet  &		%{\Huge \checkmark}
  \\ \bottomrule
  
 \caption{Accepttest af Use Case 3}\\
