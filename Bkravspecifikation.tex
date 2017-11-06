@@ -18,7 +18,7 @@
 \end{center}
 \vfill
 \begin{center}
-{\large 16. december 2017}
+{\large 19. december 2017}
 \end{center}
 \end{titlingpage}
 
@@ -142,8 +142,8 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Start BI-måling"\\				 	
 							&    2. 	& 	Systemet foretager målingen indtil der trykkes på knappen "Stop måling" \\[-1ex]
 							& 	 3.		&	 Systemet har gemt målingen i en fil \\[-1ex]
-                            &&[\textit{Undtagelse 3.a:}] Systemet har ikke gemt målingen\\ \midrule
-	Undtagelser 			& 3.a. & Hovedscenarie 1 i Use Case 1 gentages.\\ \bottomrule
+                            &&[\textit{Undtagelse 3.a:}] Systemet har ikke gemt målingen i en fil\\ \midrule
+	Undtagelser 			& 3.a. & Hovedscenarie 1 i Use Case 1 gentages\\ \bottomrule
                          
 	
 	\caption{Fully dressed Use Case 1}
@@ -165,8 +165,8 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Start EMG-måling"\\ 				 	
 							&    2. 	& 	Systemet foretager målingen indtil der trykkes på knappen "Stop måling" \\[-1ex]
 							& 	 3.		&	 Systemet har gemt målingen i en fil \\[-1ex]
-                            &&[\textit{Undtagelse 3.a:}] Systemet har ikke gemt målingen\\ \midrule
-	Undtagelser 			& 3.a. & Hovedscenarie 1 i Use Case 2 gentages.\\ \bottomrule
+                            &&[\textit{Undtagelse 3.a:}] Systemet har ikke gemt målingen i en fil\\ \midrule
+	Undtagelser 			& 3.a. & Hovedscenarie 1 i Use Case 2 gentages\\ \bottomrule
 	\caption{Fully dressed Use Case 2}
 	\label{UC2}
 \end{longtabu}
@@ -184,8 +184,9 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 	Forudsætninger 			&&	Use case 1 er foretaget\\ 
 	Resultat 				&& 	BI-beregningen er foretaget efter ønske\\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Beregn-BI"\\	
-							&    2. 	& 	Systemet foretager BI-beregningen\\ 
-Undtagelser 			&			& 	-  \\ \bottomrule
+							&    2. 	& 	Systemet har gemt BI-beregningen i en fil\\
+                             &&[\textit{Undtagelse 2.a:}] Systemet har ikke gemt BI-beregningen i en fil\\ \midrule
+Undtagelser 			& 2.a. & Hovedscenarie 1 i Use Case 3 gentages\\  \\ \bottomrule
 	
 	\caption{Fully dressed Use Case 3}
 	\label{UC3}
@@ -201,7 +202,7 @@ Undtagelser 			&			& 	-  \\ \bottomrule
 	Aktører 				&& 	Sundhedspersonale (primær)\\
 	Referencer 				&& 	\\
 	Samtidige forekomster  	&& 	En graf pr. kørsel \\
-	Forudsætninger 			&&	Use case 1, 2 og 3 er foretaget\\ 
+	Forudsætninger 			&&	Use case 2 og 3 er foretaget\\ 
 	Resultat 				&& 	Grafen er vist efter ønske\\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Vis BI \& EMG"\\				 	
 							&    2. 	& 	Grafen vises i GUI-vinduet\\
@@ -228,7 +229,7 @@ nielsen \cite{NielsenUsabilityUsability}
 \end{enumerate}
                                                                                                 
 \textbf{Reliability}
-\begin{enumerate}
+\begin{enumerate}[resume]
 \item Det skal maksimalt tage 5 timer at gendanne Synkerefleksmonitor (MTTR - Mean Time To Restore).
 \item Synkerefleksmonitor skal have en oppetid uden nedbrud på minimum 1 dag (24 timer) (MTBF - Mean Time Between Failure).  
 \item Synkerefleksmonitor skal have en oppetid/køretid på: 
@@ -241,7 +242,7 @@ Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 
 
 					
 \textbf{Performance}
-\begin{enumerate}
+\begin{enumerate}[resume]
 \item Synkerefleksmonitorens hardware skal kunne tændes indenfor 3 minutter.
 \item Synkerefleksmonitorens GUI skal kunne vises indenfor 3 minutter.
 \item GUI'ens responstid skal maksimum være 10 sekunder.
@@ -250,7 +251,7 @@ Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 
 
 
 \textbf{Supportability}
-\begin{enumerate}
+\begin{enumerate}[resume]
 \item Sundhedspersonalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter.
 \item Sundhedspersonalet skal kunne udskifte elektroderne inden for 2 minutter.
 \item Softwaren skal opbygges med lav samhørlighed.
