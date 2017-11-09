@@ -75,10 +75,53 @@ I det oprindelig design af BI konstateret vi at det var lavet lavet til at måle
 \subsubsection{Strømgenerator}
 Det forstærket signal som kommer fra udgangen på instrumenterings forstærkeren løber over til strømgeneratoren. Denne strømgenerator er en Howland bridge. Sammensætningen af modstandene er vigtige og deres tolerance skal være lav for at få en korrekt og konstant strøm. For at justerer strømmen kan R5 udskiftes i kredsløbet. For at få en konstant strøm omkring ca. 500 uA, er modstanden ændret fra 51 Kohm til 2 Kohm.  
 
+\begin{center}
+  \begin{tabular}{ r |  r }
+    \hline
+    Hz & uA \\ \hline
+    100 & 49 \\ \hline
+    200 & 40 \\ \hline
+    300 & 35 \\ \hline
+    400 & 32 \\ \hline
+    500 & 30 \\ \hline
+    600 & 29 \\ \hline
+    700 & 28 \\ \hline
+    800 & 27 \\ \hline
+    900 & 27 \\ \hline
+    1000 & 27 \\ \hline
+    2000 & 24 \\ \hline
+    3000 & 21 \\ \hline
+    4000 & 19 \\ \hline
+    5000 & 17 \\ \hline
+    6000 & 14 \\ \hline
+    7000 & 12 \\ \hline
+    8000 & 10 \\ \hline
+    9000 & 7 \\ \hline
+    10000 & 5 \\ \hline
+    20000 & 0 \\ \hline
+    
+    
+  \end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{figure}[H]
 \centering
 {\includegraphics[width=12cm]
-{Figure/stromfrekvens}}
+{Figure/stromfrekvensoprindelig}}
 \caption{No load strøm respons af det konstante strømkredsløb VCCS. }
 \label{stromfrekvens}
 \end{figure}
