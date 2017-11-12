@@ -75,8 +75,31 @@ I det oprindelig design af BI konstateret vi at det var lavet lavet til at måle
 \subsubsection{Strømgenerator}
 Det forstærket signal som kommer fra udgangen på instrumenterings forstærkeren løber over til strømgeneratoren. Denne strømgenerator er en Howland bridge. Sammensætningen af modstandene er vigtige og deres tolerance skal være lav for at få en korrekt og konstant strøm. For at justerer strømmen kan R5 udskiftes i kredsløbet. For at få en konstant strøm omkring ca. 500 uA, er modstanden ændret fra 51 Kohm til 2 Kohm.  
 
-\begin{center}
-  \begin{tabular}{ r |  r }
+\textbf{Det oprindelige kredsløb}\\
+Først bygges det orindelige kredsløb som det er opgivet og der bliver foretaget en no load test, for at se om det stemmer overens med figuren fra artiklen.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{Figure/VCCSwavegen1}
+  \captionof{figure}{A figure}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{Figure/oprindeligekredslob}
+  \captionof{figure}{Another figure}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
+
+
+
+\begin{table}[ht]
+\begin{minipage}[b]{0.30\linewidth}
+\centering
+\begin{tabular}{ r |  r }
     \hline
     Hz & uA \\ \hline
     100 & 49 \\ \hline
@@ -99,32 +122,91 @@ Det forstærket signal som kommer fra udgangen på instrumenterings forstærkere
     9000 & 7 \\ \hline
     10000 & 5 \\ \hline
     20000 & 0 \\ \hline
-    
-    
-  \end{tabular}
-\end{center}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{figure}[H]
+\end{tabular}
+    \caption{Student Database}
+    \label{table:student}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.7\linewidth}
 \centering
-{\includegraphics[width=12cm]
-{Figure/stromfrekvensoprindelig}}
-\caption{No load strøm respons af det konstante strømkredsløb VCCS. }
-\label{stromfrekvens}
-\end{figure}
+\includegraphics[width=10cm]{Figure/stromfrekvensoprindelig}
+\captionof{figure}{2-D scatterplot of the Student Database}
+\label{fig:image}
+\end{minipage}
+\end{table}
+
+
+\textbf{Det modificeret kredsløb}\\
+
+\begin{table}[H]
+\begin{minipage}[b]{0.30\linewidth}
+\centering
+\begin{tabular}{ r |  r }
+    \hline
+    Hz & uA \\ \hline
+    100 & 1268 \\ \hline
+    200 & 1051 \\ \hline
+    300 & 920 \\ \hline
+    400 & 845 \\ \hline
+    500 & 802 \\ \hline
+    600 & 775 \\ \hline
+    700 & 756 \\ \hline
+    800 & 744 \\ \hline
+    900 & 735 \\ \hline
+    1000 & 728 \\ \hline
+    2000 & 703 \\ \hline
+    3000 & 696 \\ \hline
+    4000 & 692 \\ \hline
+    5000 & 688 \\ \hline
+    6000 & 685 \\ \hline
+    7000 & 683 \\ \hline
+    8000 & 680 \\ \hline
+    9000 & 678 \\ \hline
+    10000 & 676 \\ \hline
+    20000 & 675 \\ \hline
+    30000 & 634 \\ \hline
+    40000 & 596 \\ \hline
+    50000 & 542 \\ \hline
+    60000 & 475 \\ \hline
+    70000 & 405 \\ \hline
+    80000 & 332 \\ \hline
+    90000 & 268 \\ \hline
+    100000 & 210 \\ \hline
+    110000 & 161 \\ \hline
+    120000 & 120 \\ \hline
+    130000 & 87 \\ \hline
+    140000 & 60 \\ \hline
+    150000 & 40 \\ \hline
+    160000 & 25 \\ \hline
+    170000 & 16 \\ \hline
+    180000 & 10 \\ \hline
+    190000 & 6 \\ \hline
+    200000 & 4 \\ \hline
+    210000 & 2 \\ \hline
+    220000 & 1 \\ \hline
+    230000 & 1 \\ \hline
+    240000 & 0 \\ \hline
+        
+\end{tabular}
+    \caption{Student Database}
+    \label{table:student}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.7\linewidth}
+\centering
+\includegraphics[width=10cm]{Figure/stromfrekvensoprindelig2k}
+\captionof{figure}{2-D scatterplot of the Student Database}
+\label{fig:image}
+\end{minipage}
+\end{table}
+
+
+
+
+
+
+
+
+
+
 
 
 
