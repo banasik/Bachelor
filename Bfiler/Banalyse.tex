@@ -71,37 +71,90 @@ I artiklen \cite{Aroom2009} blev der brugt en $\pm$12v strømforsyning tilslutte
 \end{figure}
 
 \subsection{Funktionsgenerator}
-Analog Discovery blev brugt som funktionsgenerator, da denne er nem og hurtig til at generere signaler. Den ønskede frekvens på 50 kHz blev brugt, da det er en brugt frekvens når der skal måles et synk. Amplituden blev sat til 2v. \cite{Kusuhara2004ImpedanceFunction.}
+Analog Discovery blev brugt som funktionsgenerator, da denne er nem og hurtig til at generere signaler. Den ønskede frekvens på 50 kHz blev brugt, da det er en brugt frekvens når der skal måles et synk\cite{Kusuhara2004}. Amplituden blev sat til 2V. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=6cm]
 {Figure/analogdis}}
 \caption{Analog discovery som funktionsgenerator}
-\label{fig:12vbatteri}
+\label{fig:analogdis}
 \end{figure}
 
 
 \subsection{Forstærkning}
-Signalet fra Analog Discovery går ind til forstærkeren, hvor der blev brugt en INA128 for at efterligne kredsløbet. Den tilhørende gain modstand på 51kohm blev også brugt, da det giver en fordobling af hvad den tilføres.
+Signalet fra Analog Discovery går ind til forstærkeren INA128. Den tilhørende gain modstand på 51kohm blev også brugt, da det giver en fordobling i forstærkning. På udgangen af INA128 er der nu 4V.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/ina128}}
 \caption{Diagram over INA128}
-\label{fig:12vbatteri}
+\label{fig:ina128}
 \end{figure}
 
 
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/ina128gain}}
+\caption{Oversigt over hvilke frekvenser INA128 kan arbejde indenfor ved bestemte gains}
+\label{fig:ina128gain}
+\end{figure}
 
-
-
-
+Ved en gain på 2 kan der aflæses i figur \ref{fig:ina128gain}, at båndbredden er over 100kHz, hvilket er indenfor den ønskede frekvens på 50kHz. 
 
 \subsection{Strømgenerator}
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/howland1}}
+\caption{Diagram over VCCS. Den faste spænding på 4V til VCCS giver en fast strøm på 100uA}
+\label{fig:howland1}
+\end{figure}
+
+Spændningen kommer ind ved modstand R1 og strømmen ud på ben 3 på LF412N. Kombinationen af bestemt ohmsk modstand størrelse og lav \% tolerance modstand giver den faste strøm. Her er der brugt 1\% modstande. Ved at ændre modstand R5, kan en ønsket strøm beregnes\cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
+
+
 \subsection{Elektroder}
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=12cm]
+{Figure/elektroder}}
+\caption{Ved målingerne er der blevet brugt EKG elektroder (venstre) og EMG elektroder (højre).}
+\label{fig:elektroder}
+\end{figure}
+
+De forskellige elektroder kan ses i figur \ref{fig:elektroder}. EKG elektroderne er nemme at påsætte og indeholder meget gel som giver optimal kontakt, men fysisk fylder de meget. EMG elektroderne har mindre gel, men fylder næsten ingen ting. 
+
+
+
+
+
+
 \subsection{A/D konverter}
+
+Det analogt signal er blevet samplet ved brug af Analog Discovery som målte over elektroderne. Der blev også monteret et multimeter i serie for at aflæse den konstante strøm.
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=6cm]
+{Figure/adkonverter}}
+\caption{Scope channel 1 positiv blev brugt til at måle spændingen over elektroderne}
+\label{fig:adkonverter}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=6cm]
+{Figure/elektroderdia}}
+\caption{Der blev målt over elektroderne mellem ben 3 på LF412N og ground.}
+\label{fig:elektroderdia}
+\end{figure}
+
 \section{Software}
 \subsection{Waveforms}
 
