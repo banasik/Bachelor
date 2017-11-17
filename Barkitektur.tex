@@ -7,13 +7,13 @@
 
 %\includegraphics[width=0.6\textwidth]{figurer/ASE}~\\[1cm]
 
-\textsc{\LARGE Bilag 4}\\[1.5cm]
+\textsc{\LARGE Bilag 5}\\[1.5cm]
 
 %\textsc{\Large Sundhedsteknologi}\\
 %\textsc{\Large 3. semesterprojekt}\\[0.5cm]
 
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}\\
-[0.5cm]{\Huge Analyse}
+[0.5cm]{\Huge Arkitektur}
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 \end{center}
 \vfill
@@ -28,8 +28,6 @@
 
 \chapter{Indledning}
 
-
-I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger i projektet og hvilke der har valgt at gå videre og begrundelse herom. Der er beskrevet og diskuteret valget af hardware- og software komponenter som er kritiske for systemet. Det udleveret diagram som kan ses på figur \ref{fig:BIdiagram} er en simple BI måler som består af en instrumenterings forstærker, en strømgenerator og udgang til elektroder. Kredsløbet skal tilføres et signal fra en funktiongenerator, som resulterer i en konstant genereret strøm over elektroderne. Da man nu har en kendte strøm og måler spændingsfaldet over elektroderne, kan man ved brug af ohms lov $(\frac{U}{I}=R)$ beregne og vise impedansen for et synk.
 
 
 \begin{figure}[H]
@@ -48,37 +46,13 @@ I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger
 \chapter{Det oprindelige kredsløb}
 \section{Hardware}
 
-Det oprindeligekredsløb var bygget som vist på figur \ref{fig:oprindeligebd} i simuleringsværtøjet Multisim og efterfølgende på et fumlebræt. 
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=6cm]
-{Figure/oprindeligebd}}
-\caption{Blokdiagram over det oprindelige kredsløb\cite{Aroom2009}}
-\label{fig:oprindeligebd}
-\end{figure}
-
 \subsection{Strømforsyning}
 I artiklen \cite{Aroom2009} blev der brugt en $\pm$12v strømforsyning tilsluttet til netforsyningen. Vi valgte at undgå netforsyningen, ved at sætte otte AA batterier i serie, både for +12v og -12v.
 
-\begin{figure}[H]
-\centering
-{\includegraphics[width=10cm]
-{Figure/12vbatteri}}
-\caption{$\pm$12v batteriforsyning}
-\label{fig:12vbatteri}
-\end{figure}
 
 \subsection{Funktionsgenerator}
 Analog Discovery blev brugt som funktionsgenerator, da denne er nem og hurtig til at generere signaler. Den ønskede frekvens på 50 kHz blev brugt, da det er en brugt frekvens når der skal måles et synk. Amplituden blev sat til 2v. \cite{Kusuhara2004ImpedanceFunction.}
 
-\begin{figure}[H]
-\centering
-{\includegraphics[width=6cm]
-{Figure/analogdis}}
-\caption{Analog discovery som funktionsgenerator}
-\label{fig:12vbatteri}
-\end{figure}
 
 
 \subsection{Forstærkning}
