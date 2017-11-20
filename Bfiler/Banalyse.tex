@@ -28,10 +28,11 @@
 \tableofcontents*
 \newpage
 
+
 \chapter{Indledning}
 
 
-I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger i projektet og hvilke der har valgt at gå videre og begrundelse herom. Der er beskrevet og diskuteret valget af hardware- og software komponenter som er kritiske for systemet. Det udleveret diagram som kan ses på figur \ref{fig:BIdiagram} er en simple BI måler som består af en instrumenterings forstærker, en strømgenerator og udgang til elektroder. Kredsløbet skal tilføres et signal fra en funktiongenerator, som resulterer i en konstant genereret strøm over elektroderne. Da man nu har en kendte strøm og måler spændingsfaldet over elektroderne, kan man ved brug af ohms lov $(\frac{U}{I}=R)$ beregne og vise impedansen for et synk.
+I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger i projektet og hvilke der har valgt at gå videre og begrundelse herom. Der er beskrevet og diskuteret valget af hardware- og software komponenter som er kritiske for systemet. Det udleveret diagram som kan ses på figur \ref{fig:BIdiagram} er en simple BI måler som består af en instrumenterings forstærker, en strømgenerator og udgang til elektroder. Det fungere ved at kredsløbet blev tilført et signal fra en funktiongenerator, som resulteret i en konstant genereret strøm over elektroderne. Den kendte strøm og ved at måle spændingsfaldet over elektroderne, kunne man ved brug af ohms lov $(\frac{U}{I}=R)$ beregne og vise impedansen for et synk.
 
 \begin{figure}[H]
 \centering
@@ -40,10 +41,6 @@ I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger
 \caption{BI diagram\cite{Aroom2009}}
 \label{fig:BIdiagram}
 \end{figure}
-
-
-
-
 
 
 \chapter{Det oprindelige kredsløb}
@@ -60,7 +57,7 @@ Det oprindeligekredsløb var bygget som vist på figur \ref{fig:oprindeligebd} i
 \end{figure}
 
 \subsection{Strømforsyning}
-I artiklen \cite{Aroom2009} blev der brugt en $\pm$12v strømforsyning tilsluttet til netforsyningen. Vi valgte at undgå netforsyningen, ved at sætte otte AA batterier i serie, både for +12v og -12v.
+I artiklen \cite{Aroom2009} blev der brugt en $\pm$12V strømforsyning tilsluttet til netforsyningen. Vi valgte at undgå netforsyningen, ved at sætte otte AA batterier i serie, både for +12V og -12V.
 
 \begin{figure}[H]
 \centering
@@ -83,7 +80,7 @@ Analog Discovery blev brugt som funktionsgenerator, da denne er nem og hurtig ti
 
 
 \subsection{Forstærkning}
-Signalet fra Analog Discovery går ind til forstærkeren INA128. Den tilhørende gain modstand på 51kohm blev også brugt, da det giver en fordobling i forstærkning. På udgangen af INA128 er der nu 4V. Udover at forstærke signalet vil det også fået fjernet common-mode støj, så signalet er mindre støj fyldt.
+Signalet fra Analog Discovery gik ind til instrumentationsforstærkeren INA128 se figur \ref{fig:ina128}. Den tilhørende gain modstand på 51 kohm blev også brugt, da det giver en fordobling i forstærkning. På udgangen af INA128 var der nu 4V. Udover at forstærke signalet vil det også fået reduceret common-mode støj, så signalet er mindre støjfyldt.
 
 \begin{figure}[H]
 \centering
@@ -102,7 +99,7 @@ Signalet fra Analog Discovery går ind til forstærkeren INA128. Den tilhørende
 \label{fig:ina128gain}
 \end{figure}
 
-Ved en gain på 2 kan der aflæses i figur \ref{fig:ina128gain}, at båndbredden er over 100kHz, hvilket er indenfor den ønskede frekvens på 50kHz. 
+Ved en gain på 2 kan der aflæses i figur \ref{fig:ina128gain}, at båndbredden var over 100 kHz, hvilket er indenfor den ønskede frekvens på 50 kHz. 
 
 \subsection{Strømgenerator}
 
@@ -114,7 +111,7 @@ Ved en gain på 2 kan der aflæses i figur \ref{fig:ina128gain}, at båndbredden
 \label{fig:howland1}
 \end{figure}
 
-Spændningen kommer ind ved modstand R1 og strømmen ud på ben 3 på LF412N. Kombinationen af bestemt ohmsk modstand størrelse og lav \% tolerance modstand giver den faste strøm. Her er der brugt 1\% modstande. Ved at ændre modstand R5, kan en ønsket strøm beregnes\cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
+Spændningen kommer ind ved modstand R1 og strømmen ud på ben 3 på LF412N. Kombinationen af bestemt ohmsk modstand størrelse og lav \% tolerance modstand giver den faste strøm. Her er der brugt 1\% modstande. Ved at ændre modstand R5, kan en ønsket strøm beregnes vha. af formlen\cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
 
 
 \subsection{Elektroder}
