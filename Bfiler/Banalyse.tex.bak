@@ -411,17 +411,33 @@ Forstærkningen blev nu øget fra 4V til 8V strømgeneratoren.
 \subsection{Strømgenerator}
 Der vælges at øge strømmen til 500uA ved at ændre R5 til 2k, da artiklerne \cite{Chester}, \cite{Chester2014} og \cite{Kusuhara2004} bruger denne strøm til at detektere BI over svælget. 
 
+
+
+
+
 \subsection{Elektroder}
 
-Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer.
+Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer. Strømmen og den målte spændingen er nu blevet ført over sine egne ledninger. BI er bedst at måle med fire elektroder, for at undgå utilsigtet inklusion af elektrode impedans ved kun brug af to elektroder \cite[s. 420-421]{Holder2004}.
+
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=8cm]
 {Figure/elektrodeplacering1}}
-\caption{Der er prøvet med forskellige elektrode placeringer.}
+\caption{Der er prøvet med forskellige elektrode placeringer. Hvor strøm elektroder er yderst og spændingen måles inderst.}
 \label{fig:elektroder}
 \end{figure}
+
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=8cm]
+{Figure/BIbasic}}
+\caption{Diagram for hvordan man måler BI, med en fast strøm hvor spændingen kan måles over.}
+\label{fig:analyse2}
+\end{figure}
+
 
 \section{Hardware del 2 - Spændingsmåler}
 \begin{figure}[H]
@@ -431,12 +447,27 @@ Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forsk
 \caption{Bioimpedans ud}
 \label{fig:analyse2}
 \end{figure}
-\subsection{Strømforsyning}
-\subsection{Elektroder}
-\subsection{Forstærkning}
-\subsection{Antialiaseringsfilter}
-\subsection{A/D konverter}
 
+
+\subsection{Strømforsyning}
+
+Da strømforsyningen var øget til $\pm$18V for del 1, blev del 2 forsynet med den samme excitationsspænding. 
+
+\subsection{Elektroder}
+
+Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer.
+
+\subsection{Forstærkning}
+Da det var en lille spænding der måltes blev den forstærket op samtidig med at støj blev reduceret. Der blev stadig holdt øje om båndbredden var indenfor hvad INA128 kunne leverer ved forskellige gains. Gain blev sat til 10, hvilket der ok som det kan aflæses i figur \ref{fig:ina128gain}.
+
+
+\subsection{Antialiaseringsfilter}
+Antialiaseringsfilteret består af et lavpas filter med en knækfrekvens på 50kHz, da synket er blevet amplitudemoduleret ved denne frekvens. Lavpasfilteret blev et 2.ordenfilter da det ville dæmpe med -40dB pr. dekade, således at ved 500kHz er det dæmpet -40dB.
+
+
+
+\subsection{A/D konverter}
+Når signalet er blevet forstærket til det ønskede spændingsniveau som er brugbart for A/D konverteren, er det muligt at sample signalet. Ved at vælge en høj samplingfrekvens på 1MHZ, fik vi samplet det dobbelte af det halve af nyquist frekvens.
 
 \section{Software}
 \subsection{Matlab}
