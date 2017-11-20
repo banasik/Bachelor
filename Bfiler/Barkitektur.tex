@@ -28,13 +28,39 @@
 
 \chapter{Indledning}
 
+I dette bilag beskrives hardware- og softwarearkitekturen for systemet, som ønskes realiseret. Formålet med arkitekturen er at definere, hvilke "roller" de enkelte hardwareenheder og softwareobjekter skal tildeles. Når disse roller er tildelt til de forskellige HW-enheder og SW-objekter kan man designe systemet i detaljer. Med andre ord anvendes arkitekturen til danne overblik over systemet, hvorimod design giver svar på konkrete implementeringer. For at illustrerer arkitekturen i hardware-delen benyttes Blok definition diagrammer (BDD) og Internal blok diagrammer (IBD). For software-delen benyttes et selvudviklet diagram, kaldet script session diagram. Dette diagram kan sammenlignes med et BBD, men alligevel ikke, da det ikke følger BDD standarder. Script session diagrammet er udviklet for at illustrere Matlab kodens overordnet struktur. Begrundelsen for valg af script session diagrammet uddybes i afsnit \ref{swafsnit}.         
 
 
 \chapter{Hardware}
 
-\cite{Aroom2009}
-\chapter{Software}
+\section{Blok definition diagram}
 
+Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, som består af en hardware-blok (HW) og tre blokker, som har relationer til HW-blokken. HW-blokken består ydeligere af tre blokke, der repræsenterer en bioimpedans-måler (BI-måler), en elektromyografi-måler(EMG-måler) og en forsyningsspænding, der bruges til at forsyne BI-måleren.  
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/BDD}}
+\caption{BDD}
+\label{figbdd}
+\end{figure}
+
+\section{Internal blok diagram}
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/IBD}}
+\caption{BDD}
+\label{fig:BDD}
+\end{figure}
+
+\section{Signalbeskrivelse}
+
+
+\chapter{Software} \label{swafsnit}
+
+\citep{Aroom2009}
 \bibliography{library}
 \end{document}
 
