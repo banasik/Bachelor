@@ -37,33 +37,148 @@ I dette bilag beskrives hardware- og softwarearkitekturen for systemet, som øns
 \chapter{Hardware}
 \section{Blok definition diagram}
 
-Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, som består af en hardware-blok (HW) og tre blokker, som har relationer til HW-blokken. HW-blokken består ydeligere af tre blokke, der repræsenterer en bioimpedans-måler (BI-måler), en elektromyografi-måler(EMG-måler) og en forsyningsspænding, der bruges til at forsyne BI-måleren.  
+Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, som består af en hardware-blok (HW) og tre blokker, som har relationer til HW-blokken. HW-blokken består ydeligere af tre blokke, der repræsenterer en bioimpedans-måler (BI-måler), en elektromyografi-måler(EMG-måler) og en forsyningsspænding, der bruges til at forsyne BI-måleren.  EMG-måleren består to komponenter og BI-måleren består af en række komponenter. Funktionerne af alle komponenter i BDD'et kan læses i tabel, hvor der også er beskrevet signaltyper, port-navne og blok-navne.  
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/BDD}}
-\caption{BDD}
+\caption{Figuren viser de enkelte komponenter, som hardware-delen består af. Overordnet består hardwaren af en Bioimpedansmåler og EMG-måler og en enhed, som bruges til at forsyne  målerapparaterne. DAQ'en anvendes som dataopsamlingsenhed.}
 \label{figbdd}
 \end{figure}
 
 \section{Internal blok diagram}
 
+Det interne blokdiagram på \ref{ibdfigur} viser den interne struktur og kommunikation mellem delsystemer. Figur \ref{ibdfigur} indeholder to uafhængige blokke med navnene BI-måler og EMG-måler. De to måleapparater kommunikerer med Analog Discovery og en PC. For BI-målerens vedkommende starter kommunikationsflowet med at Analog Discovery'en sender to \textbf{2V} AC spænding til den første forstærker i BI-måler blokken. Forstærker 1 forstærker de \textbf{2V} med faktor 2. Det forstærket signal sendes videre til strømgeneratoren, VCCS, som på baggrund af det indkommende spænding producerer en konstant strøm på \textbf{0,5mA}. Strømen sendes videre til et måleobjekt via. to elektroder, kaldet Blue Sensor Electrodes.       Yderligere to elektroder påsættes på måleobjektet for at måle en spændingsforskel. Denne spændingsforskel ligger i millivolt området og kræver at blive forstærket. Denne forstærkning foregår over trin. Til formålet anvendes en instrumentationsforstærker efterfulgt af en operationsforstærker. Det forstærker signal sendes videre til et anti-aliaseringsfilter, der dæmper frekvenskomponenter over \textbf{Nyquist-frekvensen}. Tilslut sendes signalet til en dataopsamlingsenhed, kaldet DAQ NI USB-6259, der sender det opsamlede signal videre til en PC for at blive analyseret og vist. Delsystemerne forstærker 1, 2 og AA filteret forsynes med en eksitationsspænding på $ \pm  $\textbf{18V}. \\
+
+EMG-blokken består en Myoware Muscle Sensor og to elektroder, der måler spændingsfaldet over et valgt segment på et måleobjekt. Det målte signal sendes til en PC for at blive vist. Myoware Muscle Sensorens eksitationsspænding på \textbf{5V} på  kommer fra Analog Discovery.   
+					\textbf{INDSÆT EN BLOK OM ELNETET} 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/IBD}}
-\caption{BDD}
-\label{fig:BDD}
+\caption{Figuren viser et internt blokdiagram, der illustrer den interne relation og signalflow mellem delsystemer. Overordnet set indeholder diagrammet to store blokke med hver deres subkomponenter. Den ene af de store blokker repræsenter en bioimpedansmåler-apparat og den anden blok repræsenter en elektromyografi-apparat }
+\label{ibdfigur}
 \end{figure}
 
-\section{Signalbeskrivelse}
+\section{Blokbeskrivelse} \label{blokbesk}
+Nedenstående tabel viser den enkelte blokes funktion, signaltype og port navn, som indgår i IBD'et på figur \ref{ibdfigur}.
+
+\begin{table} [H]
+  \centering
+
+\begin{tabular}  {|p{3cm}|p{4cm}|p{1cm}|p{1.5cm}|p{3.8cm}| }
+
+\hline
+	
+	\textbf{Blok-navn} & \textbf{Funktionbeskrivelse}  & \textbf{Port} & \textbf{Signaler} & \textbf{Kommentar} \\ \cline{3-5} \hline
+	PC & Behandler input fra DAQ og EMG-måler.  Den kommunikerer også med Analog Discovery &  C1 & bit(seriel) & Indgangssignal  \\ \cline{3-5}
+	 &  & C2 & Signal & Interfacekommunikation \\ \cline{3-5} 
+	 &  & C3 & Graf & Spænding over tid \\ \cline{3-5} 
+	 &  & C4 & bit (seriel) & DigitalSignal \\ \cline{3-5} 
+	 
+	 \hline
+	 
+	 
+Analog Discovery  & Forsyner MyoWare Muscle Sensor og Forstærker 1. Den kommunikerer også med PC.  &  A1 & 2V & Indgangsspænding    \\ \cline{3-5}
+	 &  & A2 & 5V & Forsyningsspænding \\ \cline{3-5}
+	 &  & A3 & Usb  & Interfacekommunikation  \\ \hline
+	 
+	 
+	  
+	 
+	 
+	 
+DAQ-NI-USB-6259  & Anvendes til dataindsamling  &  D1 & V & Biopotentiale   \\ \cline{3-5}
+	 &  & D2 & bit (seriel) & Digital Signal \\ \cline{3-5}
+	 &  & D3 & V  & Eksitationsspænding   \\ \hline
+	
+  
+	
+	
+	 
+Power Supply  & Forsyner Forstærker 1, Forstærker 2, VCCS og AA filter med spænding  &  H1 & $ \pm  $\textbf{18V} &  Eksitationsspænding \\ \hline
+
+  
+
+	 
+	 
+ Forstærker 1 & Forstærker 2V fra Analog Discovery til 4V   &  P1 & 2V & Indgangsspænding   \\ \cline{3-5}
+	 &  & P2 & $ \pm  $\textbf{18V}  & Forsyningsspænding \\ \cline{3-5}
+	 &  & P3 & 4V  & Indgangsspænding   \\ \hline
+	 
+	 
+	 	
+	 
+	 
+VCCS  & Generer en konstant strøm &  J1 & $ \pm  $\textbf{18V} & Eksitationsspænding    \\ \cline{3-5}
+	 &  & J2 & 4V  & Indgangsspænding \\ \cline{3-5}
+	 &  & J3 & $ \pm  $\textbf{0.5mA}  & Udgangsstrøm   \\ \hline
 
 
+
+ 
+	 
+	 
+ Forstærker 2 & Forstærker biosignal fra et måleobjekt   &  F1 & mV & Indgangsspænding     \\ \cline{3-5}
+	 &  & F2 & $ \pm  $\textbf{18V}  & Forsyningsspænding \\ \cline{3-5}
+	 &  & F3 & V  & Udgangsspænding   \\ \hline
+	 
+	 
+4 x Blue Sensor Electrodes & Transporterer strøm til måleobjektet og måler biosignal fra måleobjektet.  &  T1 & uA & Udgangsstrøm  \\ \cline{3-5}
+	 &  & T2 & uA & Udgangsstrøm \\ \cline{3-5} 
+	 &  & T3 & mV & Biopotentiale \\ \cline{3-5} 
+	 &  & T4 & mV & Biopotentiale \\ \cline{3-5}  \hline
+	 
+ \end{tabular}
+ 
+\end{table}
+
+\pagebreak
+
+\begin{table} [H]
+  \centering
+
+\begin{tabular}  {|p{3cm}|p{4cm}|p{1cm}|p{1.5cm}|p{3.8cm}| }
+
+\hline
+
+AA filter & Bruges til at undgå aliasering.  &  N1 & V & Indgangsspænding  \\ \cline{3-5}
+	 &  & N2 & $ \pm  $\textbf{18V}& Eksitationsspænding \\ \cline{3-5} 
+	 &  & N3 & V & Udgangsspænding \\ \cline{3-5} \hline
+	 
+
+MyoWare Muscle Sensor & Processerer EMG input fra måleobjektet &  L1 & 5V & Forsyningsspænding  \\ \cline{3-5}
+	 &  & S2 & mV & Biopotentiale \\ \cline{3-5} 
+	 &  & S3 & bit(seriel) & Digital Signal \\ \cline{3-5} \hline
+	 
+	 
+2x Kendall electrodes & Transporterer EMG signal fra et måleobjekt  &  L1 & mV & Biopotentiale  \\ \cline{3-5}
+	 &  & L2 & mV & Biopotentiale \\ \cline{3-5} \hline
+	 
+
+\end{tabular}
+ \caption{Figuren giver overblik over blok navn, blok funktionn og signaltype af de komponenter, som indgår i det interne blokdiagram på figur \ref{ibdfigur}} \label{tab:Sigbeskriv.}
+\end{table}
+
+\textbf{Husk den anden Tabel}
 \chapter{Software} \label{swafsnit}
+\section{Script session diagram}
+
+Dette afsnit omhandler strukturering af den  software, som anvendes til analysering og visning af bioimpedans- og EMG målinger. Design af softwaren er drevet af de usecases, som er beskrevet i afsnittet systembeskrivelse. På baggrund af disse usecases udformes en script session diagram, som indeholder blokke, der hver repræsenterer en funktion/metode som udfører en bestemt opgave. 
+I dette projekt anvendes Matlab til at implementere systemets software. Matlab er ikke et objekt orienteret programmeringssprog, men derimod scriptsprog. Dette gør at at det bliver vanskeligt at anvende diagrammer, som er brugt til at strukturere objekt orienteret programmeringskoder. For at skabe en form for struktur i arkitekturen er der lavet et alternativt diagram kaldet   Matlab script session diagram. Funktionaliteter som ønskes implementeret i Matlab kodes som funktioner. Da vi ønsker at implementere Matlab GUI med kontroller i dette projekt skrives koden til disse kontroller i funktioner. Kontrollerne kan være en knap, tekstfelt eller tekstboks. I stedet for at kode alle funktioner i én scriptfil tildeles hver funktionen sin egen script session. Hver script session omtales som et objekt,der udfører en bestemt opgave, samt kan interagerer med andre objekter. På den måde er der forsøgt at lave et system/diagram som giver overblik over de funktioner som indgår i software-delen. Konkret fungerer softwaren ved at et sundhedspersonalet initialiserer koden ved at trykke på knapperne ’Start EMG-måling' og ’Start BI-måling’. Denne initiering medfører at koden, som ligger bag begge knapper udføreres og der foretages to målinger. Disse målinger gemmes i .mat-filer som gemmes lokalt på PC’en. For at analysere og vise målingerne  uploades de gemte filer til softwaren.  
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/ScriptSessionDia}}
+\caption{Figuren viser de tre lag som koden er inddelt. Kode eksekveringen initialiseres af et sundhedspersonale ved at trykke på knapperne ’Start EMG-måling’ og ’Start BI-måling. Efterfølgende foretages en måling, som gemmes lokal i PC'en. Tilslut uploades de gemte målinger for at blive analyseret og vist.}
+\label{figScrip}
+\end{figure}
+
+
 
 \citep{Aroom2009}
 \bibliography{library}
 \end{document}
-
-
