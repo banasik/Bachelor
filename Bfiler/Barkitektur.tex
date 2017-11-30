@@ -42,7 +42,7 @@ Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, s
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
-{Figure/BDD}}
+{Figure/IBDNY}}
 \caption{Figuren viser de enkelte komponenter, som hardware-delen består af. Overordnet består hardwaren af en Bioimpedansmåler og EMG-måler og en enhed, som bruges til at forsyne  målerapparaterne. DAQ'en anvendes som dataopsamlingsenhed.}
 \label{figbdd}
 \end{figure}
@@ -56,8 +56,8 @@ EMG-blokken består en Myoware Muscle Sensor og to elektroder, der måler spænd
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
-{Figure/IBD}}
-\caption{Figuren viser et internt blokdiagram, der illustrer den interne relation og signalflow mellem delsystemer. Overordnet set indeholder diagrammet to store blokke med hver deres subkomponenter. Den ene af de store blokker repræsenter en bioimpedansmåler-apparat og den anden blok repræsenter en elektromyografi-apparat }
+{Figure/IBDDpng}}
+\caption{Figuren viser et internt blokdiagram, der illustrer den interne relation og signalflow mellem delsystemer. Overordnet set indeholder diagrammet to hovedblokke med hver deres subkomponenter. Den ene af de store blokke repræsenter en bioimpedansmåler-apparat og den anden blok repræsenter en elektromyografi-apparat }
 \label{ibdfigur}
 \end{figure}
 
@@ -72,63 +72,65 @@ Nedenstående tabel viser den enkelte blokes funktion, signaltype og port navn, 
 \hline
 	
 	\textbf{Blok-navn} & \textbf{Funktionbeskrivelse}  & \textbf{Port} & \textbf{Signaler} & \textbf{Kommentar} \\ \cline{3-5} \hline
-	PC & Behandler input fra DAQ og EMG-måler.  Den kommunikerer også med Analog Discovery &  C1 & bit(seriel) & Indgangssignal  \\ \cline{3-5}
-	 &  & C2 & Signal & Interfacekommunikation \\ \cline{3-5} 
-	 &  & C3 & Graf & Spænding over tid \\ \cline{3-5} 
-	 &  & C4 & bit (seriel) & DigitalSignal \\ \cline{3-5} 
+	
+PC & Behandler input fra Analog Discovery.  &  C1 & bit(USB)  & Interfacekommunikation  \\ \cline{3-5}
+	 &  & C2 & Graf & Impedans og tid \\ 
 	 
 	 \hline
 	 
 	 
-Analog Discovery  & Forsyner MyoWare Muscle Sensor og Forstærker 1. Den kommunikerer også med PC.  &  A1 & 2V & Indgangsspænding    \\ \cline{3-5}
-	 &  & A2 & 5V & Forsyningsspænding \\ \cline{3-5}
-	 &  & A3 & Usb  & Interfacekommunikation  \\ \hline
+Analog Discovery  & Forsyner MyoWare Muscle Sensor og Forstærker 1. Den fungerer også som  Analog-til-digital-konverter.  &  A1 & 2V & Udgangsspænding    \\ \cline{3-5}
+	 &  & A2 & bit(seriel) & Indgangsspænding \\ \cline{3-5}
+	 &  & A3 & bit(USB)  & Interfacekommunikation \\
+ \cline{3-5}
+	 &  & A4 & bit(seriel)  & Indgangsspænding 	 
+	 \\
+ \cline{3-5}
+	 &  & A5 & 5V  & Eksitationsspænding 	 	 
 	 
 	 
-	  
+	  \\ \hline	  
 	 
-	 
-	 
-DAQ-NI-USB-6259  & Anvendes til dataindsamling  &  D1 & V & Biopotentiale   \\ \cline{3-5}
-	 &  & D2 & bit (seriel) & Digital Signal \\ \cline{3-5}
-	 &  & D3 & V  & Eksitationsspænding   \\ \hline
-	
-  
-	
-	
-	 
-Power Supply  & Forsyner Forstærker 1, Forstærker 2, VCCS og AA filter med spænding  &  H1 & $ \pm  $\textbf{18V} &  Eksitationsspænding \\ \hline
-
-  
-
-	 
-	 
+		 
  Forstærker 1 & Forstærker 2V fra Analog Discovery til 4V   &  P1 & 2V & Indgangsspænding   \\ \cline{3-5}
-	 &  & P2 & $ \pm  $\textbf{18V}  & Forsyningsspænding \\ \cline{3-5}
-	 &  & P3 & 4V  & Indgangsspænding   \\ \hline
+	 &  & P2 & $   ${-18V}  & Eksitationsspænding \\ \cline{3-5}
+	 &  & P3 & 4V  & Udgangsspænding   \\ 
+	\cline{3-5}
+	 &  & P4 & $   ${18V}  & Eksitationsspænding   
+	 
+	  \\ \hline	 	
 	 
 	 
-	 	
-	 
-	 
-VCCS  & Generer en konstant strøm &  J1 & $ \pm  $\textbf{18V} & Eksitationsspænding    \\ \cline{3-5}
+Strømgenerator  & Genererer en konstant strøm &  J1 &$   ${18V} & Eksitationsspænding    \\ \cline{3-5}
 	 &  & J2 & 4V  & Indgangsspænding \\ \cline{3-5}
-	 &  & J3 & $ \pm  $\textbf{0.5mA}  & Udgangsstrøm   \\ \hline
-
-
-
- 
+	 &  & J3 & $ \pm  $\textbf{0.5mA}  & Udgangsstrøm  \\ \cline{3-5}
+	
+	 &  & J4 & $  ${-18V}  & Eksitationsspænding 	 
+	 
+	   \\ \hline 
 	 
 	 
  Forstærker 2 & Forstærker biosignal fra et måleobjekt   &  F1 & mV & Indgangsspænding     \\ \cline{3-5}
-	 &  & F2 & $ \pm  $\textbf{18V}  & Forsyningsspænding \\ \cline{3-5}
-	 &  & F3 & V  & Udgangsspænding   \\ \hline
+	 &  & F2 & $  ${18V}  & Eksitationsspænding \\ \cline{3-5}
+	 &  & F3 & V  & Udgangsspænding  \\ \cline{3-5}
+	 &  & F4 & $  ${-18V}  & Eksitationsspænding
+	 
+	   \\ \hline
 	 
 	 
-4 x Blue Sensor Electrodes & Transporterer strøm til måleobjektet og måler biosignal fra måleobjektet.  &  T1 & uA & Udgangsstrøm  \\ \cline{3-5}
+4 x Blue Sensor Electrodes & Transporterer strøm til et måleobjekt og måler biosignal fra et måleobjekt.  &  T1 & uA & Udgangsstrøm  \\ \cline{3-5}
 	 &  & T2 & uA & Udgangsstrøm \\ \cline{3-5} 
 	 &  & T3 & mV & Biopotentiale \\ \cline{3-5} 
 	 &  & T4 & mV & Biopotentiale \\ \cline{3-5}  \hline
+	 
+	 
+	  OPAMP & Forstærker signalet fra forstærker 2
+	 &  O1 & V & Indgangsspænding     \\ \cline{3-5}
+	 &  & O2 & $  ${18V}  & Eksitationsspænding \\ \cline{3-5}
+	 &  & O3 & V  & Udgangsspænding  \\ \cline{3-5}
+	 &  & O4 & $  ${-18V}  & Eksitationsspænding
+	 
+	   \\ \hline
 	 
  \end{tabular}
  
@@ -144,13 +146,16 @@ VCCS  & Generer en konstant strøm &  J1 & $ \pm  $\textbf{18V} & Eksitationssp�
 \hline
 
 AA filter & Bruges til at undgå aliasering.  &  N1 & V & Indgangsspænding  \\ \cline{3-5}
-	 &  & N2 & $ \pm  $\textbf{18V}& Eksitationsspænding \\ \cline{3-5} 
-	 &  & N3 & V & Udgangsspænding \\ \cline{3-5} \hline
+	 &  & N2 & $  ${18V} & Eksitationsspænding \\ \cline{3-5} 
+	 &  & N3 & V & Udgangsspænding \\ \cline{3-5} 
+	 &  & N4 & $  ${-18V} & Eksitationsspænding \\ \cline{3-5} 
+	 
+	 \hline
 	 
 
-MyoWare Muscle Sensor & Processerer EMG input fra måleobjektet &  L1 & 5V & Forsyningsspænding  \\ \cline{3-5}
-	 &  & S2 & mV & Biopotentiale \\ \cline{3-5} 
-	 &  & S3 & bit(seriel) & Digital Signal \\ \cline{3-5} \hline
+MyoWare Muscle Sensor & Behandler EMG input fra et måleobjekt 		 &  S1 & mV & Biopotentiale  \\ \cline{3-5}
+	 &  & S2 & bit(seriel) & Biopotentiale \\ \cline{3-5} 
+	 &  & S3 & 5V & Eksitationsspænding \\ \cline{3-5} \hline
 	 
 	 
 2x Kendall electrodes & Transporterer EMG signal fra et måleobjekt  &  L1 & mV & Biopotentiale  \\ \cline{3-5}
