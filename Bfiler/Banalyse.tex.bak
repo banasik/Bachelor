@@ -1,6 +1,5 @@
 \input{setup}
-\usepackage{siunitx}
-\sisetup{output-exponent-marker=\ensuremath{\mathrm{E}}}
+
 \begin{document}
 
 \begin{titlingpage}
