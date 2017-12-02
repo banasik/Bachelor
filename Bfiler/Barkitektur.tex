@@ -28,16 +28,16 @@
 
 \chapter{Indledning}
 
-I dette bilag beskrives hardware- og softwarearkitekturen for systemet, som ønskes realiseret. Formålet med arkitekturen er at definere, hvilke "roller" de enkelte hardwareenheder og softwareobjekter skal tildeles. Når disse roller er tildelt til de forskellige HW-enheder og SW-objekter kan man designe systemet i detaljer. Med andre ord anvendes arkitekturen til danne overblik over systemet, hvorimod design giver svar på konkrete implementeringer. For at illustrerer arkitekturen i hardware-delen benyttes Blok definition diagrammer (BDD) og Internal blok diagrammer (IBD). For software-delen benyttes et selvudviklet diagram, kaldet script session diagram. Dette diagram kan sammenlignes med et BBD, men alligevel ikke, da det ikke følger BDD standarder. Script session diagrammet er udviklet for at illustrere Matlab kodens overordnet struktur. Begrundelsen for valg af script session diagrammet uddybes i afsnit \ref{swafsnit}.         
+I dette bilag beskrives hardware- og softwarearkitekturen for systemet, som ønskes realiseret. Formålet med arkitekturen er at definere, hvilke "roller"  de enkelte hardware-og softwareenheder skal tildeles. Når disse roller er tildelt kan man efterfølgende designe systemet i detaljer. For at illustrere arkitekturen i hardware-delen benyttes Blok definition diagram(BDD), Internal blok diagram(IBD) og en blokbeskrivelse, der indeholder uddybende beskrivelse af blokkene i BDD'et. For software-delens vedkommende benyttes også et BDD. Dette BDD bruges til at illustrere hovedblokkene som software-delen består af.       
 
 
-\citep{Aroom2009}
+
 
 
 \chapter{Hardware}
 \section{Blok definition diagram}
 
-Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, som består af en hardware-blok (HW) og tre blokker, som har relationer til HW-blokken. HW-blokken består ydeligere af tre blokke, der repræsenterer en bioimpedans-måler (BI-måler), en elektromyografi-måler(EMG-måler) og en forsyningsspænding, der bruges til at forsyne BI-måleren.  EMG-måleren består to komponenter og BI-måleren består af en række komponenter. Funktionerne af alle komponenter i BDD'et kan læses i tabel, hvor der også er beskrevet signaltyper, port-navne og blok-navne.  
+Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, som overordnet består af en hardware-blok og to blokke, som har relationer til HW-blokken. HW-blokken består ydeligere af to blokke, der hver repræsenterer en bioimpedans-måler (BI-måler) og en elektromyografi-måler(EMG-måler). EMG-måleren består to komponenter og BI-måleren består af en række komponenter. Funktionerne af disse komponenter kan læses i tabel \ref{tab:Sigbeskriv.}, hvor der også er beskrevet signaltyper, port- og blok-navne.  
 
 \begin{figure}[H] 
 \centering
@@ -49,7 +49,7 @@ Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, s
 
 \section{Internal blok diagram}
 
-Det interne blokdiagram på \ref{ibdfigur} viser den interne struktur og kommunikation mellem delsystemer. Figur \ref{ibdfigur} indeholder to uafhængige blokke med navnene BI-måler og EMG-måler. De to måleapparater kommunikerer med Analog Discovery og en PC. For BI-målerens vedkommende starter kommunikationsflowet med at Analog Discovery'en sender to \textbf{2V} AC spænding til den første forstærker i BI-måler blokken. Forstærker 1 forstærker de \textbf{2V} med faktor 2. Det forstærket signal sendes videre til strømgeneratoren, VCCS, som på baggrund af det indkommende spænding producerer en konstant strøm på \textbf{0,5mA}. Strømen sendes videre til et måleobjekt via. to elektroder, kaldet Blue Sensor Electrodes.       Yderligere to elektroder påsættes på måleobjektet for at måle en spændingsforskel. Denne spændingsforskel ligger i millivolt området og kræver at blive forstærket. Denne forstærkning foregår over trin. Til formålet anvendes en instrumentationsforstærker efterfulgt af en operationsforstærker. Det forstærker signal sendes videre til et anti-aliaseringsfilter, der dæmper frekvenskomponenter over \textbf{Nyquist-frekvensen}. Tilslut sendes signalet til en dataopsamlingsenhed, kaldet DAQ NI USB-6259, der sender det opsamlede signal videre til en PC for at blive analyseret og vist. Delsystemerne forstærker 1, 2 og AA filteret forsynes med en eksitationsspænding på $ \pm  $\textbf{18V}. \\
+Det interne blokdiagram på \ref{ibdfigur} viser den interne struktur og kommunikation mellem delsystemerne. Figur \ref{ibdfigur} indeholder to uafhængige blokke med navnene BI-måler og EMG-måler. De to måleapparater kommunikerer med Analog Discovery og en PC. For BI-målerens vedkommende starter kommunikationsflowet med at Analog Discovery'en sender to \textbf{2V} AC spænding til den første forstærker i BI-måler blokken. Forstærker 1 forstærker de \textbf{2V} med faktor 2. Det forstærket signal sendes videre til strømgeneratoren, VCCS, som på baggrund af det indkommende spænding producerer en konstant strøm på \textbf{0,5mA}. Strømen sendes videre til et måleobjekt via. to elektroder, kaldet Blue Sensor Electrodes.       Yderligere to elektroder påsættes på måleobjektet for at måle en spændingsforskel. Denne spændingsforskel ligger i millivolt området og kræver at blive forstærket. Denne forstærkning foregår over trin. Til formålet anvendes en instrumentationsforstærker efterfulgt af en operationsforstærker. Det forstærker signal sendes videre til et anti-aliaseringsfilter, der dæmper frekvenskomponenter over \textbf{Nyquist-frekvensen}. Tilslut sendes signalet til en dataopsamlingsenhed, kaldet DAQ NI USB-6259, der sender det opsamlede signal videre til en PC for at blive analyseret og vist. Delsystemerne forstærker 1, 2 og AA filteret forsynes med en eksitationsspænding på $ \pm  $\textbf{18V}. \\
 
 EMG-blokken består en Myoware Muscle Sensor og to elektroder, der måler spændingsfaldet over et valgt segment på et måleobjekt. Det målte signal sendes til en PC for at blive vist. Myoware Muscle Sensorens eksitationsspænding på \textbf{5V} på  kommer fra Analog Discovery.   
 					\textbf{INDSÆT EN BLOK OM ELNETET} 
@@ -168,21 +168,21 @@ MyoWare Muscle Sensor & Behandler EMG input fra et måleobjekt 		 &  S1 & mV & B
 
 \textbf{Husk den anden Tabel}
 \chapter{Software} \label{swafsnit}
-\section{Script session diagram}
+\section{Blok definition diagram}
 
-Dette afsnit omhandler strukturering af den  software, som anvendes til analysering og visning af bioimpedans- og EMG målinger. Design af softwaren er drevet af de usecases, som er beskrevet i afsnittet systembeskrivelse. På baggrund af disse usecases udformes en script session diagram, som indeholder blokke, der hver repræsenterer en funktion/metode som udfører en bestemt opgave. 
-I dette projekt anvendes Matlab til at implementere systemets software. Matlab er ikke et objekt orienteret programmeringssprog, men derimod scriptsprog. Dette gør at at det bliver vanskeligt at anvende diagrammer, som er brugt til at strukturere objekt orienteret programmeringskoder. For at skabe en form for struktur i arkitekturen er der lavet et alternativt diagram kaldet   Matlab script session diagram. Funktionaliteter som ønskes implementeret i Matlab kodes som funktioner. Da vi ønsker at implementere Matlab GUI med kontroller i dette projekt skrives koden til disse kontroller i funktioner. Kontrollerne kan være en knap, tekstfelt eller tekstboks. I stedet for at kode alle funktioner i én scriptfil tildeles hver funktionen sin egen script session. Hver script session omtales som et objekt,der udfører en bestemt opgave, samt kan interagerer med andre objekter. På den måde er der forsøgt at lave et system/diagram som giver overblik over de funktioner som indgår i software-delen. Konkret fungerer softwaren ved at et sundhedspersonalet initialiserer koden ved at trykke på knapperne ’Start EMG-måling' og ’Start BI-måling’. Denne initiering medfører at koden, som ligger bag begge knapper udføreres og der foretages to målinger. Disse målinger gemmes i .mat-filer som gemmes lokalt på PC’en. For at analysere og vise målingerne  uploades de gemte filer til softwaren.  
+Dette afsnit omhandler arkitekturen af   softwaren, som anvendes til analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i afsnittet systembeskrivelse. På baggrund af disse usecases udformes et BDD, som indeholder en parent-blok og to child-blokke, der hver indeholder funktioner/metoder.
+I dette projekt anvendes  Matlab til at realisere projektets  software-del.  Funktionaliteter som ønskes implementeret i Matlab kodes som funktioner. Disse funktioner skrives hver i en selvstændig script-fil, som kaldes fra en GUI fil, når de skal bruges. Da det ønskes i dette projekt at implementere en Matlab GUI med kontroller skrives koden til disse kontroller i funktioner. Kontrollerne kan være en knap, tekstfelt eller tekstboks. I stedet for at kode alle funktioner i én scriptfil tildeles hver funktionen sin egen scriptsession. Hver scriptsession omtales som en funktion/metode, der udfører en bestemt opgave, samt kan interagere med andre funktion. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen ’Start measurments'. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i designbilaget.    
 
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
-{Figure/ScriptSessionDia}}
-\caption{Figuren viser de tre lag som koden er inddelt. Kode eksekveringen initialiseres af et sundhedspersonale ved at trykke på knapperne ’Start EMG-måling’ og ’Start BI-måling. Efterfølgende foretages en måling, som gemmes lokal i PC'en. Tilslut uploades de gemte målinger for at blive analyseret og vist.}
+{Figure/SWIBD}}
+\caption{Figuren viser block definition diagrammet for det ønsket software. Diagrammet indeholder en hovedblok, der består af to andre blokke, som hver indeholder Matlab funktioner. Disse funktioner tilsammen analyserer og viser to målinger simultant  }
 \label{figScrip}
 \end{figure}
 
-
+\textbf{USE casene skal ændres der vi nu har en anderledes sw arkitektur}
 
 \citep{Aroom2009}
 \bibliography{library}
