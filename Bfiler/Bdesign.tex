@@ -26,28 +26,50 @@
 \newpage
 
 \chapter{Indledning}
-På baggrund af HW- arkitekturen redegøres i dette afsnit, hvordan HW-komponenterne, som indgår i HW-arkitekturen er designet samt deres funktion. Desuden indeholder afsnittet en kort beskrivelse af designovervejelser i forhold til de enkelte hardwareenheder. Design af de kommercielle HW-enhederne såsom Analog Discovery og DAQ’en beskriveres ikke, da design af disse ligger uden for projektets ramme.  Til gengæld beskrives om disse enheder kan leve op til de krav som nødvendige for at kunne realisere en bioimpedans måler. De enkelte komponenter som skal designes eller kun beskrives består af følgende blokke: 
+I dette bilag forklares design af hardware og software  for synkerefleksmonitoren. På baggrund af HW-arkitekturen redegøres der, hvordan HW-blokkene, som indgår i HW-arkitekturen er designet samt deres funktion. Desuden indeholder afsnittet en kort beskrivelse af designovervejelser i forhold til de enkelte hardwareenheder. Figur \ref{blokflow} viser de komponenter, som skal anvendes for at synkerefleksmonitoren kan blive realiseret. Nogle af disse komponenter skal designes af gruppens medlemmer mens  resten er kommercielle komponenter, der anvendes pga. deres specifikationer. Disse kommercielle komponenter omfatter en Analog Discovery, en PC og en EMG-måler. Dette afsnit forholder sig ikke til design disse kommercielle komponenter, men om de kan leve op til de krav som er nødvendig for at realisere det ønskede produkt. Desuden indeholder bilaget et sekvens diagram, der  giver en detaljeret beskrivelse af udvalgte funktioner/metoder, som styrer synkerefleksmonitorens hardware del.   
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/Blokaede}}
-\caption{Figuren viser de enkelte analoge komponenter, som skal designes for at kunne realisere en bioimpedans måler.}
-\label{ibdfigur}
+\caption{Figuren viser de enkelte komponenter, som skal designes for at realisere synkerefleksmonitoren.}
+\label{blokflow}
 \end{figure}
 
 
 \chapter{Hardware}
 
 \subsection{Analog Discovery}
-Analog Discovery (AD) er et instrument, der giver brugeren mulighed at generere og måle et signal. I dette projekt er AD brugte til at generere \textbf{et differentielt} sinus signal på 2V, som sendes til de to indgange på instrumentationsforstærkeren INA128. Dette signal bliver brugt til at generere en konstant strøm ud af operationsforstærkeren LM318. 
+Analog Discovery (AD) bruges i dette projekt til to formål. Det første er at AD skal fungere som funktionsgenerator og det andet er at den den skal også fungere som dataopsamlingmodul. Figur \ref{ToINA128} viser et skitse af de to formål som AD bliver brugt til. Her ses det at AD generere et AC signal på 2V, som sendes til indgangen af instrumentationsforstærkeren INA128. Dette signal bliver brugt til at generere en konstant strøm ud af operationsforstærkeren LM318. Det ses også på figuren at AD modtager et signal fra et antialiaseringsfilter. Her fungerer AD en dataopsamlingsmodul, der konverter et analog signal til et digital signal. 
+
+
+   
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/ADogINA128}}
-\caption{Figuren viser funktionsgeneratorens funktion i kredsløbet. Funktionsgeneratoren generer et signal på 2V med 50kHz}
+\caption{Figuren viser ADs funktion i det samlede system. AD fungerer som funktionsgenerator og som dataopsamlingsmodul}
 \label{analogOgINA}
 \end{figure}
+
+
+For at rekonstruere et fysiologisk signal som eksisterer i et analog domæne til et digital domæne kræver det at man opfylder en række krav. Den første krav er at overholde Shannons samplingsteorem som siger at samplingsfrekvensen skal minimum være 2 gange den maksimale frekvenskomponent, Nyquist-frekvensen. I praksis ønsker man en måling, der ikke indeholder frekvenser, som er større end den halve samplingsfrekvens dvs. Nyquist-frekvensen. Frekvenser større end Nyquist-frekvensen giver anledning til aliasering, der gør det vanskeligt at rekonstruere det oprindelige signal korrekt. For at genskabe et signal bedst muligt anbefales det at man vælger en samplingsfrekvens, der er betydelig højere end den maksimale frekvenskomponent. Valg af dataopsamlingsenhed har også betydning for hvor præcise man kan genskabe et analog signal. Konvertering af analoge værdier til digitale værdier sker ved at dataopsamlingsenheden måler et analog signal værdi, som derefter konverteres til den nærmeste digital værdi. Under konvertering opstår der fejl, da konverteringen ikke er præcis, men approksimation. Denne fejl kaldes kvantiseringsfejl.  Konverteringens præcision bestemmes af ADC'ens spændingsområde og opløsning. Forholdet mellem ADC'ens inputområde og dens kvantificeringsniveauer/ADC’ens opløsning kan udtrykkes ved denne formel.
+
+\begin{equation}
+\label{eq2.1}
+ LSB=  \dfrac{{Spændingsområde}}{2^{bits}} 
+\end{equation}
+
+Denne formel udtrykker A/D konverterens mindste detekterbare spændingsændring, Least Significant Bit. I dette projekt benyttes AD, der kan yde 14-bit analog til digital-konvertering og som får en spændingsforsyning på 8V. Med disse opløsninger kan LSB beregnes som følgende:
+
+ \begin{equation}
+\label{eq2.2}
+ LSB=  \dfrac{{8V}}{2^{14}}=0,48mV 
+\end{equation}
+ 
+ Dette betyder at det mindste detekterbare spændingsændring som AD kan detektere er 0.48mV. Spændingsændringer over 0,48mV bliver omsæt til digitale værdier og værdier under den bliver ikke omsæt. 
+ 
+ 
 
 \subsection{Forstærker 1 og 2}
 Når man måler fysiologiske signaler har man bruge for at forstærke dem, da deres amplituder er meget små. Disse amplituder skal forstærkes op til volt området. Ydermere er disse signaler overlejret med brum støj på 50 Hz, da omkring liggende apparater, måleudstyret og måleobjektet har elektromagnetisk kobling imellem hinanden. For at eliminere eller undertrykke denne støj mindst muligt anvendes en differensforstærker. Udover at undertrykke denne støj, ønsker man også som beskrevet at forstærke indgangssignalet fra funktionsgeneratoren. Derfor anvendes i dette projekt to instrumentationsforstærkere af typen INA128P2. INA128P har det egenskab at den kan forstærke et signal ved at man kun regulere én modstand. Dette betyder at et ønsket forstærkning kan opnås ved at regulere  en eksterne modstand kaldet $(R_G)$. INA128P har følgende egenskaber som er ønskeværdige når man måler elektrofysiologiske signaler 2:
@@ -179,25 +201,9 @@ Indsæt et billede af TL048 hvis det vælges. Husk datasheet
 \\
      \textbf{ Indsæt et billede af TL048 hvis det vælges. Husk datasheet}
 
-\subsection{DAQ og AA filter}
-For at rekonstruere et fysiologisk signal fra analog domæne i et digital domæne kræver det at man opfylder en række krav. Den første krav er at overholde Shannons samplingsteorem som siger at samplingsfrekvensen skal minimum være 2 gange den maksimale frekvenskomponent, Nyquist-frekvensen. I praksis ønsker man at en måling, der ikke indeholder frekvenser, som er større end den halve samplingsfrekvens dvs. Nyquist-frekvensen. Frekvenser større end Nyquist-frekvensen giver anledning til aliasering, der gør det vanskeligt at rekonstruere det oprindelige signal korrekt. For at genskabe et signal bedst muligt anbefales det at man vælger en samplingsfrekvensen, der er betydelig højere end den maksimale frekvenskomponent. Valg af dataopsamlingsenhed har også betydning for præcise man kan genskabe et analog signal. Konvertering af analoge værdier til digitale værdier sker ved at ens dataopsamlingsenhed har nedre grænse for hvor meget signal den kan detektere. Denne grænse er bestemt af A/D konverterens inputområde og opløsning. Dette betyder at jo mere opløsning man har i sin dataopsamlingsenhed, jo mere nøjagtig bliver ens digitale signal. Forholdet mellem A/D konverterens inputområde og dens kvantificeringsniveauer kan udtrykkes ved denne formel:
+\subsection{AA filter}
 
-\begin{equation}
-\label{eq2.12}
- LSB=  \dfrac{{spændingsområde}}{2^{bits}} 
-\end{equation}
-
-Denne formel udtrykker A/D konverterens mindste detekterbare signal værdi, Least Significant Bit.  Jo mindre LSB er, jo bedre kan man genskabe det analogt signal. I dette projekt anvendes dataopsamlingsmodelet NI-DAQ6259, der har 16-bit ADC. Dens LSB bestemmes som:
- 
- 
-\begin{equation}
-\label{eq2.13}
- LSB=  \dfrac{{8,1V}}{2^{16}} = 0,12mV
-\end{equation} 
- 
- Værdier under 0,12mV bliver ikke omsæt til digitale værdier og værdier over 0,12mV bliver konverteret til digitale værdier. \\linebreak
- 
- For at sikre at aliasering ikke opstår, tilføjes et analog anti-aliaseringsfilter i kredsløbet, der tillader passering af frekvenser, der er mindre end Nyquist-frekvensen og dæmper frekvenser, som er højere end Nyquist-frekvensen. I dette projekt realiseres ant-aliaserings filteret som 2. ordens lavpasfilter af typen Sallen-Key  med cutoff frekvens på 50kHz. Filteret har nedenstående overføringsfunktion: 
+or at sikre at aliasering ikke opstår, tilføjes et analog anti-aliaseringsfilter i kredsløbet, der tillader passering af frekvenser, der er mindre end Nyquist-frekvensen og dæmper frekvenser, som er højere end Nyquist-frekvensen. I dette projekt realiseres ant-aliaserings filteret som 2. ordens lavpasfilter af typen Sallen-Key  med cutoff frekvens på 50kHz. Filteret har nedenstående overføringsfunktion: 
  \\linebreak \textbf{Indsæt et billede af filtret man nu vælger}
 
 \begin{equation}
@@ -222,8 +228,7 @@ I stedet for at beregne værdierne for komponenterne, anvendes et værkstøj til
 \textbf{Indsæt podeplot}
 \textbf{Der mangler to punkter:
 	Hvor meget er signalet dæmpede allerede?
-	Hvor skal vi dæmpe det yderligere for komme ned til 100db?}
-
+	Hvor skal vi dæmpe det yderligere for komme ned til 100db?} 
 \chapter{Software}
 \subsection{Sekvens Diagram}
 
