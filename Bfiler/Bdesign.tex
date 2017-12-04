@@ -179,7 +179,7 @@ Gain  =2 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=50k \Omega
 
 \subsection{Strømgenerator}
 
-Da bioimpedansmåling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet i analyse afsnittet er der testet og sammenlignet to operationsforstærker, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM118 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM118 til at levere det ønsket strøm frem for den anden operationsforstærker LF412N. Det forventet strømoutput som LM118 leverer til vævet kan beregnes som følgende:
+Da bioimpedans måling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet\textbf{ i analyse afsnittet er der testet og sammenlignet to operationsforstærker}, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM118 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM118 til at levere det ønsket strøm frem for den anden operationsforstærker LF412N. Det forventet strømoutput som LM118 leverer til vævet, når $R_4 =10k\Omega $, kan beregnes som følgende:
 
 \begin{figure}[H]
 \centering
@@ -193,17 +193,19 @@ Da bioimpedansmåling kræver at man sender en konstant strøm til måleobjektet
 
 \begin{equation}
 \label{eq2.8}
-I_{\textbf{væv}} = 2 \times \dfrac{V_{in}}{R_{5}}
+I_{\textbf{væv}} = 2 \times \dfrac{V_{in}}{R_{5}}  $$ $$
+I_{\textbf{væv(p - p)}} = 2 \times \dfrac{4_{vp}}{10k}=800uA
 \end{equation}
-
-Størrelsen af $R_5$ og $V_{in}$  styrer, hvor meget strøm operationsforstærkeren kan producere. \textbf{Det anbefales af de fremfundne litteratur, at strømmen som sendes til vævet ligger ca. 0,5mA} \citep{Kusuhara2004}. For at få genereret dette strømstørrelse, isoleres $R_5$ i den overstående ligning:
-
+Dette resultat omregnes til rms:
+ 
 \begin{equation}
-\label{eq2.9}
- R_{5}= 2 \times \dfrac{V_{in}}{I_{\textbf{væv}}} $$ $$
- R_{5}= 2 \times \dfrac{4V}{283 \times 10^{-6}A} =28269\Omega 
+\label{eq2.8}
+I_{\textbf{(peak)}} = \dfrac{I_{\textbf{væv(p - p)}}}{2}=400uA
+$$ $$
+I_{\textbf{rms}} = \dfrac{I_{\textbf{(peak)}}}{\sqrt{2}}=283uA
 \end{equation}
 
+Denne konstant strøm sendes til måleobjektets væv. 
 
 \subsection{OP-AMP}
 Outputtet af instrumentationsforstærker 2 skal yderligere forstærkes og dette sker ved at benytte en ikke-inverterende operationsforstærker som ser således ud: 
