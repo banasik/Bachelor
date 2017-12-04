@@ -131,3 +131,5 @@ sympy-plots-for-*.tex/
 *.db
 *.bib
 Bfiler/Barkitektur.pdf
+*.bib
+Bfiler/library.bib

@@ -24,14 +24,25 @@
 \end{center}
 \end{titlingpage}
 
+
+
 \newpage
 \tableofcontents*
 \newpage
+\chapter{Ordliste}
 
+\begin{longtabu} to \linewidth{@{}l X[j]@{}}
+    Ord &    Forklaring\\
+    \toprule \
+   BI 	&    Bioimpedans \\
+    
+ 
+\label{forkort}
+\end{longtabu}
 
 \chapter{Indledning}
 
-I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger i projektet og hvilke der er valgt at gå videre med udgangspunkt i artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. I de følgende afsnit er der beskrevet og diskuteret valget af hardware- og software komponenter som er kritiske for systemet. Det udleveret diagram fra artiklen som kan ses på figur \ref{fig:BIdiagram} er en simple BI-måler som består af en instrumenterings forstærker, en strømgenerator og udgang til elektroder. Det fungere ved at kredsløbet blev tilført et signal fra en funktiongenerator, som resulteret i en konstant genereret strøm over elektroderne. Den kendte strøm og ved at måle spændingsfaldet over elektroderne, kunne man ved brug af ohms lov $(\frac{U}{I}=R)$ beregne og vise impedansen for et synk.
+I afsnittet analyse vil der blive beskrevet de overvejelser om mulige løsninger i projektet og hvilke der er valgt at gå videre med udgangspunkt i artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. I de følgende afsnit er der beskrevet og diskuteret valget af hardware- og software komponenter som er kritiske for systemet. Det udleveret diagram fra artiklen som kan ses på figur \ref{fig:BIdiagram} er en simple BI-måler som består af en instrumenterings forstærker, en strømgenerator og udgang til elektroder. Den fungerede ved at kredsløbet blev tilført et signal fra funktiongenerator, som resulteret i en konstant genereret strøm over elektroderne. Den kendte strøm og ved at måle spændingsfaldet over elektroderne, kunne man ved brug af ohms lov $(\frac{U}{I}=R)$ beregne og vise impedansen for et synk.
 
 Det er denne BI-måler der vil blive realiseret, bygget på et fumlebræt og testet. Der er indkøbt præcist de komponenter som der bruges i kredsløbet, dog udstyr som oscilloskop og A/D-konverter vil der blive brugt kendt udstyr for projektgruppen. 
 
@@ -49,51 +60,119 @@ Det er denne BI-måler der vil blive realiseret, bygget på et fumlebræt og tes
 \end{figure}
 
 
-\chapter{Det oprindelige kredsløb}
-\section{Hardware}
+\chapter{Bioimpedans}
+\section{Introduktion}
+BI er en ikke invasiv målemetode som er billig, simpel og hurtig at udføre. Når man måler BI bruges der elektroder som kan placeres der hvor man ønsker at måle. Enten hele kroppen eller en bestem kropssegment. Målingen består af to sæt elektroder. Det ene par elektroder sender en uskadelig AC strøm i uA og et andet måler spændingsfaldet over vævet. Impedansen i vævet varierer fra væv til væv. Hvor væske og elektrolytter har en høj ledningsevne, giver en lav impedans og hvorimod fedt og knogler har en lav ledningsevne giver en høj impedans.\cite{Brantlov2017} 
 
-Overordnet bestod det samlet system af BI-måleren som vist i blokke i figur \ref{fig:oprindeligebd}. Hvor det var muligt, blev komponenter inden de blev monteret på fumlebræt, først testet i simuleringsværtøjet Multisim. Her var det muligt at se om de fungerede som ønsket.I de følgende afsnit vil disse blokke blive bekrevet nærmere. 
+Det biologisk vævs celler kan vises som en model som består af tre elektriske komponenter. Ekstracellulærvæsken, intracellulærvæsken og cellemembranen. Ekstracellulærvæsken er repræcenteret som en modstand parallelt med intracellulærvæsken og cellemembranen. Intracellulærvæsken består af en modstand og cellemembranen som en kondensator som vist i figur \ref{fig:vaevsmodel}.
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=6cm]
+{\includegraphics[width=10cm]
+{Figure/vaevsmodel}}
+\caption{Biologisk cellemodel som elektrisk kredsløb. En del af kredsløbet er relateret til dobbeltlaget i cellemembranen og intercellularvæsken, hvor X\textsubscript{C} har kapacitive egenskaber og R\textsubscript{I} er modstanden i intercellularvæsken. Den anden del er relateret til ekstracellulærvæsken, R\textsubscript{E} som er modstanden i ekstracellulærvæsken.}
+\label{fig:vaevsmodel}
+\end{figure}
+
+Forholdet i mellem i cellemodellen kan blive illustreret ved at plotte Z som en vektor i et koordinatsystem fra (0,0) til R\textsubscript{I}X\textsubscript{C}. Værdien af Z er længden af vektoren beregnet med formlen: 
+\begin{equation}
+Z=\sqrt{R^{2}+X^{2}_{C}}
+\end{equation} 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/vektor}}
+\caption{Forholdet imellem den kapacitive reaktans (X\textsubscript{C}), modstanden (R), impedansen (Z) og fasen vinklen ($\theta$) i grader.}
+\label{fig:vektor}
+\end{figure}
+
+
+Når impedansen måles på et biologisk væv er frekvensen afgørende for resultatet af impedansen, da denne vil opføre sig forskelligt afhængig af frekvensen. Ved en lav frekvens på under 100 Hz løber strømmen i ekstracellulærvæsken, så den totale impedans er mere resistiv og svare mere til ekstracellulærvæsken. Som i figur \ref{fig:celler} kan det ses at membranen rundt om cellen sørger for at der ikke kan passerer lav frekvent strøm (rød) igennem cellen. Ved højere frekvens er det muligt at bryde membranen og trænge igennem cellen (blå). Ved den høje frekvens er der nu adgang til elektriske ioner i både ekstracellulærvæsken og intracellulærvæsken hvilket giver en lavere impedans. 
+
+%Den tilførte strøm der løber igennem vævet løber også igennem vævets celler. Da cellerne indeholder intracellulærvæske og ekstracellulærvæske vil den denne strøm opføre sig forskelligt ved lave og høje frekvenser. Hvor ved lave frekvenser kan strømmen kun trænge igennem ekstracellulærvæsken, hvor ved høje frekvenser kan strømmen trænge igennem både intracellulærvæsken og ekstracellulærvæsken i cellen. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/celler}}
+\caption{}
+\label{fig:celler}
+\end{figure}
+
+
+
+%BI måles ved at der bliver tilført strøm over et område, hvor på man måler spændningen over. 
+
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=10cm]
+%{Figure/BIbasic}}
+%\caption{}
+%\label{fig:BIbasic}
+%\end{figure}
+
+
+
+
+
+
+\section{Opbygning af BI-måler}
+Princippet i at måle BI er ved at tilføre en strøm over vævet med elektroder, hvor på man måler spændingen over elektroderne. Dette princip bliver omtalt i artikel \citep{Aroom2009} hvor der er en beskrivelse af et prisbilligt kredsløb som kan måle BI. Der er diagrammer med komponentværdier som vil være et udgangspunkt for udviklingen af bioimpedans måleren. Der vil i de følgende afsnit blive gennemgået opbygningen af BI-måleren fra artikelen og til slut realiseret, testet op imod dokumentation fra artiklen og om der kan detekteres et synk. 
+
+
+
+\section{Hardware}
+
+Overordnet bestod det samlet system af BI-måleren som vist i blokke i figur \ref{fig:oprindeligebd}. Hvor det var muligt, blev komponenter inden de blev monteret på fumlebræt, først testet i simuleringsværtøjet Multisim. Her var det muligt at se om de fungerede som ønsket. I de følgende afsnit vil disse blokke blive beskrevet nærmere. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
 {Figure/oprindeligebd}}
 \caption{Blokdiagram over det oprindelige kredsløb\cite{Aroom2009}}
 \label{fig:oprindeligebd}
 \end{figure}
 
 \subsection{Strømforsyning}
-I artiklen  blev der brugt en $\pm$12 V strømforsyning tilsluttet til netforsyningen. For at undgå netforsyningen blev der i stedet for brugt almindelige AA batteriet. Ved at sætte otte AA batterier i serie, som i figur \ref{fig:12vbatteri}, var det nu muligt at have en forsyning på +12 V og -12 V kun med batterier. Batterierne blev også valgt da de var nemt tilgængelige og fordi der ikke var nogle kritiske komponenter som var afhængige af en fast og præcis spænding som kunne resulterer i fejlmålinger. 
+I artiklen \citep{Aroom2009}  blev der brugt en $\pm$12 V strømforsyning tilsluttet til netforsyningen. For at undgå netforsyningen blev der i stedet for brugt almindelige AA batterier. For at bruge samme forsyningsspænding blev der valgt at sætte otte AA batterier i serie, som i figur \ref{fig:12vbatteri}, nu var det muligt at have en forsyning på +12 V og -12 V kun med batterier. Batterierne blev også valgt da de var nemt tilgængelige og fordi der ikke var nogle kritiske komponenter som var afhængige af en fast og præcis spænding som kunne resulterer i fejlmålinger BI-måleren. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/12vbatteri}}
-\caption{$\pm$12 v batteriforsyning}
+\caption{2x8 batterier sat sammen gav mulighed for at have en forsyning på $\pm$12 v, for at undgå at få stød fra netforsyningen.}
 \label{fig:12vbatteri}
 \end{figure}
 
 \subsection{Funktionsgenerator}
 Funktionsgeneratoren funktion var at sende en fast frekvens ind i kroppen og samtidig en fast spænding til strømgeneratoren. 
-Analog Discovery blev brugt som funktionsgenerator, forbundet som på figur \ref{fig:analogdis}, da denne er nem og hurtig til at generere signaler. Den ønskede frekvens på 50 kHz blev brugt, da det er en brugt frekvens når der skal måles et synk\cite{Kusuhara2004}. Spændings amplituden blev sat til 2 V. 
+Analog Discovery tilsluttet en PC, blev brugt som funktionsgenerator, forbundet som på figur \ref{fig:analogdis}, da denne er nem og hurtig til at generere signaler. Den ønskede frekvens på 50 kHz blev brugt, da det er en brugt frekvens når der skal måles et synk\cite{Kusuhara2004} \citep{Brantlov2017}. Amplituden blev sat til 2 V. 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=6cm]
+{\includegraphics[width=4cm]
 {Figure/analogdis}}
-\caption{Analog discovery som funktionsgenerator}
+\caption{Diagram over hvilke porte på Analog discovery der blev brugt  som funktionsgenerator. Waveform 1 som går videre til instrumentationsforsærkeren og ground som går til stel på fumlebrættet}
 \label{fig:analogdis}
 \end{figure}
 
 
 \subsection{Forstærkning}
-Signalet fra Analog Discovery gik ind til instrumentationsforstærkeren INA128 se figur \ref{fig:ina128}. Den tilhørende gain modstand på 51 kohm blev også brugt, da det giver en fordobling i forstærkning. På udgangen af INA128 var der nu 4V. Udover at forstærke signalet vil det også få reduceret common-mode støj, så signalet er mindre støjfyldt.
+Signalet fra Analog Discovery gik ind til instrumentationsforstærkeren INA128 som der også blev brugt i artiklen. Figure \ref{fig:ina128} viser diagram over INA128, hvor den tilhørende gain modstand (R\textsubscript{G}) på 51 kohm blev også brugt, da det gav en fordobling i forstærkning, ved opslag i datablad. På udgangen af INA128 var der nu 4V. Fordelene ved instrumentationsforstærkeren, udover at forstærke signalet, kan der nævnes\cite{PeterJohansen2014}:
+
+\begin{itemize}
+\item Reducer common-mode støj
+\item Differentielt input
+\item gain justering med kun en modstand
+\end{itemize}
+
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/ina128}}
-\caption{Diagram over INA128}
+\caption{Diagram over INA128 med differentielt input. Hvor den ene indgang (ben 2) var forbundet med Analog Discovery og (ben 3) forbundet til stel. Gain modstand (R\textsubscript{G} på 51 kohm. Eksitastionsspændingen på $\pm$12 V. Udover var stel (ben 5) kom det forstærket signal ud (ben 6).  }
 \label{fig:ina128}
 \end{figure}
 
@@ -102,23 +181,26 @@ Signalet fra Analog Discovery gik ind til instrumentationsforstærkeren INA128 s
 \centering
 {\includegraphics[width=10cm]
 {Figure/ina128gain}}
-\caption{Oversigt over hvilke frekvenser INA128 kan arbejde indenfor ved bestemte gains}
+\caption{Oversigt fra INA128 datablad over hvilke maks frekvenser INA128 kan arbejde indenfor ved bestemte gains.}
 \label{fig:ina128gain}
 \end{figure}
 
-Ved en gain på 2 (V/V) kan der aflæses i figur \ref{fig:ina128gain}, at båndbredden var over 100 kHz, hvilket er indenfor den ønskede frekvens på 50 kHz. 
+Ved en gain på 2 (V/V) kan der aflæses i figur \ref{fig:ina128gain} som er fra databladet til INA128, at båndbredden var over 100 kHz, hvilket er indenfor den ønskede frekvens på 50 kHz og at INA128 ikke er belastet på nogle måde. 
 
 \subsection{Strømgenerator}
+
+Spændningen på 2 V kommer ind ved modstand R1 og strømmen ud ad ben 3 på LF412N. Kombinationen af bestemt ohmsk modstand størrelse og lav \% tolerance modstand giver den faste strøm. Her er der brugt 1\% modstande. Ved at ændre modstand R5, kan en ønsket strøm beregnes vha. formlen\cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
+
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/howland1}}
-\caption{Diagram over VCCS. Den faste spænding på 4V til VCCS giver en fast strøm på 100uA}
+\caption{Diagram over VCCS som er bygget op efter Howland princippet. Den faste spænding på 4V til VCCS giver en fast strøm på 23uA ved 50kHz.}
 \label{fig:howland1}
 \end{figure}
 
-Spændningen kommer ind ved modstand R1 og strømmen ud på ben 3 på LF412N. Kombinationen af bestemt ohmsk modstand størrelse og lav \% tolerance modstand giver den faste strøm. Her er der brugt 1\% modstande. Ved at ændre modstand R5, kan en ønsket strøm beregnes vha. formlen\cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
+
 
 
 \subsection{Elektroder}
@@ -131,8 +213,16 @@ Spændningen kommer ind ved modstand R1 og strømmen ud på ben 3 på LF412N. Ko
 \label{fig:elektroder}
 \end{figure}
 
-De forskellige elektroder kan ses i figur \ref{fig:elektroder}. EKG elektroderne er nemme at påsætte og indeholder meget gel som giver optimal kontakt, men fysisk fylder de meget. EMG elektroderne har mindre gel, men fylder næsten ingen ting. 
+De forskellige elektroder kan ses i figur \ref{fig:elektroder}. EKG elektroderne er nemme at påsætte og indeholder meget gel som giver optimal kontakt, men fysisk fylder de meget. EMG elektroderne har mindre gel, men fylder næsten ingen ting. Der blev prøvet forskellige placeringer til elektroderne men brugte artikel \cite{Nahrstaedt2012a} som vejledende placering \ref{fig:elektrodeplaceringREF}. 
 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=8cm]
+{Figure/elektrodeplaceringREF}}
+\caption{Placering af elektroderne som blev brugt til vejledning\cite{Nahrstaedt2012a}}
+\label{fig:elektrodeplaceringREF}
+\end{figure}
 
 
 
@@ -140,7 +230,7 @@ De forskellige elektroder kan ses i figur \ref{fig:elektroder}. EKG elektroderne
 
 \subsection{A/D-konverter}
 
-Analog er tilsluttet en pc via usb og det analogt signal blev samplet ved at måle over elektroderne. Der blev også monteret et multimeter i serie for at aflæse den konstante strøm.
+Analog Discovery er tilsluttet en pc via USB og det analogt signal blev samplet ved at måle over elektroderne. Der blev også monteret et multimeter i serie for at aflæse den konstante strøm.
 
 
 \begin{figure}[H]
@@ -162,7 +252,7 @@ Analog er tilsluttet en pc via usb og det analogt signal blev samplet ved at må
 \section{Software}
 \subsection{Waveforms}
 
-I programmet Waveforms kan frekvens og amplitude indstilles og resultatet kan ses i oscilloskopet.
+I programmet Waveforms (som styrer Analog Discovery) kan frekvens og amplitude indstilles og resultatet kan ses i oscilloskopet. Dette blev brugt som det første til at måle og se om der kunne detekteres et synk.
 
 \begin{figure}[H]
 \centering
@@ -182,26 +272,25 @@ I programmet Waveforms kan frekvens og amplitude indstilles og resultatet kan se
 
 
 
-\section{Testopstillinger}
+\section{Test af Bi-måler}
 
-Kredsløbet blev bygget i simuleringsprogrammet multisim og på et fumlebræt. Begge med samme udgangspunkt som i figur \ref{fig:testopstilling1}. I de kommende testopstillinger vil der blive bekræftet systemts virkning op i mod dokumentationen fra den oprindelige artikel og andre metoder fra andre artikler.
-\subsection{Testopstilling 1}
-
+Nu vil kredsløbet blive testet. Kredsløbet blev bygget i simuleringsprogrammet multisim og på et fumlebræt. Begge med samme udgangspunkt som i figur \ref{fig:testopstilling1}. I den kommende testopstilling vil der blive bekræftet systemtes virkning op i mod dokumentationen fra den oprindelige artikel og andre testmetoder fra andre artikler. Da de i den oprindelige artikel brugte kredsløbet til at måle på skalpen vil der ske løbende ændringer af kredsløbet som passer bedre til at måle et synk over svælget med inspiration fra andre artikler. 
 
 
 
-I testopstilling 1 blev kredsløbet bygget efter figuer \ref{fig:testopstilling1} først i multisim og bagefter på et fumlebræt. Testen og resultaterne blev holdt op i mod dokumentationen fra den oprindelige artikel, som kan ses i figur \ref{fig:oprindeligeonload} og \ref{fig:oprindeligerms}. Ved at sammenligne resultaterne var det muligt at se om kredsløbet opførte sig korrekt og om det kunne bruges i den videre udvikling af synkerefleksmonitor. 
+
+
+I testopstillingen blev kredsløbet bygget efter figuer \ref{fig:testopstilling1} først i multisim og bagefter på et fumlebræt. Testen og resultaterne blev holdt op i mod dokumentationen fra den oprindelige artikel, som kan ses i figur \ref{fig:oprindeligeonload} og \ref{fig:oprindeligerms}. Ved at sammenligne resultaterne var det muligt at se om kredsløbet opførte sig korrekt og om det kunne bruges i den videre udvikling af synkerefleksmonitor. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
-{Figure/testopstilling1}}
-\caption{Diagram over testopstilling 1 på baggrund af det oprindelige kredsløbsdesign.}
+{Figure/testopstilling11}}
+\caption{Diagram over testopstilling  på baggrund af det oprindelige kredsløbsdesign.}
 \label{fig:testopstilling1}
 \end{figure}
 
-For at få bekræftet at kredsløbet var tilsvarende det som var bygget i artiklen, blev der brugt 
-Figuren \ref{fig:oprindeligeonload} viser hvordan kredsløbet i artiklen opførte sig ved forskellige frekvenser som resulteret i forskellige strømme. Denne  blev brugt som reference til at se om kredsløbet var blevet bygget efter hensigten. 
+I artiklen får de grafen som vist i \ref{fig:oprindeligeonload} fra deres kredsløb ved at der ikke er noget load på udgangen. Den fortæller hvad strømmen er ved forskellige frekvenser og at den er stabil fra 1 kHz til 100 kHz. 
 
 \begin{figure}[H]
 \centering
@@ -210,6 +299,9 @@ Figuren \ref{fig:oprindeligeonload} viser hvordan kredsløbet i artiklen opført
 \caption{No-Load strøm respons af VCCS fra den oprindelige artikel\cite{Aroom2009}.}
 \label{fig:oprindeligeonload}
 \end{figure}
+
+Grafen i figur \ref{fig:oprindeligerms} viser spændingen ændre sig ved forskellige frekvenser når der er påsat en vævsmodel på udgangen af kredsløbet hvor elektroderne skal sidde. 
+
 
 \begin{figure}[H]
 \centering
@@ -434,14 +526,14 @@ Den målte spænding måles over elektroderne og ved at tilføje en vævsmodel s
 \label{analyse1}
 \end{figure}
 
-
-
-
-
-
-
-
 \section{Konklusion}
+
+\chapter{EMG-måler}
+
+
+
+
+
 
 \chapter{Det modificeret kredsløb}
 Erfaringerne fra det oprindelige kredsløb og metoder fra andre artikler blev testet for til slut at kunne vælge det endelige videre system i projektet. Den overordnet ændring er at hardware blev delt op i to dele, en strømgenerator og spændingsmåler. Denne løsning er blevet brugt i flere artikler, \cite{Nahrstaedt2012a}, \cite{Chester}.
@@ -495,7 +587,7 @@ Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forsk
 {\includegraphics[width=8cm]
 {Figure/elektrodeplacering1}}
 \caption{Der er prøvet med forskellige elektrode placeringer. Hvor strøm elektroder er yderst og spændingen måles inderst.}
-\label{fig:elektroder}
+\label{fig:elektroder2}
 \end{figure}
 
 
