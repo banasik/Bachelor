@@ -53,7 +53,7 @@ Analog Discovery (AD) bruges i dette projekt til to formål. Det første er at A
 \end{figure}
 
 
-For at rekonstruere et fysiologisk signal som eksisterer i et analog domæne til et digital domæne kræver det at man opfylder en række krav. Den første krav er at overholde Shannons samplingsteorem som siger at samplingsfrekvensen skal minimum være 2 gange den maksimale frekvenskomponent, Nyquist-frekvensen. I praksis ønsker man en måling, der ikke indeholder frekvenser, som er større end den halve samplingsfrekvens dvs. Nyquist-frekvensen. Frekvenser større end Nyquist-frekvensen giver anledning til aliasering, der gør det vanskeligt at rekonstruere det oprindelige signal korrekt. For at genskabe et signal bedst muligt anbefales det at man vælger en samplingsfrekvens, der er betydelig højere end den maksimale frekvenskomponent. Valg af dataopsamlingsenhed har også betydning for hvor præcise man kan genskabe et analog signal. Konvertering af analoge værdier til digitale værdier sker ved at dataopsamlingsenheden måler et analog signal værdi, som derefter konverteres til den nærmeste digital værdi. Under konvertering opstår der fejl, da konverteringen ikke er præcis, men approksimation. Denne fejl kaldes kvantiseringsfejl.  Konverteringens præcision bestemmes af ADC'ens spændingsområde og opløsning. Forholdet mellem ADC'ens inputområde og dens kvantificeringsniveauer/ADC’ens opløsning kan udtrykkes ved denne formel.
+For at rekonstruere et fysiologisk signal som eksisterer i et analog domæne til et digital domæne kræver det at man opfylder en række krav. Den første krav er at overholde Shannons samplingsteorem som siger at samplingsfrekvensen skal minimum være 2 gange den maksimale frekvenskomponent, Nyquist-frekvensen. I praksis ønsker man en måling, der ikke indeholder frekvenser, som er større end den halve samplingsfrekvens dvs. Nyquist-frekvensen. Frekvenser større end Nyquist-frekvensen giver anledning til aliasering, der gør det vanskeligt at rekonstruere det oprindelige signal korrekt. For at genskabe et signal bedst muligt anbefales det at man vælger en samplingsfrekvens, der er betydelig højere end den maksimale frekvenskomponent. Valg af dataopsamlingsenhed har også betydning for hvor præcise man kan genskabe et analog signal. Konvertering af analoge værdier til digitale værdier sker ved at dataopsamlingsenheden måler et analog signal værdi, som derefter konverteres til den nærmeste digital værdi. Under konvertering opstår der fejl, da konverteringen ikke er præcis, men approksimation. Denne fejl kaldes kvantiseringsfejl.  Konverteringens præcision bestemmes af ADC'ens spændingsområde og opløsning. Forholdet mellem ADC'ens inputområde og dens kvantificeringsniveauer/ADC’ens opløsning kan udtrykkes ved denne formel  \cite [s. 634-635]{Lyons}:
 
 \begin{equation}
 \label{eq2.1}
@@ -67,13 +67,20 @@ Denne formel udtrykker A/D konverterens mindste detekterbare spændingsændring,
  LSB=  \dfrac{{8V}}{2^{14}}=0,48mV 
 \end{equation}
  
- Dette betyder at det mindste detekterbare spændingsændring som AD kan detektere er 0.48mV. Spændingsændringer over 0,48mV bliver omsæt til digitale værdier og værdier under den bliver ikke omsæt. 
+ Dette betyder at det mindste detekterbare spændingsændring som AD kan detektere er 0.48mV. Spændingsændringer over 0,48mV bliver omsæt til digitale værdier og værdier under den bliver ikke omsæt. AD er valgt ud fra følgende fordele:
  
+ \begin{itemize}
+\item 	Den kan fungere som funktionsgenerator samtidig med at den læser to signaler ind simultant
+\item Den kan sample to signaler simultant med en $f_{s}=500000MHz $
+\item Den kan fungere som dataopsamlingsenhed 
  
+\end{itemize}
+Med disse fordele er det besluttet at benytte AD. 
+ 
+ \pagebreak
 
-\subsection{Forstærker 1 og 2}
-Når man måler fysiologiske signaler har man bruge for at forstærke dem, da deres amplituder er meget små. Disse amplituder skal forstærkes op til volt området. Ydermere er disse signaler overlejret med brum støj på 50 Hz, da omkring liggende apparater, måleudstyret og måleobjektet har elektromagnetisk kobling imellem hinanden. For at eliminere eller undertrykke denne støj mindst muligt anvendes en differensforstærker. Udover at undertrykke denne støj, ønsker man også som beskrevet at forstærke indgangssignalet fra funktionsgeneratoren. Derfor anvendes i dette projekt to instrumentationsforstærkere af typen INA128P2. INA128P har det egenskab at den kan forstærke et signal ved at man kun regulere én modstand. Dette betyder at et ønsket forstærkning kan opnås ved at regulere  en eksterne modstand kaldet $(R_G)$. INA128P har følgende egenskaber som er ønskeværdige når man måler elektrofysiologiske signaler 2:
-
+\subsection{Instrumentationsforstærker  1 og 2}
+Når man måler fysiologiske signaler har man bruge for at forstærke dem, da deres amplituder er små. Disse amplituder skal forstærkes fra millivolt  til volt området. Ydermere er disse signaler overlejret med brum støj på 50 Hz, som kommer af de omkringliggende apparater, ved at måleudstyret og måleobjektet har elektromagnetisk kobling imellem hinanden. For at eliminere eller undertrykke denne støj mest muligt anvendes en differensforstærker. Udover at undertrykke denne støj, ønsker man også som omtalt at forstærke indgangssignalet fra funktionsgeneratoren. Derfor anvendes i dette projekt to instrumentationsforstærker af typen INA128P. Med INA128P er det muligt at forstærke et signal ved kun at regulere én modstand. Dette betyder at et ønsket forstærkning kan opnås ved at kun justere den eksterne modstand kaldet $(R_G)$. INA128P har følgende egenskaber som er ønskede, når man måler elektrofysiologiske signaler \textbf{Citer peters pdf}. 
 
 \begin{itemize}
 \item 	Høj indgangsimpedans på ca. $10^{10} \Omega $
@@ -81,108 +88,139 @@ Når man måler fysiologiske signaler har man bruge for at forstærke dem, da de
 \item 	Differentielt input-single ended out (nødvendigt for at mindske $CM_{noise}$)
 \end{itemize}
 
-I dette projekt implementeres to instrumentationsforstærker af typen INA128. Den ene bruges til at forstærke signalet fra funktionsgeneratoren og fjerne brum støj på 50Hz, hvorimod den anden anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj.  
+I dette projekt implementeres to instrumentationsforstærker af typen INA128. Den ene bruges til at forstærke signalet fra funktionsgeneratoren og fjerne brum støj på 50Hz, og den anden anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj.  
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
-{Figure/InaOgMaleobjektOG}}
-\caption{Figuren viser to instrumentationsforstærker. Den ene bruges til at forstærke signalet fra funktionsgeneratoren, hvorimod den anden anvendes til at forstærke fysiologiske signaler fra måleobjektet }
+{Figure/Ina128Design}}
+\caption{Figuren viser en instrumentationsforstærker. Den bruges til undertrykkelse af støj og forstærkning af fysiologiske signaler fra måleobjektet }
 \label{ToINA128}
 \end{figure}
 
-Den ønskede forstærkning reguleres vha. $R_G$ og det kan udledes af formel \textbf{\ref{eq2.1}}, men første skal signalet fra funktionsgeneratoren skal have en passende gain. Dette kan beregnes ved at kende to parametre, nemlig det maksimale output-spænding, som måleobjektet kan levere og den konstante strøm som går igennem måleobjektets strubevæv. Da den maksimale output-spænding fra måleobjektet ikke kan findes i et datablade ligesom en transducer kan man enten simulerere dette vha. en variabel modstand, der har en maks. modstands værdi på $10k \Omega $ eller direkte måle impedansen på strubeområdet vha. en kommerciel bioimpedansmåler. Når man måler impedansen over struben med en kommerciel bioimpedansmåler så måles impedansen til $30k \Omega $. Det betyder at den maksimale output-spænding, som ligger over struben kan nu beregnes vha. Ohms lov: 
-
+Den ønskede forstærkning reguleres vha. $R_G$ og det kan udledes af denn formel:
 
 \begin{equation}
-\label{eq2.1}
-V_{maxStrube}= I_{Strube}\times R_{Strube} $$$$
-V_{maxStrube} = (0.5 \times 10^{-3} A) \times 30\Omega = 15mV
+\label{eq2.3}
+Gain  =1 + \dfrac{{50k\Omega}}{R_G}
 \end{equation}
 
-Ifølge databladet for INA128 kan man forstærke overstående $15mV $ 10 gange og stadig have en tilstrækkelig båndbredde, der ligger over anti-aliaseringsfilterets knækfrekvens på $50kHz$.
+
+
+
+Ved anvendelse af INA128 kan man forstærke et signal 100 gange og stadig have en tilstrækkelig båndbredde, der ligger over anti-aliaseringsfilterets knækfrekvens på $20kHz$. Dette kan aflæses på figur \ref{Fig:GainOgfrequnecy}. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/GainOgfrequnecy}}
 \caption{Figuren viser at Gain på 10V/V bliver ved at være konstant op til ca. 500kHz. Vælger man derimod gain på 100 V/V så er gain konstant kun op til ca. 100kHz \cite{TexasInstruments2005} }
-\label{ToINA128}
+\label{Fig:GainOgfrequnecy}
 \end{figure} 
 
-Ved gain på 1 kan INA128 give 1,3MHz båndbredde (BW) og ved gain på 10 kan man beregne om båndbredden er tilstrækkelig når gain vælges til 10:  
-
-\begin{equation}
-\label{eq2.2}
-1,3MHz= 10 \times BW \linebreak
-\end{equation}
-
-\begin{equation}
-\label{eq2.3}
-BW=\dfrac{{1,3MHz}}{10} = 130kHz
-\end{equation}
+Det ses på figur \ref{Fig:GainOgfrequnecy} at båndbredden BW er større end anti-aliaseringsfilterets knækfrekvens på 20khz, når gain vælges til 100. Dette betyder at forstærkeren er bred nok til at kunne indeholde frekvenser, der er større og mindre end knækfrekvensen.  Med denne aflæsning af BW er det sikrede at INA128 kan benyttes til formålet. 
 
 
-
-
-
-
-Det ses at den beregnede BW er større end anti-aliaseringsfilterets knækfrekvens og det betyder at forstærkeren er bred nok til at kunne indeholde frekvenser, der er større og mindre end knækfrekvensen.  Med den beregnede BW er det sikrede at INA128 kan benyttes til formålet. 
-Der skal også beregnes værdien af den eksterne modstand, $R_G$, som bestemmer, hvor stor den ønskede forstærkning skal være. Denne forstærkning kan udregnes ved formlen:  
-
+Ved at sætte Gain=100 kan man beregne $ R_{G}$
 
 \begin{equation}
 \label{eq2.4}
-Gain  =1 + \dfrac{{50k\Omega}}{R_G}
+Gain = 100 $$ $$ \\
+Gain  =100 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=505 \Omega
 \end{equation}
+
+For at teste om INA128 kan i praksis levere en gain på 100 laves der en spændingsdeler kredsløb, der modtager et signal på 1V, som derefter bliver formindsket til $10mV$. Dette spændingsdeler kredsløb er nødvendig pga:
+
+\begin{itemize}
+\item 	at man ikke direkte kan sende små signaler fra AD til INA128 pga. AD har store usikkerheder, når den genererer små signaler 
+\item	at man ikke kan sende 1V igennem INA128 med gain på 100. Dette giver en udgangsspænding på 100V, som INA128 ikke kan klare. 
+
+\end{itemize}
+
+Med de to begrundelse designes følgende spændingsdeler kredsløb:
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/spaedingdeler}}
+\caption{Figuren viser kredsløbet til spændingsdeleren}
+\label{Fig:GainOgfrequnecy}
+\end{figure} 
 
 \begin{equation}
 \label{eq2.5}
-Gain = 10 $$ $$ \\
-Gain  =10 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=5,56 \times 10^{3} \Omega
+V_{inINA128} = 10 \times 10^{-3}V $$ $$ \\
+R_{1} = 100k\Omega, R_{2} =1000\Omega $$ $$ \\
+V_{outIna128}  = 100 \times \dfrac{R_{2}}{R_{1}+ R_{2}}=1V
 \end{equation}
 
-Udgangssignalet for denne instrumentationsforstærker kan nu beregnes:
+Det forventes at INA128 forstærker 10mV til 1V, hvilken svar til en gain på 100.  
 
-\begin{equation}
-\label{eq2.6}
-V_{outINA128} = V_{maxStrube} \times 10 $$ $$
-V_{outINA128} = 15mV \times 10 = 150mV 
-\end{equation}
 
-Da INA128 som nævnte også benyttes til at forstærke indgangssignalet fra funktionsgeneratoren på 2V skal den eksterne modstand, $R_G$, også beregnes for denne. Gain vælges til 2 og ifølge databladet kan dette gain opnås ved at sætte $R_G=50k\Omega$ \citep{TexasInstruments2005}. 
+Da INA128 som nævnte også benyttes til at forstærke signalet fra funktionsgeneratoren på 2V, skal den eksterne modstand, $R_G$, også beregnes for denne. Hvis gain vælges til 2 skal man ifølge databladet  sætte $R_G=50k\Omega$  \citep [s.13]{TexasInstruments2005}. 
 Udgangssignalet for denne instrumentationsforstærker   beregnes som den forudgående: 
 
 \begin{equation}
-\label{eq2.7}
+\label{eq2.6}
 V_{in} = 2 $$ $$
 Gain = 2 $$ $$
 V_{outINA128}=2V \times 2=4V
 \end{equation}
 
+Med en kendt Gain kan der nu beregnes $R_G$:
 
+
+\begin{equation}
+\label{eq2.7}
+Gain = 2 $$ $$ \\
+Gain  =2 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=50k \Omega
+\end{equation}
 
 \subsection{Strømgenerator}
 
-Da bioimpedans måling kræver at man sender en konstant strøm til måleobjektets væv, er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet i analyse afsnittet er der testet og sammenlignet to operationsforstærker, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM118 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM118 til at levere det ønsket strøm frem for den anden operationsforstærker LF412N. Det forventet strømoutput til vævet kan beregnes som følgende:
+Da bioimpedansmåling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet i analyse afsnittet er der testet og sammenlignet to operationsforstærker, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM118 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM118 til at levere det ønsket strøm frem for den anden operationsforstærker LF412N. Det forventet strømoutput som LM118 leverer til vævet kan beregnes som følgende:
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/StromgeneratorLM318.PNG}}
+\caption{Figuren viser kredsløbet til strømgeneratoren LM138}
+\label{Fig:GainOgfrequnecy}
+\end{figure} 
+
+
 
 \begin{equation}
 \label{eq2.8}
 I_{\textbf{væv}} = 2 \times \dfrac{V_{in}}{R_{5}}
 \end{equation}
 
-Størrelsen af $R_5$ og $V_{in}$  styrer, hvor meget strøm operationsforstærkeren kan producere. Det anbefales af de fremfundne litteratur, at strømmen som sendes til vævet ligger ca. 0,5mA \citep{Kusuhara2004}. For at få genereret dette strømstørrelse, isoleres $R_5$ i den overstående ligning:
+Størrelsen af $R_5$ og $V_{in}$  styrer, hvor meget strøm operationsforstærkeren kan producere. \textbf{Det anbefales af de fremfundne litteratur, at strømmen som sendes til vævet ligger ca. 0,5mA} \citep{Kusuhara2004}. For at få genereret dette strømstørrelse, isoleres $R_5$ i den overstående ligning:
 
 \begin{equation}
 \label{eq2.9}
  R_{5}= 2 \times \dfrac{V_{in}}{I_{\textbf{væv}}} $$ $$
- R_{5}= 2 \times \dfrac{4V}{0,5 \times 10^{-3}A} =16k\Omega 
+ R_{5}= 2 \times \dfrac{4V}{283 \times 10^{-6}A} =28269\Omega 
 \end{equation}
 
 
 \subsection{OP-AMP}
-Forstærkning af de 15mV fra instrumentationsforstærkeren sker ved at benytte en ikke-inverterende operationsforstærker, som skal forstærke dette signal til 8V. Det er nødvendigt at forstærke signalet til denne størrelse, da man vil udnytte A/D konverterens inputområde, som ligger mellem $\pm 10V$ \citep{NI}. Man kunne også vælge at udnytte hele A/D konverterens dynamikområde, men det er valgt at give A/D konverteren en buffer for at imødekomme signaler, der har en markant afvigelsesprocent. Hvis disse type signaler forekommer og man ikke giver A/D konverteren en buffer, så mister man al data, som overskrider de 10V.   
-Der benyttes operationsforstærkeren TL084 til at forstærke signalet op, hvor Gain er bestemt af forholdet mellem to modstande, $R_1$  og $R_2$: 
+Outputtet af instrumentationsforstærker 2 skal yderligere forstærkes og dette sker ved at benytte en ikke-inverterende operationsforstærker som ser således ud: 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/IkkeInviterendeOpAmp}}
+\caption{Figuren viser kredsløbet til strømgeneratoren LM138}
+\label{Fig:GainOgfrequnecy}
+\end{figure} 
+
+
+
+
+Det er nødvendigt at forstærke signalet til denne størrelse, da man vil udnytte A/D konverterens inputområde, som ligger mellem $\pm 25$ \citep{NI}. Man kunne også vælge at udnytte hele A/D konverterens dynamikområde, men det er valgt at give A/D konverteren en buffer for at imødekomme signaler, der har en markant afvigelsesprocent. Hvis disse type signaler forekommer og man ikke giver A/D konverteren en buffer, så mister man al data, som overskrider de 10V.   
+Der benyttes operationsforstærkeren LM318 til at forstærke signalet op, hvor Gain er bestemt af forholdet mellem to modstande, $R_1$  og $R_2$: 
 
 \begin{equation}
 \label{eq2.10}
@@ -197,9 +235,7 @@ Hermed isoleres værdien af $R_2$:
  54= 1 + \dfrac{R_{2}}{1k\Omega} \Rightarrow R_{2} =53k\Omega
 \end{equation}
 Det forventes at operationsforstærkeren forstærker $V_{outINA128}$ til $8,1V$.\
-Indsæt et billede af TL048 hvis det vælges. Husk datasheet
-\\
-     \textbf{ Indsæt et billede af TL048 hvis det vælges. Husk datasheet}
+
 
 \subsection{AA filter}
 
@@ -231,6 +267,16 @@ I stedet for at beregne værdierne for komponenterne, anvendes et værkstøj til
 	Hvor skal vi dæmpe det yderligere for komme ned til 100db?} 
 \chapter{Software}
 \subsection{Sekvens Diagram}
+
+Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugerne kan herfra vælge at igangsætte en måling ved at trykke knappen $'Btn-Start-Measurments'$. Denne knap kører efterfølgende en række funktioner, der tilsammen måler, gemmer og viser en bioimpedans og EMG måling simultant. Hver af disse funktioner eksisterer i sin egen m.fil. Denne opdeling muliggør at man nemt kan udvide programmet uden at have kendskab til alle disse funktioner.    
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/SekevensDiagram}}
+\caption{Figuren viser sekvensen af programmets kode}
+\label{Fig:GainOgfrequnecy}
+\end{figure} 
 
 
 
