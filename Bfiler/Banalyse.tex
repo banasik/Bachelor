@@ -272,7 +272,7 @@ I programmet Waveforms (som styrer Analog Discovery) kan frekvens og amplitude i
 
 
 
-\section{Test af Bi-måler}
+\section{Test af BI-måler}
 
 Nu vil kredsløbet blive testet. Kredsløbet blev bygget i simuleringsprogrammet multisim og på et fumlebræt. Begge med samme udgangspunkt som i figur \ref{fig:testopstilling1}. I den kommende testopstilling vil der blive bekræftet systemtes virkning op i mod dokumentationen fra den oprindelige artikel og andre testmetoder fra andre artikler. Da de i den oprindelige artikel brugte kredsløbet til at måle på skalpen vil der ske løbende ændringer af kredsløbet som passer bedre til at måle et synk over svælget med inspiration fra andre artikler. 
 
@@ -311,32 +311,33 @@ Grafen i figur \ref{fig:oprindeligerms} viser spændingen ændre sig ved forskel
 \label{fig:oprindeligerms}
 \end{figure}
 
-\subsubsection{Simulering}
+\subsection{Simulering}
 
-Opstiling af simuleringen af testopstilling 1 kan ses i figur \ref{fig:testopstilling1multisim}. 
+Opstiling af simuleringen af testopstilling kan ses i figur \ref{fig:testopstilling1multisim}. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/testopstilling1multisim}}
-\caption{Diagram over testopstilling 1 i multisim på baggrund af det oprindelige kredsløbsdesign, dog uden instrumentationsforstærker.}
+\caption{Diagram over testopstilling i multisim på baggrund af det oprindelige kredsløbsdesign, dog uden instrumentationsforstærker.}
 \label{fig:testopstilling1multisim}
 \end{figure}
 
+\subsubsection{No-Load}
 \textbf{No-Load}\\
 Til at bekræfte No-Load responset blev funktionsgeneratoren sat til 4V og 100Hz. På udgangen sad amperemeter for at kunne aflæse den konstante strøm.
 
-Det kunne nu måles at den konstante strøm er på 49uA ved 100Hz, som det fremgår af figur \ref{fig:testopstilling1multisimnoload} hvilket stemmer fint overens med figur \ref{fig:oprindeligeonload} fra den oprindelige artikel. Ved at foretage flere målinger ved at varierer frekvensen kan der tegnes en graf til sammenligning.
+Det kunne nu måles at den konstante strøm er på 49uA ved 100Hz, som det fremgår af figur \ref{fig:testopstilling1multisimnoload} hvilket stemmer fint overens med figur \ref{fig:oprindeligeonload} fra den oprindelige artikel. Ved at foretage flere målinger ved at variere frekvensen kan der tegnes en graf til sammenligning.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/testopstilling1multisimnoload}}
-\caption{Diagram over testopstilling 1 i multisim ved 4V og 100Hz, kan den konstante strøm aflæses til 49uA.}
+\caption{Diagram over testopstilling 1 i multisim ved 4 V og 100 Hz, kan den konstante strøm aflæses til 49uA.}
 \label{fig:testopstilling1multisimnoload}
 \end{figure}
 
-I tabel \ref{table:frekvensernoload} kan de brugte frekvenser ses og går fra 100Hz til 20kHz med et passende interval. På baggrund af disse målinger kan der laves en graf over strøm responset som i \ref{fig:oprindeligeonload}.
+I tabel \ref{table:frekvensernoload} kan de brugte frekvenser ses og går fra 100 Hz til 1 MHz med et passende interval. På baggrund af disse målinger kan der laves en graf over strøm responset som i \ref{fig:oprindeligeonload}.
 
 \begin{table}[H]
 \centering
@@ -363,11 +364,11 @@ I tabel \ref{table:frekvensernoload} kan de brugte frekvenser ses og går fra 10
 \centering
 \includegraphics[width=10cm]{Figure/testopstilling1multisimnoloadgraf}
 \captionof{figure}{Resultatet af den målte strøm ved varieret frekvenser, som kan sammenlignes med figur \ref{fig:oprindeligeonload}. X aksen er i logaritmisk skala.}
-\label{fig:stromfrekvensoprindelig}
+\label{fig:testopstilling1multisimnoloadgraf}
 \end{figure}
 
 
-\textbf{Målte spænding}
+\subsubsection{RMS spænding}
 
 Den målte spænding måles over elektroderne og ved at tilføje en vævsmodel som i figur \ref{fig:testopstilling1multisimvaevs}, vil spændingen ændre sig ved forskellige frekvenser. Vævsmodellen bruges til at vertificere nøjeagtighed og repeterbarhed af kredsløbet\cite{Aroom2009}.
 
@@ -386,9 +387,11 @@ Den målte spænding måles over elektroderne og ved at tilføje en vævsmodel s
 \centering
 {\includegraphics[width=10cm]
 {Figure/testopstilling1multisimRMS}}
-\caption{Diagram over testopstilling 1 i multisim ved 4V og 100Hz, hvor spændingen kan aflæses over elektroderne.}
-\label{fig:testopstilling1multisimnoload}
+\caption{Diagram over testopstilling i multisim ved 4V og 100Hz, hvor spændingen kan aflæses over vævsmodellen.}
+\label{fig:testopstilling1multisimRMS}
 \end{figure}
+
+De målte spændinger som vist i tabel \ref{table:frekvenservrms} er målt fra 100 Hz til 100 kHz.  Målingerne får følgende graf vist i figur \ref{fig:testopstilling1multisimVRMSgraf} 
 
 \begin{table}[H]
 \centering
@@ -426,20 +429,35 @@ Den målte spænding måles over elektroderne og ved at tilføje en vævsmodel s
 
 
 
-\subsubsection{Fumlebræt}
+\subsection{Fumlebræt}
 
-
+Der blev foretaget samme målinger på fumlebræt. Opstillingen af fumlebrættet kan ses i figur \ref{fig:oprindeligekredslob2}. Den øverst bane var +12V (rød), den nederste bane var -12 V (grøn) og stel sort.  
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=8cm]
-{Figure/oprindeligekredslob}}
-\caption{Billede af testopstilling 1 på fumlebræt på baggrund af det oprindelige kredsløbsdesign.}
-\label{fig:oprindeligekredslob}
+{Figure/oprindeligekredslob2}}
+\caption{Billede af testopstilling på fumlebræt på baggrund af det oprindelige kredsløbsdesign. INA128 til venstre og LF412CN til højre.}
+\label{fig:oprindeligekredslob2}
 \end{figure}
 
-\textbf{No-Load}\\
+
+\subsubsection{No-Load}
+Der blev udført no-load test fra 100 Hz til 220 kHz og strømmen blev aflæst. Resultatet af de målte værdier kan ses i tabel \ref{table:frekvensernoload2}, efterfølgende blev der lavet en graf af resultaterne som kan ses i figur \ref{fig:testopstilling1fumlenoloadgraf}.
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=8cm]
+{Figure/oprindeligekredslobfumle1}}
+\caption{Billede af testopstilling på fumlebræt ved 100 Hz og en konstant strøm på 49 uA.}
+\label{fig:oprindeligekredslobfumle1}
+\end{figure}
+
+
+
+
 
 \begin{table}[H]
 \centering
@@ -458,40 +476,33 @@ Den målte spænding måles over elektroderne og ved at tilføje en vævsmodel s
     1000 & 29,1 & 20000 & 25,9 & 120000 & 23,2 &  220000 & 0,1  \\ \hline
 \end{tabular}
     \caption{Målt strøm over elektroderne ved bestemte frekvenser.}
-    \label{table:frekvensernoload}
+    \label{table:frekvensernoload2}
 \end{table} 
-
-
-
-
-
-
-
-
-
-
 
 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/testopstilling1fumlenoloadgraf}}
 \caption{Grafen viser målt RMS.}
-\label{analyse1}
+\label{fig:testopstilling1fumlenoloadgraf}
 \end{figure}
 
-\textbf{Målte spænding}\\
+
+\subsubsection{RMS spænding}
+Ved at tilføre vævsmodellen som i figur \ref{fig:testopstilling1fumlevaevs} kunne spændingerne måles.
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=8cm]
 {Figure/testopstilling1fumlevaevs}}
-\caption{Grafen viser målt RMS.}
-\label{analyse1}
+\caption{I vævsmodellen er der brugt modstande på 20 kohm, 1 kohm (i serie) og 1,5 kohm. Kondensatoren var på 0,1 uF.}
+\label{fig:testopstilling1fumlevaevs}
 \end{figure}
 
+Frekvensen blev varieret fra 100 Hz til 100 kHz og RMS spændningerne blev aflæst og resultatet kan ses i tabel \ref{table:fumlebraetfrekvenservrms}. På baggrund af målingerne blev kunne disse blive tegnet i en graf som kan ses i figur \ref{fig:testopstilling1fumlevrmsgraf} til sammenligningsgrundlag med de tidligere VRMS grafer.
 
 \begin{table}[H]
 \centering
@@ -514,285 +525,357 @@ Den målte spænding måles over elektroderne og ved at tilføje en vævsmodel s
 \end{table} 
 
 
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/testopstilling1fumlevrmsgraf}}
+\caption{Grafen viser de målte VRMS fra 100 Hz til 100 kHz.}
+\label{fig:testopstilling1fumlevrmsgraf}
+\end{figure}
 
+\section{Detektion af synk}
 
-
+Detektionen af synk vil foregå med fumlebrættet. Først med en variable modstand efterfølgende med elektroder påsat som load. Ved den variable load modstand kan det ses i figur \ref{fig:10kohmdummysynk}, at et synk kan vises ved at dalene i signalet er når modstanden bliver mindre og går så op igen når modstanden øges. Dette er en meget forsimplet test og der er ikke taget højde for sampling, filtering m.m. Strømmen var stabil imellem 23 uA og 20 uA.
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
-{Figure/testopstilling1fumlevrmsgraf}}
-\caption{Grafen viser målt RMS.}
-\label{analyse1}
+{\includegraphics[width=10cm]
+{Figure/10kohmdummysynk}}
+\caption{Simuleret et synk på fumlebræt ved at montere en variable 10 kohm som load modstand. Dette er ved 50 kHz og med en amplitude på 2 V fra Analog Discovery.}
+\label{fig:10kohmdummysynk}
 \end{figure}
 
-\section{Konklusion}
+
+Det målte signal i figur \ref{fig:synk1} viser en måling med elektroder og hvor der er foretaget synk. Det der blev kigget efter i målingen var om der kom et spændingsfald når der blev foretaget et synk. Det var ikke muligt at se nogen ændring i spændingsfaldet ved at se om signalet blev fladere. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/synk1}}
+\caption{Målt synk med påsatte elektroder. Dette er ved 50 kHz og amplitude på 2 V.}
+\label{fig:synk1}
+\end{figure}
+
+
+
+
+
+
+
 
 \chapter{EMG-måler}
 
-
-
-
-
-
-\chapter{Det modificeret kredsløb}
-Erfaringerne fra det oprindelige kredsløb og metoder fra andre artikler blev testet for til slut at kunne vælge det endelige videre system i projektet. Den overordnet ændring er at hardware blev delt op i to dele, en strømgenerator og spændingsmåler. Denne løsning er blevet brugt i flere artikler, \cite{Nahrstaedt2012a}, \cite{Chester}.
-
-
-
-
-
-\section{Hardware del 1 - Strømgenerator}
-
-I denne hardware del 1 blev der genereret strøm til to elektroder. I figur \ref{fig:analyse1} kan de enkelte komponenter ses.
-
+Udover BI-måleren vil der blive brugt en kommercielt EMG-måler som i figur \ref{fig:emgdata}, MyoWare Muscle Sensor til at detektere synk. Da BI-måleren ikke kan stå alene om at detektere et synk er det muligt at tilføje en EMG-måler der måler muskelaktiviteten ved svælget. 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
-{Figure/analyse1}}
-\caption{Forløbet over generationen af den faste strøm.}
-\label{analyse1}
+{\includegraphics[width=10cm]
+{Figure/emgdata}}
+\caption{Overblik over EMG-måleren fra databladet.}
+\label{fig:emgdata}
 \end{figure}
 
-\subsection{Strømforsyning}
-Strømforsyningen er blevet øget fra $\pm$12 til $\pm$18 da dette giver en højere excitationsspænding som bidrager til en øget strøm som kan genereres.
-\begin{figure}[H]
-\centering
-{\includegraphics[width=8cm]
-{Figure/18v}}
-\caption{Ved brug af fire 9V batterier kan excitationsspænding komme op på $\pm$18V.}
-\label{fig:18v}
-\end{figure}
-
-\subsection{Funktionsgenerator}
-Signalet fra funktionsgeneratoren blev øget til 4V og bibeholdt 50kHz.
-\subsection{Forstærkning}
-Forstærkningen blev nu øget fra 4V til 8V strømgeneratoren.
-
-\subsection{Strømgenerator}
-Der vælges at øge strømmen til 500uA ved at ændre R5 til 2k, da artiklerne \cite{Chester}, \cite{Chester2014} og \cite{Kusuhara2004} bruger denne strøm til at detektere BI over svælget. 
-
-
-
-
-
-\subsection{Elektroder}
-
-Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer. Strømmen og den målte spændingen er nu blevet ført over sine egne ledninger. BI er bedst at måle med fire elektroder, for at undgå utilsigtet inklusion af elektrode impedans ved kun brug af to elektroder \cite[s. 420-421]{Holder2004}.
-
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=8cm]
-{Figure/elektrodeplacering1}}
-\caption{Der er prøvet med forskellige elektrode placeringer. Hvor strøm elektroder er yderst og spændingen måles inderst.}
-\label{fig:elektroder2}
-\end{figure}
-
-
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=8cm]
-{Figure/BIbasic}}
-\caption{Diagram for hvordan man måler BI, med en fast strøm hvor spændingen kan måles over.}
-\label{fig:analyse2}
-\end{figure}
-
-
-\section{Hardware del 2 - Spændingsmåler}
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\linewidth]
-{Figure/analyse2}}
-\caption{Bioimpedans ud}
-\label{fig:analyse2}
-\end{figure}
-
-
-\subsection{Strømforsyning}
-
-Da strømforsyningen var øget til $\pm$18V for del 1, blev del 2 forsynet med den samme excitationsspænding. 
-
-\subsection{Elektroder}
-
-Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer.
-
-\subsection{Forstærkning}
-Da det var en lille spænding der måltes blev den forstærket op samtidig med at støj blev reduceret. Der blev stadig holdt øje om båndbredden var indenfor hvad INA128 kunne leverer ved forskellige gains. Gain blev sat til 10, hvilket der ok som det kan aflæses i figur \ref{fig:ina128gain}.
-
-
-\subsection{Antialiaseringsfilter}
-Antialiaseringsfilteret består af et lavpas filter med en knækfrekvens på 50kHz, da synket er blevet amplitudemoduleret ved denne frekvens. Lavpasfilteret blev et 2.ordenfilter da det ville dæmpe med -40dB pr. dekade, således at ved 500kHz er det dæmpet -40dB.
-
-
-
-\subsection{A/D konverter}
-Når signalet er blevet forstærket til det ønskede spændingsniveau som er brugbart for A/D konverteren, er det muligt at sample signalet. Ved at vælge en høj samplingfrekvens på 1MHZ, fik vi samplet det dobbelte af det halve af nyquist frekvens.
-
-\section{Software}
-\subsection{Matlab}
-
-\section{Testopstillinger}
-\subsection{Testopstilling 1}
-\subsection{Testopstilling 2 - LM318N}
-\subsection{Testopstilling 3 - OPAMP}
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\linewidth]
-{Figure/modificeretkredslob}}
-\caption{}
-\label{modificeretkredslob}
-\end{figure}
-
-\section{Konklusion}
-
-\chapter{EMG}
-
-
-
-
-
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\linewidth]
-{Figure/analyse1}}
-\caption{Bioimpedans ud}
-\label{fig:analyse1}
-\end{figure}
-
-Instrumenterings forstærker 1\\
-I det oprindelig design af BI konstateret vi at det var lavet lavet til at måle BI'er på skalpen og ikke over svælget. Derfor valgte vi at instrumenterings forstærkeren fik et større signal ind fra Analog Discovery på 2V og 50kHz. I det hele taget undrede vi over artiklens valg af brug af instrumenterings forstærker i starten af kredsløbet, da den ikke er et must for at realisere kredsløbet. Men dens eneste formål var at nedbringe common-mode støj fra funktions generatoren, så vi valgte at beholde denne da vi også vil undgå så meget støj som muligt videre i kredsløbet. Gain var oprindeligt sat til 51 Kohm hvilket giver det dobbelte af hvad instrumenterings forstærkeren tilføre. I diagrammet på figur \ref{BIdiagram} kan det ses at instrumenterings forstærkeren bliver forsynet med +12/-12 V, men der er her valgt at -12 V skal direkte til ground, hvilket har resulteret i at instrumenterings forstærkeren ikke fungerer korrekt, så der er den i stedet forsynet med -12 V og ikke ground.  
-
-
-
-
-
-Strømgenerator\\
-Det forstærket signal som kommer fra udgangen på instrumenterings forstærkeren løber over til strømgeneratoren. Denne strømgenerator er en Howland bridge. Sammensætningen af modstandene er vigtige og deres tolerance skal være lav for at få en korrekt og konstant strøm. For at justerer strømmen kan R5 udskiftes i kredsløbet. For at få en konstant strøm omkring ca. 500 uA, er modstanden ændret fra 51 Kohm til 2 Kohm.  
-
-\textbf{Det oprindelige kredsløb}\\
-Først bygges det oprindelige kredsløb som det er opgivet og der bliver foretaget en no load test, for at se om det stemmer overens med figuren fra artiklen.
-
-\begin{figure}[H]
-\centering
-\begin{minipage}{.5\textwidth}
-  \centering
-  \includegraphics[width=.9\linewidth]{Figure/VCCSwavegen1}
-  \captionof{figure}{A figure}
-  \label{fig:test1}
-\end{minipage}%
-\begin{minipage}{.5\textwidth}
-  \centering
-  \includegraphics[width=.9\linewidth]{Figure/oprindeligekredslob}
-  \captionof{figure}{Another figure}
-  \label{fig:test2}
-\end{minipage}
-\end{figure}
-
-
-
-
-
-
-
-
-\textbf{Det modificeret kredsløb}\\
-
-\begin{table}[H]
-\begin{minipage}[b]{0.30\linewidth}
-\centering
-\begin{tabular}{ r |  r }
-    \hline
-    Hz & uA \\ \hline
-    100 & 1268 \\ \hline
-    200 & 1051 \\ \hline
-    300 & 920 \\ \hline
-    400 & 845 \\ \hline
-    500 & 802 \\ \hline
-    600 & 775 \\ \hline
-    700 & 756 \\ \hline
-    800 & 744 \\ \hline
-    900 & 735 \\ \hline
-    1000 & 728 \\ \hline
-    2000 & 703 \\ \hline
-    3000 & 696 \\ \hline
-    4000 & 692 \\ \hline
-    5000 & 688 \\ \hline
-    6000 & 685 \\ \hline
-    7000 & 683 \\ \hline
-    8000 & 680 \\ \hline
-    9000 & 678 \\ \hline
-    10000 & 676 \\ \hline
-    20000 & 675 \\ \hline
-    30000 & 634 \\ \hline
-    40000 & 596 \\ \hline
-    50000 & 542 \\ \hline
-    60000 & 475 \\ \hline
-    70000 & 405 \\ \hline
-    80000 & 332 \\ \hline
-    90000 & 268 \\ \hline
-    100000 & 210 \\ \hline
-    110000 & 161 \\ \hline
-    120000 & 120 \\ \hline
-    130000 & 87 \\ \hline
-    140000 & 60 \\ \hline
-    150000 & 40 \\ \hline
-    160000 & 25 \\ \hline
-    170000 & 16 \\ \hline
-    180000 & 10 \\ \hline
-    190000 & 6 \\ \hline
-    200000 & 4 \\ \hline
-    210000 & 2 \\ \hline
-    220000 & 1 \\ \hline
-    230000 & 1 \\ \hline
-    240000 & 0 \\ \hline
-        
-\end{tabular}
-    \caption{Student Database}
-    \label{table:student}
-\end{minipage}\hfill
-\begin{minipage}[b]{0.7\linewidth}
-\centering
-\includegraphics[width=10cm]{Figure/stromfrekvensoprindelig2k}
-\captionof{figure}{2-D scatterplot of the Student Database}
-\label{fig:image}
-\end{minipage}
-\end{table}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Overvejelser om mulige løsninger
-løsninger I har valgt, begrundelsen herfor
-grundlæggende valg af hardware- og softwaremæssige komponenter, som er kritiske for realisering af systemet
-
-For at træffe et valg kan der analyseres og diskuteres forskellige løsninger mht. til ydeev-ne, pris, leveringstid og forhåndskendskab. Disse kan med fordel opstilles i tabelform.
-
-Anti-alisering
-Elektroder
-Konstant strøm
-Lavpas filtering
-Ensretter
-Sampling af signal \cite{martin}
-
-
+Den vil få sine egne elektroder og der er brug for tre styk. Samplingen vil ske ved hjælp af Analog Discovery. Den vil blive forsynet med egen spændingskilde på 4,5 V. Der vil i første omgang blive brugt udgangen "EMG Envelope" da det ikke vil kræve yderligere filtrering eller databehandling.
+ 
 
 
 
 \chapter{Konklusion}
+
+Ved først at simulere og bagefter bygge kredsløbet i artiklen har været meget lærerigt. Det gav en ide om hvad en BI-måler skal kunne og indeholde. Dette vil være udgangspunktet for udviklingen af Synkerefleksmonitor.  
+
+Test resultaterne af no-load og Vrms ligner meget lig de resultater fra artiklen. Det har ikke været muligt at bruge præcis samme udstyr, men kredsløbet er identisk hvilket må være acceptabelt.
+
+For at udvikle Synkerefleksmonitor der kritiske ting som skal tilføjes og ændres fra det oprindelige kredsløb:
+\begin{itemize}
+\item Større strøm
+\item 4 elektroder
+\item Filtrering
+\item A/D konvertering
+\end{itemize}
+
+Strømmen der bliver ført over i måleobjektet skal være større, da det er kendt at den ligger ved 500 uA\cite{Kusuhara2004} når der skal måles over svælget og ikke på skalpen som er tilfældet i artiklen. Dette vil kræve en udvikling af en ny VCCS med udgangspunkt i howland som fra artiklen.
+
+Når der måles BI bliver dette typisk gjort ved hjælp af fire elektroder\cite{Brantlov2017}. To til at overføre strømmen og to til at måle spændingsfaldet med. To elektroder vil også kunne skabe impedans inteferanse i elektroderne hvilket kan resulterer i fejlmålinger. Dette kræver en opdeling af et strømkredsløb med howland og et som måler spændningen fra måleobjektet.
+
+I artiklen bliver der ikke omtalt filterring af det samplet signal. Dette vil blive et must da for at undgå antialisering\cite{Thomas2011} skal dette udvikles til systemet.
+
+
+En kritisk del af synkerefleksmonitor er dataopsamlingen. For at begrænse A/D konvertere til et minimum vælges Analog discovery til at både at fungere som funktionsgenerator og sample signalet. Det skaber dog en begrænsning i hvor hurtigt Analog Discovery da den nu skal sample to signaler (BI-måler og EMG-måler simultant), hvilket resulterer i at det er nødvendigt at reducere samplingsfrekvens. Udover at samplingsfrekvensen skal sættes ned, er det også nødvendigt at nedsætte de 50 kHz. Det vil sige at Analog Discovery kan maks. sample ved 500 kHz når der skal bruge to analog kanaler. Dette gør at for at få en korrekt databehandling og den videre udvikling af synkerefleksmonitor nedsættes funktionsgeneratoren til 20 kHz.
+
+Et overblik over de nye tiltag i forhold til artikel kredløbet kan ses i figur \ref{fig:konklusiondiagram}. 
+
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/konklusiondiagram}}
+\caption{Øverst er det simple kredsløb fra artiklen. Nederst er det ønsket mere komplekse Synkerefleksmonitor.}
+\label{fig:konklusiondiagram}
+\end{figure}
+
+
+
+
+%\chapter{Det modificeret kredsløb}
+%Erfaringerne fra det oprindelige kredsløb og metoder fra andre artikler blev testet for til slut at kunne vælge det endelige videre system i projektet. Den overordnet ændring er at hardware blev delt op i to dele, en strømgenerator og spændingsmåler. Denne løsning er blevet brugt i flere artikler, \cite{Nahrstaedt2012a}, \cite{Chester}.
+
+
+
+
+
+%\section{Hardware del 1 - Strømgenerator}
+
+%I denne hardware del 1 blev der genereret strøm til to elektroder. I figur \ref{fig:analyse1} kan de enkelte komponenter ses.
+
+
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=\linewidth]
+%{Figure/analyse1}}
+%\caption{Forløbet over generationen af den faste strøm.}
+%\label{analyse1}
+%\end{figure}
+
+%\subsection{Strømforsyning}
+%Strømforsyningen er blevet øget fra $\pm$12 til $\pm$18 da dette giver en højere excitationsspænding som bidrager til en øget strøm som kan genereres.
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=8cm]
+%{Figure/18v}}
+%\caption{Ved brug af fire 9V batterier kan excitationsspænding komme op på $\pm$18V.}
+%\label{fig:18v}
+%\end{figure}
+%
+%\subsection{Funktionsgenerator}
+%Signalet fra funktionsgeneratoren blev øget til 4V og bibeholdt 50kHz.
+%\subsection{Forstærkning}
+%Forstærkningen blev nu øget fra 4V til 8V strømgeneratoren.
+%
+%\subsection{Strømgenerator}
+%Der vælges at øge strømmen til 500uA ved at ændre R5 til 2k, da artiklerne \cite{Chester}, \cite{Chester2014} og \cite{Kusuhara2004} bruger denne strøm til at detektere BI over svælget. 
+%
+%
+%
+%
+%
+%\subsection{Elektroder}
+%
+%Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer. Strømmen og den målte spændingen er nu blevet ført over sine egne ledninger. BI er bedst at måle med fire elektroder, for at undgå utilsigtet inklusion af elektrode impedans ved kun brug af to elektroder \cite[s. 420-421]{Holder2004}.
+%
+%
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=8cm]
+%{Figure/elektrodeplacering1}}
+%\caption{Der er prøvet med forskellige elektrode placeringer. Hvor strøm elektroder er yderst og spændingen måles inderst.}
+%\label{fig:elektroder2}
+%\end{figure}
+%
+%
+%
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=8cm]
+%{Figure/BIbasic}}
+%\caption{Diagram for hvordan man måler BI, med en fast strøm hvor spændingen kan måles over.}
+%\label{fig:analyse2}
+%\end{figure}
+%
+%
+%\section{Hardware del 2 - Spændingsmåler}
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=\linewidth]
+%{Figure/analyse2}}
+%\caption{Bioimpedans ud}
+%\label{fig:analyse2}
+%\end{figure}
+%
+%
+%\subsection{Strømforsyning}
+%
+%Da strømforsyningen var øget til $\pm$18V for del 1, blev del 2 forsynet med den samme excitationsspænding. 
+%
+%\subsection{Elektroder}
+%
+%Der blev testet med begge elektroder fra figur \ref{fig:elektroder} og med forskellige placeringer.
+%
+%\subsection{Forstærkning}
+%Da det var en lille spænding der måltes blev den forstærket op samtidig med at støj blev reduceret. Der blev stadig holdt øje om båndbredden var indenfor hvad INA128 kunne leverer ved forskellige gains. Gain blev sat til 10, hvilket der ok som det kan aflæses i figur \ref{fig:ina128gain}.
+%
+%
+%\subsection{Antialiaseringsfilter}
+%Antialiaseringsfilteret består af et lavpas filter med en knækfrekvens på 50kHz, da synket er blevet amplitudemoduleret ved denne frekvens. Lavpasfilteret blev et 2.ordenfilter da det ville dæmpe med -40dB pr. dekade, således at ved 500kHz er det dæmpet -40dB.
+%
+%
+%
+%\subsection{A/D konverter}
+%Når signalet er blevet forstærket til det ønskede spændingsniveau som er brugbart for A/D konverteren, er det muligt at sample signalet. Ved at vælge en høj samplingfrekvens på 1MHZ, fik vi samplet det dobbelte af det halve af nyquist frekvens.
+%
+%\section{Software}
+%\subsection{Matlab}
+%
+%\section{Testopstillinger}
+%\subsection{Testopstilling 1}
+%\subsection{Testopstilling 2 - LM318N}
+%\subsection{Testopstilling 3 - OPAMP}
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=\linewidth]
+%{Figure/modificeretkredslob}}
+%\caption{}
+%\label{modificeretkredslob}
+%\end{figure}
+%
+%\section{Konklusion}
+%
+%\chapter{EMG}
+%
+%
+%
+%
+%
+%
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=\linewidth]
+%{Figure/analyse1}}
+%\caption{Bioimpedans ud}
+%\label{fig:analyse1}
+%\end{figure}
+%
+%Instrumenterings forstærker 1\\
+%I det oprindelig design af BI konstateret vi at det var lavet lavet til at måle BI'er på skalpen og ikke over svælget. Derfor valgte vi at instrumenterings forstærkeren fik et større signal ind fra Analog Discovery på 2V og 50kHz. I det hele taget undrede vi over artiklens valg af brug af instrumenterings forstærker i starten af kredsløbet, da den ikke er et must for at realisere kredsløbet. Men dens eneste formål var at nedbringe common-mode støj fra funktions generatoren, så vi valgte at beholde denne da vi også vil undgå så meget støj som muligt videre i kredsløbet. Gain var oprindeligt sat til 51 Kohm hvilket giver det dobbelte af hvad instrumenterings forstærkeren tilføre. I diagrammet på figur \ref{BIdiagram} kan det ses at instrumenterings forstærkeren bliver forsynet med +12/-12 V, men der er her valgt at -12 V skal direkte til ground, hvilket har resulteret i at instrumenterings forstærkeren ikke fungerer korrekt, så der er den i stedet forsynet med -12 V og ikke ground.  
+%
+%
+%
+%
+%
+%Strømgenerator\\
+%Det forstærket signal som kommer fra udgangen på instrumenterings forstærkeren løber over til strømgeneratoren. Denne strømgenerator er en Howland bridge. Sammensætningen af modstandene er vigtige og deres tolerance skal være lav for at få en korrekt og konstant strøm. For at justerer strømmen kan R5 udskiftes i kredsløbet. For at få en konstant strøm omkring ca. 500 uA, er modstanden ændret fra 51 Kohm til 2 Kohm.  
+%
+%\textbf{Det oprindelige kredsløb}\\
+%Først bygges det oprindelige kredsløb som det er opgivet og der bliver foretaget en no load test, for at se om det stemmer overens med figuren fra artiklen.
+%
+%\begin{figure}[H]
+%\centering
+%\begin{minipage}{.5\textwidth}
+%  \centering
+%  \includegraphics[width=.9\linewidth]{Figure/VCCSwavegen1}
+%  \captionof{figure}{A figure}
+%  \label{fig:test1}
+%\end{minipage}%
+%\begin{minipage}{.5\textwidth}
+%  \centering
+%  \includegraphics[width=.9\linewidth]{Figure/oprindeligekredslob}
+%  \captionof{figure}{Another figure}
+%  \label{fig:test2}
+%\end{minipage}
+%\end{figure}
+%
+%
+%
+%
+%
+%
+%
+%
+%\textbf{Det modificeret kredsløb}\\
+%
+%\begin{table}[H]
+%\begin{minipage}[b]{0.30\linewidth}
+%\centering
+%\begin{tabular}{ r |  r }
+%    \hline
+%    Hz & uA \\ \hline
+%    100 & 1268 \\ \hline
+%    200 & 1051 \\ \hline
+%    300 & 920 \\ \hline
+%    400 & 845 \\ \hline
+%    500 & 802 \\ \hline
+%    600 & 775 \\ \hline
+%    700 & 756 \\ \hline
+%    800 & 744 \\ \hline
+%    900 & 735 \\ \hline
+%    1000 & 728 \\ \hline
+%    2000 & 703 \\ \hline
+%    3000 & 696 \\ \hline
+%    4000 & 692 \\ \hline
+%    5000 & 688 \\ \hline
+%    6000 & 685 \\ \hline
+%    7000 & 683 \\ \hline
+%    8000 & 680 \\ \hline
+%    9000 & 678 \\ \hline
+%    10000 & 676 \\ \hline
+%    20000 & 675 \\ \hline
+%    30000 & 634 \\ \hline
+%    40000 & 596 \\ \hline
+%    50000 & 542 \\ \hline
+%    60000 & 475 \\ \hline
+%    70000 & 405 \\ \hline
+%    80000 & 332 \\ \hline
+%    90000 & 268 \\ \hline
+%    100000 & 210 \\ \hline
+%    110000 & 161 \\ \hline
+%    120000 & 120 \\ \hline
+%    130000 & 87 \\ \hline
+%    140000 & 60 \\ \hline
+%    150000 & 40 \\ \hline
+%    160000 & 25 \\ \hline
+%    170000 & 16 \\ \hline
+%    180000 & 10 \\ \hline
+%    190000 & 6 \\ \hline
+%    200000 & 4 \\ \hline
+%    210000 & 2 \\ \hline
+%    220000 & 1 \\ \hline
+%    230000 & 1 \\ \hline
+%    240000 & 0 \\ \hline
+%        
+%\end{tabular}
+%    \caption{Student Database}
+%    \label{table:student}
+%\end{minipage}\hfill
+%\begin{minipage}[b]{0.7\linewidth}
+%\centering
+%\includegraphics[width=10cm]{Figure/stromfrekvensoprindelig2k}
+%\captionof{figure}{2-D scatterplot of the Student Database}
+%\label{fig:image}
+%\end{minipage}
+%\end{table}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%Overvejelser om mulige løsninger
+%løsninger I har valgt, begrundelsen herfor
+%grundlæggende valg af hardware- og softwaremæssige komponenter, som er kritiske for realisering af systemet
+%
+%For at træffe et valg kan der analyseres og diskuteres forskellige løsninger mht. til ydeev-ne, pris, leveringstid og forhåndskendskab. Disse kan med fordel opstilles i tabelform.
+%
+%Anti-alisering
+%Elektroder
+%Konstant strøm
+%Lavpas filtering
+%Ensretter
+%Sampling af signal 
+%
+%
+%
+%
+%
+%\chapter{Konklusion}
 \bibliography{library}
 
 \end{document}
