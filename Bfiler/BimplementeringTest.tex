@@ -27,15 +27,117 @@
 \newpage
 
 \chapter{Indledning}
+I dette bilag beskrives, hvordan de designede hardware og software-komponenter er implementeret og modultestet. På baggrund af disse designede enheder i designfasen foretages der nu implementering og modultest. Til implementering af hardware komponenter er der valgt at opbygge testkredsløbet på et fumlebræt. Hver af disse komponenter skal igennem en modultest for at verificere om de kan bruges til det tiltænkte formål. For softwarens vedkommende dokumenteres, hvordan kode implementeringen er foregået, samt resultatet af disse implementeringer. Formålet med modultesten er at forberede produktet til integrationstest.       
 \chapter{Implementering}
 \section{Hardware}
-\section{Software}
+\subsection{Instrumentationsforstærker 1}
+Denne instrumentationsforstærker er tiltænkt til at forstærke et AC signal på 2V til 4V. Til dette formål  er der anvendt instrumentationsforstærkeren INA128 med de begrundelser, som er angivet i designafsnittet. Figur \ref{figScrip} viser INA128 og en eksterne modstand, som bruges til at fastsætte den ønskede forstærkning.  
 
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/INA128IM}}
+\caption{Figuren viser, hvordan INA128 er implementeret på et fumlebræt  }
+\label{figScrip}
+\end{figure}
+
+
+
+\subsection{Strømgenerator}
+Strømgeneratoren funktion er at levere en konstant strøm, som sendes til et måleobjektets væv. Til implementering af denne strømgenerator er der anvendt operationsforstærkeren LM318. Figur \ref{figScrip1}
+viser komponenten LM138 med de tilhørende modstande. 
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/LM318IM}}
+\caption{Figuren viser, hvordan LM318 er implementeret på et fumlebræt  }
+\label{figScrip1}
+\end{figure}
+
+
+\subsection{Instrumentationsforstærker 2}
+
+Instrumentationsforstærker 2 bliver brugt til at forstærke biosignal fra måleobjektets og undertrykkelse støj . Til implementering af denne Instrumentationsforstærker er der igen brugt INA128. Figur \ref{figINAogSpandeler} B viser komponenten INA128 med dens tilhørende eksterne modstand. Figur \ref{figINAogSpandeler} A viser en spændingsdeler kredsløb, der er benyttet til at teste instrumentationsforstærkeren. Hvorfor der anvendes en spændingsdeler til test af INA128 henvises der  til bilaget "Design" 
+
+
+ 
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/INA128ogSpDelerIM}}
+\caption{Figuren viser, hvordan LM318 er implementeret på et fumlebræt  }
+\label{figINAogSpandeler}
+\end{figure}
+
+\subsection{OP-AMP}
+
+Biosignalet fra måleobjektet forstærkes op i to trin. Det første trin benyttes Instrumentationsforstærker 2 og det andet trin anvendes operationsforstærkeren LM318, som forstærker signalet fra Instrumentationsforstærker 2 yderligere. Figur \ref{opamp} viser implementering af LM318 og de to modstande, som fastsætter, hvor meget forstærkning man kan få ud af operationsforstærkeren. 
+
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/OP-AMPIM}}
+\caption{Figuren viser, hvordan LM318 er implementeret på et fumlebræt  }
+\label{opamp}
+\end{figure}
+
+
+
+    
+\subsection{AA filter}
+
+er ikke klar endnu
+\section{Software}
+I will back baby
 
 \chapter{Modultest}
+Modultest af hardware-delen består af en simuleret test vha. Multisim og en praktisk test. Nogle komponenterne eksister ikke i Multisim og kræver at blive oprettet, men det er valgt at ikke bruge tid på det, da det er tidskrævende. Derfor præsenteres kun praktiske resultater for disse komponenter. I det følgende præsenteres testresultaterne for instrumentationsforstærker 1, 2 , strømgeneratoren, operationsforstærkeren og AA filteret. 
 \section{Hardware}
-\section{Software}
+\subsection{Instrumentationsforstærker 1}
+Denne modul er testet ved at sende 2V fra Analog Discovery (den gule kurve) igennem INA128. Det ses på \ref{TestINA} at de 2V bliver forstærket til 4V(turkis kurve) ved udgangen af INA128. Dette resultat stemmer overens med det beregnede resultat i designfasen.    
 
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/TestINA1281}}
+\caption{Figuren viser resultatet af INA128, som forstærker 2V til 4V}
+\label{TestINA}
+\end{figure}
+ 
+\subsection{Strømgenerator}
+
+Strømgeneratoren er simuleret ved at den får 4V fra en funktionsgenerator. På baggrund af denne spænding genereres der 283uA ud af strømgeneratoren. 
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/VCCSTest}}
+\caption{Figuren viser det simuleret resultat for  strømgeneratoren}
+\label{TestINA}
+\end{figure}
+
+Tilsvarende sendes der 4V ind i strømgeneratoren, når der skal foretages den praktiske test. De 4V genereres fra Analog Discovery. Den producerede strøm måles vha. 
+en amperemeter på udgangen af den anvendte operationsforstærker. Det ses på figur \ref{TestStrGen} at udgangsstrømmen er 285uA. \textbf{Dette resultat afviger lidt fra det beregnede og simulerede resultat. }
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/VCCStestParktisk}}
+\caption{Figuren viser det simuleret resultat for  resultatet af strømgeneratoren}
+\label{TestStrGen}
+\end{figure}
+
+
+\subsection{Instrumentationsforstærker 2}
+\subsection{OP-AMP}
+\subsection{AA filter}
+\section{Software}
+TEST SD'ets funktioner
 \chapter{Integrationstest}
 
 
