@@ -594,7 +594,7 @@ For at udvikle Synkerefleksmonitor der kritiske ting som skal tilføjes og ændr
 \item A/D konvertering
 \end{itemize}
 
-Strømmen der bliver ført over i måleobjektet skal være større, da det er kendt at den ligger ved 500 uA\cite{Kusuhara2004} når der skal måles over svælget og ikke på skalpen som er tilfældet i artiklen. Dette vil kræve en udvikling af en ny VCCS med udgangspunkt i howland som fra artiklen.
+Strømmen der bliver ført over i måleobjektet skal være større, da det er kendt at den ligger ved 500 uA\cite{Kusuhara2004} når der skal måles over svælget og ikke på skalpen som er tilfældet i artiklen. Dette vil kræve en udvikling af en ny VCCS med udgangspunkt i basis howland som fra artiklen, hvilket vil kræve en ny operationsforsærker som skal erstatte LF412, da den er  
 
 Når der måles BI bliver dette typisk gjort ved hjælp af fire elektroder\cite{Brantlov2017}. To til at overføre strømmen og to til at måle spændingsfaldet med. To elektroder vil også kunne skabe impedans inteferanse i elektroderne hvilket kan resulterer i fejlmålinger. Dette kræver en opdeling af et strømkredsløb med howland og et som måler spændningen fra måleobjektet.
 

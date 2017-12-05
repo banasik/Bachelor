@@ -40,7 +40,7 @@ I dette bilag forklares design af hardware og software  for synkerefleksmonitore
 \chapter{Hardware}
 
 \subsection{Analog Discovery}
-Analog Discovery (AD) bruges i dette projekt til to formål. Det første er at AD skal fungere som funktionsgenerator og det andet er at den den skal også fungere som dataopsamlingmodul. Figur \ref{ToINA128} viser et skitse af de to formål som AD bliver brugt til. Her ses det at AD generere et AC signal på 2V, som sendes til indgangen af instrumentationsforstærkeren INA128. Dette signal bliver brugt til at generere en konstant strøm ud af operationsforstærkeren LM318. Det ses også på figuren at AD modtager et signal fra et antialiaseringsfilter. Her fungerer AD en dataopsamlingsmodul, der konverter et analog signal til et digital signal. 
+Analog Discovery (AD) bruges i dette projekt til to formål. Det første er at AD skal fungere som funktionsgenerator og det andet er at den den skal også fungere som dataopsamlingmodul. Figur \ref{ADogINA128} viser et skitse af de to formål som AD bliver brugt til. Her ses det at AD generere et AC signal på 2V, som sendes til indgangen af instrumentationsforstærkeren INA128. Dette signal bliver brugt til at generere en konstant strøm ud af operationsforstærkeren LM318. Det ses også på figuren at AD modtager et signal fra et antialiaseringsfilter. Her fungerer AD en dataopsamlingsmodul, der konverter et analog signal til et digital signal. 
 
 
    
@@ -79,7 +79,7 @@ Med disse fordele er det besluttet at benytte AD.
  
  \pagebreak
 
-\subsection{Instrumentationsforstærker  1 og 2}
+\subsection{Instrumentationsforstærker}
 Når man måler fysiologiske signaler har man bruge for at forstærke dem, da deres amplituder er små. Disse amplituder skal forstærkes fra millivolt  til volt området. Ydermere er disse signaler overlejret med brum støj på 50 Hz, som kommer af de omkringliggende apparater, ved at måleudstyret og måleobjektet har elektromagnetisk kobling imellem hinanden. For at eliminere eller undertrykke denne støj mest muligt anvendes en differensforstærker. Udover at undertrykke denne støj, ønsker man også som omtalt at forstærke indgangssignalet fra funktionsgeneratoren. Derfor anvendes i dette projekt to instrumentationsforstærker af typen INA128P. Med INA128P er det muligt at forstærke et signal ved kun at regulere én modstand. Dette betyder at et ønsket forstærkning kan opnås ved at kun justere den eksterne modstand kaldet $(R_G)$. INA128P har følgende egenskaber som er ønskede, når man måler elektrofysiologiske signaler \textbf{Citer peters pdf}. 
 
 \begin{itemize}
@@ -88,81 +88,16 @@ Når man måler fysiologiske signaler har man bruge for at forstærke dem, da de
 \item 	Differentielt input-single ended out (nødvendigt for at mindske $CM_{noise}$)
 \end{itemize}
 
-I dette projekt implementeres to instrumentationsforstærker af typen INA128. Den ene bruges til at forstærke signalet fra funktionsgeneratoren og fjerne brum støj på 50 Hz, og den anden anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj.  
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=10cm]
-{Figure/Ina128Design}}
-\caption{Figuren viser en instrumentationsforstærker. Den bruges til undertrykkelse af støj og forstærkning af fysiologiske signaler fra måleobjektet }
-\label{ToINA128}
-\end{figure}
-
-Den ønskede forstærkning reguleres vha. $R_G$ og det kan udledes af denne formel:
-
-\begin{equation}
-\label{eq2.3}
-Gain  =1 + \dfrac{{50k\Omega}}{R_G}
-\end{equation}
+I dette projekt implementeres to instrumentationsforstærker af typen INA128. Den ene bruges til at forstærke signalet fra funktionsgeneratoren og fjerne brum støj på 50 Hz, og den anden anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj.
 
 
-
-
-Ved anvendelse af INA128 kan man forstærke et signal 100 gange og stadig have en tilstrækkelig båndbredde, der ligger over anti-aliaseringsfilterets knækfrekvens på $20 kHz$. Dette kan aflæses på figur \ref{Fig:GainOgfrequnecy}. 
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=10cm]
-{Figure/GainOgfrequnecy}}
-\caption{Figuren viser at Gain på 10 V/V bliver ved at være konstant op til ca. 500 kHz. Vælger man derimod gain på 100 V/V så er gain konstant kun op til ca. 100 kHz \cite{TexasInstruments2005} }
-\label{Fig:GainOgfrequnecy}
-\end{figure} 
-
-Det ses på figur \ref{Fig:GainOgfrequnecy} at båndbredden BW er større end anti-aliaseringsfilterets knækfrekvens på 20khz, når gain vælges til 100. Dette betyder at forstærkeren er bred nok til at kunne indeholde frekvenser, der er større og mindre end knækfrekvensen.  Med denne aflæsning af BW er det sikrede at INA128 kan benyttes til formålet. 
-
-
-Ved at sætte Gain = 100 kan man beregne $ R_{G}$:
-
-\begin{equation}
-\label{eq2.4}
-Gain = 100 $$ $$ \\
-Gain  =100 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=505 \Omega
-\end{equation}
-
-For at teste om INA128 kan i praksis levere en gain på 100 laves der en spændingsdeler kredsløb, der modtager et signal på 1V, som derefter bliver formindsket til $10mV$. Dette spændingsdeler kredsløb er nødvendig pga:
-
-\begin{itemize}
-\item 	at man ikke direkte kan sende små signaler fra AD til INA128 pga. AD har store usikkerheder, når den genererer små signaler 
-\item	at man ikke kan sende 1V igennem INA128 med gain på 100. Dette giver en udgangsspænding på 100V, som INA128 ikke kan klare. 
-
-\end{itemize}
-
-Med de to begrundelse designes følgende spændingsdeler kredsløb:
-
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\linewidth]
-{Figure/spaedingdeler}}
-\caption{Figuren viser kredsløbet til spændingsdeleren}
-\label{Fig:spaedingdeler}
-\end{figure} 
-
-\begin{equation}
-\label{eq2.5}
-V_{inINA128} = 10 \times 10^{-3}V $$ $$ \\
-R_{1} = 100k\Omega, R_{2} =1000\Omega $$ $$ \\
-V_{outIna128}  = 100 \times \dfrac{R_{2}}{R_{1}+ R_{2}}=1V
-\end{equation}
-
-Det forventes at INA128 forstærker 10mV til 1V, hvilken svar til en gain på 100.  
-
+\subsubsection{Instrumentationsforstærker  1}
 
 Da INA128 som nævnte også benyttes til at forstærke signalet fra funktionsgeneratoren på 2V, skal den eksterne modstand, $R_G$, også beregnes for denne. Hvis gain vælges til 2 skal man ifølge databladet  sætte $R_G=50k\Omega$  \citep [s.13]{TexasInstruments2005}. 
-Udgangssignalet for denne instrumentationsforstærker   beregnes som den forudgående: 
+Udgangssignalet for denne instrumentationsforstærker beregnes således: 
 
 \begin{equation}
-\label{eq2.6}
+\label{voutina1281}
 V_{in} = 2 $$ $$
 Gain = 2 $$ $$
 V_{outINA128}=2V \times 2=4V
@@ -177,17 +112,142 @@ Gain = 2 $$ $$ \\
 Gain  =2 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=50k \Omega
 \end{equation}
 
-\subsection{Strømgenerator}
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/instrumentation1}}
+\caption{Figuren viser diagrammet over instrumentationsforstærker 1. Den bruges til undertrykkelse af støj og forstærkning af spænding fra Analog Discovery.}
+\label{fig:instrumentation1}
+\end{figure}
 
-Da bioimpedans måling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet\textbf{ i analyse afsnittet er der testet og sammenlignet to operationsforstærker}, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM318 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM318 til at levere det ønsket strøm frem for den anden operationsforstærker LF412CN. Det forventet strømoutput som LM318 leverer til vævet, når $R_4 =10k\Omega $, kan beregnes som følgende:
+\begin{table}[H]
+\centering
+\caption{Stykliste for instrumentationsforstærker 1}
+\label{Styklisteinstrumentationsforstarker1}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Stykliste}} \\ \hline
+INA128             &                    \\ \hline
+$R_{G}$            & 51 kohm            \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\subsubsection{Instrumentationsforstærker  2}
+
+Instrumentationsforstærker 2 anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj. 
+
+
+Ved anvendelse af INA128 kan man forstærke et signal 100 gange og stadig have en tilstrækkelig båndbredde, der ligger over anti-aliaseringsfilterets knækfrekvens på $25 kHz$. Dette kan aflæses på figur \ref{Fig:GainOgfrequnecy}. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
-{Figure/StromgeneratorLM318.PNG}}
-\caption{Figuren viser kredsløbet til strømgeneratoren LM318}
-\label{Fig:StromgeneratorLM318}
+{Figure/GainOgfrequnecy}}
+\caption{Figuren viser at Gain på 10 V/V bliver ved at være konstant op til ca. 500 kHz. Vælger man derimod gain på 100 V/V så er gain konstant kun op til ca. 100 kHz \cite{TexasInstruments2005} }
+\label{Fig:GainOgfrequnecy}
 \end{figure} 
+
+Det ses på figur \ref{Fig:GainOgfrequnecy} at båndbredden BW er større end anti-aliaseringsfilterets knækfrekvens på 20khz, når gain vælges til 100. Dette betyder at forstærkeren er bred nok til at kunne indeholde frekvenser, der er større og mindre end knækfrekvensen.  Med denne aflæsning af BW er det sikrede at INA128 kan benyttes til formålet. 
+
+Den ønskede forstærkning reguleres vha. $R_G$ og det kan udledes af denne formel:
+
+\begin{equation}
+\label{eq2.3}
+Gain  =1 + \dfrac{{50k\Omega}}{R_G}
+\end{equation}
+
+Ved at sætte Gain = 100 kan man beregne $ R_{G}$:
+
+\begin{equation}
+\label{eq2.4}
+Gain = 100 $$ $$ \\
+Gain  =100 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=505 \Omega
+\end{equation}
+
+For at opnå gain modstanden, sættes en modstand på 470ohm sammen med en modstand på 36ohm i serie.
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/instrumentation2}}
+\caption{Figuren viser diagrammet over instrumentationsforstærker 2. Den bruges til undertrykkelse af støj og forstærkning af biologiske signaler fra måleobjekt.}
+\label{Fig:instrumentation2}
+\end{figure} 
+
+
+
+\begin{table}[H]
+\centering
+\caption{Stykliste for instrumentationsforstærker 2}
+\label{Styklisteinstrumentationsforstarker2}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Stykliste}} \\ \hline
+INA128             &                    \\ \hline
+$R_{G}$            & 470ohm+36ohm            \\ \hline
+\end{tabular}
+\end{table}
+
+
+For at teste om INA128 kan i praksis levere en gain på 100 laves der et spændingsdeler kredsløb, der modtager et signal på 1V, som derefter bliver formindsket til $10mV$. Dette spændingsdeler kredsløb er nødvendig pga:
+
+\begin{itemize}
+\item 	at man ikke direkte kan sende små signaler fra AD til INA128 pga. AD har store usikkerheder, når den genererer små signaler 
+\item	at man ikke kan sende 1V igennem INA128 med gain på 100. Dette giver en udgangsspænding på 100V, som INA128 ikke kan klare. 
+
+\end{itemize}
+
+Med de to begrundelse designes følgende spændingsdeler kredsløb:
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/spaedingdeler}}
+\caption{Figuren viser kredsløbet til spændingsdeleren}
+\label{Fig:spaedingdeler}
+\end{figure} 
+
+\begin{equation}
+\label{eq2.5}
+V_{inINA128} = 10 \times 10^{-3}V $$ $$ \\
+R_{1} = 100k\Omega, R_{2} =1000\Omega $$ $$ \\
+V_{outIna128}  = 100 \times \dfrac{R_{2}}{R_{1}+ R_{2}}=1V
+\end{equation}
+
+Det forventes at INA128 forstærker 10mV til 1V, hvilken svar til en gain på 100.  
+
+\begin{table}[H]
+\centering
+\caption{Stykliste for spændingsdeleren}
+\label{Styklistespandingsdeleren}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Stykliste}} \\ \hline
+R1             &      100kohm              \\ \hline
+R2             &         1kohm  			\\ \hline
+R3             &           1kohm         \\ \hline
+R4             &         100kohm  			\\ \hline
+
+
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Strømgenerator}
+
+Da bioimpedans måling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Til formålet anvendes operationsforstærkeren LM318 og for at sikre at LM318 kan bruges udregnes slewrate\cite{Baker2003}. $$slewrate=2*\pi*f*V$$
+$$2*\pi*20kHz*4V=0,503V/us$$
+Ved at kigge i databladet for LM318 er der oplyst en typisk slewrate på 70V/us, hvilke er fint til den beregnet  på 0,503V/us.
+
+LM318 indeholder én operationsforstærker som kan bruges til at designe en basic Howland.
+
+Derfor vælges LM318 til at levere det ønsket strøm. Det forventet strømoutput som LM318 leverer til vævet, når $R_4 =10k\Omega $, kan beregnes som følgende:
+
+
 
 
 
@@ -207,6 +267,31 @@ I_{\textbf{rms}} = \dfrac{I_{\textbf{(peak)}}}{\sqrt{2}}=283uA
 
 Denne konstant strøm sendes til måleobjektets væv. 
 
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/StromgeneratorLM318.PNG}}
+\caption{Figuren viser kredsløbet til strømgeneratoren LM318}
+\label{Fig:StromgeneratorLM318}
+\end{figure} 
+
+\begin{table}[H]
+\centering
+\caption{Stykliste for strømgenerator}
+\label{Styklistestromgenerator}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Stykliste}} \\ \hline
+LM318N             &                    \\ \hline
+R1             &         10kohm  			\\ \hline
+R2             &           10kohm         \\ \hline
+R3             &         10kohm  			\\ \hline
+R3             &         10kohm  			\\ \hline
+
+\end{tabular}
+\end{table}
+
+
 \subsection{OP-AMP}
 Outputtet af instrumentationsforstærker 2 skal yderligere forstærkes og dette sker ved at benytte en ikke-inverterende operationsforstærker som ser således ud: 
 
@@ -214,7 +299,7 @@ Outputtet af instrumentationsforstærker 2 skal yderligere forstærkes og dette 
 \centering
 {\includegraphics[width=10cm]
 {Figure/IkkeInviterendeOpAmp}}
-\caption{Figuren viser kredsløbet til den ikke-inverterende operationsforstærker LM318}
+\caption{Figuren viser kredsløbet til den ikke-inverterende operationsforstærker LM318N.}
 \label{Fig:IkkeInviterendeOpAmp}
 \end{figure} 
 
@@ -237,6 +322,21 @@ Hermed isoleres værdien af $R_2$:
  10= 1 + \dfrac{R_{2}}{1k\Omega} \Rightarrow R_{2} =9k\Omega
 \end{equation}
 Det forventes at operationsforstærkeren forstærker $V_{outINA128}$ til $10V$.\
+
+\begin{table}[H]
+\centering
+\caption{Stykliste for OP-AMP}
+\label{Styklisteopamp}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Stykliste}} \\ \hline
+LM318N             &                    \\ \hline
+R1             &         1kohm  			\\ \hline
+R2             &           9,1kohm         \\ \hline
+
+\end{tabular}
+\end{table}
+
 
 
 \subsection{AA filter}
