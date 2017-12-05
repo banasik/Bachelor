@@ -46,7 +46,7 @@ Analog Discovery (AD) bruges i dette projekt til to formål. Det første er at A
    
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/ADogINA128}}
 \caption{Figuren viser ADs funktion i det samlede system. AD fungerer som funktionsgenerator og som dataopsamlingsmodul}
 \label{analogOgINA}
@@ -60,18 +60,18 @@ For at rekonstruere et fysiologisk signal som eksisterer i et analog domæne til
  LSB=  \dfrac{{Spændingsområde}}{2^{bits}} 
 \end{equation}
 
-Denne formel udtrykker A/D konverterens mindste detekterbare spændingsændring, Least Significant Bit. I dette projekt benyttes AD, der kan yde 14-bit analog til digital-konvertering og som får en spændingsforsyning på 8V. Med disse opløsninger kan LSB beregnes som følgende:
+Denne formel udtrykker A/D konverterens mindste detekterbare spændingsændring, Least Significant Bit. I dette projekt benyttes AD, der kan yde 14-bit analog til digital-konvertering og som får en spændingsforsyning på 8 V. Med disse opløsninger kan LSB beregnes som følgende:
 
  \begin{equation}
 \label{eq2.2}
- LSB=  \dfrac{{8V}}{2^{14}}=0,48mV 
+ LSB=  \dfrac{{8V}}{2^{14}}=0,48 mV 
 \end{equation}
  
  Dette betyder at det mindste detekterbare spændingsændring som AD kan detektere er 0.48mV. Spændingsændringer over 0,48mV bliver omsæt til digitale værdier og værdier under den bliver ikke omsæt. AD er valgt ud fra følgende fordele:
  
  \begin{itemize}
 \item 	Den kan fungere som funktionsgenerator samtidig med at den læser to signaler ind simultant
-\item Den kan sample to signaler simultant med en $f_{s}=500000MHz $
+\item Den kan sample to signaler simultant med en $f_{s}=500kHz $
 \item Den kan fungere som dataopsamlingsenhed 
  
 \end{itemize}
@@ -88,17 +88,17 @@ Når man måler fysiologiske signaler har man bruge for at forstærke dem, da de
 \item 	Differentielt input-single ended out (nødvendigt for at mindske $CM_{noise}$)
 \end{itemize}
 
-I dette projekt implementeres to instrumentationsforstærker af typen INA128. Den ene bruges til at forstærke signalet fra funktionsgeneratoren og fjerne brum støj på 50Hz, og den anden anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj.  
+I dette projekt implementeres to instrumentationsforstærker af typen INA128. Den ene bruges til at forstærke signalet fra funktionsgeneratoren og fjerne brum støj på 50 Hz, og den anden anvendes til både at forstærke elektrofysiologiske signaler fra måleobjektet og undertrykkelse af commen mode støj.  
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/Ina128Design}}
 \caption{Figuren viser en instrumentationsforstærker. Den bruges til undertrykkelse af støj og forstærkning af fysiologiske signaler fra måleobjektet }
 \label{ToINA128}
 \end{figure}
 
-Den ønskede forstærkning reguleres vha. $R_G$ og det kan udledes af denn formel:
+Den ønskede forstærkning reguleres vha. $R_G$ og det kan udledes af denne formel:
 
 \begin{equation}
 \label{eq2.3}
@@ -108,20 +108,20 @@ Gain  =1 + \dfrac{{50k\Omega}}{R_G}
 
 
 
-Ved anvendelse af INA128 kan man forstærke et signal 100 gange og stadig have en tilstrækkelig båndbredde, der ligger over anti-aliaseringsfilterets knækfrekvens på $20kHz$. Dette kan aflæses på figur \ref{Fig:GainOgfrequnecy}. 
+Ved anvendelse af INA128 kan man forstærke et signal 100 gange og stadig have en tilstrækkelig båndbredde, der ligger over anti-aliaseringsfilterets knækfrekvens på $20 kHz$. Dette kan aflæses på figur \ref{Fig:GainOgfrequnecy}. 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/GainOgfrequnecy}}
-\caption{Figuren viser at Gain på 10V/V bliver ved at være konstant op til ca. 500kHz. Vælger man derimod gain på 100 V/V så er gain konstant kun op til ca. 100kHz \cite{TexasInstruments2005} }
+\caption{Figuren viser at Gain på 10 V/V bliver ved at være konstant op til ca. 500 kHz. Vælger man derimod gain på 100 V/V så er gain konstant kun op til ca. 100 kHz \cite{TexasInstruments2005} }
 \label{Fig:GainOgfrequnecy}
 \end{figure} 
 
 Det ses på figur \ref{Fig:GainOgfrequnecy} at båndbredden BW er større end anti-aliaseringsfilterets knækfrekvens på 20khz, når gain vælges til 100. Dette betyder at forstærkeren er bred nok til at kunne indeholde frekvenser, der er større og mindre end knækfrekvensen.  Med denne aflæsning af BW er det sikrede at INA128 kan benyttes til formålet. 
 
 
-Ved at sætte Gain=100 kan man beregne $ R_{G}$
+Ved at sætte Gain = 100 kan man beregne $ R_{G}$:
 
 \begin{equation}
 \label{eq2.4}
@@ -145,7 +145,7 @@ Med de to begrundelse designes følgende spændingsdeler kredsløb:
 {\includegraphics[width=\linewidth]
 {Figure/spaedingdeler}}
 \caption{Figuren viser kredsløbet til spændingsdeleren}
-\label{Fig:GainOgfrequnecy}
+\label{Fig:spaedingdeler}
 \end{figure} 
 
 \begin{equation}
@@ -179,14 +179,14 @@ Gain  =2 + \dfrac{{50k\Omega}}{R_G} \Rightarrow {R_G}=50k \Omega
 
 \subsection{Strømgenerator}
 
-Da bioimpedans måling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet\textbf{ i analyse afsnittet er der testet og sammenlignet to operationsforstærker}, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM118 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM118 til at levere det ønsket strøm frem for den anden operationsforstærker LF412N. Det forventet strømoutput som LM118 leverer til vævet, når $R_4 =10k\Omega $, kan beregnes som følgende:
+Da bioimpedans måling kræver at man sender en konstant strøm til måleobjektets væv er det nødvendigt at designe og opbygge en strømgenerator, der kan levere en konstant strøm. Som beskrevet\textbf{ i analyse afsnittet er der testet og sammenlignet to operationsforstærker}, som kan anvendes til dette formål. Testen har vist at operationsforstærkeren LM318 er bedre til at levere en konstant strøm, når vævsmodstanden varieres. Derfor vælges LM318 til at levere det ønsket strøm frem for den anden operationsforstærker LF412CN. Det forventet strømoutput som LM318 leverer til vævet, når $R_4 =10k\Omega $, kan beregnes som følgende:
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/StromgeneratorLM318.PNG}}
-\caption{Figuren viser kredsløbet til strømgeneratoren LM138}
-\label{Fig:GainOgfrequnecy}
+\caption{Figuren viser kredsløbet til strømgeneratoren LM318}
+\label{Fig:StromgeneratorLM318}
 \end{figure} 
 
 
@@ -212,10 +212,10 @@ Outputtet af instrumentationsforstærker 2 skal yderligere forstærkes og dette 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/IkkeInviterendeOpAmp}}
-\caption{Figuren viser kredsløbet til strømgeneratoren LM138}
-\label{Fig:GainOgfrequnecy}
+\caption{Figuren viser kredsløbet til den ikke-inverterende operationsforstærker LM318}
+\label{Fig:IkkeInviterendeOpAmp}
 \end{figure} 
 
 
@@ -229,19 +229,19 @@ Der benyttes operationsforstærkeren LM318 til at forstærke signalet op, hvor G
  Gain= 1 + \dfrac{R_{2}}{R_{1}} $$ $$
 \end{equation}
 
-For at forstærke signalet op til $8V$ kræver det at man gainer $V_{outINA128}$ 54 gange og vælger $R_1=1k\Omega$. 
+For at forstærke signalet op til $10V$ kræver det at man gainer $V_{outINA128}$ 10 gange og vælger $R_1=1k\Omega$. 
 Hermed isoleres værdien af $R_2$:
 
 \begin{equation}
 \label{eq2.11}
- 54= 1 + \dfrac{R_{2}}{1k\Omega} \Rightarrow R_{2} =53k\Omega
+ 10= 1 + \dfrac{R_{2}}{1k\Omega} \Rightarrow R_{2} =9k\Omega
 \end{equation}
-Det forventes at operationsforstærkeren forstærker $V_{outINA128}$ til $8,1V$.\
+Det forventes at operationsforstærkeren forstærker $V_{outINA128}$ til $10V$.\
 
 
 \subsection{AA filter}
 
-or at sikre at aliasering ikke opstår, tilføjes et analog anti-aliaseringsfilter i kredsløbet, der tillader passering af frekvenser, der er mindre end Nyquist-frekvensen og dæmper frekvenser, som er højere end Nyquist-frekvensen. I dette projekt realiseres ant-aliaserings filteret som 2. ordens lavpasfilter af typen Sallen-Key  med cutoff frekvens på 50kHz. Filteret har nedenstående overføringsfunktion: 
+For at sikre at aliasering ikke opstår, tilføjes et analog anti-aliaseringsfilter i kredsløbet, der tillader passering af frekvenser, der er mindre end Nyquist-frekvensen og dæmper frekvenser, som er højere end Nyquist-frekvensen. I dette projekt realiseres anti-aliaserings filteret som 2. ordens butterworth lavpasfilter af typen Sallen-Key, da det har et flat filter respons i passbåndet,  med cutoff frekvens på 25 kHz. Filteret har nedenstående overføringsfunktion: 
  \\linebreak \textbf{Indsæt et billede af filtret man nu vælger}
 
 \begin{equation}
@@ -266,7 +266,7 @@ I stedet for at beregne værdierne for komponenterne, anvendes et værkstøj til
 \textbf{Indsæt podeplot}
 \textbf{Der mangler to punkter:
 	Hvor meget er signalet dæmpede allerede?
-	Hvor skal vi dæmpe det yderligere for komme ned til 100db?} 
+	Hvor skal vi dæmpe det yderligere for komme ned til 100db? Vi kender vel først den faktiske dæmpning der er behov for ved integrationstesten?} 
 \chapter{Software}
 \subsection{Sekvens Diagram}
 
@@ -277,7 +277,7 @@ Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet
 {\includegraphics[width=\linewidth]
 {Figure/SekevensDiagram}}
 \caption{Figuren viser sekvensen af programmets kode}
-\label{Fig:GainOgfrequnecy}
+\label{Fig:SekevensDiagram}
 \end{figure} 
 
 
