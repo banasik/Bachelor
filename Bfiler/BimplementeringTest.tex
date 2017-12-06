@@ -36,7 +36,7 @@ Denne instrumentationsforstærker er tiltænkt til at forstærke et AC signal p�
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=10cm]
 {Figure/INA128IM}}
 \caption{Figuren viser, hvordan INA128 er implementeret på et fumlebræt  }
 \label{figScrip}
@@ -45,8 +45,8 @@ Denne instrumentationsforstærker er tiltænkt til at forstærke et AC signal p�
 
 
 \subsection{Strømgenerator}
-Strømgeneratoren funktion er at levere en konstant strøm, som sendes til et måleobjektets væv. Til implementering af denne strømgenerator er der anvendt operationsforstærkeren LM318. Figur \ref{figScrip1}
-viser komponenten LM138 med de tilhørende modstande. 
+Strømgeneratorens funktion er at levere en konstant strøm, som sendes til et måleobjektets væv. Til implementering af denne strømgenerator er der anvendt operationsforstærkeren LM318. Figur \ref{figScrip1}
+viser komponenten LM318 med de tilhørende modstande. 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
@@ -58,7 +58,7 @@ viser komponenten LM138 med de tilhørende modstande.
 
 \subsection{Instrumentationsforstærker 2}
 
-Instrumentationsforstærker 2 bliver brugt til at forstærke biosignal fra måleobjektets og undertrykkelse støj . Til implementering af denne Instrumentationsforstærker er der igen brugt INA128. Figur \ref{figINAogSpandeler} B viser komponenten INA128 med dens tilhørende eksterne modstande. Figur \ref{figINAogSpandeler} A viser en spændingsdeler kredsløb, der er benyttet til at teste instrumentationsforstærkeren. Hvorfor der anvendes en spændingsdeler til test af INA128 henvises der  til bilaget "Design" 
+Instrumentationsforstærker 2 bliver brugt til at forstærke biosignal fra måleobjektets og undertrykkelse støj . Til implementering af denne Instrumentationsforstærker er der igen brugt INA128. Figur \ref{figINAogSpandeler} B viser komponenten INA128 med dens tilhørende eksterne modstande. Figur \ref{figINAogSpandeler} A viser en spændingsdeler kredsløb, der er benyttet til at teste instrumentationsforstærkeren. Hvorfor der anvendes en spændingsdeler til test af INA128 henvises der til bilag 6 "Design". 
 
 
  
@@ -104,6 +104,19 @@ Der er behov for at foretage en spektrumanalyse, med alle komponenter sat sammen
 
 \subsection{AA filter}
 
+For at undgå aliasering i det optaget signal implementeres et anti-aliaseringsfilter foran Analog Discovery. AA filteret modtager et forstærketsignal fra OPAMP, filtrere det og sender det videre til Analog Discovery.    
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=6cm]
+{Figure/aafilterimplementering}}
+\caption{Implementering af AA filter.}
+\label{aafilterimplementering}
+\end{figure}
+
+
+
+
 
 \section{Software}
 
@@ -114,7 +127,7 @@ I dette afsnit beskrives de vigtigste scripts for systemet software-del. Til imp
 \item Matlab forærer databehandlingsfunktioner som ligger klar til anvendelse
 \item Matlab er god til at indlæse store mængde data med få kodelinjer
 \item I Matlab kan man udvikle en brugergrænseflade nemt og hurtigt 
-\ Ved brug af Matlab med Analog Discovery, kan man betjene  funktionsgeneratoren, dataopsamlingsenhed og brugergrænsefladen  fra ét udviklingsværktøj.    
+\item Ved brug af Matlab med Analog Discovery, kan man betjene  funktionsgeneratoren, dataopsamlingsenhed og brugergrænsefladen  fra ét udviklingsværktøj.    
 \end{itemize}  
 
 Alternativet til overnævnte fordele er at man bruger forskellige “single purpose” programmer og enheder, når man skal måle et biomedicinsk signal. \\ \\
@@ -133,7 +146,7 @@ Modultest af hardware-delen består af en simuleret test vha. Multisim og en pra
 \section{Hardware}
 
 \subsection{Instrumentationsforstærker 1}
-Denne modul er testet ved at sende 2V fra Analog Discovery (den gule kurve) igennem INA128. Det ses på \ref{TestINA} at de 2V bliver forstærket til 4V(turkis kurve) ved udgangen af INA128. Dette resultat stemmer overens med det beregnede resultat i designfasen.    
+Dette modul er testet ved at sende 2V/20kHz fra Analog Discovery (den gule kurve) igennem INA128. Det ses på figur \ref{TestINA} at de 2V bliver forstærket til 4V (turkis kurve) ved udgangen af INA128. Dette resultat stemmer overens med det beregnede resultat i designfasen.    
 
 \begin{figure}[H] 
 \centering
@@ -145,7 +158,7 @@ Denne modul er testet ved at sende 2V fra Analog Discovery (den gule kurve) igen
   \pagebreak
 \subsection{Strømgenerator}
 
-Strømgeneratoren er simuleret ved at den får 4V fra en funktionsgenerator. På baggrund af denne spænding genereres der 283uA ud af strømgeneratoren. Bemærk at figur \ref{SimTestStrom} viser strømudgangen ved no-load, hvorimod \ref{SimTestStromNoLoad} viser når man belaster strømgeneratoren med $ 10k\Omega$.  
+Strømgeneratoren er simuleret ved at den får 4V fra en funktionsgenerator. På baggrund af denne spænding genereres der 283uA ud af strømgeneratoren. Bemærk at figur \ref{SimTestStrom} viser strømudgangen ved no-load, hvorimod figur \ref{SimTestStromNoLoad} viser når man belaster strømgeneratoren med $ 10k\Omega$.  
 
 \begin{figure}[H] 
 \centering
@@ -170,28 +183,28 @@ Det ses på figur \ref{SimTestStromNoLoad} at strømmen ikke ændrer sig, selvom
 
 
 \pagebreak
-Tilsvarende sendes der 4V ind i strømgeneratoren, når der skal foretages den praktiske test. De 4V genereres fra Analog Discovery. Den producerede strøm måles vha. 
-en amperemeter på udgangen af den anvendte operationsforstærker, LM318. Det ses på figur \ref{TestStrGen} at udgangsstrømmen, som genereres af strømgeneratoren er målt til 285uA. Dette resultat afviger lidt fra det beregnede og simulerede resultat. Det vurderes at afvigelsen er så lille at den ingen betydning har for måleobjektets sikkerhed. Derfor er det besluttet at arbejde videre med det målte strøm. 
+Tilsvarende sendes der 4V ind i strømgeneratoren, når der skal foretages den praktiske test på fumlebræt. De 4V genereres fra Analog Discovery. Den producerede strøm måles vha. 
+et amperemeter i serie på udgangen af den anvendte operationsforstærker, LM318. Det ses på figur \ref{TestStrGen} at udgangsstrømmen, som genereres af strømgeneratoren er målt til 285uA. Dette resultat afviger lidt fra det beregnede og simulerede resultat. Det vurderes at afvigelsen er så lille at den ingen betydning har for måleobjektets sikkerhed. Derfor er det besluttet at arbejde videre med den målte strøm. 
 
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/VCCStestParktisk}}
-\caption{Figuren viser det praktisk strømresultat som er målt ved udgangen af strømgeneratoren}
+\caption{Figuren viser det praktisk strømresultat som er målt ved udgangen af strømgeneratoren.}
 \label{TestStrGen}
 \end{figure}
 
 
 \subsection{Instrumentationsforstærker 2}
 
-Til test af instrumentationsforstærker 2 er der benyttet en spændingsdeler, som får 1V fra en funktionsgeneratoren, Analog Discovery. Spændingsdelens funktion er at reducere 1V til 10mV, som efterfølgende forstærkes af instrumentationsforstærker 2 100 gange. Som figur \ref{TestAfINA1282} viser, kan man med instrumentationsforstærkeren INA128 opnå en forstærkning på 100. Dette resultat stemmer overens med det teoretiske resultat, som er beregnet i designfasen.  
+Til test af instrumentationsforstærker 2 er der benyttet en spændingsdeler, som får 1V fra en funktionsgeneratoren, Analog Discovery. Spændingsdelerens funktion er at reducere 1V til 10mV, som efterfølgende forstærkes af instrumentationsforstærker 2 med faktor 100 gange. Som figur \ref{TestAfINA1282} viser, kan man med instrumentationsforstærkeren INA128 opnå en forstærkning på 100. Dette resultat stemmer overens med det teoretiske resultat, som er beregnet i designfasen.  
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=12cm]
 {Figure/TestAfINA1282.PNG}}
-\caption{Figuren viser det praktiske udgangsspænding for INA128. Denne INA128 yder en forstærkning på 100 gange}
+\caption{Figuren viser det praktiske udgangsspænding for INA128. Denne INA128 yder en forstærkning på 100 gange.}
 \label{TestAfINA1282}
 \end{figure}
 
@@ -199,13 +212,13 @@ Til test af instrumentationsforstærker 2 er der benyttet en spændingsdeler, so
 
 \subsection{OP-AMP}
 
-Denne operationsforstærkers opgave er at forstærke 1V til 10, dvs. en forstærkning på 10. Der sendes 1V fra funktionsgeneratoren, Analog Discovery, som derefter bliver forstærket til 10V. Figur \ref{TestAfOpAmp} viser at signalet fra funktionsgeneratoren bliver forstærket 10 gange, dvs. den målte udgangsspænding er på 10V. Hermed stemmer den målte og den teoretiske udgangsspænding af operationsforstærkeren LM318 med hinanden.  
+Denne operationsforstærkers opgave er at forstærke 1 V til 10 V, dvs. en forstærkning ved faktor 10. Der sendes 1V fra funktionsgeneratoren, Analog Discovery, som derefter bliver forstærket til 10 V. Figur \ref{TestAfOpAmp} viser at signalet fra funktionsgeneratoren bliver forstærket 10 gange, dvs. den målte udgangsspænding er på 10V. Hermed stemmer den målte og den teoretiske udgangsspænding af operationsforstærkeren LM318 med hinanden.  
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=14cm]
 {Figure/TestOpamp.PNG}}
-\caption{Figuren viser det praktisk udgangsspænding som er målt ved udgangen af operationsforstærkeren}
+\caption{Figuren viser det praktisk udgangsspænding som er målt ved udgangen af operationsforstærkeren.}
 \label{TestAfOpAmp}
 \end{figure}
 
@@ -213,7 +226,7 @@ Denne operationsforstærkers opgave er at forstærke 1V til 10, dvs. en forstær
 
 \subsection{Spektrumanalyse}
 
-Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen blive optaget vha. Analog Discovery. Som det kan aflæses i figur \ref{fig:aaspectrum1}, er der en dæmpning fra det samlet kredsløb på -75dB. Dette aflæses fra den højeste peak i passbåndet til ca. 250 kHz som er den halve samplingfrekvens. Da Analog arbejder med 14bit (skal dæmpe ned til -90dB) kræver det en yderligere dæmpning på ca. 15 dB. Dette kunne realiseres med et 1. ordens filter, men der vælges at benytte et 2. ordens filter, for at undgå de variationer der måtte være i passbåndet ii det målte signal.
+Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen blive optaget vha. Analog Discovery. Som det kan aflæses i figur \ref{fig:aaspectrum1}, er der en dæmpning fra det samlet kredsløb på -75dB. Dette aflæses fra den højeste peak i passbåndet til ca. 250 kHz som er den halve samplingfrekvens. Da Analog arbejder med 14bit (skal dæmpe ned til -90dB) kræver det en yderligere dæmpning på ca. 15 dB. Dette kunne realiseres med et 1. ordens filter, men der vælges at benytte et 2. ordens filter, for at undgå de variationer der måtte være i passbåndet i det målte signal.
 
 
 \begin{figure}[H] 
@@ -226,6 +239,32 @@ Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen bliv
 
 
 \subsection{AA filter}
+
+Først er AA filteret simuleret i Multisim. Ved hjælp af Bode Plotter i Multisim, kan det aflæses at der er ved 250 kHz en dæmpning på 40 dB.
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/aafilterbodemultisim}}
+\caption{Resultat om filterets virkning simuleret i Multisim}
+\label{fig:aafilterbodemultisim}
+\end{figure}
+
+Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste filters virkning, hvilket resulterer i et bodeplot over dette se figur \ref{fig:aafiltermodultest}. Det kan konstateres at ved knækfrekvensen (25 kHz) er faseforskydningen ca. \ang{90}. Efterfølgende kan det aflæses at ved knækfrekvensen og en dekade frem er der en dæmpning på ca. 35 dB.
+
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/aafiltermodultest}}
+\caption{Resultat om filterets virkning fra Network Analyzer i waveforms.}
+\label{fig:aafiltermodultest}
+\end{figure}
+
+
+
 
 
 \section{Software}
