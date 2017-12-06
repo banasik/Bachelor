@@ -88,9 +88,23 @@ Biosignalet fra måleobjektet forstærkes op i to trin. Det første trin benytte
 
 
     
+\subsection{Spektrumanalyse}
+
+Der er behov for at foretage en spektrumanalyse, med alle komponenter sat sammen, for at vurdere hvilket krav der skal være til AA filterets dæmpning.  
+
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/aaspectrumimplementering}}
+\caption{Billede over den samlede opstilling med komponenterne: Instrumentationsforstærker 1 \& 2, strømgenerator, OP-AP og monteret elektroder. Disse komponenter repræsentere det samlet frekvensspektrum.}
+\label{aaspectrumimplementering}
+\end{figure}
+
 \subsection{AA filter}
 
-er ikke klar endnu
+
 \section{Software}
 
 I dette afsnit beskrives de vigtigste scripts for systemet software-del. Til implementering af disse funktioner er der brugt udviklingsværktøjet Matlab pga. følgende fordele:
@@ -197,7 +211,23 @@ Denne operationsforstærkers opgave er at forstærke 1V til 10, dvs. en forstær
 
 
 
+\subsection{Spektrumanalyse}
+
+Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen blive optaget vha. Analog Discovery. Som det kan aflæses i figur \ref{fig:aaspectrum1}, er der en dæmpning fra det samlet kredsløb på -75dB. Dette aflæses fra den højeste peak i passbåndet til ca. 250 kHz som er den halve samplingfrekvens. Da Analog arbejder med 14bit (skal dæmpe ned til -90dB) kræver det en yderligere dæmpning på ca. 15 dB. Dette kunne realiseres med et 1. ordens filter, men der vælges at benytte et 2. ordens filter, for at undgå de variationer der måtte være i passbåndet ii det målte signal.
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/aaspectrum1}}
+\caption{Det implementeret frekvensspektrum, som viser at der er en samlet dæmpning på ca. 75dB som skal yderligere dæmpes til 90dB med et 2.ordens lavpasfilter.}
+\label{fig:aaspectrum1}
+\end{figure}
+
+
 \subsection{AA filter}
+
+
 \section{Software}
 TEST SD'ets funktioner
 \chapter{Integrationstest}
