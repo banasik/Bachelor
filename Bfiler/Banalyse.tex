@@ -42,12 +42,13 @@
 
 \chapter{Indledning}
 
-I dette bilag vil der blive beskrevet de overvejelser om mulige løsninger i projektet og hvilke der er valgt at gå videre med udgangspunkt i artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. I de følgende afsnit er der beskrevet og diskuteret valget af hardware- og software komponenter som er kritiske for det ønsket system. I artiklen er der givet et kredsløb som kan ses på figur \ref{fig:BIdiagram}, som repræsenterer en simple BI-måler, der består af en instrumenteringsforstærker, en strømgenerator og to elektroder. Kredsløbet fungerer ved at funktionsgeneratoren genererer et AC signal, som sendes til en strømgenerator, som på baggrund af det indsendte signal genererer en kendt konstant strøm. Denne kendte strøm sendes til et måleobjekt igennem to elektroder. Ved at måle spændingsfaldet over elektroderne, kan man regne måleobjektets impedans vha. af ohms lov: $$R=\frac{V}{I}$$
+I dette bilag vil der blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt skal munde ud i og de erfaringer der er draget på baggrund af de udført tests på bioimpedans-måler kredsløbet fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Artiklen har været kilden til inspiration, da den beskriver de grundlæggende elementer, der skal være tilstede når man udvikler en simpel bioimpedans-måler. I artiklen er der givet et kredsløb, der kan ses på figur \ref{fig:BIdiagram}, som repræsenterer en simpel BI-måler. Den består af en instrumenteringsforstærker, en strømgenerator og to elektroder. Kredsløbet fungerer ved at funktionsgeneratoren genererer et AC signal, som sendes igennem en strømgenerator. På baggrund af det indsendte signal genereres der en konstant strøm ud af strømgeneratoren. Denne kendte strøm sendes til et måleobjekt igennem to elektroder. Ved at måle spændingsfaldet over elektroderne, kan man bestemme måleobjektets bioimpedans vha. af ohms lov: $$R=\frac{V}{I}$$
 
-Det er denne BI-måler der vil blive realiseret, bygget på et fumlebræt og testet. Der er indkøbt præcist de komponenter som der bruges i kredsløbet, dog udstyr som oscilloskop og A/D-konverter vil der blive brugt kendt udstyr for projektgruppen. 
+Formålet med analysefasen er at implementere det omtalte kredsløb på et fumlebræt for derefter at teste det. Forskerne bag denne artikel har anvendt kredsløbet til at måle bioimpedans på skalpen. Om det sammen kredsløb kan anvendes til detektering og monitorering af et synk, skal det planlagt tests vise. 
 
+For at realisere kredsløbet er der indkøbt præcist de samme komponenter  som artiklens kredsløb gør brug af, med undtagelse af af udstyr som oscilloskop, funktionsgenerator og A/D-konverter.
 
-
+I de følgende afsnit gennemgås kort principperne, som anvendes, når der måles bioimpedans.  Efterfølgende analyseres og tests den overnævnte kredsløb fra artiklen. Tilslut præsenteres testens resultater og de erfaringer, der er opnået under testen. 
 
 
 
@@ -62,7 +63,7 @@ Det er denne BI-måler der vil blive realiseret, bygget på et fumlebræt og tes
 
 \chapter{Bioimpedans}
 \section{Introduktion}
-BI er en ikke invasiv målemetode som er billig, simpel og hurtig at udføre. Når man måler BI bruges der elektroder som kan placeres der hvor man ønsker at måle. Enten hele kroppen eller en bestem kropssegment. Målingen består af to sæt elektroder. Det ene par elektroder sender en uskadelig AC strøm i uA og et andet måler spændingsfaldet over vævet. Impedansen i vævet varierer fra væv til væv. Hvor væske og elektrolytter har en høj ledningsevne, giver en lav impedans og hvorimod fedt og knogler har en lav ledningsevne giver en høj impedans.\cite{Brantlov2017} 
+Bioimpedans måling  er en non-invasiv målemetode som er billig, simpel og hurtig at udføre. Når man måler BI bruges der elektroder som placeres der hvor man ønsker at måle. Det ene par elektroder sender en uskadelig AC strøm i uA og et andet måler spændingsfaldet over vævet. Impedansen i vævet varierer fra væv til væv. Hvor væske og elektrolytter har en høj ledningsevne, giver en lav impedans og hvorimod fedt og knogler har en lav ledningsevne giver en høj impedans.\cite{Brantlov2017} 
 
 Det biologisk vævs celler kan vises som en model som består af tre elektriske komponenter. Ekstracellulærvæsken, intracellulærvæsken og cellemembranen. Ekstracellulærvæsken er repræcenteret som en modstand parallelt med intracellulærvæsken og cellemembranen. Intracellulærvæsken består af en modstand og cellemembranen som en kondensator som vist i figur \ref{fig:vaevsmodel}.
 
