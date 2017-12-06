@@ -29,26 +29,17 @@
 \newpage
 \tableofcontents*
 \newpage
-\chapter{Ordliste}
 
-\begin{longtabu} to \linewidth{@{}l X[j]@{}}
-    Ord &    Forklaring\\
-    \toprule \
-   BI 	&    Bioimpedans \\
-    
- 
-\label{forkort}
-\end{longtabu}
 
 \chapter{Indledning}
 
-I dette bilag vil der blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt skal munde ud i og de erfaringer der er draget på baggrund af de udført tests på bioimpedans-måler kredsløbet fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Artiklen har været kilden til inspiration, da den beskriver de grundlæggende elementer, der skal være tilstede når man udvikler en simpel bioimpedans-måler. I artiklen er der givet et kredsløb, der kan ses på figur \ref{fig:BIdiagram}, som repræsenterer en simpel BI-måler. Den består af en instrumenteringsforstærker, en strømgenerator og to elektroder. Kredsløbet fungerer ved at funktionsgeneratoren genererer et AC signal, som sendes igennem en strømgenerator. På baggrund af det indsendte signal genereres der en konstant strøm ud af strømgeneratoren. Denne kendte strøm sendes til et måleobjekt igennem to elektroder. Ved at måle spændingsfaldet over elektroderne, kan man bestemme måleobjektets bioimpedans vha. af ohms lov: $$R=\frac{V}{I}$$
+I dette bilag vil der blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt skal munde ud i og de erfaringer der er draget på baggrund af de udført tests på bioimpedans-måler kredsløbet fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Artiklen har været kilden til inspiration, da den beskriver de grundlæggende elementer, der skal være tilstede når man udvikler en simpel bioimpedans-måler(BI-måler). I artiklen er der givet et kredsløb, der kan ses på figur \ref{fig:BIdiagram}, som repræsenterer en simpel BI-måler. Den består af en instrumenteringsforstærker, en strømgenerator og to elektroder. Kredsløbet fungerer ved at funktionsgeneratoren genererer et AC signal, som sendes igennem en strømgenerator. På baggrund af det indsendte signal genereres der en konstant strøm ud af strømgeneratoren. Denne kendte strøm sendes til et måleobjekt igennem to elektroder. Ved at måle spændingsfaldet over elektroderne, kan man bestemme måleobjektets bioimpedans vha. af ohms lov: $$R=\frac{V}{I}$$
 
 Formålet med analysefasen er at implementere det omtalte kredsløb på et fumlebræt for derefter at teste det. Forskerne bag denne artikel har anvendt kredsløbet til at måle bioimpedans på skalpen. Om det sammen kredsløb kan anvendes til detektering og monitorering af et synk, skal det planlagt tests vise. 
 
-For at realisere kredsløbet er der indkøbt præcist de samme komponenter  som artiklens kredsløb gør brug af, med undtagelse af af udstyr som oscilloskop, funktionsgenerator og A/D-konverter.
+For at realisere kredsløbet er der indkøbt præcist de samme komponenter  som artiklens kredsløb gør brug af, med undtagelse af udstyr som oscilloskop, funktionsgenerator og A/D-konverter.
 
-I de følgende afsnit gennemgås kort principperne, som anvendes, når der måles bioimpedans.  Efterfølgende analyseres og tests den overnævnte kredsløb fra artiklen. Tilslut præsenteres testens resultater og de erfaringer, der er opnået under testen. 
+I de følgende afsnit gennemgås kort principperne, som anvendes, når der måles bioimpedans.  Efterfølgende analyseres, realiseres og tests den overnævnte kredsløb fra artiklen. Tilslut præsenteres testens resultater og de erfaringer, der er opnået under testen. 
 
 
 
@@ -63,19 +54,22 @@ I de følgende afsnit gennemgås kort principperne, som anvendes, når der måle
 
 \chapter{Bioimpedans}
 \section{Introduktion}
-Bioimpedans måling  er en non-invasiv målemetode som er billig, simpel og hurtig at udføre. Når man måler BI bruges der elektroder som placeres der hvor man ønsker at måle. Det ene par elektroder sender en uskadelig AC strøm i uA og et andet måler spændingsfaldet over vævet. Impedansen i vævet varierer fra væv til væv. Hvor væske og elektrolytter har en høj ledningsevne, giver en lav impedans og hvorimod fedt og knogler har en lav ledningsevne giver en høj impedans.\cite{Brantlov2017} 
-
-Det biologisk vævs celler kan vises som en model som består af tre elektriske komponenter. Ekstracellulærvæsken, intracellulærvæsken og cellemembranen. Ekstracellulærvæsken er repræcenteret som en modstand parallelt med intracellulærvæsken og cellemembranen. Intracellulærvæsken består af en modstand og cellemembranen som en kondensator som vist i figur \ref{fig:vaevsmodel}.
+Bioimpedans måling  er en non-invasiv målemetode som er simpel og hurtig at udføre. Måleteknikken består i at man placere to sæt elektroder der hvor man ønsker at måle. Det ene sæt af elektroderne transmitterer  en uskadelig AC strøm i mikrovolt området til måleregionen, hvorimod det andet sæt bruges til at måle spændingsfaldet over måleregionen. Herfra kan man måle den elektriske impedans, når forholdet mellem spænding og strøm i vævet ændrer sig . Impedansen i vævet varierer fra væv til væv, da væske og elektrolytter har en høj ledningsevne, som giver en lav impedans hvorimod fedt og knogler har en lav ledningsevne, der resulterer en høj impedans.\cite{Brantlov2017} 
+ 
+Det biologiske væv kan vises som en elektrisk model, der består af tre elektriske komponenter (to modstande og en kondensator). Den ene modstand sammen med kondensatoren repræsenterer målregionens intracellulærvæske hvorimod den anden modstand repræsenterer ekstracellulærvæsken, se figur \ref{fig:vaevsmodel}.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/vaevsmodel}}
-\caption{Biologisk cellemodel som elektrisk kredsløb. En del af kredsløbet er relateret til dobbeltlaget i cellemembranen og intercellularvæsken, hvor X\textsubscript{C} har kapacitive egenskaber og R\textsubscript{I} er modstanden i intercellularvæsken. Den anden del er relateret til ekstracellulærvæsken, R\textsubscript{E} som er modstanden i ekstracellulærvæsken.}
+\caption{Figuren viser et biologisk væv repræsenteret som et elektrisk kredsløb. Intracellulærvæsken består af modstanden  R\textsubscript{I} og kondensatoren X\textsubscript{C}, der har kapacitive egenskaber. R\textsubscript{E} er modstanden i ekstracellulærvæsken}
 \label{fig:vaevsmodel}
 \end{figure}
 
-Forholdet i mellem i cellemodellen kan blive illustreret ved at plotte Z som en vektor i et koordinatsystem fra (0,0) til R\textsubscript{I}X\textsubscript{C}. Værdien af Z er længden af vektoren beregnet med formlen: 
+\pagebreak
+
+
+Bioimpedansen eller den elektriske impedans(Z), der skal måles siger noget om modstanden som den injicerede strøm møder i vævet. Denne impedans består to elementer, en modstand (R) og en reaktance X\textsubscript{C}, som kan plottes i et koordinatsystem, der har en real- og imaginærdel. Værdien af Z kan beregnes som følgende: 
 \begin{equation}
 Z=\sqrt{R^{2}+X^{2}_{C}}
 \end{equation} 
@@ -84,20 +78,20 @@ Z=\sqrt{R^{2}+X^{2}_{C}}
 \centering
 {\includegraphics[width=10cm]
 {Figure/vektor}}
-\caption{Forholdet imellem den kapacitive reaktans (X\textsubscript{C}), modstanden (R), impedansen (Z) og fasen vinklen ($\theta$) i grader.}
+\caption{Forholdet imellem den kapacitive reaktans (X\textsubscript{C}), modstanden (R), impedansen (Z) og fasevinklen ($\theta$) i grader.}
 \label{fig:vektor}
 \end{figure}
 
 
-Når impedansen måles på et biologisk væv er frekvensen afgørende for resultatet af impedansen, da denne vil opføre sig forskelligt afhængig af frekvensen. Ved en lav frekvens på under 100 Hz løber strømmen i ekstracellulærvæsken, så den totale impedans er mere resistiv og svare mere til ekstracellulærvæsken. Som i figur \ref{fig:celler} kan det ses at membranen rundt om cellen sørger for at der ikke kan passerer lav frekvent strøm (rød) igennem cellen. Ved højere frekvens er det muligt at bryde membranen og trænge igennem cellen (blå). Ved den høje frekvens er der nu adgang til elektriske ioner i både ekstracellulærvæsken og intracellulærvæsken hvilket giver en lavere impedans. 
+Når man måler impedansen af et biologisk væv, er frekvensens størrelse afgørende for resultatet af impedansen, da vævet har kondensator egenskaber som er frekvens afhængig. Ved lave frekvenser under 100 Hz løber strømmen kun i ekstracellulærvæsken, da den totale impedans er mere resistiv. Figur \ref{fig:celler} viser strømflowet i vævet.  Cellens membran sørger for at der ikke kan passere strøm med lave frekvenser (rød) igennem cellen. Ved højere frekvenser er det muligt for strømmen at bryde membranen og trænge igennem cellens intracellulærvæske(blå). Dette medfører at strømmen kommer i kontakt med de elektriske ioner i intracellulærvæsken, hvilken giver en lavere impedans. 
 
-%Den tilførte strøm der løber igennem vævet løber også igennem vævets celler. Da cellerne indeholder intracellulærvæske og ekstracellulærvæske vil den denne strøm opføre sig forskelligt ved lave og høje frekvenser. Hvor ved lave frekvenser kan strømmen kun trænge igennem ekstracellulærvæsken, hvor ved høje frekvenser kan strømmen trænge igennem både intracellulærvæsken og ekstracellulærvæsken i cellen. 
+
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/celler}}
-\caption{}
+\caption{Strømflow igennem cellemembranen}
 \label{fig:celler}
 \end{figure}
 
@@ -119,51 +113,53 @@ Når impedansen måles på et biologisk væv er frekvensen afgørende for result
 
 
 \section{Opbygning af BI-måler}
-Princippet i at måle BI er ved at tilføre en strøm over vævet med elektroder, hvor på man måler spændingen over elektroderne. Dette princip bliver omtalt i artikel \citep{Aroom2009} hvor der er en beskrivelse af et prisbilligt kredsløb som kan måle BI. Der er diagrammer med komponentværdier som vil være et udgangspunkt for udviklingen af bioimpedans måleren. Der vil i de følgende afsnit blive gennemgået opbygningen af BI-måleren fra artikelen og til slut realiseret, testet op imod dokumentation fra artiklen og om der kan detekteres et synk. 
+
+Den omtalte artikel i starten af dette bilag indeholder et kredsløb, der er prisbilligt. Kredsløbets komponenter har i alt kostet $ kr. 100$ \cite{Nr}. Opbygning af dette kredsløb vil blive gennemgået i det følgende. 
 
 
 
 \section{Hardware}
 
-Overordnet bestod det samlet system af BI-måleren som vist i blokke i figur \ref{fig:oprindeligebd}. Hvor det var muligt, blev komponenter inden de blev monteret på fumlebræt, først testet i simuleringsværtøjet Multisim. Her var det muligt at se om de fungerede som ønsket. I de følgende afsnit vil disse blokke blive beskrevet nærmere. 
+Overordnet består det samlet system af et kredsløb, der repræsenter en BI-måler, en funktionsgenerator, en forsyningskilde, et oscilloskop og en PC, der styrer funktionsgeneratoren og oscilloskopet, se \ref{fig:oprindeligebd}. Inden kredsløbets komponenter blev implementeret på et fumlebræt, blev komponenter simuleret vha. simuleringsværktøjet Multisim. Disse simuleringsresultater vil blive præsenteret senere. I de følgende afsnit beskrives, hvordan figur  \ref{fig:oprindeligebd}s blokke er implementeret. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/oprindeligebd}}
-\caption{Blokdiagram over det oprindelige kredsløb\cite{Aroom2009}}
+\caption{Blokdiagram over det angivet kredsløb \cite{Aroom2009}}
 \label{fig:oprindeligebd}
 \end{figure}
 
-\subsection{Strømforsyning}
-I artiklen \citep{Aroom2009}  blev der brugt en $\pm$12 V strømforsyning tilsluttet til netforsyningen. For at undgå netforsyningen blev der i stedet for brugt almindelige AA batterier. For at bruge samme forsyningsspænding blev der valgt at sætte otte AA batterier i serie, som i figur \ref{fig:12vbatteri}, nu var det muligt at have en forsyning på +12 V og -12 V kun med batterier. Batterierne blev også valgt da de var nemt tilgængelige og fordi der ikke var nogle kritiske komponenter som var afhængige af en fast og præcis spænding som kunne resulterer i fejlmålinger BI-måleren. 
+\pagebreak
+
+\subsection{Power Supply}
+I artiklen er der brugt en $\pm$12 V spændingsforsyning tilsluttet til netforsyningen. Af hensyn til måleobjektets sikkerhed anvendes almindelige AA batterier i stedet for netforsyningen, når denne blok implementeres. For at bruge samme forsyningsspænding som i artiklen, blev der valgt at sætte otte AA batterier i serie med hinanden, se figur \ref{fig:12vbatteri}. På den måde opnås der en forsyning på $\pm$12 V uden at bruge netforsyningen.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/12vbatteri}}
-\caption{2x8 batterier sat sammen gav mulighed for at have en forsyning på $\pm$12 v, for at undgå at få stød fra netforsyningen.}
+\caption{2x8 batterier sat i serie med hinanden}
 \label{fig:12vbatteri}
 \end{figure}
 
 \subsection{Funktionsgenerator}
-Funktionsgeneratoren funktion var at sende en fast frekvens ind i kroppen og samtidig en fast spænding til strømgeneratoren. 
-Analog Discovery tilsluttet en PC, blev brugt som funktionsgenerator, forbundet som på figur \ref{fig:analogdis}, da denne er nem og hurtig til at generere signaler. Den ønskede frekvens på 50 kHz blev brugt, da det er en brugt frekvens når der skal måles et synk\cite{Kusuhara2004} \citep{Brantlov2017}. Amplituden blev sat til 2 V. 
+Funktionsgeneratorens funktion er at sende en fast frekvens og spænding til strømgeneratoren. Til dette formål er der brugt Analog Discovery(AD) tilsluttet til en PC, se \ref{fig:analogdis}. Fra PC'en styres AD via. softwaren WaveForms. Den ønskede frekvens er sat til 50 kHz, da det er en brugt frekvens når der skal måles et synk\cite{Kusuhara2004} \citep{Brantlov2017}. Amplituden blev sat til 2 V. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=4cm]
 {Figure/analogdis}}
-\caption{Diagram over hvilke porte på Analog discovery der blev brugt  som funktionsgenerator. Waveform 1 som går videre til instrumentationsforsærkeren og ground som går til stel på fumlebrættet}
+\caption{Diagram over hvilke porte på Analog Discovery der blev brugt  som funktionsgenerator.}
 \label{fig:analogdis}
 \end{figure}
 
 
 \subsection{Forstærkning}
-Signalet fra Analog Discovery gik ind til instrumentationsforstærkeren INA128 som der også blev brugt i artiklen. Figure \ref{fig:ina128} viser diagram over INA128, hvor den tilhørende gain modstand (R\textsubscript{G}) på 51 kohm blev også brugt, da det gav en fordobling i forstærkning, ved opslag i datablad. På udgangen af INA128 var der nu 4V. Fordelene ved instrumentationsforstærkeren, udover at forstærke signalet, kan der nævnes\cite{PeterJohansen2014}:
-
+Signalet fra Analog Discovery kommmer ind til instrumentationsforstærkeren INA128. Figure \ref{fig:ina128} viser diagram over INA128 med den tilhørende gain modstand (R\textsubscript{G}) på $ 51k\Omega $. Denne gain modstand gør at signalet fra funktionsgeneratoren bliver fordoblet\citep{TexasInstruments2005}. Fordelene ved instrumentationsforstærkeren, udover at forstærke signalet, er at den har \cite{PeterJohansen2014}:
+ 
 \begin{itemize}
-\item Reducer common-mode støj
+\item Høj common-mode rejection
 \item Differentielt input
 \item gain justering med kun en modstand
 \end{itemize}
@@ -173,20 +169,11 @@ Signalet fra Analog Discovery gik ind til instrumentationsforstærkeren INA128 s
 \centering
 {\includegraphics[width=10cm]
 {Figure/ina128}}
-\caption{Diagram over INA128 med differentielt input. Hvor den ene indgang (ben 2) var forbundet med Analog Discovery og (ben 3) forbundet til stel. Gain modstand (R\textsubscript{G} på 51 kohm. Eksitastionsspændingen på $\pm$12 V. Udover var stel (ben 5) kom det forstærket signal ud (ben 6).  }
+\caption{Diagram over INA128 med differentielt input. Indgangen (ben 2) modtager 2V fra Analog Discovery og (ben 3) sættes til stel. Gain modstand R\textsubscript{G} er på $ 51k\Omega$. Eksitationsspændingen er på $\pm$12 V. Det forstærket signal måles på ben 6  }
 \label{fig:ina128}
 \end{figure}
 
 
-\begin{figure}[H]
-\centering
-{\includegraphics[width=10cm]
-{Figure/ina128gain}}
-\caption{Oversigt fra INA128 datablad over hvilke maks frekvenser INA128 kan arbejde indenfor ved bestemte gains.}
-\label{fig:ina128gain}
-\end{figure}
-
-Ved en gain på 2 (V/V) kan der aflæses i figur \ref{fig:ina128gain} som er fra databladet til INA128, at båndbredden var over 100 kHz, hvilket er indenfor den ønskede frekvens på 50 kHz og at INA128 ikke er belastet på nogle måde. 
 
 \subsection{Strømgenerator}
 
