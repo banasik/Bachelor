@@ -131,15 +131,29 @@ Denne modul er testet ved at sende 2V fra Analog Discovery (den gule kurve) igen
   \pagebreak
 \subsection{Strømgenerator}
 
-Strømgeneratoren er simuleret ved at den får 4V fra en funktionsgenerator. På baggrund af denne spænding genereres der 283uA ud af strømgeneratoren. 
+Strømgeneratoren er simuleret ved at den får 4V fra en funktionsgenerator. På baggrund af denne spænding genereres der 283uA ud af strømgeneratoren. Bemærk at figur \ref{SimTestStrom} viser strømudgangen ved no-load, hvorimod \ref{SimTestStromNoLoad} viser når man belaster strømgeneratoren med $ 10k\Omega$.  
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
-{Figure/VCCSTest}}
-\caption{Figuren viser det simuleret resultat for  strømgeneratoren}
-\label{TestINA}
+{Figure/SimuleretStromGenerator}}
+\caption{Figuren viser det simuleret resultat for  strømgeneratoren ved no-load}
+\label{SimTestStrom}
 \end{figure}
+
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/SimuleretStromMedLoad}}
+\caption{Figuren viser det simuleret resultat for  strømgeneratoren med load på $10k\Omega$}
+\label{SimTestStromNoLoad}
+\end{figure}
+
+Det ses på figur \ref{SimTestStromNoLoad} at strømmen ikke ændrer sig, selvom man belaster kredsløbet med $ 10k\Omega	$.   
+
+
 
 \pagebreak
 Tilsvarende sendes der 4V ind i strømgeneratoren, når der skal foretages den praktiske test. De 4V genereres fra Analog Discovery. Den producerede strøm måles vha. 
