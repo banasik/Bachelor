@@ -341,32 +341,83 @@ R2             &           9,1kohm         \\ \hline
 
 \subsection{AA filter}
 
-For at sikre at aliasering ikke opstår, tilføjes et analog anti-aliaseringsfilter i kredsløbet, der tillader passering af frekvenser, der er mindre end Nyquist-frekvensen og dæmper frekvenser, som er højere end Nyquist-frekvensen. I dette projekt realiseres anti-aliaserings filteret som 2. ordens butterworth lavpasfilter af typen Sallen-Key, da det har et flat filter respons i passbåndet,  med cutoff frekvens på 25 kHz. Filteret har nedenstående overføringsfunktion: 
- \\linebreak \textbf{Indsæt et billede af filtret man nu vælger}
+I dette projekt vælges samplingfrekvensen til 500 kHz. Den halve samplingfrekvens  bliver derfor 250 kHz (Nyquist frekvensen). Da Analog Discovery bruges som A/D konverter, skal signalet ved 250 kHz være dæmpet under $1/2*LSB$, som i dB svarer til en dæmpning på $20log*2^{15}= 90 dB$ 
 
-\begin{equation}
-\label{eq2.14}
- H(s)=  \dfrac{2 \times \pi \times f_{c}}{s^{2}+ 2 \times \varsigma \times (2 \times \pi \times f_{c}) s + (2 \times \pi \times f_{c})^{2} } = 0,12mV
-\end{equation} 
+På baggrund af modultesten i \textit{Bilag 7 - Implementering \& Test} kan det aflæses at signalet i sig selv allerede er dæmpet med ca. 75 dB, derfor skal der som minimum tilføres en yderligere dæmpning på 20 dB.
 
-Filtreret knækfrekvens kan bestemmes vha. denne formel: 
-\begin{equation}
-\label{eq2.15}
-f_{c}= \dfrac{1}{2 \times \pi \times  \sqrt{R1 \times C1 \times R2 \times C2}}
-\end{equation}
+Derfor skal der designes et anti-aliaseringsfilter som tillader passering af frekvenser, der er mindre end Nyquist frekvensen og dæmper frekvenser, som er højere end Nyquist frekvensen. Dette anti-aliaseringsfilter skal give en minimum dæmpning på 20 dB ved 250 kHz. Dette kan lade sig gøre med et første ordens filter, da det dæmper med 20 dB pr. dekade. Der vælges i stedet for et 2. ordens filter, der vil dæmpe 40 dB pr. dekade, for at tage højde for variationer i det optagede signal.
 
-I stedet for at beregne værdierne for komponenterne, anvendes et værkstøj til design af filtre, som kan regne disse komponentværdier når man indtaster den ønskede knækfrekvens 5 . Indtastning af cutoff frekvensen giver følgende resultater:
+Samtidig er der taget højde for det amplitude moduleret signal som stadig ligger indenfor passbåndet ved 20 kHz, således at synkesignalet ikke bliver filteret væk.
 
-\begin{equation}
-\label{eq2.16}
- R1=R2= 33k\Omega $$ $$
- C1=C2=100pF
-\end{equation}
+Lavpas filteret designes med følgende specifikationer:
+\begin{itemize}
+\item Aktivt lavpas
+\item 2. orden Butterworth 
+\item Sallen key
+\item Knækfrekvens = 25 kHz
+\end{itemize}
 
-\textbf{Indsæt podeplot}
-\textbf{Der mangler to punkter:
-	Hvor meget er signalet dæmpede allerede?
-	Hvor skal vi dæmpe det yderligere for komme ned til 100db? Vi kender vel først den faktiske dæmpning der er behov for ved integrationstesten?} 
+De overstående specifikationer er indtastet i programmet FilterPro og der er beregnet følgende kredsløb i figur \ref{Fig:aafilterdiagram}. Som operationsforstærker vælges OP27G og for at sikre at OP27G kan bruges udregnes slewrate:
+$$slewrate=2*\pi*f*V$$
+$$2*\pi*20kHz*8V=1,005V/us$$
+
+I OP27G's datablad kan slewrate aflæses til 2,8 V/us, hvilket er fint for den udregnet slewrate på 1,005 V/us. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/aafilterdiagram}}
+\caption{Figuren viser kredsløbet til AA filteret.}
+\label{Fig:aafilterdiagram}
+\end{figure} 
+
+
+
+\begin{table}[H]
+\centering
+\caption{Stykliste for AA filter}
+\label{Styklisteaafilter}
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Stykliste}} \\ \hline
+OP27G             &                    \\ \hline
+R1             &         3kohm  			\\ \hline
+R2             &           5,6kohm         \\ \hline
+C1             &           1nF         \\ \hline
+C2             &           2.2nF         \\ \hline
+
+\end{tabular}
+\end{table}
+
+%På baggrund af modultesten i \textit{Bilag 7 - Implementering \& Test} skal filteret i dette projekt realiseres som et 2. ordens butterworth lavpasfilter af typen Sallen-Key, da det har et flat filterrespons i passbåndet,  med cutoff frekvens på 25 kHz. Filteret har nedenstående overføringsfunktion: 
+% \\linebreak \textbf{Indsæt et billede af filtret man nu vælger}
+%
+%\begin{equation}
+%\label{eq2.14}
+% H(s)=  \dfrac{2 \times \pi \times f_{c}}{s^{2}+ 2 \times \varsigma \times (2 \times \pi \times f_{c}) s + (2 \times \pi \times f_{c})^{2} } = 0,12mV
+%\end{equation} 
+%
+%Filtreret knækfrekvens kan bestemmes vha. denne formel: 
+%\begin{equation}
+%\label{eq2.15}
+%f_{c}= \dfrac{1}{2 \times \pi \times  \sqrt{R1 \times C1 \times R2 \times C2}}
+%\end{equation}
+%
+%I stedet for at beregne værdierne for komponenterne, anvendes et værkstøj til design af filtre, som kan regne disse komponentværdier når man indtaster den ønskede knækfrekvens 5 . Indtastning af cutoff frekvensen giver følgende resultater:
+%
+%\begin{equation}
+%\label{eq2.16}
+% R1=R2= 33k\Omega $$ $$
+% C1=C2=100pF
+%\end{equation}
+%
+%\textbf{Indsæt podeplot}
+%\textbf{Der mangler to punkter:
+%	Hvor meget er signalet dæmpede allerede?
+%	Hvor skal vi dæmpe det yderligere for komme ned til 100db? Vi kender vel først den faktiske dæmpning der er behov for ved integrationstesten?} 
+	
+	
+	
 \chapter{Software}
 \subsection{Sekvens Diagram}
 
