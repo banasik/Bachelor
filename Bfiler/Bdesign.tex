@@ -428,9 +428,38 @@ C2             &           2.2nF         \\ \hline
 	
 	
 \chapter{Software}
+Her følger en beskrivelse af koden udviklet til Synkerefleksmonitor som består af følgende blokke. De to funktioner generere Matlab og funktionerne bliver brugt til at køre bestemte selv udviklede scripts.
+
+
+\begin{table}[H]
+
+\begin{tabularx}{\textwidth}{l l X}
+     Navn	&	Type		&	Beskrivelse \\ \midrule
+     Synkerefleksmonitor\_OpeningFcn   	& 	Funktion  	& 	Denne funktion har til opgave at køre koden automatisk som den indeholder , når programmet startes. Scriptet der ligger i denne funktion er "Start\_GUI".  \\ 			  \addlinespace[2mm]
+     Btn\_Start\_Measurments	&	Funktion	&	Denne funktion bliver kørt, når der trykkes på knappen "Start Measurments". De scripts der ligger i denne funktion er, "Generate\_SineWave", "Read\_Measurments", "Process\_Measurments", "Save\_Measurments" og "Show\_Measurments". \\   \addlinespace[2mm]
+     Start\_GUI	&	Script	&	Dette script indeholder kode som automatisk bliver kørt når GUI'en åbnes. Koden indeholder indlæsning og visning af billede, samt dato og tid. \\   \addlinespace[2mm]
+     Generate\_SineWave	&	Script	&	Scriptet opretter forbindelse til Analog Discovery, tilføjer funktionsgeneratoren og dens indstillinger, amplitude 2 V og frekvens 20 kHz.\\   \addlinespace[2mm]
+     Read\_Measurments	&	Script	&	I dette script tilføjes de to analog input som bruges til måling af BI og EMG. Yderligere sættes samplingfrekvensen til 500 kHz og at en måling skal vare 10 sekunder.\\   \addlinespace[2mm]
+     Process\_Measurments	&	Script	&	Her bliver der foretaget envelope af BI målingen. Dette sker ved at ensrette BI-signalet og lavpasfiltrere det ved 500 Hz.   \\   \addlinespace[2mm]
+     Save\_Measurments	&	Script	&	Målingerne BI og EMG, gemmes som CSV-filer til senere brug.\\   \addlinespace[2mm]
+     Show\_Measurments	&	Script	&	Til slut vises det udglattet BI og EMG. Her opsættes akserne, labels og title.\\   \addlinespace[2mm]
+   
+     \bottomrule                                                                                                                   
+    \end{tabularx}
+    \caption {Tabellen viser navne funktioner og scripts.}
+    \label{tab:sw1}
+	
+\end{table}
+
+
+
+
+
+
+
 \subsection{Sekvens Diagram}
 
-Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugerne kan herfra vælge at igangsætte en måling ved at trykke knappen $'Btn-Start-Measurments'$. Denne knap kører efterfølgende en række funktioner, der tilsammen måler, gemmer og viser en bioimpedans og EMG måling simultant. Hver af disse funktioner eksisterer i sin egen m.fil. Denne opdeling muliggør at man nemt kan udvide programmet uden at have kendskab til alle disse funktioner.    
+Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugerne kan herfra vælge at igangsætte en måling ved at trykke knappen $'Btn-Start-Measurments'$. Denne knap kører efterfølgende en række scripts, der tilsammen måler, gemmer og viser en bioimpedans og EMG måling simultant. Hver af disse scripts eksisterer i sin egen m.fil. Denne opdeling muliggør at man nemt kan udvide programmet uden at have kendskab til alle disse scripts.    
 
 \begin{figure}[H]
 \centering
