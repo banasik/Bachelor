@@ -203,7 +203,7 @@ Det ses på figur \ref{SimTestStromNoLoad} at strømmen ikke ændrer sig, selvom
 
 \pagebreak
 Tilsvarende sendes der 4V ind i strømgeneratoren, når der skal foretages den praktiske test på fumlebræt. De 4V genereres fra Analog Discovery. Den producerede strøm måles vha. 
-et amperemeter i serie på udgangen af den anvendte operationsforstærker, LM318. Det ses på figur \ref{TestStrGen} at udgangsstrømmen, som genereres af strømgeneratoren er målt til 285uA. Dette resultat afviger lidt fra det beregnede og simulerede resultat. Det vurderes at afvigelsen er så lille at den ingen betydning har for måleobjektets sikkerhed. Derfor er det besluttet at arbejde videre med den målte strøm. 
+et amperemeter i serie på udgangen af den anvendte operationsforstærker, LM318. Det ses på figur \ref{TestStrGen} at udgangsstrømmen, som genereres af strømgeneratoren er målt til 285uA. Dette resultat afviger lidt fra det beregnede og simulerede resultat. Det vurderes at afvigelsen er så lille at den ingen betydning har for måleobjektets sikkerhed. Figur \ref{fig:Stromgeneratorload} viser strømmens stabilitet fra 1 k$\Omega$ til 10 k$\Omega$, hvilket svarer til området for load impedansen for et biologisk væv \citep{Chester2014}. Derfor er det besluttet at arbejde videre med den målte strøm. 
 
 
 \begin{figure}[H] 
@@ -219,7 +219,7 @@ et amperemeter i serie på udgangen af den anvendte operationsforstærker, LM318
 {\includegraphics[width=12cm]
 {Figure/Stromgeneratorload}}
 \caption{}
-\label{Stromgeneratorload}
+\label{fig:Stromgeneratorload}
 \end{figure}
 
 \subsection{Instrumentationsforstærker 2}
@@ -251,6 +251,14 @@ Denne operationsforstærkers opgave er at forstærke 1 V til 10 V, dvs. en forst
 \label{TestAfOpAmp}
 \end{figure}
 
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/opampmultisim}}
+\caption{Figuren viser det simuleret udgangsspænding som er målt ved udgangen af operationsforstærkeren.}
+\label{opampmultisim}
+\end{figure}
 
 
 \subsection{Spektrumanalyse}
