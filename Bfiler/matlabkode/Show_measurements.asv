@@ -1,0 +1,12 @@
+%period = 1/fgenCh.Frequency;
+subplot(2,1,1)
+plot(timestamps, data(:,1),'y');
+title('Bioimpedance')
+xlabel('Time in seconds'); ylabel('Impedance in ohm');
+
+subplot(2,1,2)
+plot(timestamps, data(:,2),'b');
+xlabel('Time in seconds'); ylabel('Impedance in ohm');
+title('EMG')
+axis([0 s.DurationInSeconds -5 15])
+legend('BI','EMG')

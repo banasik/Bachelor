@@ -1,0 +1,11 @@
+%% Generate_SineWave
+s = daq.createSession('digilent'); % Opretter forbindelse til Analog Discovery
+
+fgenBI = addFunctionGeneratorChannel(s, 'AD1', 1, 'Sine'); % Opsætning af kanalSinus
+
+fgenBI.Gain = 2;
+
+fgenBI.Frequency = 20000;
+
+
+
