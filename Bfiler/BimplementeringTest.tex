@@ -134,11 +134,30 @@ Alternativet til overnævnte fordele er at man bruger forskellige “single purp
 I det følgende gennemgås de kritiske funktioner for programmet.
 
 \pagebreak
-\subsection{Generate\_SineWave } 
-Dette script håndterer generering af 2V AC signal ud af Analog Discovery. 
+
+\subsection{Funktioner}
+\subsubsection{Synkerefleksmonitor\_OpeningFcn}
+
+\subsubsection{Btn\_Start\_Measurment}
+
+\subsection{Scripts}
+
+\subsubsection{Start\_GUI } 
+\lstinputlisting{matlabkode/StartGUI.m}
+\subsubsection{Generate\_SineWave } 
+Dette script håndterer generering af 2V AC signal ud af Analog Discovery.
+\lstinputlisting{matlabkode/GenerateSineWave.m}
 
 
- 
+
+\subsubsection{Read\_Measurments}
+\lstinputlisting{matlabkode/Read_Measurments.m}
+
+\subsubsection{Process\_Measurments } 
+
+\subsubsection{Show\_Measurements} 
+\lstinputlisting{matlabkode/Show_measurements.m}
+\subsubsection{Save\_Measurments} 
 
 \chapter{Modultest}
 Modultest af hardware-delen består af en simuleret test vha. Multisim og en praktisk test. Nogle komponenterne eksister ikke i Multisim og kræver at blive oprettet, men det er valgt at ikke bruge tid på det, da det er tidskrævende. Derfor præsenteres kun praktiske resultater for disse komponenter. I det følgende præsenteres testresultaterne for instrumentationsforstærker 1, 2 , strømgeneratoren, operationsforstærkeren og AA filteret. 
