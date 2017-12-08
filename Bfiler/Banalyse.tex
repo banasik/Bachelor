@@ -33,13 +33,13 @@
 
 \chapter{Indledning}
 
-I dette bilag vil der blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt skal munde ud i og de erfaringer, der er draget på baggrund af de udført tests på bioimpedans-måler kredsløbet fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Artiklen har været kilden til inspiration, da den beskriver de grundlæggende elementer, der skal være tilstede når man udvikler en simpel bioimpedans-måler(BI-måler). I artiklen er der givet et kredsløb, der kan ses på figur \ref{fig:BIdiagram}, som repræsenterer en simpel BI-måler. Kredsløbet består af en instrumenteringsforstærker, en strømgenerator og to elektroder. Kredsløbet fungerer, ved at funktionsgeneratoren genererer et AC signal, som sendes igennem en strømgenerator. På baggrund af det indsendte signal genereres der en konstant strøm ud af strømgeneratoren. Denne kendte strøm sendes til et måleobjekt igennem to elektroder. Ved at måle spændingsfaldet over elektroderne, kan man bestemme måleobjektets bioimpedans vha. af ohms lov: $$R=\frac{V}{I}$$
+I dette bilag vil der blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt skal munde ud i, og de erfaringer, der er opnået på baggrund af de udført tests på bioimpedans-måler kredsløbet fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Artiklen har været kilden til inspiration, da den beskriver de grundlæggende elementer, der skal være til stede, når man udvikler en simpel bioimpedans-måler(BI-måler). I artiklen er der givet et kredsløb, se figur \ref{fig:BIdiagram}, som repræsenterer en simpel BI-måler. Kredsløbet består af en instrumenteringsforstærker, en strømgenerator og to elektroder. Kredsløbet fungerer ved at en funktionsgenerator sender et AC signal til instrumentationsforstærkeren , som efterfølgende forstærker signalet inden det sendes igennem en strømgenerator. På baggrund af det indsendte signal i strømgeneratoren genereres der en konstant strøm ud af strømgeneratoren. Denne kendte strøm sendes til et måleobjekt igennem to elektroder. Ved at måle spændingsfaldet over elektroderne, kan man bestemme måleobjektets bioimpedans vha. af ohms lov: $$R=\frac{V}{I}$$
 
-Formålet med analysefasen er at implementere det omtalte kredsløb på et fumlebræt for derefter at teste det. Forskerne bag denne artikel har anvendt kredsløbet til at måle bioimpedans på skalpen. Om det sammen kredsløb kan anvendes til detektering og monitorering af et synk, skal det planlagt tests vise. 
+Formålet med analysefasen er at implementere det omtalte kredsløb på et fumlebræt for derefter at teste det. Forskerne bag denne artikel har anvendt kredsløbet til at måle bioimpedans på skalpen. Om det sammen kredsløb kan anvendes til detektering og monitorering af et synk, skal denne analysefase afdække.
 
-For at realisere kredsløbet er der indkøbt præcist de samme komponenter  som artiklens kredsløb gør brug af med undtagelse af udstyr som oscilloskop, funktionsgenerator og A/D-konverter.
+For at realisere kredsløbet er der indkøbt præcist de samme komponenter  som artiklens kredsløb gør brug af med undtagelse af udstyr som oscilloskop, funktionsgenerator og A/D-konverter. Disse udstyr har projektgruppens medlemmer selv anskaffet. 
 
-I de følgende afsnit gennemgås kort principperne, som anvendes, når der måles bioimpedans.  Efterfølgende analyseres, realiseres og tests den overnævnte kredsløb fra artiklen. Tilslut præsenteres testens resultater og de erfaringer, der er opnået herigennem. 
+I de følgende afsnit gennemgås kort principperne som anvendes, når der måles bioimpedans.  Efterfølgende realiseres og testes det overnævnte kredsløb fra artiklen. Tilslut præsenteres testens resultater og de konklusioner som afledes derigennem.
 
 
 
@@ -54,9 +54,9 @@ I de følgende afsnit gennemgås kort principperne, som anvendes, når der måle
 
 \chapter{Bioimpedans}
 \section{Introduktion}
-Bioimpedans måling  er en non-invasiv målemetode, som er simpel og hurtig at udføre. Måleteknikken består i at man placere to sæt elektroder der hvor man ønsker at måle. Det ene sæt af elektroderne transmitterer  en uskadelig AC strøm i mikrovolt området til måleregionen, hvorimod det andet sæt bruges til at måle spændingsfaldet over måleregionen. Herfra kan man måle den elektriske impedans, når forholdet mellem spænding og strøm i vævet ændrer sig . Impedansen i vævet varierer fra væv til væv, da væske og elektrolytter har en høj ledningsevne, som giver en lav impedans hvorimod fedt og knogler har en lav ledningsevne, der resulterer en høj impedans.\cite{Brantlov2017} 
+Bioimpedans måling  er en non-invasiv målemetode, som er simpel og hurtig at udføre. Måleteknikken består i at man placere to sæt elektroder der hvor man ønsker at måle. Det ene sæt af elektroderne transmitterer  en uskadelig AC strøm i mikrovolt området til måleregionen, hvorimod det andet sæt bruges til at måle spændingsfaldet over måleregionen. Herfra kan man måle bioimpedansen, når forholdet mellem spænding og strøm i vævet ændrer sig . Impedansen i vævet varierer fra væv til væv, da væske og elektrolytter har en høj ledningsevne, som giver en lav impedans, hvorimod fedt og knogler har en lav ledningsevne, der resulterer en høj impedans.\cite{Brantlov2017} 
  
-Det biologiske væv kan vises som en elektrisk model, der består af tre elektriske komponenter (to modstande og en kondensator). Den ene modstand sammen med kondensatoren repræsenterer målregionens intracellulærvæske, hvorimod den anden modstand repræsenterer ekstracellulærvæsken, se figur \ref{fig:vaevsmodel}.
+Det biologiske væv kan illustreres som et elektrisk kredsløb, der består af tre elektriske komponenter (to modstande og en kondensator). Den ene modstand sammen med en kondensator repræsenterer målregionens intracellulærvæske, hvorimod den anden modstand repræsenterer ekstracellulærvæsken, se figur \ref{fig:vaevsmodel}.
 
 \begin{figure}[H]
 \centering
@@ -69,7 +69,7 @@ Det biologiske væv kan vises som en elektrisk model, der består af tre elektri
 \pagebreak
 
 
-Bioimpedans eller den elektriske impedans(Z) siger noget om modstanden som den injicerede strøm møder i vævet. Denne impedans består af to elementer, en modstand (R) og en reaktance X\textsubscript{C}, som kan plottes i et koordinatsystem, der har en real- og imaginærdel. Værdien af Z kan beregnes som følgende: 
+Bioimpedans eller den elektriske impedans(Z) siger noget om modstanden som den injicerede strøm møder i vævet. Denne impedans består af to elementer, en modstand (R) og en reaktance X\textsubscript{C}, som kan plottes i et koordinatsystem, der har en real- og imaginærdel \citep{Aroom2009}. Værdien af Z kan beregnes som følgende: 
 \begin{equation}
 Z=\sqrt{R^{2}+X^{2}_{C}}
 \end{equation} 
@@ -83,7 +83,7 @@ Z=\sqrt{R^{2}+X^{2}_{C}}
 \end{figure}
 
 
-Når man måler impedansen af et biologisk væv, er frekvensens størrelse afgørende for resultatet af impedansen, da vævet har kondensator egenskaber som er frekvens afhængig. Ved lave frekvenser under 100 Hz løber strømmen kun i ekstracellulærvæsken, da den totale impedans er mere resistiv. Figur \ref{fig:celler} viser strømflowet i vævet.  Cellens membran sørger for at der ikke kan passere strøm med lave frekvenser (rød) igennem cellen. Ved højere frekvenser er det muligt for strømmen at bryde membranen og trænge igennem cellens intracellulærvæske(blå). Dette medfører at strømmen kommer i kontakt med de elektriske ioner i intracellulærvæsken, hvilken giver en lavere impedans. 
+Når man måler impedansen af et biologisk væv er frekvensens størrelse afgørende for resultatet af impedansen, da vævet har kondensator egenskaber. Ved lave frekvenser under 100 Hz løber strømmen kun i ekstracellulærvæsken, da den totale impedans er mere resistiv. Figur \ref{fig:celler} viser strømflowet i vævet.  Cellens membran sørger for, at der ikke kan passere strøm med lave frekvenser (rød) igennem cellen. Ved højere frekvenser er det muligt for strømmen at bryde membranen og trænge igennem cellens intracellulærvæske(blå). Dette medfører at strømmen kommer i kontakt med de elektriske ioner i intracellulærvæsken, hvilken giver en lavere impedans \citep{Brantlov2017}. 
 
 
 
@@ -114,13 +114,13 @@ Når man måler impedansen af et biologisk væv, er frekvensens størrelse afgø
 
 \section{Opbygning af BI-måler}
 
-Den omtalte artikel i starten af dette bilag indeholder et kredsløb, der er prisbilligt. Kredsløbets komponenter har i alt kostet $ kr. 100$ \cite{Nr}. Opbygning af dette kredsløb vil blive gennemgået i det følgende. 
+Den omtalte artikel i starten af dette bilag indeholder et kredsløb, der er prisbilligt. Kredsløbets komponenter er indkøbt og har i alt kostet $ kr. 100$ \cite{Nr}. Opbygning af dette kredsløb vil blive gennemgået i det følgende. 
 
 
 
 \section{Hardware}
 
-Overordnet består det samlet system af et kredsløb, der repræsenter en BI-måler, en funktionsgenerator, en forsyningskilde, et oscilloskop og en PC, der styrer funktionsgeneratoren og oscilloskopet, se \ref{fig:oprindeligebd}. Inden kredsløbets komponenter blev implementeret på et fumlebræt, blev komponenter simuleret vha. simuleringsværktøjet Multisim. Disse simuleringsresultater vil blive præsenteret senere. I de følgende afsnit beskrives, hvordan figur  \ref{fig:oprindeligebd}s blokke er implementeret. 
+Overordnet består det samlet system af et kredsløb, der repræsenter en BI-måler, en funktionsgenerator, en forsyningskilde, et oscilloskop og en PC, der styrer funktionsgeneratoren og oscilloskopet, se \ref{fig:oprindeligebd}. Inden kredsløbets komponenter blev implementeret på et fumlebræt, blev komponenter simuleret i simuleringsværktøjet Multisim. Disse simuleringsresultater vil blive præsenteret senere. I de følgende afsnit gennemgås, hvordan figur  \ref{fig:oprindeligebd}s blokke er implementeret i dette projekt. 
 
 \begin{figure}[H]
 \centering
@@ -133,7 +133,7 @@ Overordnet består det samlet system af et kredsløb, der repræsenter en BI-må
 \pagebreak
 
 \subsection{Power Supply}
-I artiklen er der brugt en $\pm$12 V spændingsforsyning tilsluttet til netforsyningen. Af hensyn til måleobjektets sikkerhed anvendes almindelige AA batterier i stedet for netforsyningen, når denne blok implementeres. For at bruge samme forsyningsspænding som i artiklen, blev der valgt at sætte otte AA batterier i serie med hinanden, se figur \ref{fig:12vbatteri}. På den måde opnås der en forsyning på $\pm$12 V uden at bruge netforsyningen.
+I artiklen er der brugt en $\pm$12 V spændingsforsyning tilsluttet til netforsyningen. Af hensyn til måleobjektets sikkerhed anvendes almindelige AA batterier i stedet for netforsyningen, når denne blok senere implementeres. For at bruge samme forsyningsspænding som i artiklen, blev der valgt at sætte otte AA batterier i serie med hinanden, se figur \ref{fig:12vbatteri}. På den måde opnås der en forsyning på $\pm$12 V uden at bruge netforsyningen. Denne forsyningsspænding forsyner både instrumentationsforstærkeren og strømgeneratoren. 
 
 \begin{figure}[H]
 \centering
@@ -144,7 +144,7 @@ I artiklen er der brugt en $\pm$12 V spændingsforsyning tilsluttet til netforsy
 \end{figure}
 
 \subsection{Funktionsgenerator}
-Funktionsgeneratorens funktion er at sende en fast frekvens og spænding til strømgeneratoren. Til dette formål er der brugt Analog Discovery(AD) tilsluttet til en PC, se \ref{fig:analogdis}. Fra PC'en styres AD via. softwaren WaveForms. Den ønskede frekvens er sat til 50 kHz, da det er en brugt frekvens når der skal måles et synk\cite{Kusuhara2004} \citep{Brantlov2017}. Amplituden blev sat til 2 V. 
+Funktionsgeneratorens funktion er at sende en fast frekvens og spænding til strømgeneratoren. Til dette formål er der brugt Analog Discovery(AD) tilsluttet til en PC, se \ref{fig:analogdis}. Fra PC'en styres AD via. softwaren WaveForms. Den ønskede frekvens er sat til 50 kHz, da det er en brugt frekvens når der måles et synk   \cite{Kusuhara2004} \citep{Brantlov2017}. Amplituden er valgt til 2 V. 
 
 \begin{figure}[H]
 \centering
@@ -156,20 +156,20 @@ Funktionsgeneratorens funktion er at sende en fast frekvens og spænding til str
 
 
 \subsection{Forstærkning}
-Signalflowet starter, ved at Analog Discovery sender 2V ind til instrumentationsforstærkeren INA128. Figure \ref{fig:ina128} viser diagram over INA128 med den tilhørende gain modstand (R\textsubscript{G}) på $ 51k\Omega $. Denne gain modstand gør at signalet fra funktionsgeneratoren bliver fordoblet\citep{TexasInstruments2005}. Fordelene ved instrumentationsforstærkeren, udover at forstærke signalet, er, at den har følgende egenskaber \cite{PeterJohansen2014}:
+Signalflowet starter, ved at Analog Discovery sender 2V ind til instrumentationsforstærkeren INA128. Figure \ref{fig:ina128} viser diagram over INA128 med den tilhørende gain modstand (R\textsubscript{G}) på $ 51k\Omega $. Denne gain modstand gør at signalet fra funktionsgeneratoren bliver fordoblet \citep{TexasInstruments2005}. Fordelene ved instrumentationsforstærkeren, udover at forstærke signalet, er, at den har følgende egenskaber \cite{PeterJohansen2014}:
  
 \begin{itemize}
 \item Høj common-mode rejection
 \item Differentielt input
-\item gain justering med kun en modstand
+\item Gain justering med kun én modstand
 \end{itemize}
 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=9cm]
 {Figure/ina128}}
-\caption{Diagram over INA128 med differentielt input. Indgangen (ben 2) modtager 2V fra Analog Discovery og (ben 3) sættes til stel. Gain modstanden R\textsubscript{G} er på $ 51k\Omega$. Eksitationsspændingen er på $\pm$12 V. Det forstærket signal måles på ben 6  }
+\caption{Diagram over INA128 med differentielt input. Indgangen (ben 2) modtager 2V fra Analog Discovery og (ben 3) sættes til stel. Gain modstanden R\textsubscript{G} er på $ 51k\Omega$. Eksitationsspændingen er på $\pm$12 V. Det forstærkede signal måles på ben 6  }
 \label{fig:ina128}
 \end{figure}
 
@@ -177,7 +177,8 @@ Signalflowet starter, ved at Analog Discovery sender 2V ind til instrumentations
 
 \subsection{Strømgenerator}
 
-Strømgenratoren, LF412N, bliver forsynet med de 4V fra instrumentationsforstærkeren. Denne forsyningsspænding kommer ind via. R1. På baggrund af den forsyning producerer LF412N strøm, som måles på ben 3 vha. en amperemeter. Kombinationen af bestemt ohmsk modstands størrelse og lav \% tolerance værdi, giver LF412N en faste strøm. Her er der brugt 1\% modstande. Ved at justere kun modstanden R5, kan en ønsket strøm strørrelse beregnes vha. formlen\cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
+Strømgenratoren, LF412N, bliver forsynet med de 4V fra instrumentationsforstærkeren. Denne forsyningsspænding kommer ind via. R1. På baggrund af den forsyning producerer LF412N strøm, som måles på ben 3 vha. en amperemeter. Alle modstande i kredsløbet har 1\% tolerance værdi. $ R_{5} $ styrer, hvor meget strøm, der kan komme ud af strømgeneratoren. Den forventede output-strøm 
+beregnes vha. formlen \cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
 
 
 \begin{figure}[H]
@@ -196,8 +197,8 @@ Strømgenratoren, LF412N, bliver forsynet med de 4V fra instrumentationsforstær
 
 \subsection{A/D-konverter}
 
-Analog Discovery bruges, udover at fungere som funktionsgenerator, også som dataopsamlingsenhed. AD er valgt, fordi den kan sample to signaler simultant, samtidig med den generer et signal. Ved sampling af ét signal tillader AD at man sætter samplingsfrekvensen optil 1MHz, men når to signaler samples simultant, skal samplingsfrekvensen reduceres til 500kHz. 
-Der er også eksperimenteret med en anden dataopsamlingsenhed kaldet NI USB-6259 BNC \cite{NI}. Denne enhed tillader en  samplingsfrekvens op til 1,3MHz ved sampling af ét signal. Samples der derimod to signaler samtidig, skal samplingsfrekvensen ligesom AD nedsættes  til 500kHz. Begge enheder kan det samme når det gælder sampling af to signaler simultant, men AD har den ekstra fordel, at den også kan fungere som funktionsgenerator. Derfor vælges AD fremfor NI USB-6259 BNC som dataopsamlingsenhed.     
+Analog Discovery bruges, udover at fungere som funktionsgenerator, også som dataopsamlingsenhed. AD er valgt, fordi den kan sample to signaler simultant, samtidig med den generer et signal. Ved sampling af ét signal tillader AD at man sætter samplingsfrekvensen op til 1MHz, men når to signaler samples simultant, skal samplingsfrekvensen reduceres til 500kHz. 
+Der er også eksperimenteret med en anden dataopsamlingsenhed kaldet NI USB-6259 BNC \cite{NI}. Denne enhed tillader en  samplingsfrekvens op til 1,3MHz ved sampling af ét signal. Samples der derimod to signaler samtidig, skal samplingsfrekvensen ligesom AD nedsættes  til 500kHz. Begge enheder kan det samme, når det gælder sampling af to signaler simultant, men AD har den ekstra fordel, at den også kan fungere som funktionsgenerator. Derfor vælges AD fremfor NI USB-6259 BNC som dataopsamlingsenhed.     
 
 
 \begin{figure}[H]
@@ -230,7 +231,7 @@ Det skal bemærkes at emg-elektroderne første anvendes senere i dette projekt. 
 \centering
 {\includegraphics[width=8cm]
 {Figure/elektrodeplaceringREF}}
-\caption{Placering af elektroderne implementeres som vist i figuren \cite{Nahrstaedt2012a}}
+\caption{Placering af elektroderne, når man kombinere BI og EMG, implementeres som vist i figuren \cite{Nahrstaedt2012a}}
 \label{fig:elektrodeplaceringREF}
 \end{figure}
 
@@ -243,18 +244,18 @@ Det skal bemærkes at emg-elektroderne første anvendes senere i dette projekt. 
 \section{Software}
 \subsection{Waveforms}
 
-Til styring af Analog Discovery er der brugt "single purpose"  programmet  Waveforms. I dette program har brugeren mulighed for at generere et signal op til 5V. Der er også mulighed for at indstille signalets frekvens op til 10MHz. Programmet indeholder også et oscilloskop, se figur \ref{fig:waveforms}. 
+Til styring af Analog Discovery er der brugt "single purpose"  programmet  Waveforms. \\ I dette program har brugeren mulighed for at generere et signal op til 5V. Der er også mulighed for at indstille signalets frekvens op til 10MHz. Programmet indeholder også et oscilloskop, se figur \ref{fig:waveforms}. 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=14cm]
+{\includegraphics[width=12cm]
 {Figure/waveforms}}
 \caption{Brugerinterfacet i Waveforms, hvor funktionsgeneratoren og oscilloskopet kan indstilles som man ønsker}
 \label{fig:waveforms}
 \end{figure}
 
 
-\section{Realisering og test af BI-måler}
+\section{Realisering og test af kredsløbet}
 
 Med den overstående gennemgang er det nu muligt at igangsætte  realisering og test af kredsløbet på et fumlebræt. Realisering af kredsløbet er bygget efter figuer \ref{fig:testopstilling1}. Her ses det at signalflowet starter med at funktionsgeneratoren simulerer kredsløbet ved at sende 2V til instrumentationsforstærkeren, som forstærker de 2V til 4V. De 4V kommer ind i strømgeneratoren, som generer strøm på baggrund af det indkommende forsyning. Af hensyn til måleobjektets sikkerhed placeres en amperemeter ved udgangen af strømgeneratoren for at følge med at strømmen er konstant inden den sendes i måleobjektet. Strømmen bliver herefter transmitteret igennem ekg-elektroder til måleobjektet.      
 
@@ -270,7 +271,7 @@ Med den overstående gennemgang er det nu muligt at igangsætte  realisering og 
 
 
 \section{Resultater}
-Formålet med testen er først og fremmest at genskabe artiklens resultater, og se om det samme kredsløb kan anvendes til detektering af et synk. Den første test omhandler at teste om strømgeneratoren leverer en konstant strøm, når man varier frekvensen og den ikke er belastet. Her er det især vigtigt at genskabe en konstant strøm mellem 1 kHz og 100 kHz, se artiklens resultat på figur \ref{fig:oprindeligeonload}, når strømgeneratoren ikke er belastet. Den anden test handler om at simulere en vævsmodel og måle spændingsændringer over elektroder, når frekvensen varieres, se artiklens resultat på figur \ref{fig:oprindeligerms}, når strømgeneratoren er belastet. Hermed kan man beregne impedansen over vævsmodellen ved at dividere den målte spænding med den injicerede strøm.  
+Formålet med testen er først og fremmest at genskabe artiklens resultater, og se om det samme kredsløb kan anvendes til detektering af et synk. Den første test omhandler at teste om strømgeneratoren leverer en konstant strøm, når man variere frekvensen og den ikke er belastet. Her er det især vigtigt at genskabe en konstant strøm mellem 1 kHz og 100 kHz, se artiklens resultat på figur \ref{fig:oprindeligeonload}, når strømgeneratoren ikke er belastet. Den anden test handler om at simulere en vævsmodel og måle spændingsændringer over den, når frekvensen varieres, se artiklens resultat på figur \ref{fig:oprindeligerms}, og strømgeneratoren er belastet. Hermed kan man beregne impedansen over vævsmodellen ved at dividere den målte spænding med den injicerede strøm.  
 
 
 
@@ -296,13 +297,13 @@ Formålet med testen er først og fremmest at genskabe artiklens resultater, og 
 
 
 \subsection{Simulering}
-Í det følgende præsenteres to simuleret resultater af strømgeneratoren. Det ene viser udgangsstrømmen når frekvensen varieres ved no-load, hvorimod den andet illustrer spændingen over elektroderne når en vævsmodel simuleres med en kendt strøm, hvor frekvens varieres. 
+Í det følgende præsenteres to simuleret resultater af strømgeneratoren. Det ene viser udgangsstrømmen når frekvensen varieres ved no-load, hvorimod den andet illustrer spændingen over vævsmodellen, når den simuleres med en kendt strøm og varieret frekvens. 
  
 
 
 \subsubsection{No-Load}
 
-Til test af strømgeneratorens No-Load respons blev funktionsgeneratoren sat til 4V og frekvensen varieres op til 100kHz. På udgangen af strømgeneratoren måles strømmen vha. en amperemeter. Resultaterne af denne test kan læses i tabel \ref{table:frekvensernoload} og figur \ref{fig:testopstilling1multisimnoloadgraf}.
+Til test af strømgeneratorens no-load respons blev funktionsgeneratoren sat til 4V og frekvensen varieres op til 100kHz. På udgangen af strømgeneratoren måles strømmen vha. en amperemeter. Resultaterne af denne test kan læses i tabel \ref{table:frekvensernoload} og figur \ref{fig:testopstilling1multisimnoloadgraf}.
 
 Det konstateres at strømmen er konstant mellem 1kHz til 1MHz. Dette betyder at figur \ref{fig:oprindeligeonload} og  \ref{fig:testopstilling1multisimnoloadgraf} er sammenlig.   
 
@@ -408,27 +409,33 @@ Det konstateres at figur \ref{fig:oprindeligerms} og  \ref{fig:testopstilling1mu
 
 \subsection{Fumlebræt}
 
-Der blev foretaget samme målinger på fumlebræt. Opstillingen af fumlebrættet kan ses i figur \ref{fig:oprindeligekredslob2}. Den øverst bane var +12V (rød), den nederste bane var -12 V (grøn) og stel sort.  
+Efter simuleringsfasen blev kredsløbet implementeret på et fumlebræt for at teste om resultaterne fra simuleringen kan genskabes i virkeligheden. Den praktiske test omfatter lige som i simulering at sikre at strømgeneratoren kan levere en konstant strøm, før og efter belastning, når frekvensen varieres. Begge tests er vigtige, da man vil sikre at strømgeneratoren kun producerer den beregnede strøm og ikke strømme, der kan kan blive til fare for måleobjektet.  
+
+
+Opstillingen af testen er implementeret på fumlebrættet som vist på figur \ref{fig:oprindeligekredslob2}. Der ligger $+12V$ forsyning i den øverste bane(rød), hvor den  nederste bane indeholder $-12V$ (grøn). Figuren viser også det samlede kredsløb, der skal testes.    
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=8cm]
 {Figure/oprindeligekredslob2}}
-\caption{Billede af testopstilling på fumlebræt på baggrund af det oprindelige kredsløbsdesign. INA128 til venstre og LF412CN til højre.}
+\caption{Illustration af testopstillingen på et fumlebræt. Testopstillingen indeholder en instrumentationsforstærker, INA128, til venstre og en strømgenerator, LF412CN, til højre.}
 \label{fig:oprindeligekredslob2}
 \end{figure}
 
 
 \subsubsection{No-Load}
-Der blev udført no-load test fra 100 Hz til 220 kHz og strømmen blev aflæst. Resultatet af de målte værdier kan ses i tabel \ref{table:frekvensernoload2}, efterfølgende blev der lavet en graf af resultaterne som kan ses i figur \ref{fig:testopstilling1fumlenoloadgraf}.
+Test af kredsløbet uden belastning, no-load, testes ved at AD sender 2V AC signal ind til strømgeneratoren igennem en instrumentationsforstærker, der har en gain på 2. Strømgeneratoren bliver hermed forsynet med 4V. De 4V forårsager at strømgeneratoren producerer strøm. Denne strøm  måles og noteres, hver gang frekvensen ændres. Resultaterne kan ses i tabel \ref{table:frekvensernoload2} og figur \ref{fig:testopstilling1fumlenoloadgraf}.
+
+
+  
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=8cm]
 {Figure/oprindeligekredslobfumle1}}
-\caption{Billede af testopstilling på fumlebræt ved 100 Hz og en konstant strøm på 49 uA.}
+\caption{Illustration af det samlede system, der er under test. Her vises eksitationsspændingen, AD, multimeteret og kredsløbet, der under test}
 \label{fig:oprindeligekredslobfumle1}
 \end{figure}
 
@@ -452,7 +459,7 @@ Der blev udført no-load test fra 100 Hz til 220 kHz og strømmen blev aflæst. 
     900 & 29,3 & 10000 & 26,9 & 110000 & 22,3 &  210000 & 0,2   \\ \hline
     1000 & 29,1 & 20000 & 25,9 & 120000 & 23,2 &  220000 & 0,1  \\ \hline
 \end{tabular}
-    \caption{Målt strøm over elektroderne ved bestemte frekvenser.}
+    \caption{Målt strømme når frekvensen varieres og kredsløbet er uden belastning}
     \label{table:frekvensernoload2}
 \end{table} 
 
@@ -462,13 +469,18 @@ Der blev udført no-load test fra 100 Hz til 220 kHz og strømmen blev aflæst. 
 \centering
 {\includegraphics[width=10cm]
 {Figure/testopstilling1fumlenoloadgraf}}
-\caption{Grafen viser målt RMS.}
+\caption{Målt strømme når frekvensen varieres og kredsløbet er uden belastning}
 \label{fig:testopstilling1fumlenoloadgraf}
 \end{figure}
 
 
+
+\pagebreak
+
 \subsubsection{RMS spænding}
-Ved at tilføre vævsmodellen som i figur \ref{fig:testopstilling1fumlevaevs} kunne spændingerne måles.
+
+Denne del af testen består i at man belaster kredsløbet med en vævsmodel, se figur \ref{fig:testopstilling1fumlevaevs}. Under testen måles og noteres spændingsændringerne, der opstår når frekvensen varieres. Ved at dividere den målte spænding med den kendte strøm fra strømgeneratoren, kan man bestemme impedansen over vævsmodellen. De noterede målinger under denne test kan ses i tabel \ref{table:fumlebraetfrekvenservrms} og figur \ref{fig:testopstilling1fumlevrmsgraf}
+
 
 
 \begin{figure}[H]
@@ -510,21 +522,36 @@ Frekvensen blev varieret fra 100 Hz til 100 kHz og RMS spændningerne blev aflæ
 \label{fig:testopstilling1fumlevrmsgraf}
 \end{figure}
 
-\section{Detektion af synk}
 
-Detektionen af synk vil foregå med fumlebrættet. Først med en variable modstand efterfølgende med elektroder påsat som load. Ved den variable load modstand kan det ses i figur \ref{fig:10kohmdummysynk}, at et synk kan vises ved at dalene i signalet er når modstanden bliver mindre og går så op igen når modstanden øges. Dette er en meget forsimplet test og der er ikke taget højde for sampling, filtering m.m. Strømmen var stabil imellem 23 uA og 20 uA.
+Begge målinger, når strømgeneratoren er med og uden belastning, stemmer overens med artiklens resultater. Dette giver indikation af at den implementerede strømgenerator kan producere konstant strøm, der er ufarlig. Med overstående resultater er det nu forsvarligt  at belaste kredsløbet med et menneske væv i stedet for en vævsmodel.   
+
+\section{Detektion af synk}
+Inden kredsløbet belastes med et levende væv for at undersøge om man kan detektere et synk, er det valgt at imitere, hvad der forventedes at være en lignende belastning vha. en variabel modstand. Dette er en meget forsimplet test, da et menneske væv ikke kun har en modstands egenskab. Resultatet af denne efterligning kan ses på figur \ref{fig:10kohmdummysynk}.    
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/10kohmdummysynk}}
-\caption{Simuleret et synk på fumlebræt ved at montere en variable 10 kohm som load modstand. Dette er ved 50 kHz og med en amplitude på 2 V fra Analog Discovery.}
+\caption{Efterligning af et synk vha. variabel modstand på $ 10k\Omega$}
 \label{fig:10kohmdummysynk}
 \end{figure}
 
+Figuren viser at kredsløbet er i stand til at detektere en lille ændring i spændingen, når variabel modstanden justeres. Denne spændingsændring betyder at impedansen også ændres, da spændingen og impedansen er proportionale.
 
-Det målte signal i figur \ref{fig:synk1} viser en måling med elektroder og hvor der er foretaget synk. Det der blev kigget efter i målingen var om der kom et spændingsfald når der blev foretaget et synk. Det var ikke muligt at se nogen ændring i spændingsfaldet ved at se om signalet blev fladere. 
 
+Det kan nu konstateres at kredsløbet kan levere en konstant strøm, og kan detektere en spændingsændring, når det belastes med en variabel modstand. Herfra kan kredsløbet forbindes til et rask objekt for at detektere et synk. Dette realiseres ved at forbinde kredsløbet med et måleobjekt vha. elektroder, se hvordan elektroderne er placeret på figur \ref{fig:martin}. Disse elektroder transporterer strøm til måleobjektet og måler spændingsfaldet over vævet, når måleobjektet fremprovokerer et synk. Måleobjektet indtager væske i munden og synker den efterfølgende. Resultatet af denne måling er vist på \ref{fig:synk1}.    
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=5cm]
+{Figure/MartinElektroder}}
+\caption{Elektrode placering på måleobjektet }
+\label{fig:martin}
+\end{figure}
+
+
+
+   
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
