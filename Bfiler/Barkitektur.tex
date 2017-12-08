@@ -198,15 +198,15 @@ USB& Kommunikation med Analog Discovery &  & PC, C1& Analog Discovery, A1 &     
 \chapter{Software} \label{swafsnit}
 \section{Blok definition diagram}
 
-Dette afsnit omhandler arkitekturen af   softwaren, som anvendes til analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i afsnittet systembeskrivelse. På baggrund af disse usecases udformes et BDD, som indeholder en parent-blok og to child-blokke, der hver indeholder kode inddelt i scripts.
-I dette projekt anvendes  Matlab til at realisere projektets  software-del.  Funktionaliteter som ønskes implementeret i Matlab skrives som kode. Disse koder skrives hver i en selvstændig script-fil, som kaldes fra en GUI fil, når de skal bruges. Da det ønskes i dette projekt at implementere en Matlab GUI med kontroller skrives koden til disse kontroller i funktioner. Kontrollerne kan være en knap, tekstfelt eller tekstboks. I stedet for at koden ligger i én scriptfil tildeles hver kode sin egen scriptsession. Hver scriptsession udfører en bestemt opgave, samt kan interagere med andre scripts. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen ’Start measurments'. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i designbilaget.    
+Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i afsnittet systembeskrivelse. På baggrund af disse usecases udformes et BDD, som indeholder en parent-blok og tre child-blokke, der hver indeholder bestemte funktioner.
+I dette projekt anvendes  Matlab til at realisere projektets  software-del.  Funktionaliteter som ønskes implementeret i Matlab skrives som funktioner. Disse funktioner skrives hver i en selvstændig m.fil, som kaldes fra en GUI fil, når de skal bruges. Da det ønskes i dette projekt at implementere en Matlab GUI med kontroller skrives koden til disse kontroller i funktioner. Kontrollerne kan være en knap, tekstfelt eller tekstboks. I stedet for at funktionerne ligger i én m.fil tildeles hver funktion sin egen m.fil. Hver funktion udfører en bestemt opgave, samt kan interagere med andre funktioner. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen \textit{"Start Measurements"}. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i designbilaget.    
 
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/SWIBD}}
-\caption{Figuren viser block definition diagrammet for det ønsket software. Diagrammet indeholder en hovedblok, der består af to andre bl  okke, som hver indeholder Matlab funktioner. Disse funktioner tilsammen analyserer og viser to målinger simultant  }
+\caption{Figuren viser block definition diagrammet for det ønsket software. Diagrammet indeholder en hovedblok, der består af tre andre blokke, som hver indeholder Matlab funktioner. Disse funktioner tilsammen måler, analyserer og viser to målinger simultant.}
 \label{figScrip}
 \end{figure}
 

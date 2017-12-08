@@ -1,12 +1,18 @@
+function handles = Show_Measurements(handles)
 %period = 1/fgenCh.Frequency;
+% axes(handles.axes1)
+set(handles.Btn_Save_Measurments,'Visible','Off');
 subplot(2,1,1)
-plot(timestamps, data(:,1),'y');
+plot(handles.timestamps, handles.BIsignal,'k');
 title('Bioimpedance')
-xlabel('Time in seconds'); ylabel('Impedance in ohm');
+ylabel('Impedance (ohm)');
 
 subplot(2,1,2)
-plot(timestamps, data(:,2),'b');
-xlabel('Time in seconds'); ylabel('Impedance in ohm');
+plot(handles.timestamps, handles.data(:,2),'k');
 title('EMG')
-axis([0 s.DurationInSeconds -5 15])
-legend('BI','EMG')
+xlabel('Time in seconds')
+ylabel('Voltage (V)');
+
+
+%axis([0 s.DurationInSeconds -5 15])
+end

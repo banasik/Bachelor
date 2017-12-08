@@ -22,7 +22,7 @@ function varargout = Synkerefleksmonitor(varargin)
 
 % Edit the above text to modify the response to help Synkerefleksmonitor
 
-% Last Modified by GUIDE v2.5 07-Dec-2017 20:09:59
+% Last Modified by GUIDE v2.5 08-Dec-2017 11:52:08
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -53,8 +53,8 @@ function Synkerefleksmonitor_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to Synkerefleksmonitor (see VARARGIN)
 
 % Choose default command line output for Synkerefleksmonitor
-handles.output = hObject;
-StartGUI;
+%handles.output = hObject;
+handles = Start_GUI(handles);
 % Update handles structure
 guidata(hObject, handles);
 
@@ -70,7 +70,7 @@ function varargout = Synkerefleksmonitor_OutputFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
-varargout{1} = handles.output;
+%varargout{1} = handles.output;
 
 
 % --- Executes on button press in Btn_Start_Measurments.
@@ -78,12 +78,15 @@ function Btn_Start_Measurments_Callback(hObject, eventdata, handles)
 % hObject    handle to Btn_Start_Measurments (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-axes(handles.axes1)
+
 handles = Generate_SineWave(handles);
-guidata(hObject,handles);
+
 handles = Read_Measurments(handles);
+handles = Process_Measurments(handles);
 guidata(hObject,handles);
-handles = Show_measurements(handles);
+handles = Show_Measurements(handles);
+set(handles.Btn_Save_Measurments,'Visible','On');
+guidata(hObject,handles);
 %Save_Measurments;
 
 
@@ -109,3 +112,12 @@ function edit1_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in Btn_Save_Measurments.
+function Btn_Save_Measurments_Callback(hObject, eventdata, handles)
+% hObject    handle to Btn_Save_Measurments (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles = Save_Measurements(handles);
+guidata(hObject,handles);
