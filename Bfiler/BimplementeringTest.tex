@@ -137,27 +137,46 @@ I det følgende gennemgås de kritiske funktioner for programmet.
 
 \subsection{Funktioner}
 \subsubsection{Synkerefleksmonitor\_OpeningFcn}
+\lstinputlisting[frame=single, firstline=48, lastline=59]{matlabkode/Synkerefleksmonitor.m}
+
+
+
+
+\subsubsection{Btn\_Start\_Measurment}
+\lstinputlisting[frame=single, firstline=107, lastline=117]{matlabkode/Synkerefleksmonitor.m}
+
 
 \subsubsection{Btn\_Start\_Measurment}
+\lstinputlisting[frame=single, firstline=98, lastline=103]{matlabkode/Synkerefleksmonitor.m}
 
-\subsection{Scripts}
 
-\subsubsection{Start\_GUI } 
-\lstinputlisting{matlabkode/StartGUI.m}
-\subsubsection{Generate\_SineWave } 
-Dette script håndterer generering af 2V AC signal ud af Analog Discovery.
-\lstinputlisting{matlabkode/Generate_SineWave.m}
+\subsubsection{Start\_GUI} 
+\lstinputlisting[frame=single]{matlabkode/Start_GUI.m}
 
 
 
-\subsubsection{Read\_Measurments}
-\lstinputlisting{matlabkode/Read_Measurments.m}
+\subsubsection{Generate\_SineWave} 
 
-\subsubsection{Process\_Measurments } 
+\lstinputlisting[frame=single]{matlabkode/Generate_SineWave.m}
+
+
+
+\subsubsection{Read\_Measurements}
+\lstinputlisting[frame=single]{matlabkode/Read_Measurements.m}
+
+\subsubsection{Process\_Measurements} 
+\lstinputlisting[frame=single]{matlabkode/Process_Measurements.m}
+
+
+
 
 \subsubsection{Show\_Measurements} 
-\lstinputlisting{matlabkode/Show_measurements.m}
+\lstinputlisting[frame=single]{matlabkode/Show_Measurements.m}
+
 \subsubsection{Save\_Measurments} 
+\lstinputlisting[frame=single]{matlabkode/Save_Measurements.m}
+
+
 
 \chapter{Modultest}
 Modultest af hardware-delen består af en simuleret test vha. Multisim og en praktisk test. Nogle komponenterne eksister ikke i Multisim og kræver at blive oprettet, men det er valgt at ikke bruge tid på det, da det er tidskrævende. Derfor præsenteres kun praktiske resultater for disse komponenter. I det følgende præsenteres testresultaterne for instrumentationsforstærker 1, 2 , strømgeneratoren, operationsforstærkeren og AA filteret. 
@@ -305,7 +324,61 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 
 \section{Software}
-TEST SD'ets funktioner
+
+\subsection{Funktioner}
+\subsubsection{Synkerefleksmonitor\_OpeningFcn}
+
+
+
+
+
+\subsubsection{Btn\_Start\_Measurment}
+
+
+
+\subsubsection{Btn\_Start\_Measurment}
+
+
+
+\subsubsection{Start\_GUI} 
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/modultestGUI}}
+\caption{Resultat om koden i "Start\_GUI"}
+\label{fig:aafiltermodultest}
+\end{figure}
+
+
+\subsubsection{Generate\_SineWave} 
+
+
+
+
+
+\subsubsection{Read\_Measurements}
+
+
+\subsubsection{Process\_Measurements} 
+
+
+
+
+
+\subsubsection{Show\_Measurements} 
+
+
+\subsubsection{Save\_Measurments} 
+
+
+
+
+
+
+
+
+
 \chapter{Integrationstest}
 
 

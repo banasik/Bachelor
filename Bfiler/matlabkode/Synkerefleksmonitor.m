@@ -53,7 +53,6 @@ function Synkerefleksmonitor_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to Synkerefleksmonitor (see VARARGIN)
 
 % Choose default command line output for Synkerefleksmonitor
-%handles.output = hObject;
 handles = Start_GUI(handles);
 % Update handles structure
 guidata(hObject, handles);

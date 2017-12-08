@@ -1,18 +1,12 @@
 function handles = Start_GUI(handles)
-%handles.output = hObject;
+%% Denne funktion har til opgave at saette tilfoeje objekter til GUI op naar programmet startes. 
+set(handles.txtDate, 'String', (datestr(datestr(now)))); %Dato og tid vises
 
-set(handles.txtDate, 'String', (datestr(datestr(now))));
-
-axes(handles.axes3)
+axes(handles.axes3) %Visning af billede i GUI
 myImage = imread('SynkBillede.PNG');
 image(myImage);
 axis off
 axis image
 
-set(handles.Btn_Save_Measurements,'Visible','Off');
-
-% handles.myImage = axes3;
-% imshow(myImage);
-% Update handles structure
-%guidata(hObject, handles);
+set(handles.Btn_Save_Measurements,'Visible','Off'); %Save Measurements knappen er ikke synlig
 end

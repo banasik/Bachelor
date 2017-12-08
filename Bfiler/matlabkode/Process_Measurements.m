@@ -1,20 +1,19 @@
-function handles = Process_Measurments(handles)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function handles = Process_Measurements(handles)
+% Digital envelope af BI signalet.
+RawBI = handles.data(:,1); % Det raa BI signal tages ud af data
 
-RawBI = handles.data(:,1);
-
-% Dobbeltensret signal
+% Dobbeltensret BI signal
 BIabs = abs(RawBI);
 
-% Udglat signal
-lpFilt = designfilt('lowpassfir', 'PassbandFrequency', 2E-3, ...
-                    'StopbandFrequency', 2E-2, 'PassbandRipple', 0.2, ...
+% Udglattr BI signal med lavpas filter.
+% Knaekfrekvens = 500 Hz
+% Daemper en dekade frem til 5000 Hz
+lpFilt = designfilt('lowpassfir', 'PassbandFrequency', 0.001, ...
+                    'StopbandFrequency', 0.01, 'PassbandRipple', 0.2, ...
                     'StopbandAttenuation', 40, 'DesignMethod', ...
                     'kaiserwin');
 
-BIsignal = filter(lpFilt,BIabs);
-handles.BIsignal = BIsignal;
-
+BIsignal = filter(lpFilt,BIabs); %BI signalet filteret
+handles.BIsignal = BIsignal; %BI signalet gemmes i handles til senere visning
 end
 
