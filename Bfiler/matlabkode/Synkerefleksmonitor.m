@@ -74,7 +74,7 @@ function varargout = Synkerefleksmonitor_OutputFcn(hObject, eventdata, handles)
 
 
 % --- Executes on button press in Btn_Start_Measurments.
-function Btn_Start_Measurments_Callback(hObject, eventdata, handles)
+function Btn_Start_Measurements_Callback(hObject, eventdata, handles)
 % hObject    handle to Btn_Start_Measurments (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
