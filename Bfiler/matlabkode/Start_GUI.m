@@ -9,7 +9,7 @@ image(myImage);
 axis off
 axis image
 
-set(handles.Btn_Save_Measurments,'Visible','Off');
+set(handles.Btn_Save_Measurements,'Visible','Off');
 
 % handles.myImage = axes3;
 % imshow(myImage);

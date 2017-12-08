@@ -428,21 +428,22 @@ C2             &           2.2nF         \\ \hline
 	
 	
 \chapter{Software}
-Her følger en beskrivelse af koden udviklet til Synkerefleksmonitor som består af følgende blokke. De to funktioner generere Matlab og funktionerne bliver brugt til at køre bestemte selv udviklede scripts.
+Her følger en beskrivelse af koden udviklet til Synkerefleksmonitor som består af følgende blokke. De tre funktioner generere Matlab og funktionerne bliver brugt til at køre bestemte selv udviklede funktioner i m.filer.
 
-
+\subsection{Funktioner}
 \begin{table}[H]
 
 \begin{tabularx}{\textwidth}{l l X}
      Navn	&	Type		&	Beskrivelse \\ \midrule
-     Synkerefleksmonitor\_OpeningFcn   	& 	Funktion  	& 	Denne funktion har til opgave at køre koden automatisk som den indeholder , når programmet startes. Scriptet der ligger i denne funktion er "Start\_GUI".  \\ 			  \addlinespace[2mm]
-     Btn\_Start\_Measurments	&	Funktion	&	Denne funktion bliver kørt, når der trykkes på knappen "Start Measurments". De scripts der ligger i denne funktion er, "Generate\_SineWave", "Read\_Measurments", "Process\_Measurments", "Save\_Measurments" og "Show\_Measurments". \\   \addlinespace[2mm]
-     Start\_GUI	&	Script	&	Dette script indeholder kode som automatisk bliver kørt når GUI'en åbnes. Koden indeholder indlæsning og visning af billede, samt dato og tid. \\   \addlinespace[2mm]
-     Generate\_SineWave	&	Script	&	Scriptet opretter forbindelse til Analog Discovery, tilføjer funktionsgeneratoren og dens indstillinger, amplitude 2 V og frekvens 20 kHz.\\   \addlinespace[2mm]
-     Read\_Measurments	&	Script	&	I dette script tilføjes de to analog input som bruges til måling af BI og EMG. Yderligere sættes samplingfrekvensen til 500 kHz og at en måling skal vare 10 sekunder.\\   \addlinespace[2mm]
-     Process\_Measurments	&	Script	&	Her bliver der foretaget envelope af BI målingen. Dette sker ved at ensrette BI-signalet og lavpasfiltrere det ved 500 Hz.   \\   \addlinespace[2mm]
-     Save\_Measurments	&	Script	&	Målingerne BI og EMG, gemmes som CSV-filer til senere brug.\\   \addlinespace[2mm]
-     Show\_Measurments	&	Script	&	Til slut vises det udglattet BI og EMG. Her opsættes akserne, labels og title.\\   \addlinespace[2mm]
+     Synkerefleksmonitor\_OpeningFcn   	& 	Funktion  	& 	Denne funktion er automatisk oprettet af Matlab og køre så snart programmet startes. Den indeholder funktionen "Start\_GUI".  \\ 			  \addlinespace[2mm]
+     Btn\_Start\_Measurements	&	Funktion	&	Denne funktion bliver kørt, når der trykkes på knappen "Start Measurements". De funktioner som efterfølgende bliver kørt er: "Generate\_SineWave", "Read\_Measurments", "Process\_Measurments" og "Show\_Measurments". \\   \addlinespace[2mm]
+     Btn\_Save\_Measurements	&	Funktion	&	Denne funktion bliver kørt, når der trykkes på knappen "Save Measurements". Den indeholder funktionen Save\_Measurements.\\   \addlinespace[2mm]
+     Start\_GUI	&	Funktion	&	Denne funktion indeholder kode som automatisk bliver kørt når GUI'en åbnes. Koden indeholder bl.a. indlæsning og visning af billede, samt dato og tid. \\   \addlinespace[2mm]
+     Generate\_SineWave	&	Funktion	&	Funktionen opretter forbindelse til Analog Discovery, tilføjer funktionsgeneratoren samt dens indstillinger, amplitude 2 V og frekvens 20 kHz.\\   \addlinespace[2mm]
+     Read\_Measurements	&	Funktion	&	Funktionen tilføjder de to analog input som bruges til måling af BI og EMG. Yderligere sættes samplingfrekvensen til 500 kHz og at en måling skal vare 10 sekunder.\\   \addlinespace[2mm]
+     Process\_Measurements	&	Funktion	&	Her bliver der foretaget envelope af BI målingen. Dette sker ved at ensrette BI-signalet og lavpasfiltrere det ved 500 Hz.   \\   \addlinespace[2mm]
+     Save\_Measurements	&	Funktion	&	Målingerne BI og EMG, gemmes som en samlet CSV-fil.\\   \addlinespace[2mm]
+     Show\_Measurements	&	Funktion	&	Til slut vises det udglattet BI og EMG. Der opsættes akser, labels og title på grafen.\\   \addlinespace[2mm]
    
      \bottomrule                                                                                                                   
     \end{tabularx}
@@ -459,7 +460,7 @@ Her følger en beskrivelse af koden udviklet til Synkerefleksmonitor som består
 
 \subsection{Sekvens Diagram}
 
-Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugerne kan herfra vælge at igangsætte en måling ved at trykke knappen $'Btn-Start-Measurments'$. Denne knap kører efterfølgende en række scripts, der tilsammen måler, gemmer og viser en bioimpedans og EMG måling simultant. Hver af disse scripts eksisterer i sin egen m.fil. Denne opdeling muliggør at man nemt kan udvide programmet uden at have kendskab til alle disse scripts.    
+Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugeren kan herfra vælge at igangsætte en måling ved at trykke knappen \textit{"Btn\_Start\_Measurements"}. Denne knap kører efterfølgende en række funktioner, der tilsammen måler og viser en bioimpedans og EMG måling simultant. Herefter er det muligt at gemme den foretaget måling ved knappen \textit{"Btn\_Save\_Measurements"} i en csv fil. De selvudviklede funktioner eksisterer i sin egen m-fil. Denne opdeling muliggør at man nemt kan udvide programmet uden at have kendskab til alle disse funktioner.    
 
 \begin{figure}[H]
 \centering
@@ -468,6 +469,63 @@ Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet
 \caption{Figuren viser sekvensen af programmets kode}
 \label{Fig:SekevensDiagram}
 \end{figure} 
+
+
+
+\subsection{GUI}
+
+Synkerefleksmonitor består af en Graphical User Interfaces (GUI), hvor GUI'en interagere med sundhedspersonalet. Når programmet startes op vil man få vist følgende vindue, se figur \ref{Fig:designGUI}. Denne GUI består af forskellige objekter. I GUI'en er det muligt at se dags dato og klokken for målingen. Sundhedspersonalet har mulighed for at trykke på to knapper. Den ene knap \textit{"Btn\_Start\_Measurements"}, bruges når der ønskes en måling. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/designGUI}}
+\caption{Figuren viser designet af GUI til Synkerefleksmonitor.}
+\label{Fig:designGUI}
+\end{figure} 
+
+
+Når målingen er påbegyndt, vil der komme en massages boks frem som i figur \ref{Fig:designmessageboks1}.
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=6cm]
+{Figure/designmessageboks1}}
+\caption{Massages boksen der kommer frem under målingerne.}
+\label{Fig:designmessageboks1}
+\end{figure} 
+
+ Denne vil være fremme under hele målingen og informere om at en måling er i gang. Efter endt måling forsvinder massages boksen igen og målingen vises i to grafer, BI og EMG graf. Det er nu muligt at trykke på den anden knap \textit{"Btn\_Save\_Measurements"} for at gemme målingerne. Da målingen fylder meget vil gemme funktionen tage lidt tid. Derfor kommer massages boksen \ref{Fig:designmessageboks2} frem mens denne proces er i gang.
+ 
+ \begin{figure}[H]
+\centering
+{\includegraphics[width=6cm]
+{Figure/designmessageboks2}}
+\caption{Massages boksen der informere om at målingerne er ved at blive gemt.}
+\label{Fig:designmessageboks2}
+\end{figure} 
+ 
+ 
+ 
+  Når målingen er færdig kommer den sidste massages boks frem, figur \ref{Fig:designmessageboks3} for at informere om at målingerne nu er gemt i csv-fil.
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=4cm]
+{Figure/designmessageboks3}}
+\caption{Massages boksen der bekræfter at målingerne er gemt.}
+\label{Fig:designmessageboks3}
+\end{figure} 
+
+
+
+
+
+
+
+
+
+
 
 
 

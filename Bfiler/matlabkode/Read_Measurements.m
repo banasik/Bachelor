@@ -1,4 +1,4 @@
-function handles = Read_Measurments(handles)
+function handles = Read_Measurements(handles)
 s = handles.GS;
 aiBI = addAnalogInputChannel(s, 'AD1', 1, 'Voltage');
 aiEMG = addAnalogInputChannel(s, 'AD1', 2, 'Voltage');

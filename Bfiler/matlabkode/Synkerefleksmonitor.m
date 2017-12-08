@@ -22,7 +22,7 @@ function varargout = Synkerefleksmonitor(varargin)
 
 % Edit the above text to modify the response to help Synkerefleksmonitor
 
-% Last Modified by GUIDE v2.5 08-Dec-2017 11:52:08
+% Last Modified by GUIDE v2.5 08-Dec-2017 15:06:15
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -72,25 +72,6 @@ function varargout = Synkerefleksmonitor_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 %varargout{1} = handles.output;
 
-
-% --- Executes on button press in Btn_Start_Measurments.
-function Btn_Start_Measurements_Callback(hObject, eventdata, handles)
-% hObject    handle to Btn_Start_Measurments (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-handles = Generate_SineWave(handles);
-handles = Read_Measurments(handles);
-handles = Process_Measurments(handles);
-guidata(hObject,handles);
-handles = Show_Measurements(handles);
-set(handles.Btn_Save_Measurments,'Visible','On');
-guidata(hObject,handles);
-%Save_Measurments;
-
-
-
-
 function edit1_Callback(hObject, eventdata, handles)
 % hObject    handle to edit1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -113,10 +94,25 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in Btn_Save_Measurments.
-function Btn_Save_Measurments_Callback(hObject, eventdata, handles)
-% hObject    handle to Btn_Save_Measurments (see GCBO)
+
+% --- Executes on button press in Btn_Save_Measurements.
+function Btn_Save_Measurements_Callback(hObject, eventdata, handles)
+% hObject    handle to Btn_Save_Measurements (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles = Save_Measurements(handles);
+guidata(hObject,handles);
+
+
+% --- Executes on button press in Btn_Start_Measurements.
+function Btn_Start_Measurements_Callback(hObject, eventdata, handles)
+% hObject    handle to Btn_Start_Measurements (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles = Generate_SineWave(handles);
+handles = Read_Measurements(handles);
+handles = Process_Measurements(handles);
+guidata(hObject,handles);
+handles = Show_Measurements(handles);
+set(handles.Btn_Save_Measurements,'Visible','On');
 guidata(hObject,handles);
