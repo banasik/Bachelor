@@ -27,39 +27,31 @@
 
 
 \chapter{Indledning}
-På baggrund af krav fra Hammel Neurocenter, er denne
-kravspecifikation blevet udarbejdet. Kravspecifikationen har til formål at specificere
-kravene til synkerefleksmonitor. Dette bacelor projekt tager udgangspunkt i en BI- og EMG-måler. Disse krav er blevet prioteret i MoSCoW analyse, hvor fra det er "must" krav som i første gang vil blive realiseret. 
+På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, hvor udfordringer med nuværende behandling af dysfagi blev diskuteret, er der udarbejdet en kravspecifikation til synkerefleksmonitor(SRM). Kravet til dette system er udspecificeret af projektgruppens medlemmer uden at der er indgået en kontrakt med Hammel Neurocenter som kunde. Med andre ord er projektgruppens medlemmer ikke forpligtet til at levere et produkt til nogen. \\
 
-Kravspecifikationen består af en systembeskrivelse, som beskriver det samlet system og elementer. Dernæst en beskrivelse af projektets funktionelle krav. Beskrivelse af
-aktører, samt hvordan de intergerer. Derudover også beskrivelse af de relevante use-cases
-samt systemets undtagelser. Desuden er systemets ikke-funktionelle krav også beskrevet,
-dette gennem systembeskrivelsesmetoden "(F)URPS+".
 
-Til denne kravspecifikation er der lavet en accepttest, som primært har til formål at teste
-de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten beskrives efterfølgende
-kronologisk fra use case 1 til ikke-funktionelle krav, for at i sidste ende at kunne
-dokumentere synkerefleksmonitors funktionalitet. Accepttesten kan ses i bilag 9 - Accepttestspecifikation.
-
+Kravspecifikationen har til formål at specificere
+kravene til SRM. SRM'en består af en bioimpedans måler(BI) og en EMG måler. Kravene til SRM'en er blevet prioriteret i MoSCoW analyse, hvor "must kravet" prioriteres højst. Kravspecifikationen  der indeholder, en beskrivelse af projektets funktionelle krav, en aktør-kontekstdiagram, systemets use-cases og ikke-funktionelle krav. Til  kravspecifikationen er der lavet en accepttest, som primært har til formål at teste
+de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten kan ses i "bilag 9 - Accepttestspecifikation".
 
 
 \chapter{Kravspecifikation}
-\section{Versionshistorik}
-\begin{table}[H]
+%\section{Versionshistorik}
+%\begin{table}[H]
+%
+%\begin{longtabu} to \linewidth{@{}l l l X[l]@{}}
+%    Version 	&    Dato 		&    Ansvarlig 	&    Beskrivelse\\[-1ex]
+%    \midrule
+%    0.1 		&  	26-09-2017 	&   MBA 	&   Oprettelse og udfyldning af UC1 og Use case diagram \\
+%	0.2			&	27-09-2017	&	MBA \& MHM	&	Udfyldning af UC2 - UC4 og aktør kontekstdiagram tilføjet\\
+%    	0.3			&	28-09-2017	&	MBA \& MHM	&	(F)URPS+ er tilføjet\\
+%    
+%\label{version_Systemark}
+%\end{longtabu}
+% \caption {Versionshistorik}
+%    \label{tab:Versionshistorik}
+%\end{table}
 
-\begin{longtabu} to \linewidth{@{}l l l X[l]@{}}
-    Version 	&    Dato 		&    Ansvarlig 	&    Beskrivelse\\[-1ex]
-    \midrule
-    0.1 		&  	26-09-2017 	&   MBA 	&   Oprettelse og udfyldning af UC1 og Use case diagram \\
-	0.2			&	27-09-2017	&	MBA \& MHM	&	Udfyldning af UC2 - UC4 og aktør kontekstdiagram tilføjet\\
-    	0.3			&	28-09-2017	&	MBA \& MHM	&	(F)URPS+ er tilføjet\\
-    
-\label{version_Systemark}
-\end{longtabu}
- \caption {Versionshistorik}
-    \label{tab:Versionshistorik}
-\end{table}
-\newpage
 
 
 
@@ -106,14 +98,15 @@ Sundhedspersonalet foretager en BI- og EMG-måling ved at tilkoble elektroder fr
 \section{Funktionelle krav}
 \subsection{Use Case diagram}
 
+\subsubsection{Version 1.0} 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=\textwidth]
+{\includegraphics[width=10cm]
 {Figure/usecasediagram}}
 \caption{Use Case diagram}
 \label{Use Case diagram}
 \end{figure}
-
+\subsubsection{Version 1.1} 
 Diagrammet i figur \ref{Use case diagram} viser systemets fire Use Cases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. Herunder følger en nærmere
 beskrivelse af de enkelte Use Cases, gennem et fully-dressed Use Case skema.
 
@@ -126,6 +119,8 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 
 
 \subsection{Use Cases - fully dressed}
+
+\subsubsection{Version 1.0}
 
 \begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC1%
 	{\large \textbf{Use Case 1}} && \\
@@ -213,7 +208,14 @@ Undtagelser 			& 2.a. & Hovedscenarie 1 i Use Case 3 gentages\\  \\ \bottomrule
 \end{longtabu}
 
 
+\subsubsection{Version 1.1}
+
 \section{Ikke-funktionelle krav}
+
+
+
+
+
 
 nielsen \cite{NielsenUsabilityUsability}
 
