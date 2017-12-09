@@ -3,7 +3,8 @@ function handles = Show_Measurements(handles)
 
 axes(handles.axes1); % Vises i axes1 
 subplot(2,1,1)
-plot(handles.timestamps, handles.BIsignal,'k'); % Det behandlet BI signal
+plot(handles.timestamps, handles.data(:,1),'k'); % Det behandlet BI signal
+%plot(handles.timestamps, handles.BIsignal,'k'); % Det behandlet BI signal
 title('Bioimpedance')
 ylabel('Impedance (ohm)');
 

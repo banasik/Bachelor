@@ -3,8 +3,8 @@ function handles = Read_Measurements(handles)
 s = handles.GS; %Analog Discovery instillinger fra "Generate_SineWave" funktionen
 aiBI = addAnalogInputChannel(s, 'AD1', 1, 'Voltage'); %Oprettelse af analog ind 1 og 2
 aiEMG = addAnalogInputChannel(s, 'AD1', 2, 'Voltage');
-s.Rate = 30000; % Samplingrate
-s.DurationInSeconds = 3; % Tid pr. maaling 
+s.Rate = 500000; % Samplingrate
+s.DurationInSeconds = 2; % Tid pr. maaling 
 
 % Visning af message boksen "Measurements running..."
 h = figure('units','pixels','position',[300 300 300 80],'windowstyle','modal');
