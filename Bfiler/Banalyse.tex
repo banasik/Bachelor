@@ -197,7 +197,7 @@ beregnes vha. formlen \cite{Aroom2009}: $$I_{tissue}=2*\frac{V_{in}}{R_{5}}$$
 
 \subsection{A/D-konverter}
 
-Analog Discovery bruges, udover at fungere som funktionsgenerator, også som dataopsamlingsenhed. AD er valgt, fordi den kan sample to signaler simultant, samtidig med den generer et signal. Ved sampling af ét signal tillader AD at man sætter samplingsfrekvensen op til 1MHz, men når to signaler samples simultant, skal samplingsfrekvensen reduceres til 500kHz. 
+Analog Discovery bruges, udover at fungere som funktionsgenerator, også som dataopsamlingsenhed. AD er valgt, fordi den kan sample to signaler simultant, samtidig med den generer et signal. Dette er nødvendigt, da BI-måleren senere i integrationstesten kombineres med en EMG-måler.  Ved sampling af ét signal tillader AD at man sætter samplingsfrekvensen op til 1MHz, men når to signaler samples simultant, skal samplingsfrekvensen reduceres til 500kHz. 
 Der er også eksperimenteret med en anden dataopsamlingsenhed kaldet NI USB-6259 BNC \cite{NI}. Denne enhed tillader en  samplingsfrekvens op til 1,3MHz ved sampling af ét signal. Samples der derimod to signaler samtidig, skal samplingsfrekvensen ligesom AD nedsættes  til 500kHz. Begge enheder kan det samme, når det gælder sampling af to signaler simultant, men AD har den ekstra fordel, at den også kan fungere som funktionsgenerator. Derfor vælges AD fremfor NI USB-6259 BNC som dataopsamlingsenhed.     
 
 
@@ -491,7 +491,6 @@ Denne del af testen består i at man belaster kredsløbet med en vævsmodel, se 
 \label{fig:testopstilling1fumlevaevs}
 \end{figure}
 
-Frekvensen blev varieret fra 100 Hz til 100 kHz og RMS spændningerne blev aflæst og resultatet kan ses i tabel \ref{table:fumlebraetfrekvenservrms}. På baggrund af målingerne blev kunne disse blive tegnet i en graf som kan ses i figur \ref{fig:testopstilling1fumlevrmsgraf} til sammenligningsgrundlag med de tidligere VRMS grafer.
 
 \begin{table}[H]
 \centering
@@ -561,65 +560,37 @@ Det kan nu konstateres at kredsløbet kan levere en konstant strøm, og kan dete
 \end{figure}
 
 
+Det håbede resultat af denne test var at se spændingsændringer, når måleobjektet fremprovokerer et synk. Dette blev ikke tilfældet. At systemet ikke er i stand til at detektere et synk, kan skyldes følgende forklaringer:
+
+\begin{itemize}
+\item at dette kredsløb er designede til et andet formål end at detektere et synk
+\item at de målte spændinger er så svage at forstærkning af dem nødvendige
+\item at de målte spændinger er overlejret med støj 
+
+\end{itemize} 
+
+Som konsekvens af det manglende synk besluttede projektgruppens medlemmer at designe et alternativ system, der kan detektere et synk. Design af dette system kan læses i det følgende. 
 
 
 
-
-
-
-%\chapter{EMG-måler}
-%
-%Udover BI-måleren vil der blive brugt en kommercielt EMG-måler som i figur \ref{fig:emgdata}, MyoWare Muscle Sensor til at detektere synk. Da BI-måleren ikke kan stå alene om at detektere et synk er det muligt at tilføje en EMG-måler der måler muskelaktiviteten ved svælget. 
-%
-%\begin{figure}[H]
-%\centering
-%{\includegraphics[width=10cm]
-%{Figure/emgdata}}
-%\caption{Overblik over EMG-måleren fra databladet.}
-%\label{fig:emgdata}
-%\end{figure}
-%
-%Den vil få sine egne elektroder og der er brug for tre styk. Samplingen vil ske ved hjælp af Analog Discovery. Den vil blive forsynet med egen spændingskilde på 4,5 V. Der vil i første omgang blive brugt udgangen "EMG Envelope" da det ikke vil kræve yderligere filtrering eller databehandling.
  
 
 
 
 \chapter{Konklusion}
 
-Ved først at simulere og bagefter bygge kredsløbet i artiklen har været meget lærerigt. Det gav en ide om hvad en BI-måler skal kunne og indeholde. Dette vil være udgangspunktet for udviklingen af Synkerefleksmonitor.  
-
-Test resultaterne af no-load og Vrms ligner meget lig de resultater fra artiklen. Det har ikke været muligt at bruge præcis samme udstyr, men kredsløbet er identisk hvilket må være acceptabelt.
-
-For at udvikle Synkerefleksmonitor der kritiske ting som skal tilføjes og ændres fra det oprindelige kredsløb:
-\begin{itemize}
-\item Større strøm
-\item 4 elektroder
-\item Filtrering
-\item A/D konvertering
-\end{itemize}
-
-Strømmen der bliver ført over i måleobjektet skal være større, da det er kendt at den ligger ved 500 uA\cite{Kusuhara2004} når der skal måles over svælget og ikke på skalpen som er tilfældet i artiklen. Dette vil kræve en udvikling af en ny VCCS med udgangspunkt i basis howland som fra artiklen, hvilket vil kræve en ny operationsforsærker som skal erstatte LF412, da den er  
-
-Når der måles BI bliver dette typisk gjort ved hjælp af fire elektroder\cite{Brantlov2017}. To til at overføre strømmen og to til at måle spændingsfaldet med. To elektroder vil også kunne skabe impedans inteferanse i elektroderne hvilket kan resulterer i fejlmålinger. Dette kræver en opdeling af et strømkredsløb med howland og et som måler spændningen fra måleobjektet.
-
-I artiklen bliver der ikke omtalt filterring af det samplet signal. Dette vil blive et must da for at undgå antialisering\cite{Thomas2011} skal dette udvikles til systemet.
-
-
-En kritisk del af synkerefleksmonitor er dataopsamlingen. For at begrænse A/D konvertere til et minimum vælges Analog discovery til at både at fungere som funktionsgenerator og sample signalet. Det skaber dog en begrænsning i hvor hurtigt Analog Discovery da den nu skal sample to signaler (BI-måler og EMG-måler simultant), hvilket resulterer i at det er nødvendigt at reducere samplingsfrekvens. Udover at samplingsfrekvensen skal sættes ned, er det også nødvendigt at nedsætte de 50 kHz. Det vil sige at Analog Discovery kan maks. sample ved 500 kHz når der skal bruge to analog kanaler. Dette gør at for at få en korrekt databehandling og den videre udvikling af synkerefleksmonitor nedsættes funktionsgeneratoren til 20 kHz.
-
-Et overblik over de nye tiltag i forhold til artikel kredløbet kan ses i figur \ref{fig:konklusiondiagram}. 
-
-
+I dette bilag er der gennemgået indholdet af et kredsløb fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Formålet med denne gennemgang var at undersøge om kredsløbet er i stand til at detektere et synk hos raske objekter. Under gennemgangen er der i flere trin testet strømgeneratoren for at sikre at måleobjektet kun forsynes med en uskadelig strøm. Tilslut blev måleobjektet koblet sammen med systemet for at teste om kredsløbet kan anvendes til at detektere et synk. På baggrund af denne test kunne det konstateres at systemet ikke er i stand til at detekteret et synk og vi dermed er nødt til at designe et alternativ system som kan anvendes til det ønskede formål. Arkitekturen til det nye system kan ses på figur \ref{fig:konklusiondiagram}. Her ses de kritiske komponenter som det nye system skal bestå af.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/konklusiondiagram}}
-\caption{Øverst er det simple kredsløb fra artiklen. Nederst er det ønsket mere komplekse Synkerefleksmonitor.}
+\caption{Det nye system, som BI-måleren kommer til at bestå. De nederste blokke til sammen transporterer forsyning til måleobjektet, hvorimod de øverste blokke måler biosignal fra måleobjektet. }
 \label{fig:konklusiondiagram}
 \end{figure}
 
-
+Design og valg af disse komponenter henvises der til \textit{Bilag 6 - Design}. \\
+Det er også valgt at kombinere overstående BI-måler system med en EMG måler. Dette er valgt, da kombinationen af de to målesystemer giver et mere retvisende billede af, hvornår et synk optræder \cite{Schultheiss2014}    \citep{ChristensenElisabeth;LundbakStrand2017}. 
 
 
 %\chapter{Det modificeret kredsløb}
