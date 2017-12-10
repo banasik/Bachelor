@@ -27,12 +27,12 @@
 
 
 \chapter{Indledning}
-På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, hvor udfordringer med nuværende behandling af dysfagi blev diskuteret, er der udarbejdet en kravspecifikation til synkerefleksmonitor(SRM). Kravet til dette system er udspecificeret af projektgruppens medlemmer uden at der er indgået en kontrakt med Hammel Neurocenter som kunde. Med andre ord er projektgruppens medlemmer ikke forpligtet til at levere et produkt til nogen. \\
+På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, hvor udfordringer med nuværende behandling og udredning af dysfagipatienter blev diskuteret, er der udarbejdet en kravspecifikation til et system ved navnet synkerefleksmonitor(SRM). Dette system er tiltænkt til at supplere de nuværende systemer, der bruges til at udrede synke-spise problemer hos dysfagipatienter. Det skal dog for god ordens skyld understreges at systemet, der realiseres i dette projekt er på Proof-of-Concept stadie og dermed må ikke anvendes til kliniske brug. Kravet til dette system er udspecificeret af projektgruppens medlemmer uden at der er indgået en kontrakt med Hammel Neurocenter som kunde. Med andre ord er projektgruppens medlemmer ikke forpligtet til at levere et produkt til nogen. \\
 
 
 Kravspecifikationen har til formål at specificere
-kravene til SRM. SRM'en består af en bioimpedans måler(BI) og en EMG måler. Kravene til SRM'en er blevet prioriteret i MoSCoW analyse, hvor "must kravet" prioriteres højst. Kravspecifikationen  der indeholder, en beskrivelse af projektets funktionelle krav, en aktør-kontekstdiagram, systemets use-cases og ikke-funktionelle krav. Til  kravspecifikationen er der lavet en accepttest, som primært har til formål at teste
-de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten kan ses i "bilag 9 - Accepttestspecifikation".
+kravene til SRM. SRM'en består af en bioimpedans måler(BI) og en EMG måler. Kravene til SRM'en er blevet prioriteret i MoSCoW analyse, hvor "must kravet" prioriteres højst. Kravspecifikationen indeholder en beskrivelse af projektets funktionelle krav, en aktør-kontekstdiagram, systemets use-cases og ikke-funktionelle krav. Til  kravspecifikationen er der lavet en accepttest, som primært har til formål at teste
+de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten kan ses i \textit{"bilag 9 - Accepttestspecifikation"}.
 
 
 \chapter{Kravspecifikation}
@@ -57,7 +57,7 @@ de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten kan ses i "b
 
 
 \section{Systembeskrivelse}
-Sundhedspersonalet foretager en BI- og EMG-måling ved at tilkoble elektroder fra hhv. BI- og EMG-måleren til et måleobjekt. Vha. en funktiongenerator sendes en konstant strøm til måleobjektet via. et print og elektroder. Herved måles spændingen over elektroderne. De målte spændinger omdannes til et digital signal vha. en A/D-konverter. Dette digital signal vises på en PC-skærm i form af en graf. Sundhedspersonalet har herved mulighed for at evaluere måleobjektets synkefrekvens. Sundhedspersonalet foretager også EMG-måling ved at tilkoble elektroder på måleobjektet. Dataindsamling fra måleobjektet omdannes ligeledes til et digital signal og vises på en PC-skærm.      
+Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet består af et BI kredsløb og en kommerciel emg-måler, der tilsammen udgør SRM'en. Systemet fungerer ved at et sundhedspersonale foretager en BI- og EMG-måling ved at tilkoble elektroder fra hhv. BI- og EMG-måleren til et måleobjekt. Vha. en funktionsgenerator sendes en konstant strøm til måleobjektet via. BI-kredsløbet og elektroderne. Herved måles spændinger, vha. elektroderne, som opstår når forholdet mellem spænding og strøm over måleregionen. De målte spændinger omdannes til digitale værdier vha.  en A/D-konverter. Tilslut vises disse værdier på en PC-skærm i form af en graf. Sundhedspersonalet har hermed mulighed for at evaluere måleobjektets synkefrekvens. 
 \subsection{Aktør kontekstdiagram}
 
 \begin{figure}[H]
@@ -65,7 +65,7 @@ Sundhedspersonalet foretager en BI- og EMG-måling ved at tilkoble elektroder fr
 {\includegraphics[width=\textwidth]
 {Figure/AktoerKontextDiagram}}
 \caption{Aktør-kontext diagram}
-\label{Use case diagram}
+\label{fig:sysbeskrivelse}
 \end{figure}  
 
 \subsection{Aktørbeskrivelse}
@@ -73,15 +73,15 @@ Sundhedspersonalet foretager en BI- og EMG-måling ved at tilkoble elektroder fr
 \begin{tabularx}{\textwidth}{l l X}
      Aktørnavn	&	Type		&	Beskrivelse \\ \midrule
      Sundhedspersonale   	&  	Primær  	& 	Sundhedspersonalet tilkobler BI- og EMG-måleren til måleobjektet vha. elektroder, samt starter og afslutter målingen. Yderligere interagerer sundhedspersonalet med en brugergrænseflade.     \\ 			  \addlinespace[2mm]
-     Bioimpedans måler	&	Sekundær	& Bioimpedans måleren anvendes til at måle bioimpedans signaler fra måleobjektet  	 \\   \addlinespace[2mm]
+     Bioimpedans-måler	&	Sekundær	& BI- måleren anvendes til at måle bioimpedans signaler fra måleobjektet  	 \\   \addlinespace[2mm]
 
-  EMG måler	&	Sekundær	&	EMG-måleren anvendes til at måle EMG-signaler fra måleobjektet.
+  EMG-måler	&	Sekundær	&	EMG-måleren anvendes til at måle emg fra måleobjektet.
      \\   \addlinespace[2mm]
     
     Måleobjekt	&	Sekundær	&	Måleobjektet er kilden  hvorfra bioimpedans signalerne indhentes. Måleobjektet er tilkoblet til både BI- og EMG-måleren.
      \\   \addlinespace[2mm]
      
- A/D-konverter	&	Sekundær	&	A/D-konverterens funktion er at konvertere analog signaler fra hhv. BI-og EMG-måler  til digital signaler.
+ A/D-konverter	&	Sekundær	&	A/D-konverterens funktion er at konvertere analog signaler fra hhv. BI-og EMG-måler  til digitale signaler.
      \\   \addlinespace[2mm]      
     PC	&	Sekundær	&	Denne brugergrænseflade bruges til at visualisere de målte signaler i graf form.
      \\   \addlinespace[2mm]
@@ -89,33 +89,42 @@ Sundhedspersonalet foretager en BI- og EMG-måling ved at tilkoble elektroder fr
    
      \bottomrule                                                                                                                   
     \end{tabularx}
-    \caption {Aktørbeskrivelse}
+    \caption {Aktørbeskrivelse for hele systemet}
     \label{tab:aktoerbeskrivelse}
 	
 \end{table}
 
-
+\pagebreak
 \section{Funktionelle krav}
+
+
 \subsection{Use Case diagram}
 
 \subsubsection{Version 1.0} 
+
+
+Figur \ref{UseCaseV1} viser systemets fire  usecases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. De fire usecases udtrykker antallet af brugerscenarier som brugeren til programmet kan interagerer med på brugergrænsefladen.  Nedenstående er der detaljeret beskrivelse af de enkelte usecases gennem et fully-dressed skema. 
+
+
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
-{Figure/usecasediagram}}
-\caption{Use Case diagram}
-\label{Use Case diagram}
+{Figure/usecaseDiaV1}}
+\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af 4 usecases, der tilsammen igangsætter, beregner og viser to målinger}
+\label{UseCaseV1}
 \end{figure}
-\subsubsection{Version 1.1} 
-Diagrammet i figur \ref{Use case diagram} viser systemets fire Use Cases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. Herunder følger en nærmere
-beskrivelse af de enkelte Use Cases, gennem et fully-dressed Use Case skema.
+
+
+
 
 
 
 
 Systemet består af en softwaredel, en A/D-konverter, BI-måler, EMG-måler med tilhørende hardware.
-Systemet gør det muligt at foretage en BI- og EMG-måling på et måleobjekt. BI- og EMG-målingerne bliver sendt ind i systemet via A/D-konverter, hvor signalet vises i Matlab. I softwaren er det muligt at få simultane signaler på en graf og samtidig benyttes der algoritme for at vise synkefrekvensen. Denne algoritme undersøger signalet for, ved en omregning fra den kendte spænding og strøm, impedans og dens ændringer som der ligner et synk.
-Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra systemet aktiveres.
+
+
+
+
 
 
 \subsection{Use Cases - fully dressed}
@@ -135,7 +144,7 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 	Forudsætninger 			&&	Alle systemer er ledige og operationelle. Elektroder påsat måleobjekt og GUI-vindue er åbent\\ 
 	Resultat 				&& 	BI-målingen er blevet foretaget efter ønske\\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Start BI-måling"\\				 	
-							&    2. 	& 	Systemet foretager målingen indtil der trykkes på knappen "Stop måling" \\[-1ex]
+							&    2. 	& 	Systemet foretager en måling i 10 sekunder \\[-1ex]
 							& 	 3.		&	 Systemet har gemt målingen i en fil \\[-1ex]
                             &&[\textit{Undtagelse 3.a:}] Systemet har ikke gemt målingen i en fil\\ \midrule
 	Undtagelser 			& 3.a. & Hovedscenarie 1 i Use Case 1 gentages\\ \bottomrule
@@ -155,10 +164,10 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 	Aktører 				&& 	Sundhedspersonale (primær), Måleobjekt (sekundær)\\
 	Referencer 				&& 	\\
 	Samtidige forekomster  	&& 	En EMG-måling pr. kørsel \\
-	Forudsætninger 			&&	Alle systemer er ledige og operationelle. Elektroder påsat måleobjekt og GUI-vindue er åbent\\ 
-	Resultat 				&& 	EMG-målingen er blevet foretaget efter ønske\\ \midrule
+	Forudsætninger 			&&	EMG-måleren er ledig og operationel. Elektroder påsat måleobjektet og GUI-vinduet er åbent\\ 
+	Resultat 				&& 	EMG-målingen er blevet foretaget \\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Start EMG-måling"\\ 				 	
-							&    2. 	& 	Systemet foretager målingen indtil der trykkes på knappen "Stop måling" \\[-1ex]
+							&    2. 	& 	Systemet foretager en måling i 10 sekunder \\[-1ex]
 							& 	 3.		&	 Systemet har gemt målingen i en fil \\[-1ex]
                             &&[\textit{Undtagelse 3.a:}] Systemet har ikke gemt målingen i en fil\\ \midrule
 	Undtagelser 			& 3.a. & Hovedscenarie 1 i Use Case 2 gentages\\ \bottomrule
@@ -177,7 +186,7 @@ Brugergrænsefladen er det som sundhedspersonalet initierer med, altså hvorfra 
 	Referencer 				&& 	Use Case 1\\
 	Samtidige forekomster  	&& 	En BI-beregning pr. kørsel \\
 	Forudsætninger 			&&	Use case 1 er foretaget\\ 
-	Resultat 				&& 	BI-beregningen er foretaget efter ønske\\ \midrule
+	Resultat 				&& 	BI-beregningen er foretaget \\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonale trykker på knappen "Beregn-BI"\\	
 							&    2. 	& 	Systemet har gemt BI-beregningen i en fil\\
                              &&[\textit{Undtagelse 2.a:}] Systemet har ikke gemt BI-beregningen i en fil\\ \midrule
@@ -207,8 +216,25 @@ Undtagelser 			& 2.a. & Hovedscenarie 1 i Use Case 3 gentages\\  \\ \bottomrule
 	\label{UC4}
 \end{longtabu}
 
+\subsection{Use Case diagram }
+\subsubsection{Version 1.1} 
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/usecasediagram}}
+\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af to usecases, der starter og gemmer målinger}
+\label{Use Case diagram}
+\end{figure}
 
-\subsubsection{Version 1.1}
+
+\subsection{Use Cases - fully dressed}
+
+\subsubsection{Version 1.1} 
+
+
+
+
+
 
 \section{Ikke-funktionelle krav}
 
