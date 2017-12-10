@@ -97,13 +97,46 @@ Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet bes
 \pagebreak
 \section{Funktionelle krav}
 
+Nedenstående tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikationen synkerefleksmonitor. Nogle krav til synkerefleksmonitoren er vigtigere end andre, og de prioriteret vha. MosCow-metoden. Kravene i\textit{ Must og Should} prioriteres højest. I dette projekt bestræbes det at opfylde kravene i \textit{ Must og Should}. 
 
-\subsection{Use Case diagram}
+\begin{table}[H]
+
+\begin{tabularx}{\textwidth}{X|X}
+\rowcolor{Gray}
+\toprule
+\textbf{Must have} & \textbf{Should have} \\
+\hline \\
+\textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{5. }Validere bioimpedans sensoren op imod kommerciel BI måler \\[5ex]
+\textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{6. }Matlab GUI, der kan præsentere BI og EMG signaler \\[3ex]
+\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \textbf{7. }Både BI og EMG målinger skal køre simultant\\[4ex]
+\textbf{4. }Systemet skal kunne beregne BI på baggrund af målte spændinger & \\[4ex]
+
+
+\midrule
+    \rowcolor{Gray}
+    \textbf{Could have} & \textbf{Would have}\\
+    \midrule \\
+\textbf{8. }Real-time visning af EMG- og BI signalerne & \textbf{10. }Mobilt synkerefleksmonitor med touch skærm\\[4ex]
+\textbf{9. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste)& \textbf{11. }EMG og BI signalerne overføres til EPJ  \\[4ex]
+& \textbf{12. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
+
+\end{tabularx}
+
+\caption{MoSCoW opdeling af kravene til  synkerefleksmonitorens software-del}
+  \label{tab:moscow}
+\end{table}
+
+
+
+
+
+\section{Use Case diagram}
+
 
 \subsubsection{Version 1.0} 
 
-
-Figur \ref{UseCaseV1} viser systemets fire  usecases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. De fire usecases udtrykker antallet af brugerscenarier som brugeren til programmet kan interagerer med på brugergrænsefladen.  Nedenstående er der detaljeret beskrivelse af de enkelte usecases gennem et fully-dressed skema. 
+For at opfylde de overstående krav, skal systemet have usecases, der bidrager til opfyldelsen af disse krav.
+Figur \ref{UseCaseV1} viser systemets fire  usecases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. De fire usecases udtrykker antallet af muligheder som brugeren til programmet kan interagerer med på brugergrænsefladen.  Nedenstående er der detaljeret beskrivelse af de enkelte usecases gennem et fully-dressed skema. 
 
 
 \begin{figure}[H]
@@ -216,36 +249,82 @@ Undtagelser 			& 2.a. & Hovedscenarie 1 i Use Case 3 gentages\\  \\ \bottomrule
 	\label{UC4}
 \end{longtabu}
 
-\subsection{Use Case diagram }
+\section{Use Case diagram }
 \subsubsection{Version 1.1} 
+Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. Denne beslutning har medført ændringer i det oprindelige usecase diagram. De nye ændringer kan ses på \ref{UseCasediagramV1.1}. Her er det valgt at reducere de oprindelige usecases til kun 2 usecases. 
+
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/usecasediagram}}
-\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af to usecases, der starter og gemmer målinger}
-\label{Use Case diagram}
+\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af to usecases, der tilsammen starter, måler og gemmer en BI- og en EMG-måling}
+\label{UseCasediagramV1.1}
 \end{figure}
 
 
 \subsection{Use Cases - fully dressed}
 
 \subsubsection{Version 1.1} 
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC1%
+	{\large \textbf{Use Case 1 }} && \\
+	\toprule
+	Scenarie 				&&	Hovedscenarie\\
+	Navn 					&& 	Start Measurements\\
+	Mål 					&& 	At måle to signaler simultant \\
+	Initiering 				&& 	Startes af Sundhedspersonale\\
+	Aktører 				&& 	Sundhedspersonale (primær)\\
+	Referencer 				&& 	\\
+	Samtidige forekomster  	&& 	To målinger pr. kørsel \\
+	Forudsætninger 			&&	BI-måleren og EMG-måleren er ledige og operationelle. Elektroderne påsat måleobjektet og GUI-vinduet er åbent \\ 
+	Resultat 				&& 	To målinger foretages og vises til brugeren\\ \midrule
+	Hovedscenarie 			&    1. 	&	Sundhedspersonalet trykker på knappen "Start Measurements "\\				 	
+							&    2. 	& 	En række funktioner køres automatisk og systemet sørger for at to målinger foretages simultant\\
+	
+	
+	&&[\textit{Undtagelse 2.a:}] Systemet foretager ikke målinger\\ \midrule						
+							
+							
+	Undtagelser 			&		2.a	& 	Applikationen genstartes og hovedscenarie 1 i Use Case 1 gentages \\ \bottomrule
+	
+	\caption{Fully dressed for Use Case 1}
+	\label{UC1}
+\end{longtabu}
 
 
 
+
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC1%
+	{\large \textbf{Use Case 2 }} && \\
+	\toprule
+	Scenarie 				&&	Hovedscenarie\\
+	Navn 					&& 	Save Measurements\\
+	Mål 					&& 	At gemme to signaler  \\
+	Initiering 				&& 	Startes af Sundhedspersonale\\
+	Aktører 				&& 	Sundhedspersonale (primær)\\
+	Referencer 				&& 	\\
+	Samtidige forekomster  	&& 	To gemme pr. kørsel \\
+	Forudsætninger 			&&	Use Case 1 er kørt \\ 
+	Resultat 				&& At gemme to målinger \\ \midrule
+	Hovedscenarie 			&    1. 	&	Sundhedspersonalet trykker på knappen "Save Measurements "\\				 	
+							&    2. 	& 	En række funktioner køres automatisk og systemet sørger for at gemme to målinger\\
+							
+	&&[\textit{Undtagelse 2.a:}] Systemet gemmer  ikke målingerne\\ \midrule							
+							
+	Undtagelser 			&		2.a	& 	Hovedscenarie 1 i Use Case 1 gentages  \\ \bottomrule
+	
+	\caption{Fully dressed for Use Case 2}
+	\label{UC2}
+\end{longtabu}
+
+
+\pagebreak
 
 
 
 \section{Ikke-funktionelle krav}
+Hvor de funktionelle krav afdækker applikationens specifikke adfærd, afdækker ikke-funktionelle krav applikationens kvalitetsaspekter  \cite{ISELektioner}. Her er der fokus på (F)URPS+ elementerne. Ved at tage højde for disse elementer kan man forbedre produktets kvalitet. Lige som i de funktionelle krav prioriteres (F)URPS+ elementerne vha. MosCow-metoden. I det følgende beskrives de (F)URPS+ elementer, som er prioriteret i dette projekt.  
 
 
-
-
-
-
-nielsen \cite{NielsenUsabilityUsability}
-
-\subsection{(F)URPS+}
 
 \textbf{Usability}
 \begin{enumerate}
@@ -273,7 +352,7 @@ Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 
 \begin{enumerate}[resume]
 \item Synkerefleksmonitorens hardware skal kunne tændes indenfor 3 minutter.
 \item Synkerefleksmonitorens GUI skal kunne vises indenfor 3 minutter.
-\item GUI'ens responstid skal maksimum være 10 sekunder.
+\item GUI'ens responstid skal maksimum være 30 sekunder.
 
 \end{enumerate}
 
@@ -281,7 +360,7 @@ Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 
 \textbf{Supportability}
 \begin{enumerate}[resume]
 \item Sundhedspersonalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter.
-\item Sundhedspersonalet skal kunne udskifte elektroderne inden for 2 minutter.
+\item Sundhedspersonalet skal kunne udskifte elektroderne inden for 4 minutter.
 \item Softwaren skal opbygges med lav samhørlighed.
 \end{enumerate}
 
