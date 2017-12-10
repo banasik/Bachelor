@@ -57,7 +57,7 @@ de opstillede funktionelle- og ikke-funktionelle krav. Accepttesten kan ses i \t
 
 
 \section{Systembeskrivelse}
-Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet består af et BI kredsløb og en kommerciel emg-måler, der tilsammen udgør SRM'en. Systemet fungerer ved at et sundhedspersonale foretager en BI- og EMG-måling ved at tilkoble elektroder fra hhv. BI- og EMG-måleren til et måleobjekt. Vha. en funktionsgenerator sendes en konstant strøm til måleobjektet via. BI-kredsløbet og elektroderne. Herved måles spændinger, vha. elektroderne, som opstår når forholdet mellem spænding og strøm over måleregionen. De målte spændinger omdannes til digitale værdier vha.  en A/D-konverter. Tilslut vises disse værdier på en PC-skærm i form af en graf. Sundhedspersonalet har hermed mulighed for at evaluere måleobjektets synkefrekvens. 
+Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet består af et BI kredsløb og en kommerciel emg-måler, der tilsammen udgør SRM'en. Systemet fungerer ved at et sundhedspersonale foretager en BI- og EMG-måling ved at tilkoble elektroder fra hhv. BI- og EMG-måleren til et måleobjekt. Vha. en funktionsgenerator sendes en konstant strøm til måleobjektet via. BI-kredsløbet og elektroderne. Herved måles spændinger, vha. elektroderne, som opstår når forholdet mellem spænding og strøm over måleregionen ændrer sig. De målte spændinger omdannes til digitale værdier vha.  en A/D-konverter. Tilslut vises disse værdier på en PC-skærm i form af en graf. Sundhedspersonalet har hermed mulighed for at evaluere måleobjektets synkefrekvens. 
 \subsection{Aktør kontekstdiagram}
 
 \begin{figure}[H]
@@ -75,7 +75,7 @@ Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet bes
      Sundhedspersonale   	&  	Primær  	& 	Sundhedspersonalet tilkobler BI- og EMG-måleren til måleobjektet vha. elektroder, samt starter og afslutter målingen. Yderligere interagerer sundhedspersonalet med en brugergrænseflade.     \\ 			  \addlinespace[2mm]
      Bioimpedans-måler	&	Sekundær	& BI- måleren anvendes til at måle bioimpedans signaler fra måleobjektet  	 \\   \addlinespace[2mm]
 
-  EMG-måler	&	Sekundær	&	EMG-måleren anvendes til at måle emg fra måleobjektet.
+  EMG-måler	&	Sekundær	&	EMG-måleren anvendes til at måle EMG fra måleobjektet.
      \\   \addlinespace[2mm]
     
     Måleobjekt	&	Sekundær	&	Måleobjektet er kilden  hvorfra bioimpedans signalerne indhentes. Måleobjektet er tilkoblet til både BI- og EMG-måleren.
@@ -97,7 +97,7 @@ Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet bes
 \pagebreak
 \section{Funktionelle krav}
 
-Nedenstående tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikationen synkerefleksmonitor. Nogle krav til synkerefleksmonitoren er vigtigere end andre, og de prioriteret vha. MosCow-metoden. Kravene i\textit{ Must og Should} prioriteres højest. I dette projekt bestræbes det at opfylde kravene i \textit{ Must og Should}. 
+Nedenstående tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikationen synkerefleksmonitor. Nogle krav til synkerefleksmonitoren er vigtigere end andre, og de prioriteres vha. MosCow-metoden. Kravene i\textit{ Must og Should} prioriteres højest. I dette projekt bestræbes det at opfylde kravene i \textit{ Must og Should}. 
 
 \begin{table}[H]
 
@@ -273,8 +273,8 @@ Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. 
 	Mål 					&& 	At måle to signaler simultant \\
 	Initiering 				&& 	Startes af Sundhedspersonale\\
 	Aktører 				&& 	Sundhedspersonale (primær)\\
-	Referencer 				&& 	\\
-	Samtidige forekomster  	&& 	To målinger pr. kørsel \\
+	
+	Samtidige forekomster  	&& 	1 måling pr. kørsel \\
 	Forudsætninger 			&&	BI-måleren og EMG-måleren er ledige og operationelle. Elektroderne påsat måleobjektet og GUI-vinduet er åbent \\ 
 	Resultat 				&& 	To målinger foretages og vises til brugeren\\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonalet trykker på knappen "Start Measurements "\\				 	
@@ -301,8 +301,8 @@ Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. 
 	Mål 					&& 	At gemme to signaler  \\
 	Initiering 				&& 	Startes af Sundhedspersonale\\
 	Aktører 				&& 	Sundhedspersonale (primær)\\
-	Referencer 				&& 	\\
-	Samtidige forekomster  	&& 	To gemme pr. kørsel \\
+
+	Samtidige forekomster  	&& 	1 måling gemmes pr. kørsel  \\
 	Forudsætninger 			&&	Use Case 1 er kørt \\ 
 	Resultat 				&& At gemme to målinger \\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonalet trykker på knappen "Save Measurements "\\				 	
@@ -340,6 +340,7 @@ Hvor de funktionelle krav afdækker applikationens specifikke adfærd, afdækker
 \item Det skal maksimalt tage 5 timer at gendanne Synkerefleksmonitor (MTTR - Mean Time To Restore).
 \item Synkerefleksmonitor skal have en oppetid uden nedbrud på minimum 1 dag (24 timer) (MTBF - Mean Time Between Failure).  
 \item Synkerefleksmonitor skal have en oppetid/køretid på: 
+
 \end{enumerate}
 
 
@@ -353,10 +354,11 @@ Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 
 \item Synkerefleksmonitorens hardware skal kunne tændes indenfor 3 minutter.
 \item Synkerefleksmonitorens GUI skal kunne vises indenfor 3 minutter.
 \item GUI'ens responstid skal maksimum være 30 sekunder.
+\item Synkerefleksmonitorens hardware skal kunne fungere under temperatur mellem  -10  til   \ang{40}C.
 
 \end{enumerate}
 
-
+\pagebreak
 \textbf{Supportability}
 \begin{enumerate}[resume]
 \item Sundhedspersonalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter.
