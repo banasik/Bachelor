@@ -58,7 +58,7 @@ viser komponenten LM318 med de tilhørende modstande.
 
 \subsection{Instrumentationsforstærker 2}
 
-Instrumentationsforstærker 2 bliver brugt til at forstærke biosignal fra måleobjektets og undertrykkelse støj . Til implementering af denne Instrumentationsforstærker er der igen brugt INA128. Figur \ref{figINAogSpandeler} B viser komponenten INA128 med dens tilhørende eksterne modstande. Figur \ref{figINAogSpandeler} A viser en spændingsdeler kredsløb, der er benyttet til at teste instrumentationsforstærkeren. Hvorfor der anvendes en spændingsdeler til test af INA128 henvises der til bilag 6 "Design". 
+Instrumentationsforstærker 2 bliver brugt til at forstærke biosignal fra måleobjektets og undertrykkelse støj . Til implementering af denne Instrumentationsforstærker er der igen brugt INA128. Figur \ref{figINAogSpandeler} B viser komponenten INA128 med dens tilhørende eksterne modstande. Figur \ref{figINAogSpandeler} A viser en spændingsdeler kredsløb, der er benyttet til at teste instrumentationsforstærkeren. Hvorfor der anvendes en spændingsdeler til test af INA128 henvises der til \textit{"bilag 6 - Design"}. 
 
 
  
@@ -120,14 +120,14 @@ For at undgå aliasering i det optaget signal implementeres et anti-aliaseringsf
 
 \section{Software}
 
-I dette afsnit beskrives de vigtigste scripts for systemet software-del. Til implementering af disse funktioner er der brugt udviklingsværktøjet Matlab pga. følgende fordele:
+I dette afsnit beskrives de vigtigste funktioner for systemet software-del. Til implementering af disse funktioner er der brugt udviklingsværktøjet Matlab pga. følgende fordele:
 
 \begin{itemize}
 \item  Matlab understøtter styring af Analog Discovery 
 \item Matlab forærer databehandlingsfunktioner som ligger klar til anvendelse
 \item Matlab er god til at indlæse store mængde data med få kodelinjer
 \item I Matlab kan man udvikle en brugergrænseflade nemt og hurtigt 
-\item Ved brug af Matlab med Analog Discovery, kan man betjene  funktionsgeneratoren, dataopsamlingsenhed og brugergrænsefladen  fra ét udviklingsværktøj.    
+\item Ved brug af Matlab med Analog Discovery, kan man betjene  funktionsgeneratoren, dataopsamlingsenhed og brugergrænsefladen  fra ét sted   
 \end{itemize}  
 
 Alternativet til overnævnte fordele er at man bruger forskellige “single purpose” programmer og enheder, når man skal måle et biomedicinsk signal. \\ \\
@@ -136,17 +136,19 @@ I det følgende gennemgås de kritiske funktioner for programmet.
 \pagebreak
 
 \subsection{Funktioner}
+Funktionernes nærmere beskrivelser henvises der til \textit{"bilag 6 - Design".}
+
 \subsubsection{Synkerefleksmonitor\_OpeningFcn}
 \lstinputlisting[frame=single, firstline=48, lastline=59]{matlabkode/Synkerefleksmonitor.m}
 
 
 
 
-\subsubsection{Btn\_Start\_Measurment}
+\subsubsection{Btn\_Start\_Measurements}
 \lstinputlisting[frame=single, firstline=107, lastline=117]{matlabkode/Synkerefleksmonitor.m}
 
 
-\subsubsection{Btn\_Start\_Measurment}
+\subsubsection{Btn\_Save\_Measuerments}
 \lstinputlisting[frame=single, firstline=98, lastline=103]{matlabkode/Synkerefleksmonitor.m}
 
 
@@ -282,7 +284,7 @@ Denne operationsforstærkers opgave er at forstærke 1 V til 10 V, dvs. en forst
 
 \subsection{Spektrumanalyse}
 
-Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen blive optaget vha. Analog Discovery. Som det kan aflæses i figur \ref{fig:aaspectrum1}, er der en dæmpning fra det samlet kredsløb på -75dB. Dette aflæses fra den højeste peak i passbåndet til ca. 250 kHz som er den halve samplingfrekvens. Da Analog arbejder med 14bit (skal dæmpe ned til -90dB) kræver det en yderligere dæmpning på ca. 15 dB. Dette kunne realiseres med et 1. ordens filter, men der vælges at benytte et 2. ordens filter, for at undgå de variationer der måtte være i passbåndet i det målte signal.
+Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen blive optaget vha. Analog Discovery. Som det kan aflæses på figur \ref{fig:aaspectrum1}, er der en dæmpning fra det samlet kredsløb på -75 dB. Dette aflæses fra den højeste peak i passbåndet til ca. 250 kHz, som er den halve samplingfrekvens. Da Analog Discovery arbejder med 14bit (skal dæmpe ned til -90 dB) kræver det en yderligere dæmpning på ca. 15 dB. Dette kunne realiseres med et 1. ordens filter, men der vælges at benytte et 2. ordens filter, for at undgå de variationer der måtte være i passbåndet i det målte signal.
 
 
 \begin{figure}[H] 
@@ -296,7 +298,7 @@ Ved at sammensætte alle komponenter inkl. elektroder, kan spektrumanalysen bliv
 
 \subsection{AA filter}
 
-Først er AA filteret simuleret i Multisim. Ved hjælp af Bode Plotter i Multisim, kan det aflæses at der er ved 250 kHz en dæmpning på 40 dB.
+Først er AA filteret simuleret i Multisim. Ved hjælp af Bode Plotter i Multisim, kan det aflæses ved 250 kHz at er en dæmpning på 40 dB.
 
 
 \begin{figure}[H] 
@@ -307,7 +309,7 @@ Først er AA filteret simuleret i Multisim. Ved hjælp af Bode Plotter i Multisi
 \label{fig:aafilterbodemultisim}
 \end{figure}
 
-Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste filters virkning, hvilket resulterer i et bodeplot over dette se figur \ref{fig:aafiltermodultest}. Det kan konstateres at ved knækfrekvensen (25 kHz) er faseforskydningen ca. \ang{90}. Efterfølgende kan det aflæses at ved knækfrekvensen og en dekade frem er der en dæmpning på ca. 35 dB.
+Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste filters virkning, se figur \ref{fig:aafiltermodultest}. Det kan konstateres at ved knækfrekvensen (25 kHz) er faseforskydningen ca. \ang{90}. Efterfølgende kan det aflæses, at ved knækfrekvensen og en dekade frem er der en dæmpning på ca. 35 dB.
 
 
 
