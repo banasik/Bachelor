@@ -6,7 +6,7 @@
 ~ \\[3cm]
 
 %\includegraphics[width=0.6\textwidth]{figurer/ASE}~\\[1cm]
-\textsc{\LARGE Bilag 6}\\[1.5cm]
+\textsc{\LARGE Bilag 5}\\[1.5cm]
 
 %\textsc{\Large Sundhedsteknologi}\\
 %\textsc{\Large 3. semesterprojekt}\\[0.5cm]
@@ -343,7 +343,7 @@ R2             &           9,1kohm         \\ \hline
 
 I dette projekt vælges samplingfrekvensen til 500 kHz. Den halve samplingfrekvens  bliver derfor 250 kHz (Nyquist frekvensen). Da Analog Discovery bruges som A/D konverter, skal signalet ved 250 kHz være dæmpet under $1/2*LSB$, som i dB svarer til en dæmpning på $20log*2^{15}= 90 dB$ 
 
-På baggrund af modultesten i \textit{Bilag 7 - Implementering \& Test} kan det aflæses at signalet i sig selv allerede er dæmpet med ca. 75 dB, derfor skal der som minimum tilføres en yderligere dæmpning på 20 dB.
+På baggrund af modultesten i \textit{Bilag 6 - Implementering \& Test} kan det aflæses at signalet i sig selv allerede er dæmpet med ca. 75 dB, derfor skal der som minimum tilføres en yderligere dæmpning på 20 dB.
 
 Derfor skal der designes et anti-aliaseringsfilter som tillader passering af frekvenser, der er mindre end Nyquist frekvensen og dæmper frekvenser, som er højere end Nyquist frekvensen. Dette anti-aliaseringsfilter skal give en minimum dæmpning på 20 dB ved 250 kHz. Dette kan lade sig gøre med et første ordens filter, da det dæmper med 20 dB pr. dekade. Der vælges i stedet for et 2. ordens filter, der vil dæmpe 40 dB pr. dekade, for at tage højde for variationer i det optagede signal.
 
@@ -428,7 +428,7 @@ C2             &           2.2nF         \\ \hline
 	
 	
 \chapter{Software}
-I forlængelse af software arkitekturen i \textit{"bilag 5 - Arkitektur"}, hvor grænsefladerne til hver enkelt software blok blev beskrevet,  praktiseres nu et software design. Denne designprocess er til for at det bliver klart hvor den tilhørende Matlab kode kan skrives i den senere implementering af Synkerefleksmonitor.
+I forlængelse af software arkitekturen i \textit{"bilag 4 - Arkitektur"}, hvor grænsefladerne til hver enkelt software blok blev beskrevet,  praktiseres nu et software design. Denne designprocess er til for at det bliver klart hvor den tilhørende Matlab kode kan skrives i den senere implementering af Synkerefleksmonitor.
 
 Først er der detaljer om væsentlige Matlab funktioner i form af beskrivelser af funktionernes indhold opsat i tabelform. Dernæst følger funktionernes input og output parametre i tabelform.
 
