@@ -4,11 +4,12 @@ s = handles.GS; %Analog Discovery instillinger fra "Generate_SineWave" funktione
 aiBI = addAnalogInputChannel(s, 'AD1', 1, 'Voltage'); %Oprettelse af analog ind 1 og 2
 aiEMG = addAnalogInputChannel(s, 'AD1', 2, 'Voltage');
 s.Rate = 500000; % Samplingrate
-s.DurationInSeconds = 2; % Tid pr. maaling 
+s.DurationInSeconds = 12; % Tid pr. maaling 
 
 % Visning af message boksen "Measurements running..."
 h = figure('units','pixels','position',[300 300 300 80],'windowstyle','modal');
 uicontrol('FontSize',12,'style','text','string','Measurements running...','units','pixels','position',[40 30 200 20]);
+
 
 [data, timestamps] = startForeground(s); % Maaling startes og genererer data og tid
 close(h); % Lukker message boksen "Measurements running..."
