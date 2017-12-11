@@ -7,7 +7,7 @@
 
 %\includegraphics[width=0.6\textwidth]{figurer/ASE}~\\[1cm]
 
-\textsc{\LARGE Bilag 5}\\[1.5cm]
+\textsc{\LARGE Bilag 4}\\[1.5cm]
 
 %\textsc{\Large Sundhedsteknologi}\\
 %\textsc{\Large 3. semesterprojekt}\\[0.5cm]
@@ -198,7 +198,7 @@ USB& Kommunikation med Analog Discovery &  & PC, C1& Analog Discovery, A1 &     
 \chapter{Software} \label{swafsnit}
 \section{Blok definition diagram}
 
-Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i \textit{"bilag 3 - Kravspecifikation"}. På baggrund af disse usecases udformes et BDD, som består af en parent-blok og tre child-blokke. I dette projekt anvendes  Matlab til at realisere projektets  software-del. Udover Matlab kode implementeres en Matlab GUI med objekter. Objekterne kan f.eks. være en knap, tekstfelt eller tekstboks. Når Matlab GUI bruges, skrives programmets funktionaliteter i funktioner som så kaldes fra objekternes autogeneret callback funktioner, når de skal bruges. Child-blokkene er callback funktionerne og de eksisterer inde i hovedfilen synkerefleksmonitor.m. Funktionerne under callback funktionen består af selvstændige m-filer. Hver funktion udfører en bestemt opgave, samt kan interagere med andre funktioner. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen \textit{"Start Measurements"}. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Brugeren af programmet har også mulighed for at gemme de målte data lokalt via. knappen \textit{"Save Measurements"}. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i \textit{"bilag 6 - Design"}.    
+Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i \textit{"bilag 1 - Kravspecifikation"}. På baggrund af disse usecases udformes et BDD, som består af en parent-blok og tre child-blokke. I dette projekt anvendes  Matlab til at realisere projektets  software-del. Udover Matlab kode implementeres en Matlab GUI med objekter. Objekterne kan f.eks. være en knap, tekstfelt eller tekstboks. Når Matlab GUI bruges, skrives programmets funktionaliteter i funktioner som så kaldes fra objekternes autogeneret callback funktioner, når de skal bruges. Child-blokkene er callback funktionerne og de eksisterer inde i hovedfilen synkerefleksmonitor.m. Funktionerne under callback funktionen består af selvstændige m-filer. Hver funktion udfører en bestemt opgave, samt kan interagere med andre funktioner. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen \textit{"Start Measurements"}. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Brugeren af programmet har også mulighed for at gemme de målte data lokalt via. knappen \textit{"Save Measurements"}. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i \textit{"bilag 5 - Design"}.    
 
 \begin{figure}[H] 
 \centering
