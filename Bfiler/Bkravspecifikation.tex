@@ -96,7 +96,7 @@ Figur \ref{fig:sysbeskrivelse} viser systembeskrivelsen for SRM'en. Systemet bes
 
 \pagebreak
 \section{Funktionelle krav}
-
+\subsection{Version 1.0}
 Nedenstående tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikationen synkerefleksmonitor. Nogle krav til synkerefleksmonitoren er vigtigere end andre, og de prioriteres vha. MosCow-metoden. Kravene i\textit{ Must og Should} prioriteres højest. I dette projekt bestræbes det at opfylde kravene i \textit{ Must og Should}. 
 
 \begin{table}[H]
@@ -126,9 +126,36 @@ Nedenstående tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles ti
   \label{tab:moscow}
 \end{table}
 
+\subsection{Version 1.1}
+
+Senere i projektet er det konstateret at krav nummer 5 ikke er muligt at opfylde. For komme i besiddelse af en kommerciel BI-måler har gruppen taget kontakt til Steven Brandtlov, fra Indkøb og Medicoteknik Skejby Sygehus, gennem  Peter Johansen, lektor på Institut for Ingeniørvidenskab på Aarhus Universitet. Etablering af konktakten har taget længere pga. manglende respons fra Steven Brandtlov side, se \textit{"bilag 11 - Mail korrespondance"}. Desuden fungerede den kommercielle BI-måler ikke efter dens brugeranvisning efter gruppen fik fat i den. Derfor  blev gruppen enig om at ikke bruge mere tid på den kommercielle BI-måler. Dette har resulteret ændringer i krav nummer 5. Kravet flyttes til \textit{"Could hav"} kategorien i den nye version.  
+
+\begin{table}[H]
+
+\begin{tabularx}{\textwidth}{X|X}
+\rowcolor{Gray}
+\toprule
+\textbf{Must have} & \textbf{Should have} \\
+\hline \\
+\textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{5. }Validere bioimpedans sensoren op imod kommerciel BI måler \\[5ex]
+\textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{6. }Matlab GUI, der kan præsentere BI og EMG signaler \\[3ex]
+\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \textbf{7. }Både BI og EMG målinger skal køre simultant\\[4ex]
+\textbf{4. }Systemet skal kunne beregne BI på baggrund af målte spændinger & \\[4ex]
 
 
+\midrule
+    \rowcolor{Gray}
+    \textbf{Could have} & \textbf{Would have}\\
+    \midrule \\
+\textbf{8. }Real-time visning af EMG- og BI signalerne & \textbf{10. }Mobilt synkerefleksmonitor med touch skærm\\[4ex]
+\textbf{9. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste)& \textbf{11. }EMG og BI signalerne overføres til EPJ  \\[4ex]
+& \textbf{12. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
 
+\end{tabularx}
+
+\caption{MoSCoW opdeling af kravene til  synkerefleksmonitorens software-del}
+  \label{tab:moscow}
+\end{table}
 
 \section{Use Case diagram}
 
