@@ -279,13 +279,13 @@ Undtagelser 			& 2.a. & Hovedscenarie 1 i Use Case 3 gentages\\  \\ \bottomrule
 
 \section{Use Case diagram }
 \subsubsection{Version 1.1} 
-Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. Denne beslutning har medført ændringer i det oprindelige usecase diagram. De nye ændringer kan ses på \ref{UseCasediagramV1.1}. Her er det valgt at reducere de oprindelige usecases til kun 2 usecases. 
+Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. Denne beslutning har medført ændringer i det oprindelige usecase diagram. De nye ændringer kan ses på \ref{UseCasediagramV1.1}. Her er det valgt at reducere de oprindelige usecases til kun 3 usecases. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/usecasediagram}}
-\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af to usecases, der tilsammen starter, måler og gemmer en BI- og en EMG-måling}
+\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af tre usecases, der tilsammen starter, måler, gemmer og henter en BI- og en EMG-måling}
 \label{UseCasediagramV1.1}
 \end{figure}
 
@@ -300,7 +300,7 @@ Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. 
 	Navn 					&& 	Start Measurements\\
 	Mål 					&& 	At måle to signaler simultant \\
 	Initiering 				&& 	Startes af Sundhedspersonale\\
-	Aktører 				&& 	Sundhedspersonale (primær)\\
+	Aktører 				&& 	Sundhedspersonale (primær), Måleobjekt (sekundær)\\
 	
 	Samtidige forekomster  	&& 	1 måling pr. kørsel \\
 	Forudsætninger 			&&	BI-måleren og EMG-måleren er ledige og operationelle. Elektroderne påsat måleobjektet og GUI-vinduet er åbent \\ 
@@ -328,7 +328,7 @@ Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. 
 	Navn 					&& 	Save Measurements\\
 	Mål 					&& 	At gemme to signaler  \\
 	Initiering 				&& 	Startes af Sundhedspersonale\\
-	Aktører 				&& 	Sundhedspersonale (primær)\\
+	Aktører 				&& 	Sundhedspersonale (primær), PC (sekundær)\\
 
 	Samtidige forekomster  	&& 	1 måling gemmes pr. kørsel  \\
 	Forudsætninger 			&&	Use Case 1 er kørt \\ 
@@ -343,6 +343,32 @@ Senere i projektet er det besluttet at forsimple design af brugergrænsefladen. 
 	\caption{Fully dressed for Use Case 2}
 	\label{UC2}
 \end{longtabu}
+
+
+
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC1%
+	{\large \textbf{Use Case 3 }} && \\
+	\toprule
+	Scenarie 				&&	Hovedscenarie\\
+	Navn 					&& 	Load Measurements\\
+	Mål 					&& 	At hente målingerne  \\
+	Initiering 				&& 	Startes af Sundhedspersonale\\
+	Aktører 				&& 	Sundhedspersonale (primær), PC (sekundær)\\
+
+	Samtidige forekomster  	&& 	1 måling hentes pr. kørsel  \\
+	Forudsætninger 			&&	Use Case 1 og 2 er gennemført \\ 
+	Resultat 				&& At hente to målinger \\ \midrule
+	Hovedscenarie 			&    1. 	&	Sundhedspersonalet trykker på knappen "Load Measurements "\\				 	
+							&    2. 	& 	En række funktioner køres automatisk og systemet sørger for at hente to målinger\\
+							
+	&&[\textit{Undtagelse 2.a:}] Systemet henter ikke målingerne\\ \midrule							
+							
+	Undtagelser 			&		2.a	& 	Hovedscenarie 1 i Use Case 1 og 2 gentages  \\ \bottomrule
+	
+	\caption{Fully dressed for Use Case 3}
+	\label{UC2}
+\end{longtabu}
+
 
 
 \pagebreak
