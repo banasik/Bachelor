@@ -79,14 +79,14 @@ Tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikatione
 \end{table}
 
 \pagebreak
-For at realisere \textit{Must og Should } kravene, er der udviklet use cases, der bidrager til opfyldelsen af disse krav. Brugergrænsefladen til applikationen er forsøgt forsimplet, således at brugeren kun forholder sig til behandlede data og ikke rådata. På Figur \ref{UseCaseV1} ses det to aktører, der interagerer med to use cases.  Herunder beskrives funktionerne af de to use cases. 
+For at realisere \textit{Must og Should } kravene, er der udviklet use cases, der bidrager til opfyldelsen af disse krav. Brugergrænsefladen til applikationen er forsøgt forsimplet, således at brugeren kun forholder sig til behandlede data og ikke rådata. På Figur \ref{UseCaseV1} ses det tre aktører, der interagerer med tre use cases.  Herunder beskrives funktionerne af de tre use cases. 
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/usecasediagram}}
-\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af to usecases, der tilsammen bruges til at starte, måle og gemme BI og EMG målinger}
+\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af tre usecases, der tilsammen bruges til at starte, måle, oploade tidligere målinger og gemme BI og EMG målinger}
 \label{UseCaseV1}
 \end{figure}
 
@@ -96,9 +96,15 @@ Denne use case bruges til at igangsætte en måling. Når sundhedspersonalet try
 \textbf{Use Case - Save Measurements:}
 Denne use case muliggør at brugerne kan gemme to målinger lokalt i en csv fil. Her gemmes de to målinger, som brugeren har taget simultant i use casen \textit{"Start Measurements".} \\
  
+\textbf{Use Case - Load Measurements:} 
+Denne use case tillader indlæsning af tidligere målinger, som er gemt lokalt på pc'en.  
+ 
+ 
+ 
+ 
  
  \pagebreak
-Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. Her kan du læse de trin som brugeren skal igennem for at igangsætte en måling. Fully dressed for use casen \textit{"Save Measurements"} henvises der til \nameref{bilag1}. 
+Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. Her kan du læse de trin som brugeren skal igennem for at igangsætte en måling. Fully dressed for de resterende use cases henvises der til \nameref{bilag1}. 
 
 \textbf{Use Cases - fully dressed  } 
 
@@ -128,6 +134,20 @@ Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. 
 	\label{UC1}
 \end{longtabu}
 
+\pagebreak
 \section{Ikke-funktionelle krav}
 
+Hvor de funktionelle krav kortlægger applikationens specifikke adfærd, fokuserer ikke-funktionelle krav applikationens kvalitetsaspekter \cite{ISELektioner}.
+Der benyttes en model kaldet $(F)URPS$ til at sætte ord på, hvad kunden, i dette projektets tilfælde gruppen, opfatter som kvalitet. Ved brug $(F)URPS$ skal man tage stilling til produktets funktionalitet, brugervenlighed, pålidelighed, ydeevne og supportering \cite{ISELektioner}. Man kan vælge at udvide  modellen til  $(F)URPS^{+}$. Her skal man yderligere forholde sig til flere kvalitetsbegreber. Lige som i de funktionelle krav er de ikke-funktionelle krav prioriteret ved brug af Moscow-metoden. Der er valgt at inddrage kun \textit{must-kategorien}. I dette projekt anvendes kun $(F)URPS$ med undtagelse af  elementet funktionalitet. Det vurderes af gruppen at  dette element er afdækket i de funktionelle krav, og derfor er ingen grund til at gentage det under de ikke-funktionelle krav. Det skal oplyses at under de ikke-funktionelle krav er der medtaget nogle krav, som er svært at teste. Herunder ser ses én af dem:
+
+\begin{itemize}
+\item  Synkerefeksmonitorens hardware skal kunne fungere under et temperaturforhold, der ligger mellem -10 til 40°C.
+\end{itemize}
+
+Selvom dette krav ikke kan testes, har vi valgt at inkludere det, da det er vigtigt at tage stilling til, hvordan produktet skal virke under varme forhold. I \nameref{bilag1} kan man læse de detaljerede ikke-funktionelle krav.
+
+ 
+
+
+ 
 
