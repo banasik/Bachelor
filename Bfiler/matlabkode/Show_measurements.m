@@ -8,7 +8,7 @@ hold on
 plot(handles.TID(handles.locs_synk),handles.BIsignal(handles.locs_synk)','o','MarkerFaceColor','b');
 title('Bioimpedance')
 ylabel('Impedance (ohm)');
-axis([1 12 -100 40])
+axis([1 12 -10 5])
 
 
 subplot(2,1,2)

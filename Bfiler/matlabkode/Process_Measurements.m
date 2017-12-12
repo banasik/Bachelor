@@ -25,14 +25,14 @@ BI_data = BIsignal - f_y;
 
 strom = str2double(get(handles.txtstrom,'String'));
 
-BI_dataImpedans = (BI_data/(strom*10^-6));
+BI_dataImpedans = (BI_data/(strom*10^-5));
 
 downBI = downsample(BI_dataImpedans,20000);
 
 smoothBI = smooth(downBI);
 
 BI_inverted = -smoothBI;
-[~,locs_synk] = findpeaks(BI_inverted,'MinPeakHeight',40,...
+[~,locs_synk] = findpeaks(BI_inverted,'MinPeakHeight',4.5,...
                                         'MinPeakDistance',10);
 
 handles.locs_synk = locs_synk;
