@@ -621,6 +621,10 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 \chapter{Integrationstest}
 
+\section{Indledning}
+
+
+Efter modultesten sammensættes de enkelte hardware komponenter gradvist til et færdigt system. I det følgende afsnit dokumenteres ved brug af billeder af opstillingen, multimeter og Analog Discovery. På figur \ref{fig:integrationstestDiagram} er det samlet integreret system inkl. EMG-måler.
 
 \begin{figure}[H] 
 \centering
@@ -633,13 +637,13 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 \subsection{Hardware Top-down test}
 
-
+Ved hjælp af Top-down test styres denne integration af det samlet system som kan ses på figur \ref{fig:integrationstestTopdowntest}. Undervejs er input og output blevet noteret for hver komponent. Forløbet kan ses i tabel \ref{tab:inout}. 
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=3cm]
 {Figure/integrationstestTopdowntest}}
-\caption{}
+\caption{Top-down test af integrationstesten.}
 \label{fig:integrationstestTopdowntest}
 \end{figure}
 
@@ -656,8 +660,8 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
      AA filter	&	14,3 V 	&	13,4 V      & Se figur  \ref{fig:integrationstestAAud} og for spektrum analyse se figur \ref{fig:integrationstestAAspectrum}.  \\   \addlinespace[2mm]
      \bottomrule                                                                                                                   
     \end{tabularx}
-    \caption {}
-    \label{tab:sw1}
+    \caption {Oversigt over input og output for hver komponent, med henvisning enten til figur eller billede.}
+    \label{tab:inout}
 	
 \end{table}
 
@@ -701,7 +705,7 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 \centering
 {\includegraphics[width=12cm]
 {Figure/integrationstestINA2udstrom}}
-\caption{Strømmen er faldet til 104 uA fra VCCS, når elektroderne påsættes.}
+\caption{Strømmen var faldet til 104 uA fra VCCS, da elektroderne påsættes.}
 \label{fig:integrationstestINA2udstrom}
 \end{figure}
 
@@ -734,6 +738,45 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
+{Figure/integrationstestBilleder1}}
+\caption{Billede af alle komponenter integreret. }
+\label{fig:integrationstestBilleder1}
+\end{figure} 
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/integrationstestBilleder2}}
+\caption{Placering af elektroderne uden EMG.}
+\label{fig:integrationstestBilleder2}
+\end{figure} 
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/integrationstestBilleder3}}
+\caption{Placering af elektroderne med EMG.}
+\label{fig:integrationstestBilleder3}
+\end{figure} 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/integrationstestBilleder4}}
+\caption{De brugte elektrodeledninger. }
+\label{fig:integrationstestBilleder4}
+\end{figure} 
+
+
+
+Resultatet af integrationstesten, kan også vises i GUI som viser en BI- og EMG-måling simultant på figur \ref{fig:integrationstestSynk1}. 
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
 {Figure/integrationstestSynk1}}
 \caption{Simultant måling af BI og EMG signal.}
 \label{fig:integrationstestSynk1}
@@ -755,7 +798,7 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 
 
-\subsection{Software Top-down test}
+
 
 
 
