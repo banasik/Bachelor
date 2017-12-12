@@ -24,7 +24,9 @@ f_y = polyval(p,(1:numel(BIsignal))',[],mu);
 BI_data = BIsignal - f_y; 
 
 strom = str2double(get(handles.txtstrom,'String'));
-
+%strom2 = str2double(strom);
+%get(handles.txtstrom, 'String', str2num(chr)) = strom;
+%str2double
 BI_dataImpedans = (BI_data/(strom*10^-6));
 
 downBI = downsample(BI_dataImpedans,20000);

@@ -22,7 +22,7 @@ function varargout = Synkerefleksmonitor(varargin)
 
 % Edit the above text to modify the response to help Synkerefleksmonitor
 
-% Last Modified by GUIDE v2.5 12-Dec-2017 15:48:35
+% Last Modified by GUIDE v2.5 12-Dec-2017 11:45:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -116,89 +116,4 @@ handles = Show_Measurements(handles);
 set(handles.txtSynk, 'String', length(handles.locs_synk));
 set(handles.txtSynk,'Visible','On');
 set(handles.Btn_Save_Measurements,'Visible','On');
-guidata(hObject,handles);
-
-
-
-function txtstrom_Callback(hObject, eventdata, handles)
-% hObject    handle to txtstrom (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of txtstrom as text
-%        str2double(get(hObject,'String')) returns contents of txtstrom as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function txtstrom_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to txtstrom (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes on slider movement.
-function slider3_Callback(hObject, eventdata, handles)
-% hObject    handle to slider3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
-
-% --- Executes during object creation, after setting all properties.
-function slider3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-
-
-% --- Executes on selection change in popSec.
-function popSec_Callback(hObject, eventdata, handles)
-% hObject    handle to popSec (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns popSec contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popSec
-
-
-% --- Executes during object creation, after setting all properties.
-function popSec_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popSec (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes on button press in Btn_Load_Measurements.
-function Btn_Load_Measurements_Callback(hObject, eventdata, handles)
-% hObject    handle to Btn_Load_Measurements (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-handles = Load_Measurements(handles);
-guidata(hObject,handles);
-handles = Process_Measurements(handles);
-guidata(hObject,handles);
-handles = Show_Measurements(handles);
-set(handles.txtSynk, 'String', length(handles.locs_synk));
-set(handles.txtSynk,'Visible','On');
-set(handles.Btn_Save_Measurements,'Visible','Off');
-set(handles.txtLoad,'Visible','Off');
 guidata(hObject,handles);

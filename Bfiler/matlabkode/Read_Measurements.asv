@@ -4,11 +4,9 @@ s = handles.GS; %Analog Discovery instillinger fra "Generate_SineWave" funktione
 aiBI = addAnalogInputChannel(s, 'AD1', 1, 'Voltage'); %Oprettelse af analog ind 1 og 2
 aiEMG = addAnalogInputChannel(s, 'AD1', 2, 'Voltage');
 s.Rate = 500000; % Samplingrate
+sekunder = str2double(get(handles.popSec,'String'));
 
-sekunder = get(handles.popSec,'string');
-selectedIndex = get(handles.popSec,'Value');
-s.DurationInSeconds = str2double(sekunder{selectedIndex});
-
+s.DurationInSeconds
 %s.DurationInSeconds = 2; % Tid pr. maaling 
 
 % Visning af message boksen "Measurements running..."

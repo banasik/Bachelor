@@ -1,6 +1,7 @@
 function handles = Show_Measurements(handles)
 % De optaget signaler BI og EMG plottes
 
+
 axes(handles.axes1); % Vises i axes1 
 subplot(2,1,1)
 plot(handles.TID, handles.BIsignal,'k'); % Det behandlet BI signal
