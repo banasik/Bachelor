@@ -770,6 +770,132 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 
 
+\section{Indledning}
+Accepttesten skal vise om produktet lever op til de standarder, der er blevet sat op for, at den aktivt kan indgå til klinisk brug. 
+Accepttesten er en opfølgning af kravspecifikation, som har til formål at sikre, at alle kravene er overholdt. Der vil blive testet på hovedscenarier. Det er målsætningen, at disse test sikrer produktets kvalitet, idet produktet vil blive afprøvet før det tages i brug. Derfor er det accepttestens ansvarsfunktion, at godkende de opsatte delmål for produktet, hvad angår både funktionelle, samt ikke-funktionelle krav. \\
+
+Når der i feltet Godkendt er et flueben, betyder det at testen er godkendt. Hvis der er et flueben i parenteser, betyder det at den er delvis godkendt. Hvis der er et kryds betyder det, at den ikke er godkendt. 
+\section{Accepttest af Usecases}
+
+%Use case 1 acceptest
+\subsection{Use Case 1}
+Det forventes for Use Case 1, at sundhedspersonalet har fået tilsluttet BI-måleren, EMG-måleren og påsat elektroder på måleobjektet. 
+
+\begin{longtabu} to \linewidth{@{}l r X[j]@{}} %UC1%
+	\toprule
+	Test af Use Case 1  				&&	Start Measurements\\
+	Scenarie 							&&	Hovedscenarie\\
+	Prækondition 						&&	Synkerefleksmonitor er monteret korrekt. BI-måleren og EMG-måleren er ledige og operationelle.
+Elektroderne påsat måleobjektet og GUI-vinduet er åbent\\ \midrule
+\end{longtabu}
+
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
+    ~ &	\textbf{Handling} &    \textbf{Forventet observation/resultat} &		\textbf{Faktisk observation/resultat} &    \textbf{Godkendt}\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+    1. & Sundhedspersonalet trykker på knappen "Start
+Measurements" &   Systemet foretager en måling, hvorefter målingerne vises simultant i graf. &       &	{\Huge \checkmark}	
+ \\ \bottomrule
+ 
+\caption{Accepttest af Use Case 1}\\
+\label{AT_UC1}
+\end{longtabu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Use Case 2}
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC2%
+	\toprule
+	Test af Use Case 2  				&&	Save Measurements\\
+	Scenarie 							&&	Hovedscenarie\\
+	Prækondition 						&&	Use Case 1 er kørt succesfuldt. 
+\\ \midrule
+\end{longtabu}
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
+
+\setlength{\textfloatsep}{10pt plus 1.0pt minus 2.0pt}
+    ~ &	\textbf{Handling} &    \textbf{Forventet observation/resultat} &		\textbf{Faktisk observation/resultat} &    \textbf{Godkendt}\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+   	1. 	& 	Sundhedspersonalet trykker på knappen "Save
+Measurements"	&  Målingerne er gemt i CSV-fil &   &	{\Huge \checkmark}	
+    \\
+    
+ \\ \bottomrule
+ 
+\caption{Accepttest af Use Case 2}\\
+\label{AT_UC2}
+\end{longtabu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Use Case 3}
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC2%
+	\toprule
+	Test af Use Case 3  				&&	Load Measurements\\
+	Scenarie 							&&	Hovedscenarie\\
+	Prækondition 						&&	Use Case 1 og 2 er kørt succesfuldt
+
+\\ \midrule
+\end{longtabu}
+
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
+    ~ &	\textbf{Handling} &    \textbf{Forventet observation/resultat} &		\textbf{Faktisk observation/resultat} &    \textbf{Godkendt}\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+    1. & Sundhedspersonalet trykker på knappen "Load
+Measurements " &   Systemet henter målinger og viser i graf  &   Når Forsker indtaster Forsøgsnavn, gør systemet Start Måling-knap tilgængelig   & {\Huge \checkmark}
+
+ \\ 
+ \bottomrule
+ 
+\caption{Accepttest af Use Case 3}\\
+\label{AT_UC3}
+\end{longtabu}
+
+
+\newpage
+\section{Accepttest af ikke-funktionelle krav}
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] X[j] c@{}}
+	Krav nr. & Krav & Test & Forventet resultat & Resultat & Godkendt
+	\\[-1ex] \midrule
+	
+	1. & Sundheds-personalet skal kunne anvende synkerefleksmonitoren efter 10 minutters
+instruktion. & Introducér synkerefleksmonitoren & Efter 10 minutter kan Sundhedspersonalet anvende synkerefleksmonitoren & & {\Huge \checkmark}	\\
+2. & Sundheds-personalet skal kunne efter endt introduktion til synkerefleks-monitoren
+foretage en måling uden fejl & Kør Use Case 1 & En måling uden fejl & & {\Huge \checkmark}	\\ 
+3. & Sundheds-personalet skal kunne efter en periode, på en uge væk fra synkerefleks-monitoren,
+foretage en måling uden fejl & Vent en uge og kør Use Case 1 & En måling uden fejl & & {\Huge \checkmark}	\\ 
+4. & Sundheds-personalet får mulighed for, at give karakter til GUI-designet på en skala
+fra 1-5, hvor 5 er yderst tilfredsstillende & Sundheds-personalet giver mundtlig karakter & Forventer 4 & & {\Huge \checkmark}	\\ 
+5. & Sundheds-personalet skal kunne læse graferne fra GUI'en på 2 meters afstand. & Placér Sundheds-personalet 2 meter væk  & Sundheds-personalet fint læse graferne & & {\Huge \checkmark}	\\ 
+6. & Det skal maksimalt tage 5 timer at gendanne synkerefleks-monitoren (MTTR - Mean
+Time To Restore). & Afmontér synkerefleks-monitoren og gendan synkerefleks-monitoren indenfor 5 timer   & Systemet er funktionelt indenfor 5 timer & & {\Huge \checkmark}	\\ 
+7. & Synkerefleks-monitoren skal have en oppetid uden nedbrud på minimum 1 dag (24 timer)
+(MTBF - Mean Time Between Failure)& Tilslut Synkerefleks-monitoren og kør Use case 1,2 og 3 hver time i 24 timer  & Ingen nedbrud efter 1 dag & & {\Huge \checkmark}	\\ 
+8. & Synkerefleks-monitoren skal have en oppetid/køretid på: $Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 \%$& &  & & {\Huge \checkmark}	\\ 
+9. & Synkerefleks-monitorens hardware skal kunne tændes indenfor 3 minutter& Tænd Synkerefleks-monitoren og tag tid  & Synkerefleks-monitorens hardware er tændt på under 3 minutter & & {\Huge \checkmark}	\\ 
+10. & Synkerefleks-monitorens GUI skal kunne vises indenfor 3 minutter& Start Synkerefleks-monitorens program og tag tid  & Synkerefleks-monitorens GUI er fremme på under 3 minutter & & {\Huge \checkmark}	\\ 
+11. & GUI'ens responstid skal maksimum være 30 sekunder & Tryk rundt i GUI og registrer responstid & Responstiden er tilfredsstillende & & {\Huge \checkmark}	\\
+12. & Synkerefleks-monitorens hardware skal kunne fungere under temperatur mellem \ang{-10}C til \ang{40}C & Synkerefleks-monitorens hardware placeres i \ang{-10}C og \ang{40}C  & Synkerefleks-monitoren fungerer& & {\Huge \checkmark}	\\ 
+13. & Sundheds-personalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter &  Sundheds-personalet fjerner batterierne og i sætter nye mens der tages tid & Batterierne er skiftet under 2 minnutter & & {\Huge \checkmark}	\\ 
+14. & Sundheds-personalet skal kunne udskifte elektroderne inden for 4 minutter &  Sundheds-personalet fjerner elektroderne og påsætter nye mens der tages tid & Elektroderne er skiftet under 4 minnutter & & {\Huge \checkmark}	\\ 
+15. & Softwaren skal opbygges med lav samhørighed &  & & & {\Huge \checkmark}	\\ 
+
+	\midrule
+	\bottomrule
+\caption{Accepttest af Ikke-funktionelle krav}
+\end{longtabu}
+
+\section{Problemrapport}
+Her noteres misvisninger i forhold til forventet resultat, både fra usecases og ikke-funktionelle krav.
+
 
 
 
