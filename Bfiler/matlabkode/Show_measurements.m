@@ -8,7 +8,7 @@ hold on
 plot(handles.TID(handles.locs_synk),handles.BIsignal(handles.locs_synk)','o','MarkerFaceColor','b');
 title('Bioimpedance')
 ylabel('Impedance (ohm)');
-axis([1 12 -10 5])
+axis([1 12 -5 5])
 
 
 subplot(2,1,2)
@@ -16,5 +16,5 @@ plot(handles.TID, handles.EMGsignal,'k'); % EMG signalet
 title('EMG')
 xlabel('Time in seconds')
 ylabel('Voltage (V)');
-axis([1 12 -0.2 0.2])
+axis([1 12 0.05 0.1])
 end

@@ -33,7 +33,7 @@ smoothBI = smooth(downBI);
 
 BI_inverted = -smoothBI;
 [~,locs_synk] = findpeaks(BI_inverted,'MinPeakHeight',4.5,...
-                                        'MinPeakDistance',10);
+                                        'MinPeakDistance',30);
 
 handles.locs_synk = locs_synk;
 
@@ -41,12 +41,12 @@ handles.BIsignal = smoothBI; %BI signalet gemmes i handles til senere visning
 
 %% EMG
 
-[p,s,mu] = polyfit((1:numel(handles.EMG))',handles.EMG,6);
-f_y = polyval(p,(1:numel(handles.EMG))',[],mu);
+% [p,s,mu] = polyfit((1:numel(handles.EMG))',handles.EMG,6);
+% f_y = polyval(p,(1:numel(handles.EMG))',[],mu);
+% 
+% EMG_data = handles.EMG - f_y;  
 
-EMG_data = handles.EMG - f_y;  
-
-downEMG = downsample(EMG_data,20000);
+downEMG = downsample(handles.EMG,20000);
 smoothEMG = smooth(downEMG);
 
 handles.EMGsignal = smoothEMG;
