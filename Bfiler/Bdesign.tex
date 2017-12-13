@@ -432,9 +432,9 @@ I forlængelse af software arkitekturen i \textit{"bilag 4 - Arkitektur"}, hvor 
 
 Først er der detaljer om væsentlige Matlab funktioner i form af beskrivelser af funktionernes indhold opsat i tabelform. Dernæst følger funktionernes input og output parametre i tabelform.
 
-Der er yderligere beskrevet indholdet af funktionen \textit{"Process\_Measurements"} vha. UML-aktivitetsdiagram. Til slut er den overordnet rækkefølge af programmets kodeeksekvering udført i et sekvens diagram.
+Der er yderligere beskrevet indholdet af funktionen \textit{"Process\_Measurements"} vha. UML-aktivitetsdiagram. Efterfølgende er den overordnet rækkefølge af programmets kodeeksekvering udført i et sekvens diagram.
 
-Til slut vises et design af Matlab GUI med tilhørende objekter, såsom knapper, tekst og graf, hvilket sundhedspersonalet kan interagere med. 
+Til slut vises et design af Matlab GUI med tilhørende objekter, såsom knapper, tekst og graf, hvilke sundhedspersonalet kan interagere med. 
 
 
 \subsection{Funktioner}
@@ -451,6 +451,7 @@ Til slut vises et design af Matlab GUI med tilhørende objekter, såsom knapper,
      Process\_Measurements	&	Funktion	&	Her bliver der foretaget envelope af BI målingen. Dette sker ved at dobbeltensrette BI-signalet og lavpasfiltrere det ved 500 Hz.   \\   \addlinespace[2mm]
      Save\_Measurements	&	Funktion	&	Målingerne BI og EMG, gemmes som en samlet CSV-fil.\\   \addlinespace[2mm]
      Show\_Measurements	&	Funktion	&	Til slut vises det udglattet BI og EMG. Der opsættes akser, labels og title på grafen.\\   \addlinespace[2mm]
+     Load\_Measurements	&	Funktion	&	Henter tidligere gemte målinger klar til visning.\\   \addlinespace[2mm]
    
      \bottomrule                                                                                                                   
     \end{tabularx}
@@ -467,20 +468,31 @@ Til slut vises et design af Matlab GUI med tilhørende objekter, såsom knapper,
      \textbf{Funktion}	&	\textbf{Input}		&	\textbf{Output} \\ \midrule
      
      Start\_GUI	&		&	Set Date(now)\\   \addlinespace[2mm]
-     			&		&	Set Billede\\   \addlinespace[2mm]
-     	     	&		&	Set "Save Measurements"\\   \addlinespace[2mm]\hline\addlinespace[2mm]
-	Generate\_SineWave   	&		&	Analog Discovery session (handles)\\   \addlinespace[2mm]\hline\addlinespace[2mm]
-Read\_Measurements	&	Analog Discovery session (handles)	&	Message boks (Measurements running…)\\   \addlinespace[2mm]
-			    &		&	data (handles)\\   \addlinespace[2mm]
-			    &		&	timestamps (handles)\\   \addlinespace[2mm]\hline\addlinespace[2mm]
-Process\_Measurements    &	data (handles)	&	BIsignal (handles)\\   \addlinespace[2mm]\hline\addlinespace[2mm]
-Save\_Measurements    &	BIsignal (handles), Data (handles) og timestamps (handles)	&	CSV-fil\\   \addlinespace[2mm]
-			    &		&	Message boks (Saving measurements...)\\   \addlinespace[2mm]
-			    &		&	Message boks (Measurements saved!)\\   \addlinespace[2mm]\hline\addlinespace[2mm]
-   		Show\_Measurements	    &	BIsignal (handles), Data (handles) og timestamps (handles)	&	Subplot measurements\\   \addlinespace[2mm]
+     			&		&	Set Picture\\   \addlinespace[2mm]\addlinespace[2mm]\hline\addlinespace[2mm]
+  
+	Generate\_SineWave   	&		&	handles.GS\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+Read\_Measurements	&	handles.GS	&	handles.BI\\   \addlinespace[2mm]
+			    &		&	handles.EMG\\   \addlinespace[2mm]
+			    &		&	handles.timestamps\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+			    Process\_Measurements    &	handles.BI	&	handles.locs\_syn\\   \addlinespace[2mm]
+						&	handles.EMG	&	handles.BIsignal\\   \addlinespace[2mm]
+						&	handles.timestamps	&	handles.EMGsignal\\   \addlinespace[2mm]
+						&	& handles.TID	\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+						
+				Save\_Measurements    &handles.BI	&	CSV-fil\\   				\addlinespace[2mm]
+			    &	handles.EMG	&	\\   \addlinespace[2mm]
+			    &	handles.timestamps	&	\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+   		
+Show\_Measurements	    &	handles.TID&	Subplot measurements\\   \addlinespace[2mm]
+   		    			&	handles.locs\_synk&						\\   \addlinespace[2mm]
+						&	handles.BIsignal&						\\   \addlinespace[2mm]
+   		    			&	handles.EMGsignal&						\\   \addlinespace[2mm]\hline\addlinespace[2mm]   
+   		Load\_Measurements	    &	CSV-fil	&	handles.BI\\   \addlinespace[2mm]
+   		&		&	handles.EMG\\   \addlinespace[2mm]
+   		&		&	handles.timestamps\\   \addlinespace[2mm]
      \bottomrule                                                                                                                   
     \end{tabularx}
-    \caption {Tabellen viser funktionernes input og output parametre.}
+    \caption {Tabellen viser funktionernes vigtigste input og output parametre.}
     \label{tab:sw1}
 	
 \end{table}
@@ -492,7 +504,7 @@ Save\_Measurements    &	BIsignal (handles), Data (handles) og timestamps (handle
 \centering
 {\includegraphics[width=8cm]
 {Figure/designUML}}
-\caption{Figuren viser indholdet af kodeeksekvering i funktionen \textit{"Process\_Measurements"} hvor der udføres envelope af det rå BI signal. Først bliver det rå BI signal dobbeltensrettet og dernæst filtreret vha. digital lavpasfilter med knækfrekvens = 500 Hz og dæmper med 40 dB over en dekade.}
+\caption{Figuren viser indholdet af kodeeksekvering i funktionen \textit{"Process\_Measurements"} i den del hvor der udføres envelope af det rå BI-signal. Først bliver det rå BI signal dobbeltensrettet og dernæst filtreret vha. digital lavpasfilter med knækfrekvens = 500 Hz og dæmper med 40 dB over en dekade. Til sidst bliver signalet detrended, downsampled og synk detekteres.}
 \label{Fig:designUML}
 \end{figure} 
 
@@ -505,7 +517,8 @@ Save\_Measurements    &	BIsignal (handles), Data (handles) og timestamps (handle
 
 \subsection{Sekvens Diagram}
 
-Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugeren kan herfra vælge at igangsætte en måling ved at trykke knappen \textit{"Btn\_Start\_Measurements"}. Denne knap kører efterfølgende en række funktioner, der tilsammen måler og viser en bioimpedans og EMG måling simultant. Herefter er det muligt at gemme den foretaget måling ved knappen \textit{"Btn\_Save\_Measurements"} i en csv-fil. De selvudviklede funktioner eksisterer i sin egen m-fil. Denne opdeling muliggør at man nemt kan udvide programmet uden at have kendskab til alle disse funktioner.    
+Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet igangsættes af brugeren ved ved at åbne m.filen Synkerefleksmonitor. Her ligger GUI'en til hele programmet. Brugeren kan herfra vælge at igangsætte en måling ved at trykke knappen \textit{"Btn\_Start\_Measurements"}. Denne knap kører efterfølgende en række funktioner, der tilsammen måler og viser en bioimpedans og EMG måling simultant. Herefter er det muligt at gemme den foretaget måling ved knappen \textit{"Btn\_Save\_Measurements"} i en csv-fil. Gemte målinger kan hentes frem ved knappen \textit{"Btn\_Load\_Measurements"}.
+De selvudviklede funktioner eksisterer i egne m-filer. Denne opdeling muliggør at man nemt kan udvide programmet, uden at have kendskab til alle disse funktioner.    
 
 \begin{figure}[H]
 \centering
@@ -519,7 +532,7 @@ Sekvensdiagrammet viser rækkefølgen af programmets kodeeksekvering. Programmet
 
 \subsection{GUI}
 
-Synkerefleksmonitor består af en Graphical User Interfaces (GUI), hvor GUI'en interagere med sundhedspersonalet. Når programmet startes op vil man få vist følgende vindue, se figur \ref{Fig:designGUI}. Denne GUI består af forskellige objekter. I GUI'en er det muligt at se dags dato og klokken for målingen. Sundhedspersonalet har mulighed for at trykke på to knapper. Den ene knap \textit{"Btn\_Start\_Measurements"}, bruges når der ønskes en måling. 
+Synkerefleksmonitor består af en Graphical User Interfaces (GUI), hvor GUI'en interagere med sundhedspersonalet. Når programmet startes op vil man få vist følgende vindue, se figur \ref{Fig:designGUI}. Denne GUI består af forskellige objekter. I GUI'en er det muligt at se dags dato og klokken for målingen. Sundhedspersonalet har mulighed for at trykke på tre knapper. 
 
 \begin{figure}[H]
 \centering
@@ -529,30 +542,20 @@ Synkerefleksmonitor består af en Graphical User Interfaces (GUI), hvor GUI'en i
 \label{Fig:designGUI}
 \end{figure} 
 
+Knappen \textit{"Btn\_Start\_Measurements"}, bruges når der ønskes en måling. Knappen \textit{"Btn\_Save\_Measurements"}, når målingen skal gemmes og knappen \textit{"Btn\_Load\_Measurements"}, som henter en tidligere måling.
 
-Når målingen er påbegyndt, vil der komme en massages boks frem som i figur \ref{Fig:designmessageboks1}.
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=6cm]
-{Figure/designmessageboks1}}
-\caption{Massages boksen der kommer frem under målingerne.}
-\label{Fig:designmessageboks1}
-\end{figure} 
-
- Denne vil være fremme under hele målingen og informere om at en måling er i gang. Efter endt måling forsvinder massages boksen igen og målingen vises i to grafer, BI og EMG graf. Det er nu muligt at trykke på den anden knap \textit{"Btn\_Save\_Measurements"} for at gemme målingerne. Da målingen fylder meget vil gemme funktionen tage lidt tid. Derfor kommer massages boksen \ref{Fig:designmessageboks2} frem mens denne proces er i gang.
+Brugeren bliver informeret om hvad SRM foretager sig, da nogle af funktionerne kan tage længere tid. Det er beskeder om at der måles, gemmes eller hentes en måling. Dette sker ved en gul besked henover GUI, se figur \ref{Fig:designmessageboks1}.
  
  \begin{figure}[H]
 \centering
-{\includegraphics[width=6cm]
-{Figure/designmessageboks2}}
-\caption{Massages boksen der informere om at målingerne er ved at blive gemt.}
-\label{Fig:designmessageboks2}
+{\includegraphics[width=10cm]
+{Figure/designmessageboks1}}
+\caption{De tre beskeder som kommer frem når der måles, gammes eller hentes.}
+\label{Fig:designmessageboks1}
 \end{figure} 
  
  
- 
-  Når målingen er færdig kommer den sidste massages boks frem, figur \ref{Fig:designmessageboks3} for at informere om at målingerne nu er gemt i csv-fil.
+Når der gemmes en måling kommer yderligere en massages boks frem, figur \ref{Fig:designmessageboks3} for at informere om at målingerne nu er gemt i csv-fil.
 
 \begin{figure}[H]
 \centering
@@ -562,7 +565,17 @@ Når målingen er påbegyndt, vil der komme en massages boks frem som i figur \r
 \label{Fig:designmessageboks3}
 \end{figure} 
 
+GUI'en består af en rækker objekter som sundhedspersonalet kan interagere med i form af knapper, tekstbokse og en drop down menu, se figur \ref{Fig:designGuikontrol}. Udover at starte, gemme og hente en måling ved brug af knapperne, er det muligt at få vist dato og tid men også hvor mange synk der er 
+detekteret i målingen. Det er også muligt at sætte målingens tid fra 2 til 12 sek. Til sidst er det muligt at indtaste strømmen, hvis denne har ændret sig. Undervejs i programmet ,hvor det er hensigtsmæssigt, vil nogle af knapperne blive deaktiveret for at undgå fejlmålinger. 
 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=4cm]
+{Figure/designGuikontrol}}
+\caption{Kontrolpanelets funktioner}
+\label{Fig:designGuikontrol}
+\end{figure} 
 
 
 

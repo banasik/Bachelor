@@ -5,27 +5,23 @@ aiBI = addAnalogInputChannel(s, 'AD1', 1, 'Voltage'); %Oprettelse af analog ind 
 aiEMG = addAnalogInputChannel(s, 'AD1', 2, 'Voltage');
 s.Rate = 500000; % Samplingrate
 
+% Henter den oenskede maaling i sek
 sekunder = get(handles.popSec,'string');
 selectedIndex = get(handles.popSec,'Value');
 s.DurationInSeconds = str2double(sekunder{selectedIndex});
 
-%s.DurationInSeconds = 2; % Tid pr. maaling 
-
-% Visning af message boksen "Measurements running..."
-% h = figure('units','pixels','position',[300 300 300 80],'windowstyle','modal');
-% uicontrol('FontSize',12,'style','text','string','Measurements running...','units','pixels','position',[40 30 200 20]);
-set(handles.txtMeasure,'Visible','On');
+set(handles.txtMeasure,'Visible','On'); % Viser beskeden "Measurements running..."
 
 [data, timestamps] = startForeground(s); % Maaling startes og genererer data og tid
-%close(h); % Lukker message boksen "Measurements running..."
-set(handles.txtMeasure,'Visible','Off');
-% Maalingerne gemmes i handles til videre brug
+
+set(handles.txtMeasure,'Visible','Off'); % fjerner beskeden "Measurements running..."
+
+% data bliver delt op i BI, EMG og tid
 handles.BI = data(:,1);
 handles.EMG = data(:,2);
-%handles.data = data;
 handles.timestamps = timestamps;
 
-% Rydder op og slukker forbindelsen til Analog Discovery
+% Rydder op og lukker forbindelsen til Analog Discovery
 s.release();
 delete(s);
 clear s;
