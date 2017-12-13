@@ -3,30 +3,42 @@
 \section{Udviklingsværktøjer}
 
 \subsection{Analyse og designmetode}
-ASE-modellen
-V-modellen
 
 Dette afsnit har til formål at beskrive hvilke tekniske metoder, der er benyttet af udarbejdelsen af bachelorprojektet. Primært er der tale om metoder fra faget ISE. I dette afsnit bliver der også beskrevet hvilke arbejdsredskaber, der er benyttet til udførelse af bachelorprojektet og rapporten.\\
 
-Den overordnet udviklingsproces bachelorprojektet har brugt var ASE-modellen, se figur \ref{asemodel}, som er udviklet af Ingeniørhøjskolen Aarhus Universitet.  Modellen anvendes til udvikling af hardware og software, hvilket der var behov for at udvikle af Synkefrekvensmonitor. Den er opbygget med en række faser i starten som skal følges. Dernæst kommer design, implementering og test fasen hvor det har givet gruppen mulighed for at arbejde iterativ, ved at sikre at forfedret produkt ved at hele tiden bygge erfaringer ved hver iteration. Til slut blev der samlet op med en integrationstest med hardware og software og en acceptest blev udført.
+Udviklingsforløbet er udarbejdet efter V-modellen og ASE-modellen \cite{IngeniorhojskolenAarhusUniversiteta} som er udviklet af Aarhus Ingeniørskole. ASE-modellen anvendes til udvikling af software og hardware, som er delt op i faser. For hver fase kommer en række artefakter som tilsammen resulterer i et veldokumenteret bachelorprojekt. Disse faser kombineres med V-modellen. I dette bachelorprojekt er der udført modultest på alle moduller opført i både hardware og software. Efter at kunne godkende modultestene, er en integrationstest blevet udført, hvor det bygget hardware og software er sammensat og testet som et samlet system. Her gøres det klart at systemet fungerer som intentionen, inden accepttesten nåes. Accepttesten er undersøger om alle krav i specificeret i kravspecifikationen er overholdt. Vejleder, Thomas Nielsen, lærer ved Aarhus Ingeniør Højskole, har deltaget i udførelsen af accepttesen, godkendt og underskrevet den. 
+Brugen af ASE-modellen og kombinationen af V-modellen har resulteret i denne veldokumenteret rapport.   
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\textwidth]
 {Figure/asemodel}}
-\caption{V-modellens udviklingsfaser\cite{IngenirhjskolenAarhusUniversitetDevelopmentASE}}
+\caption{V-modellen}
 \label{asemodel}
 \end{figure}
 
-Udover ASE-modellen blev metoden fra af V-modellen også brugt. Som det kan ses i figur \ref{vmodel} består V-modellen af udviklingsfaser hvor hver fase bliver testet og valideret inden næste fase påbegynder. Dette sikre at man får lavet den højest kvalitet for hver fase og projektet.
 
-Ved udvikling af prototypen blev der er i første fase, udviklet en kravspecifikation fra vores MoSCow analyse. Denne analyse indeholdte alt fra de krav som skulle med i projektet, dem som vi måske kunne nå og dem som vi ikke ville udføre, men kunne perspektivere til og videreudvikles på. Til disse krav blev der forbedret en accepttest, som skal teste det færdige produkts funktioner og egenskaber.
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/procesVoresASE}}
+\caption{Den modificeret ASE-model.}
+\label{procesVoresASE}
+\end{figure}
 
-Anden fase er system design. Hvor der undersøges hvilke hardware komponenter som kan bruges til understøtte kravene. Hertil laves en system test, som tester sammenspillet mellem de forskellige systemer efterhånden som de bliver integreret. 
 
-Tredje fase:\\
-fjerde fase:\\
-implementering:\\
+
+
+
+%Udover ASE-modellen blev metoden fra af V-modellen også brugt. Som det kan ses i figur \ref{vmodel} består V-modellen af udviklingsfaser hvor hver fase bliver testet og valideret inden næste fase påbegynder. Dette sikre at man får lavet den højest kvalitet for hver fase og projektet.
+%
+%Ved udvikling af prototypen blev der er i første fase, udviklet en kravspecifikation fra vores MoSCow analyse. Denne analyse indeholdte alt fra de krav som skulle med i projektet, dem som vi måske kunne nå og dem som vi ikke ville udføre, men kunne perspektivere til og videreudvikles på. Til disse krav blev der forbedret en accepttest, som skal teste det færdige produkts funktioner og egenskaber.
+%
+%Anden fase er system design. Hvor der undersøges hvilke hardware komponenter som kan bruges til understøtte kravene. Hertil laves en system test, som tester sammenspillet mellem de forskellige systemer efterhånden som de bliver integreret. 
+%
+%Tredje fase:\\
+%fjerde fase:\\
+%implementering:\\
 
 
 
