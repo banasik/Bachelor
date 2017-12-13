@@ -1,5 +1,5 @@
 function handles = Show_Measurements(handles)
-% De optaget signaler BI og EMG plottes
+% De maalte signaler BI og EMG plottes
 
 axes(handles.axes1); % Vises i axes1 
 subplot(2,1,1)

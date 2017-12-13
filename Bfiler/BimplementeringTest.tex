@@ -139,17 +139,22 @@ I det følgende gennemgås de kritiske funktioner for programmet.
 Funktionernes nærmere beskrivelser henvises der til \textit{"bilag 6 - Design".}
 
 \subsubsection{Synkerefleksmonitor\_OpeningFcn}
-\lstinputlisting[frame=single, firstline=48, lastline=59]{matlabkode/Synkerefleksmonitor.m}
+\lstinputlisting[frame=single, firstline=48, lastline=50]{matlabkode/Synkerefleksmonitor.m}
 
 
 
 
 \subsubsection{Btn\_Start\_Measurements}
-\lstinputlisting[frame=single, firstline=107, lastline=117]{matlabkode/Synkerefleksmonitor.m}
+\lstinputlisting[frame=single, firstline=96, lastline=105]{matlabkode/Synkerefleksmonitor.m}
 
 
-\subsubsection{Btn\_Save\_Measuerments}
-\lstinputlisting[frame=single, firstline=98, lastline=103]{matlabkode/Synkerefleksmonitor.m}
+\subsubsection{Btn\_Save\_Measurements}
+\lstinputlisting[frame=single, firstline=90, lastline=92]{matlabkode/Synkerefleksmonitor.m}
+
+
+\subsubsection{Btn\_Load\_Measurements}
+\lstinputlisting[frame=single, firstline=154, lastline=164]{matlabkode/Synkerefleksmonitor.m}
+
 
 
 \subsubsection{Start\_GUI} 
@@ -175,10 +180,11 @@ Funktionernes nærmere beskrivelser henvises der til \textit{"bilag 6 - Design".
 \subsubsection{Show\_Measurements} 
 \lstinputlisting[frame=single]{matlabkode/Show_Measurements.m}
 
-\subsubsection{Save\_Measurments} 
+\subsubsection{Save\_Measurements} 
 \lstinputlisting[frame=single]{matlabkode/Save_Measurements.m}
 
-
+\subsubsection{Load\_Measurements} 
+\lstinputlisting[frame=single]{matlabkode/Load_Measurements.m}
 
 \chapter{Modultest}
 Modultest af hardware-delen består af en simuleret test vha. Multisim og en praktisk test. Nogle komponenterne eksister ikke i Multisim og kræver at blive oprettet, men det er valgt at ikke bruge tid på det, da det er tidskrævende. Derfor præsenteres kun praktiske resultater for disse komponenter. I det følgende præsenteres testresultaterne for instrumentationsforstærker 1, 2 , strømgeneratoren, operationsforstærkeren og AA filteret. 
@@ -337,7 +343,7 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 
 
-\subsubsection{Btn\_Start\_Measurment}
+\subsubsection{Btn\_Start\_Measurement}
 
 \begin{figure}[H] 
 \centering
@@ -348,11 +354,21 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 \end{figure}
 
 
-\subsubsection{Btn\_Save\_Measurment}
+\subsubsection{Btn\_Save\_Measurement}
 
 
 \subsubsection{Start\_GUI}
- 
+
+Funktionen Start\_GUI køres så snart synkerefleksmonitor.m er startet. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Vise dato og tid bliver vist
+\item Skjule knappen "Btn\_Save\_Measurement"
+\item Vise billede
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modulteststartGUI1}, \ref{fig:modulteststartGUI2} og \ref{fig:modultestGUI}.
+
+
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=10cm]
@@ -373,25 +389,32 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 
 
-
-
-
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/modultestGUI}}
-\caption{Resultat om koden i "Start\_GUI"}
-\label{fig:aafiltermodultest}
+\caption{Resultat fra koden i "Start\_GUI"}
+\label{fig:modultestGUI}
 \end{figure}
 
 
 \subsubsection{Generate\_SineWave} 
 
+Funktionen Generate\_SineWave opsætter Analog Discoverys funktionsgenerator. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Oprette forbindelse til Analog Discovery
+\item Indstille gain til 2 V
+\item Indstille frekvensen til 20 kHz
+\item Gemme opsætningen i handles.GS
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modultestsinus1}, \ref{fig:modultestsinus3}, \ref{fig:modultestsinus4}, \ref{fig:modultestsinus5} og \ref{fig:modultestsinus}.
+
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=3cm]
 {Figure/modultestsinus2}}
-\caption{Resultat om koden i "Generate\_SineWave"}
+\caption{Analog Discoverys funktionsgenerator sættes på Analog Discoverys oscilloskop.}
 \label{fig:modultestsinus1}
 \end{figure}
 
@@ -439,12 +462,22 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 
 \subsubsection{Read\_Measurements}
+Funktionen Read\_Measurements måler BI og EMG signalerne simultant. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Indstille tid for måling i sekunder
+\item Indstille samplingrate til 500 kHz
+\item Oprette to analog input på Analog Discovery
+\item Måle BI og EMG simultant
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modultestread3}, \ref{fig:modultestread2}, \ref{fig:modultestread6}, \ref{fig:modultestread7} og \ref{fig:modultestread}.
+
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=10cm]
 {Figure/modultestread3}}
-\caption{}
+\caption{Indstille sekunder og samplerate.}
 \label{fig:modultestread3}
 \end{figure}
 
@@ -453,52 +486,28 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 \centering
 {\includegraphics[width=10cm]
 {Figure/modultestread2}}
-\caption{}
+\caption{To analog input oprettet.}
 \label{fig:modultestread2}
 \end{figure}
 
-\begin{figure}[H] 
-\centering
-{\includegraphics[width=10cm]
-{Figure/modultestread4}}
-\caption{}
-\label{fig:modultestread4}
-\end{figure}
+
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
-{Figure/modultestread5}}
-\caption{}
-\label{fig:modultestread5}
-\end{figure}
-
-\begin{figure}[H] 
-\centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=4cm]
 {Figure/modultestread6}}
-\caption{}
+\caption{Målingerne af BI og EMG i tabelform}
 \label{fig:modultestread6}
 \end{figure}
 
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=6cm]
 {Figure/modultestread7}}
-\caption{}
-\label{fig:modultestread6}
+\caption{Målingerne og tiden gemt i handles.}
+\label{fig:modultestread7}
 \end{figure}
-
-\begin{figure}[H] 
-\centering
-{\includegraphics[width=10cm]
-{Figure/modultestread8}}
-\caption{Session "s" er stoppet og fjernet fra workspace.}
-\label{fig:modultestread6}
-\end{figure}
-
-
 
 
 
@@ -506,7 +515,7 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/modultestread}}
-\caption{Resultat om koden i "Read\_Measurements"}
+\caption{Resultat fra koden "Read\_Measurements". To simultane målinger.}
 \label{fig:modultestread}
 \end{figure}
 
@@ -515,45 +524,56 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 \subsubsection{Process\_Measurements} 
 
+Funktionen Process\_Measurements behandler BI og EMG målingerne. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Dobbelt ensrette BI signal
+\item Filtrere BI signal 
+\item Oprette to analog input på Analog Discovery
+\item Måle BI og EMG simultant
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modultestsinus2}, \ref{fig:modultestprocessSignal}, \ref{fig:modultestprocessEnsrettet}, \ref{fig:modultestprocessFilter} og \ref{fig:modultestprocesshandles}.
+
+
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=3cm]
 {Figure/modultestsinus2}}
-\caption{Resultat om koden i "Generate\_SineWave"}
+\caption{Analog Discoverys funktionsgenerator sættes på Analog Discoverys oscilloskop.}
 \label{fig:modultestsinus2}
 \end{figure}
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=12cm]
 {Figure/modultestprocessSignal}}
-\caption{Resultat om koden i "Read\_Measurements"}
+\caption{Et test BI signal med amplitude på 2 V}
 \label{fig:modultestprocessSignal}
 \end{figure}
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=12cm]
 {Figure/modultestprocessEnsrettet}}
-\caption{Resultat om koden i "Read\_Measurements"}
+\caption{BI signalet bliver Dobbelt ensrettet.}
 \label{fig:modultestprocessEnsrettet}
 \end{figure}
 
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=12cm]
 {Figure/modultestprocessFilter}}
-\caption{Resultat om koden i "Read\_Measurements"}
+\caption{BI signalet bliver filteret.}
 \label{fig:modultestprocessFilter}
 \end{figure}
 
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=8cm]
 {Figure/modultestprocesshandles}}
-\caption{}
+\caption{Det nye test BI signal gammes i handles.}
 \label{fig:modultestprocesshandles}
 \end{figure}
 
@@ -565,58 +585,85 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 
 \subsubsection{Show\_Measurements} 
 
+Funktionen Show\_Measurements viser de målte BI og EMG signaler simultant. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Vise BI og EMG simultant i graf
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modultestshow}.
+
+
+
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/modultestshow}}
-\caption{}
+\caption{De to simultane test signaler}
 \label{fig:modultestshow}
 \end{figure}
 
 
 
-
-
-
-
-
-
-
 \subsubsection{Save\_Measurments} 
+
+Funktionen Save\_Measurements gemmer de målte BI og EMG signaler. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Gemme BI og EMG signaler i CSV-fil
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modultestsave1} og \ref{fig:modultestsave3}.
+
 
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=10cm]
 {Figure/modultestsave1}}
-\caption{}
+\caption{Den oprettet sti hvor CSV-filen skal gemmes.}
 \label{fig:modultestsave1}
 \end{figure}
 
-\begin{figure}[H] 
-\centering
-{\includegraphics[width=10cm]
-{Figure/modultestsave2}}
-\caption{}
-\label{fig:modultestsave1}
-\end{figure}
+
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=10cm]
+{\includegraphics[width=\linewidth]
 {Figure/modultestsave3}}
-\caption{}
-\label{fig:modultestsave1}
+\caption{Målingen er gemt som test.csv.}
+\label{fig:modultestsave3}
 \end{figure}
+
+
+\subsubsection{Load\_Measurments} 
+
+Funktionen Load\_Measurements henter de målte BI og EMG signaler. Denne funktion har følgende opgaver:
+\begin{itemize}
+\item Hente BI og EMG signaler fra CSV-fil
+\end{itemize}
+
+Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modultestLoad1} og \ref{fig:modultestLoad2}.
+
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=10cm]
-{Figure/modultestsave4}}
-\caption{}
-\label{fig:modultestsave1}
+{Figure/modultestLoad1}}
+\caption{Den oprettet sti hvor CSV-filen skal hentes fra.}
+\label{fig:modultestLoad1}
 \end{figure}
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/modultestLoad2}}
+\caption{De to simultane test signaler er hentet og vises.}
+\label{fig:modultestLoad2}
+\end{figure}
+
+
+
 
 
 \chapter{Integrationstest}
