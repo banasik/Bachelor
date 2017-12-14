@@ -314,15 +314,19 @@ Der benyttes operationsforstærkeren LM318 til at forstærke signalet op, hvor G
  Gain= 1 + \dfrac{R_{2}}{R_{1}} $$ $$
 \end{equation}
 
-For at forstærke signalet op til $10V$ kræver det at man gainer $V_{outINA128}$ 10 gange og vælger $R_1=1k\Omega$. 
+For at forstærke signalet op til $10V$ kræver det at man gainer $V_{out}$ 10 gange og vælger $R_1=1k\Omega$. 
 Hermed isoleres værdien af $R_2$:
 
 \begin{equation}
 \label{eq2.11}
  10= 1 + \dfrac{R_{2}}{1k\Omega} \Rightarrow R_{2} =9k\Omega
 \end{equation}
-Det forventes at operationsforstærkeren forstærker $V_{outINA128}$ til $10V$.\
+Det forventes at operationsforstærkeren forstærker $V_{out}$ til $10V$.\
 
+Slew rate udregnes for at sikre at de 10 V kan håndteres af LM318.
+$$slewrate=2*\pi*f*V$$
+$$2*\pi*20kHz*10V=1,257V/us$$
+Ved at kigge i databladet for LM318 er der oplyst en typisk slewrate på 70V/us, hvilke er fint til den beregnet  på 1,257V/us.
 \begin{table}[H]
 \centering
 \caption{Stykliste for OP-AMP}
@@ -359,9 +363,13 @@ Lavpas filteret designes med følgende specifikationer:
 
 De overstående specifikationer er indtastet i programmet FilterPro og der er beregnet følgende kredsløb i figur \ref{Fig:aafilterdiagram}. Som operationsforstærker vælges OP27G og for at sikre at OP27G kan bruges udregnes slewrate:
 $$slewrate=2*\pi*f*V$$
-$$2*\pi*20kHz*8V=1,005V/us$$
+$$2*\pi*20kHz*10V=1,257V/us$$
 
 I OP27G's datablad kan slewrate aflæses til 2,8 V/us, hvilket er fint for den udregnet slewrate på 1,005 V/us. 
+
+Derudover udregnes Gain Bandwidth Product (GBWP)\cite{Baker2003}, som skal være lig med eller større end $100*fc$. Det udregnes, med en knækfrekvens på 25 kHz, til at blive $100*25000=2,5MHz$. I OP27G's datablad kan GBWP aflæses til 8 MHz, hvilket stemmer fint med den udregnet på 2,5 MHz.
+
+
 
 \begin{figure}[H]
 \centering
