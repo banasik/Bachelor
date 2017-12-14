@@ -1,5 +1,6 @@
-
-Bfiler/library.bib
+Bfiler\*.pdf
+Rfiler\*.pdf
+Bfiler\library.bib
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -133,3 +134,4 @@ sympy-plots-for-*.tex/
 Bfiler/Barkitektur.pdf
 *.bib
 Bfiler/library.bib
+*.pdf
