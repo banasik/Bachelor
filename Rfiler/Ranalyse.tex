@@ -1,1 +1,48 @@
 \chapter{Analyse}
+
+ 
+I dette kapitel vil der kort blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt er mundet ud i og hvordan den er tilvejebragt. Formålet med analysefasen var  at undersøge og teste om et kendt kredsløb fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"} kunne benyttes til detektere synk hos raske objekter. Denne artikel er valgt at undersøge, da den indeholder de grundlæggende elementer, der skal være til stede, når der udvikles en bioimpedans. Forskerne bag artiklen har udviklet bioimpedans kredsløbet til at måle bioimpedans signaler fra hjernevæv.  Om det sammen kredsløb kan anvendes til detektering af et synk fra et andet vævstype, i dette projektes tilfælde larynx-området, skal denne analysefase undersøge. \\
+
+For at realisere kredsløbet er der indkøbt præcist de samme elektriske komponenter som artiklens kredsløb gør brug af med undtagelse af udstyr som oscilloskop og funktionsgenerator. Disse udstyr har projektgruppens medlemmer selv anskaffet, se den samlede pris for disse komponenter i \nameref{bilag13}. \\
+
+For at afgøre om kredsløbet kan kan bruges til at detektere et synk, har gruppen bygget kredsløbet på et fumlebræt og efterfølgende testet det på en af gruppens medlemmer som måleobjekt. Figur \ref{fig:testopstilling1} og \ref{fig:celler} viser, hvordan testopstillingen og implementeringen af kredsløbet ser ud:
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/testopstilling11}}
+\caption{Diagram over testopstilling af det angivet kredsløb}
+\label{fig:testopstilling1}
+\end{figure} 
+
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/oprindeligekredslob2}}
+\caption{Illustration af testopstillingen på et fumlebræt. Testopstillingen indeholder en instrumentationsforstærker, INA128, til venstre og en strømgenerator, LF412CN, til højre.}
+\label{fig:celler}
+\end{figure}
+
+Efter testen af kredsløbet, kunne det konstateres at kredsløbet ikke er i stand til at detektere et synk.  At systemet ikke er i stand til at detektere et synk kan det fortolkes med følgende forklaringer:
+
+
+ 
+\begin{itemize}
+\item at kredsløbet er designede til et andet formål end at detektere et synk
+\item at de målte spændinger er så svage at forstærkning af dem er nødvendige
+\item at anvendelsen af kun to elektroder påvirker målingens resultater.  
+\end{itemize}
+
+Som konsekvens af det manglende synk, besluttede projektgruppen at designe et alternativt BI kredsløb, der skal detektere et synk. Det nye kredsløb kan ses på figur \ref{fig:konklusiondiagram}
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/konklusiondiagram}}
+\caption{Det nye system, som BI-måleren kommer til at bestå af. De nederste blokke til sammen transporterer strøm til måleobjektet, hvorimod de øverste blokke måler biosignal fra måleobjektet }
+\label{fig:konklusiondiagram}
+\end{figure} 
+
+Med prisen og forhåndskendskab for øje er der valgt at opbygge overstående system  med kendte  komponenter, som enten findes i skolens elektronik værksted eller som kan købes billigt. Design og valg af hver blok på \ref{fig:konklusiondiagram} henvises der til \nameref{bilag5} og \nameref{bilag3} 
