@@ -956,39 +956,30 @@ Measurements " &   Systemet henter målinger og viser i graf  &      & {\Huge \c
 	Krav nr. & Krav & Test & Forventet resultat & Resultat & Godkendt
 	\\[-1ex] \midrule
 	
-	1. & Sundheds-personalet skal kunne anvende synkerefleksmonitoren efter 10 minutters
-instruktion. & Introducér synkerefleksmonitoren & Efter 10 minutter kan Sundhedspersonalet anvende synkerefleksmonitoren & & {\Huge \checkmark}	\\
-2. & Sundheds-personalet skal kunne efter endt introduktion til synkerefleks-monitoren
-foretage en måling uden fejl & Kør Use Case 1 & En måling uden fejl & & {\Huge \checkmark}	\\ 
-3. & Sundheds-personalet skal kunne efter en periode, på en uge væk fra synkerefleks-monitoren,
-foretage en måling uden fejl & Vent en uge og kør Use Case 1 & En måling uden fejl & & {\Huge \checkmark}	\\ 
-4. & Sundheds-personalet får mulighed for, at give karakter til GUI-designet på en skala
-fra 1-5, hvor 5 er yderst tilfredsstillende & Sundheds-personalet giver mundtlig karakter & Forventer 4 & & {\Huge \checkmark}	\\ 
-5. & Sundheds-personalet skal kunne læse graferne fra GUI'en på 2 meters afstand. & Placér Sundheds-personalet 2 meter væk  & Sundheds-personalet fint læse graferne & & {\Huge \checkmark}	\\ 
-6. & Det skal maksimalt tage 5 timer at gendanne synkerefleks-monitoren (MTTR - Mean
-Time To Restore). & Afmontér synkerefleks-monitoren og gendan synkerefleks-monitoren indenfor 5 timer   & Systemet er funktionelt indenfor 5 timer & & {\Huge \checkmark}	\\ 
-7. & Synkerefleks-monitoren skal have en oppetid uden nedbrud på minimum 1 dag (24 timer)
-(MTBF - Mean Time Between Failure)& Tilslut Synkerefleks-monitoren og kør Use case 1,2 og 3 hver time i 24 timer  & Ingen nedbrud efter 1 dag & & {\Huge \checkmark}	\\ 
-8. & Synkerefleks-monitoren skal have en oppetid/køretid på: $Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 \%$& &  & & {\Huge \checkmark}	\\ 
-9. & Synkerefleks-monitorens hardware skal kunne tændes indenfor 3 minutter& Tænd Synkerefleks-monitoren og tag tid  & Synkerefleks-monitorens hardware er tændt på under 3 minutter & & {\Huge \checkmark}	\\ 
-10. & Synkerefleks-monitorens GUI skal kunne vises indenfor 3 minutter& Start Synkerefleks-monitorens program og tag tid  & Synkerefleks-monitorens GUI er fremme på under 3 minutter & & {\Huge \checkmark}	\\ 
-11. & GUI'ens responstid skal maksimum være 30 sekunder & Tryk rundt i GUI og registrer responstid & Responstiden er tilfredsstillende & & {\Huge \checkmark}	\\
-12. & Synkerefleks-monitorens hardware skal kunne fungere under temperatur mellem \ang{-10}C til \ang{40}C & Synkerefleks-monitorens hardware placeres i \ang{-10}C og \ang{40}C  & Synkerefleks-monitoren fungerer& & {\Huge \checkmark}	\\ 
-13. & Sundheds-personalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter &  Sundheds-personalet fjerner batterierne og i sætter nye mens der tages tid & Batterierne er skiftet under 2 minnutter & & {\Huge \checkmark}	\\ 
-14. & Sundheds-personalet skal kunne udskifte elektroderne inden for 4 minutter &  Sundheds-personalet fjerner elektroderne og påsætter nye mens der tages tid & Elektroderne er skiftet under 4 minnutter & & {\Huge \checkmark}	\\ 
-15. & Softwaren skal opbygges med lav samhørighed &  & & & {\Huge \checkmark}	\\ 
+	1. & Sundheds-personalet skal kunne anvende synkerefleksmonitoren efter 10 minutters instruktion. & Introducér synkerefleksmonitoren & Efter 10 minutter kan Sundhedspersonalet anvende synkerefleksmonitoren & ej testbart & 	\\
+2. & Sundheds-personalet skal kunne efter endt introduktion til synkerefleksmonitoren foretage en måling uden stor fejl & Kør Use Case 1 & En måling uden fejl & ej testbart& 	\\ 
+3. & Sundheds-personalet skal kunne efter en periode, på 3 måneder væk fra synkerefleksmonitoren, foretage en måling uden fejl & Vent 3 måneder og kør Use Case 1 & En måling uden fejl & ej testbart& 	\\ 
+4. & Sundheds-personalet skal kunne aflæse et synk på graferne fra GUI'en på 2 meters afstand. & Sundheds-personalet Sundheds-personalet skal stå to meter væk fra Pc-skærmen & Synket kan ses fra 2 meters afstand& testbart & {\Huge \checkmark}	\\ 
 
-	\midrule
+5.& Det skal maksimalt tage 10 minutter(0.17h) at gendanne Synkerefleksmonitor (MTTR - Mean Time To Restore). & Afmontér synkerefleks-monitoren og gendan synkerefleks-monitoren indenfor  10 minutter  & Systemet er funktionelt indenfor 10 minutter & testbart& {\Huge \checkmark}	\\ 
+6. & Synkerefleks-monitoren skal have en oppetid uden nedbrud på minimum 1 dag (24 timer)
+(MTBF - Mean Time Between Failure)& Tilslut Synkerefleks-monitoren og kør Use case 1,2 og 3 hver time i 24 timer  & Ingen nedbrud efter 1 dag & ej testbart & 	\\ 
+7. & Synkerefleks-monitoren skal have en oppetid/køretid på: $Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 \%$& &  & ej testbart & 	\\ 
+
+8. &GUI'ens objekter skal maksimum have en responstid på 30 sekunder & Tryk rundt i GUI og registrer responstid & Responstiden er tilfredsstillende & testbart & {\Huge \checkmark}	\\
+9. & Synkerefleks-monitorens hardware skal kunne fungere under temperatur mellem \ang{10}C til \ang{40}C & Synkerefleks-monitorens hardware placeres i \ang{10}C og \ang{40}C  & Synkerefleks-monitoren fungerer& ej testbart & 	\\ 
+10. & Sundheds-personalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter &  Sundheds-personalet fjerner batterierne og i sætter nye mens der tages tid & Batterierne er skiftet under 2 minnutter & testbart & {\Huge \checkmark}	\\ 
+11. & Sundheds-personalet skal kunne udskifte elektroderne inden for 4 minutter &  Sundheds-personalet fjerner elektroderne og påsætter nye mens der tages tid & Elektroderne er skiftet under 4 minnutter & testbart & {\Huge \checkmark}	\\ 
+
 	\bottomrule
 \caption{Accepttest af Ikke-funktionelle krav}
 \end{longtabu}
 
-\section{Problemrapport}
-Her noteres misvisninger i forhold til forventet resultat, både fra usecases og ikke-funktionelle krav.
 
 
 
 
-\citep{Aroom2009}
+
+
 \bibliography{library}
 \end{document}

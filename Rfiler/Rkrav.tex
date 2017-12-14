@@ -5,37 +5,35 @@ På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, som er projektet
 I det følgende beskrives kort det overordnede system, efterfulgt af funktionelle og ikke funktionelle krav.  
 
 \section{Systembeskrivelse}
-Systemet består af et BI kredsløb og en kommerciel EMG-måler, der tilsammen udgør SRM'en, se figur \ref{fig:sysbeskrivelse}. SRM'en initieres af et sundhedspersonale ved første at tilkoble elektroder fra hhv. BI- og EMG-måleren til et raske måleobjekt. Derefter igangsætter sundhedspersonalet målingerne via. en brugergrænseflade på en PC. Begge målinger kører simultant. Efterfølgende opsamles målingerne i en A/D-konverter, der omsætter de målte værdier fra analoge til digitale værdier, som PC'en kan arbejde med. I PC'en processeres de to målinger og vises til sundhedspersonalet via. brugergrænsefladen.   
+
+
+
+Figur \ref{fig:sysbeskrivelse} illustrer systembeskrivelsen for SRM'en. Systemet igangsættes af et sundhedspersonale, ved at tilkoble elektroder fra SRM'en til et måleobjekt. Ved hjælp af en funktionsgenerator i systemet sendes en konstant strøm til måleobjektet via. elektroderne. På måleobjektets måleregionen måles spændinger, som opstår, når forholdet mellem spænding og strøm ændrer sig. De målte spændinger omdannes til digitale værdier vha.  en A/D-konverter. Tilslut vises disse værdier på en PC-skærm i form af en graf. Sundhedspersonalet har hermed mulighed for at evaluere måleobjektets synkefrekvens. I SRM'en eksisterer der delsystemer. Detaljer omkring, hvordan disse er byggede og designede, henvises der til \nameref{bilag4} og \nameref{bilag5}. 
+
+ 
+
+
+ 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/AktoerKontextDiagram}}
-\caption{Aktør-kontekst diagram illustrer det overordnet systemet, som betsår af to måleapparater, en A/D-konverter og en PC. Et sundhedspersonale igangsætter målingerne via. en brugergrænseflade. Måleobjektet er tilkoblet til begge apparater. }
+\caption{Aktør-kontekst diagrammet illustrer det overordnet system. Her ses to aktører, der direkte interagerer med SRM'en. Den tredje aktør er en Offstage-aktør, der kommunikerer med systemet igennem en anden aktør.      }
 \label{fig:sysbeskrivelse}
 \end{figure}  
 
  
 
 \section{Aktørbeskrivelse}
-Til aktør-kontekst diagrammet følger der en en aktør beskrivelse, der beskriver kort hver komponentes funktion, se tabel \ref{tab:aktoerbeskrivelse}.    
-
+Til aktør-kontekst diagrammet følger der en en aktør beskrivelse, der beskriver kort hver aktørs funktion, se tabel \ref{tab:aktoerbeskrivelse}.    
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{l l X}
      Aktørnavn	&	Type		&	Beskrivelse \\ \midrule
-     Sundhedspersonale   	&  	Primær  	& 	Sundhedspersonalet tilkobler BI- og EMG-måleren til måleobjektet vha. elektroder, samt starter målingen. Yderligere interagerer sundhedspersonalet med en brugergrænseflade.     \\ 			  \addlinespace[2mm]
-     Bioimpedans-måler	&	Sekundær	& BI- måleren anvendes til at måle bioimpedans signaler fra måleobjektet  	 \\   \addlinespace[2mm]
+     Sundhedspersonale   	&  	Primær  	& 	Sundhedspersonalet tilkobler SRM'en til måleobjektet vha. elektroder, samt starter og evaluerer målingerne.     \\ 			  \addlinespace[2mm]
+     Elektroder	&	Sekundær	& Elektroder anvendes til at måle bioimpedans og emg signaler fra måleobjektet  	 \\   \addlinespace[2mm]
 
-  EMG-måler	&	Sekundær	&	EMG-måleren anvendes til at måle EMG signaler fra måleobjektet.
-     \\   \addlinespace[2mm]
-    
-    Måleobjekt	&	Sekundær	&	Måleobjektet er kilden  hvorfra biosignalerne indhentes. Måleobjektet er tilkoblet til både BI- og EMG-måleren.
-     \\   \addlinespace[2mm]
-     
- A/D-konverter	&	Sekundær	&	A/D-konverterens funktion er at konvertere analoge signaler fra hhv. BI-og EMG-måleren  til digitale signaler.
-     \\   \addlinespace[2mm]      
-    PC	&	Sekundær	&	Denne brugergrænseflade bruges til at visualisere de målte signaler i graf form.
-     \\   \addlinespace[2mm]
+Måleobjekt	&	Offstage Actor	& Måleobjektet   leverer biosignaler, som elektroderne kan måle.   	 \\   \addlinespace[2mm]
      
    
      \bottomrule                                                                                                                   
@@ -45,10 +43,10 @@ Til aktør-kontekst diagrammet følger der en en aktør beskrivelse, der beskriv
 	
 \end{table}
 
-
+\pagebreak
 \section{Funktionelle krav}
 
-Tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikationen synkerefleksmonitor. Nogle krav er vigtigere end andre, og de prioriteres vha. MosCow-metoden. Kravene i \textit{Must og Should} kategorien prioriteres højest.  I dette projekt bestræbes det at opfylde kravene i \textit{Must og Should}. Yderligere detaljer om kravspecifikationen henvises til \nameref{bilag1}. Her kan man bl.a. læse ændringer i kravspecifikationen under projektet. 
+Tabel \ref{tab:moscow} beskriver de funktionelle krav, der stilles til applikationen SRM'en. Nogle krav er vigtigere end andre, og de prioriteres vha. MosCow-metoden. Kravene i \textit{Must og Should} kategorien prioriteres højest.  I dette projekt bestræbes det at opfylde kravene i \textit{Must og Should}. 
 
 \begin{table}[H]
 
@@ -57,29 +55,62 @@ Tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles til applikatione
 \toprule
 \textbf{Must have} & \textbf{Should have} \\
 \hline \\
-\textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{5. }Matlab GUI, der kan præsentere BI og EMG signaler \\[4ex]
-\textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{6. }Både BI og EMG målinger skal køre simultant\\[4ex]
-\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \\[4ex]
+\textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{7. }Matlab GUI, der kan præsentere BI og EMG signaler \\[4ex]
+\textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{8. }Både BI og EMG målinger skal køre simultant\\[4ex]
+\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \textbf{9. }Validere bioimpedans sensoren op imod kommerciel BI måler \\[4ex]
 \textbf{4. }Systemet skal kunne beregne BI på baggrund af målte spændinger & \\[4ex]
+\textbf{5. }Systemet skal kunne gemme BI og EMG målingerne & \\[4ex]
+\textbf{6. }Systemet skal kunne hente tidligere BI og EMG målinger & \\[4ex]
 
 
 \midrule
     \rowcolor{Gray}
     \textbf{Could have} & \textbf{Would have}\\
     \midrule \\
-    \textbf{7. }Validere bioimpedans sensoren op imod kommerciel BI måler & \textbf{10. }Mobilt synkerefleksmonitor med touch skærm\\[4ex]
-\textbf{8. }Real-time visning af EMG- og BI signalerne & \textbf{11. }EMG og BI signalerne overføres til EPJ  \\[4ex]
-\textbf{9. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste)& \textbf{12. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
+    \textbf{10. }Real-time visning af EMG- og BI signalerne & \textbf{14. }Mobilt synkerefleksmonitor med touch skærm\\[4ex]
+\textbf{11. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste) & \textbf{15. }EMG og BI signalerne overføres til EPJ  \\[4ex]
+\textbf{12. }Systemt skal udføres på et færdigt print& \textbf{16. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
+& \\
+\textbf{13. }Systemet gemmer BI og EMG målingerne i en Database& \\[4ex]
 & \\
 
 \end{tabularx}
 
-\caption{MoSCoW opdeling af funktionelle krav til  synkerefleksmonitorens software og hardware}
+\caption{MoSCoW opdeling af kravene til  synkerefleksmonitoren.}
   \label{tab:moscow}
 \end{table}
 
+
+%\begin{table}[H]
+%
+%\begin{tabularx}{\textwidth}{X|X}
+%\rowcolor{Gray}
+%\toprule
+%\textbf{Must have} & \textbf{Should have} \\
+%\hline \\
+%\textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{5. }Matlab GUI, der kan præsentere BI og EMG signaler \\[4ex]
+%\textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{6. }Både BI og EMG målinger skal køre simultant\\[4ex]
+%\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \\[4ex]
+%\textbf{4. }Systemet skal kunne beregne BI på baggrund af målte spændinger & \\[4ex]
+%
+%
+%\midrule
+%    \rowcolor{Gray}
+%    \textbf{Could have} & \textbf{Would have}\\
+%    \midrule \\
+%    \textbf{7. }Validere bioimpedans sensoren op imod kommerciel BI måler & \textbf{10. }Mobilt synkerefleksmonitor med touch skærm\\[4ex]
+%\textbf{8. }Real-time visning af EMG- og BI signalerne & \textbf{11. }EMG og BI signalerne overføres til EPJ  \\[4ex]
+%\textbf{9. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste)& \textbf{12. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
+%& \\
+%
+%\end{tabularx}
+%
+%\caption{MoSCoW opdeling af funktionelle krav til  synkerefleksmonitorens software og hardware}
+%  \label{tab:moscow}
+%\end{table}
+
 \pagebreak
-For at realisere \textit{Must og Should } kravene, er der udviklet use cases, der bidrager til opfyldelsen af disse krav. Brugergrænsefladen til applikationen er forsøgt forsimplet, således at brugeren kun forholder sig til behandlede data og ikke rådata. På Figur \ref{UseCaseV1} ses det tre aktører, der interagerer med tre use cases.  Herunder beskrives funktionerne af de tre use cases. 
+For at realisere \textit{Must og Should } kravene, er der udviklet use cases, der bidrager til opfyldelsen  af disse krav. Brugergrænsefladen til applikationen er forsøgt forsimplet, således at brugeren kun behøver at forholde sig til behandlede data og ikke rådata. På Figur \ref{UseCaseV1} ses det to aktører, der interagerer med tre use cases.  Herunder beskrives funktionaliteten af disse use cases. 
 
 
 \begin{figure}[H]
@@ -90,13 +121,13 @@ For at realisere \textit{Must og Should } kravene, er der udviklet use cases, de
 \label{UseCaseV1}
 \end{figure}
 
-\textbf{Use Case - Start Measurements:}
-Denne use case bruges til at igangsætte en måling. Når sundhedspersonalet trykker på denne knap, køres der en række funktioner, der til sammen behandler og visualisere to målinger. Funktionaliteten af denne knap implementeres i Matlab. I  \nameref{bilag6} kan du bl.a. læse om de underliggende funktioner, som eksekveres, når denne knap aktiveres af brugeren.\\
+\textbf{Use Case 1 - Start Measurements:}
+Denne use case bruges bl.a. til at igangsætte en måling. Når sundhedspersonalet trykker på denne knap, køres der en række funktioner, der til sammen, starter, måler, behandler og visualisere to målinger. I  \nameref{bilag6} kan du bl.a. læse om de underliggende funktioner, som eksekveres, når denne knap aktiveres af brugeren.\\
 
-\textbf{Use Case - Save Measurements:}
-Denne use case muliggør at brugerne kan gemme to målinger lokalt i en csv fil. Her gemmes de to målinger, som brugeren har taget simultant i use casen \textit{"Start Measurements".} \\
+\textbf{Use Case 2 - Save Measurements:}
+Denne use case muliggør at brugeren kan gemme to målinger lokalt på computeren i en csv-fil. Her gemmes de to målinger, som brugeren har taget simultant i use case 1 \\
  
-\textbf{Use Case - Load Measurements:} 
+\textbf{Use Case 3  - Load Measurements:} 
 Denne use case tillader indlæsning af tidligere målinger, som er gemt lokalt på pc'en.  
  
  
@@ -104,7 +135,7 @@ Denne use case tillader indlæsning af tidligere målinger, som er gemt lokalt p
  
  
  \pagebreak
-Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. Her kan du læse de trin som brugeren skal igennem for at igangsætte en måling. Fully dressed for de resterende use cases henvises der til \nameref{bilag1}. 
+Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. Her er der beskrevet de trin som brugeren skal igennem for at tage en måling. Fully dressed for de resterende use cases henvises der til \nameref{bilag1}. 
 
 \textbf{Use Cases - fully dressed  } 
 
@@ -138,10 +169,10 @@ Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. 
 \section{Ikke-funktionelle krav}
 
 Hvor de funktionelle krav kortlægger applikationens specifikke adfærd, fokuserer ikke-funktionelle krav applikationens kvalitetsaspekter \cite{ISELektioner}.
-Der benyttes en model kaldet $(F)URPS$ til at sætte ord på, hvad kunden, i dette projektets tilfælde gruppen, opfatter som kvalitet. Ved brug $(F)URPS$ skal man tage stilling til produktets funktionalitet, brugervenlighed, pålidelighed, ydeevne og supportering \cite{ISELektioner}. Man kan vælge at udvide  modellen til  $(F)URPS^{+}$. Her skal man yderligere forholde sig til flere kvalitetsbegreber. Lige som i de funktionelle krav er de ikke-funktionelle krav prioriteret ved brug af Moscow-metoden. Der er valgt at inddrage kun \textit{must-kategorien}. I dette projekt anvendes kun $(F)URPS$ med undtagelse af  elementet funktionalitet. Det vurderes af gruppen at  dette element er afdækket i de funktionelle krav, og derfor er ingen grund til at gentage det under de ikke-funktionelle krav. Det skal oplyses at under de ikke-funktionelle krav er der medtaget nogle krav, som er svært at teste. Herunder ser ses én af dem:
+Der benyttes en model kaldet $(F)URPS$ til at sætte ord på, hvad kunden, i dette projektets tilfælde gruppen, opfatter som kvalitet. Ved brug $(F)URPS$ skal man tage stilling til produktets funktionalitet, brugervenlighed, pålidelighed, ydeevne og supportering \cite{ISELektioner}. Man kan vælge at udvide  modellen til  $(F)URPS^{+}$. Her skal man yderligere forholde sig til flere kvalitetsbegreber. Lige som i de funktionelle krav er de ikke-funktionelle krav prioriteret ved brug af Moscow-metoden. Der er valgt at inddrage kun \textit{must-kategorien}. I dette projekt anvendes kun $(F)URPS$ med undtagelse af  elementet funktionalitet. Det vurderes af gruppen at  dette element er afdækket i de funktionelle krav, og derfor er der ingen grund til at gentage det under de ikke-funktionelle krav. Det skal oplyses at under de ikke-funktionelle krav er der medtaget nogle krav, som er svært at teste. Herunder ses én af dem:
 
 \begin{itemize}
-\item  Synkerefeksmonitorens hardware skal kunne fungere under et temperaturforhold, der ligger mellem -10 til 40°C.
+\item  Synkerefeksmonitorens hardware skal kunne fungere under et temperaturforhold, der ligger mellem 10 til 40°C.
 \end{itemize}
 
 Selvom dette krav ikke kan testes, har vi valgt at inkludere det, da det er vigtigt at tage stilling til, hvordan produktet skal virke under varme forhold. I \nameref{bilag1} kan man læse de detaljerede ikke-funktionelle krav.
