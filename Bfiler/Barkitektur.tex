@@ -49,9 +49,9 @@ Blok definition diagrammet på figur \ref{figbdd} viser synkerefleksmonitoren, s
 
 \section{Internal blok diagram}
 
-Det interne blokdiagram på \ref{ibdfigur} viser den interne struktur og kommunikation mellem delsystemerne. Figur \ref{ibdfigur} indeholder to uafhængige blokke med navnene BI-måler og EMG-måler. De to blokke kommunikerer med Analog Discovery og en PC. For BI-målerens vedkommende starter kommunikationsflowet med at Analog Discovery'en generer et AC signal på 2V som sendes til den første af to Instrumentationsforstærker i BI-måler blokken. Instrumentationsforstærkeren forstærker de 2V med faktor 2. Det forstærkede signal sendes videre til strømgeneratoren, VCCS, som på baggrund af det indkommende 3V producerer en konstant strøm på. Strømmen sendes videre til et måleobjekt via. to elektroder, kaldet Blue Sensor Electrodes.  To yderligere elektroder påsættes på måleobjektet for at måle en spændingsforskel. Denne spændingsforskel er svag og kræver at blive forstærket. Denne forstærkning foregår over to trin. Til den første trin anvendes en instrumentationsforstærker efterfulgt af en operationsforstærker. Det forstærkede signal over de to trin sendes videre til et anti-aliaseringsfilter, der dæmper frekvenskomponenter over Nyquist-frekvensen. Tilslut sendes signalet til en dataopsamlingsenheden Analog Discovery, der sender det opsamlede signal videre til en PC for at blive analyseret og vist. Delsystemerne instrumentationsforstærker 1, 2 og AA filteret forsynes med en eksitationsspænding på $ \pm  $18V. \\
+Det interne blokdiagram på figur \ref{ibdfigur} viser den interne struktur og kommunikation mellem delsystemerne. Figur \ref{ibdfigur} indeholder to uafhængige blokke med navnene BI-måler og EMG-måler. De to blokke kommunikerer med Analog Discovery og en PC. For BI-målerens vedkommende starter kommunikationsflowet med at Analog Discovery'en generer et AC signal på 2V som sendes til den første af to Instrumentationsforstærker i BI-måler blokken. Instrumentationsforstærkeren forstærker de 2 V med faktor 2. Det forstærkede signal sendes videre til strømgeneratoren, VCCS, som på baggrund af det indkommende 4 V producerer en konstant strøm på. Strømmen sendes videre til et måleobjekt via. to elektroder, kaldet Blue Sensor Electrodes.  To yderligere elektroder påsættes på måleobjektet for at måle en spændingsforskel. Denne spændingsforskel er svag og kræver at blive forstærket. Denne forstærkning foregår over to trin. Til den første trin anvendes en instrumentationsforstærker efterfulgt af en operationsforstærker. Det forstærkede signal over de to trin sendes videre til et anti-aliaseringsfilter, der dæmper frekvenskomponenter over Nyquist-frekvensen. Tilslut sendes signalet til en dataopsamlingsenheden Analog Discovery, der sender det opsamlede signal videre til en PC for at blive analyseret og vist. Delsystemerne instrumentationsforstærker 1, 2 og AA filteret forsynes med en eksitationsspænding på $ \pm  $18V. \\
 
-EMG-blokken består en Myoware Muscle Sensor og to elektroder, der måler spændingsfaldet over et valgt segment på et måleobjekt. Det målte signal opsamles også vha. Analog Discovery. Myoware Muscle Sensoren forsynes med en eksitationsspænding på 5V.  
+EMG-blokken består en Myoware Muscle Sensor og tre elektroder, der måler spændingsfaldet over et valgt segment på et måleobjekt. Det målte signal opsamles også vha. Analog Discovery. Myoware Muscle Sensoren forsynes med en eksitationsspænding på $+$4,5V.  
 
 \begin{figure}[H]
 \centering
@@ -127,7 +127,7 @@ Kendall electrodes & Transporterer biosignal fra et måleobjekt.
  	 
 \hline  
 \end{tabular}
-\caption{Figuren viser blokbeskrivelsen for systemmet synkerefleksmonitor} \label{BlokBeskr}
+\caption{Tabellen viser blokbeskrivelsen for systemmet synkerefleksmonitor} \label{BlokBeskr}
 \end{table}
 
 \pagebreak
@@ -141,7 +141,7 @@ Kendall electrodes & Transporterer biosignal fra et måleobjekt.
 \begin{tabular}{|p{1.1cm}|p{2cm}|p{1.4cm}|p{3.5cm}|p{4.4cm}|p{2cm}|}
 \hline
 
-\textbf{Blok-navn}  & \textbf{Funktion}                                 & \textbf{Område} & \textbf{Port 1}      & \textbf{Port 2}                  & \textbf{Kommentar} \\ \cline{4-6} \hline
+\textbf{Signal-navn}  & \textbf{Funktion}                                 & \textbf{Område} & \textbf{Port 1}      & \textbf{Port 2}                  & \textbf{Kommentar} \\ \cline{4-6} \hline
 
 
 0V & Reference til analoge spændinger  &   & Analog Discovery, A6  & Instrumentationsforstærker 1, P2  &  stel   \\ \cline{4-6}
@@ -151,7 +151,7 @@ Kendall electrodes & Transporterer biosignal fra et måleobjekt.
  &  &   &  Analog Discovery, A6 & MyoWare Muscle Sensor, S3 & \\ \cline{4-6}
 
  \hline
-5V & Forsynings- spænding til MyoWare Muscle Sensor  &  4,9-5,1 V & Analog Discovery, A2 & MyoWare Muscle Sensor, S2&     \\ \cline{4-6}	\hline
+4,5V & Forsynings- spænding til MyoWare Muscle Sensor  &  4,0-4,5 V & Analog Discovery, A2 & MyoWare Muscle Sensor, S2&     \\ \cline{4-6}	\hline
 
 
 
@@ -198,7 +198,7 @@ USB& Kommunikation med Analog Discovery &  & PC, C1& Analog Discovery, A1 &     
 \chapter{Software} \label{swafsnit}
 \section{Blok definition diagram}
 
-Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i \textit{"bilag 1 - Kravspecifikation"}. På baggrund af disse usecases udformes et BDD, som består af en parent-blok og tre child-blokke. I dette projekt anvendes  Matlab til at realisere projektets  software-del. Udover Matlab kode implementeres en Matlab GUI med objekter. Objekterne kan f.eks. være en knap, tekstfelt eller tekstboks. Når Matlab GUI bruges, skrives programmets funktionaliteter i funktioner som så kaldes fra objekternes autogeneret callback funktioner, når de skal bruges. Child-blokkene er callback funktionerne og de eksisterer inde i hovedfilen synkerefleksmonitor.m. Funktionerne under callback funktionen består af selvstændige m-filer. Hver funktion udfører en bestemt opgave, samt kan interagere med andre funktioner. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen \textit{"Start Measurements"}. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Brugeren af programmet har også mulighed for at gemme de målte data lokalt via knappen \textit{"Save Measurements"}. Brugeren kan hente tidligere  målinger frem via knappen \textit{"Load Measurements"}. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i \textit{"bilag 5 - Design"}.    
+Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering og visning af bioimpedans- og EMG-målinger. Arkitekturen af softwaren er drevet af de usecases, som er beskrevet i \textit{"bilag 1 - Kravspecifikation"}. På baggrund af disse usecases udformes et BDD, som består af en parent-blok og fire child-blokke. I dette projekt anvendes  Matlab til at realisere projektets  software-del. Udover Matlab kode implementeres en Matlab GUI med objekter. Objekterne kan f.eks. være en knap, tekstfelt eller tekstboks. Når Matlab GUI bruges, skrives programmets funktionaliteter i funktioner som så kaldes fra objekternes autogeneret callback funktioner, når de skal bruges. Child-blokkene er callback funktionerne og de eksisterer inde i hovedfilen synkerefleksmonitor.m. Funktionerne under callback funktionen består af selvstændige m-filer. Hver funktion udfører en bestemt opgave, samt kan interagere med andre funktioner. Konkret fungerer softwaren ved at et sundhedspersonale initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor og efterfølgende trykke knappen \textit{"Start Measurements"}. Denne initiering af sundhedspersonalet medfører at der foretages to målinger simultant. Disse målinger analyseres og vises til sundhedspersonalet. Brugeren af programmet har også mulighed for at gemme de målte data lokalt via knappen \textit{"Save Measurements"}. Brugeren kan hente tidligere  målinger frem via knappen \textit{"Load Measurements"}. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram. Dette diagram kan læses i \textit{"bilag 5 - Design"}.    
 
 \begin{figure}[H] 
 \centering
