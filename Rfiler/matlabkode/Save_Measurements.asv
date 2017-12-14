@@ -1,0 +1,15 @@
+function handles = Save_Measurements(handles)
+% Maalinger gemmes i csv-fil.
+[FileName,PathName] = uiputfile('.csv'); % Oprettelse af prompt til brugeren, hvor filnavn og sti skal bestemmes
+
+filepath=fullfile(PathName,FileName); % Sti og filnavn sammensaettes
+
+set(handles.txtSave,'Visible','On'); % Beskeden
+pause(2);
+csvwrite(filepath,({handles.BI,handles.EMG,handles.timestamps})); % Behandlet BI signal, EMG signal og tid samles i en csv-fil.
+
+%close(f); %Lukker message boksen igen efter csv-filen er gemt
+set(handles.txtSave,'Visible','Off');
+h = msgbox('Measurements saved!'); % Der informeres om at csv-filen er gemt
+end
+
