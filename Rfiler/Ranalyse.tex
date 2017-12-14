@@ -1,11 +1,19 @@
 \chapter{Analyse}
 
  
-I dette kapitel vil der kort blive beskrevet de overvejelser, der er gjort omkring den endelige løsning, som dette projekt er mundet ud i og hvordan den er tilvejebragt. Formålet med analysefasen var  at undersøge og teste om et kendt kredsløb fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"} kunne benyttes til detektere synk hos raske objekter. Denne artikel er valgt at undersøge, da den indeholder de grundlæggende elementer, der skal være til stede, når der udvikles en bioimpedans. Forskerne bag artiklen har udviklet bioimpedans kredsløbet til at måle bioimpedans signaler fra hjernevæv.  Om det sammen kredsløb kan anvendes til detektering af et synk fra et andet vævstype, i dette projektes tilfælde larynx-området, skal denne analysefase undersøge. \\
+I dette kapitel vil der kort blive opsummeret, hvad analysearbejdets formål var og de fund denne fase af projektet har affødt. Formålet med analysefasen var  at undersøge og teste om et kendt kredsløb fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"} kunne benyttes til at detektere et synk hos raske objekter. Denne artikel er valgt at undersøge, da den indeholder de grundlæggende elementer, der skal være til stede, når der udvikles en BI-måler. Yderligere har artiklen haft god erfaring med at bygge en BI-måler kredsløb, der er prisbilligt, se kredsløbet på figur \ref{fig:BIdiagram}. Dette har naturligvis fået projektgruppens opmærksomhed, da projektet kun er budgetteret til Kr. 500.   Forskerne bag artiklen har udviklet bioimpedans kredsløbet til at måle bioimpedans signaler fra hjernevæv. Om det sammen kredsløb kan anvendes til detektering af et synk på et andet vævstype, i dette projektes tilfælde larynx-området, skal denne analysefase undersøge. \\
 
-For at realisere kredsløbet er der indkøbt præcist de samme elektriske komponenter som artiklens kredsløb gør brug af med undtagelse af udstyr som oscilloskop og funktionsgenerator. Disse udstyr har projektgruppens medlemmer selv anskaffet, se den samlede pris for disse komponenter i \nameref{bilag13}. \\
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/BIdiagram}}
+\caption{Diagram over det angivet kredsløb fra artiklen\cite{Aroom2009}}
+\label{fig:BIdiagram}
+\end{figure}
 
-For at afgøre om kredsløbet kan kan bruges til at detektere et synk, har gruppen bygget kredsløbet på et fumlebræt og efterfølgende testet det på en af gruppens medlemmer som måleobjekt. Figur \ref{fig:testopstilling1} og \ref{fig:celler} viser, hvordan testopstillingen og implementeringen af kredsløbet ser ud:
+For at realisere BI-kredsløbet er der indkøbt præcist de samme elektriske komponenter som artiklens kredsløb gør brug af med undtagelse af udstyr som oscilloskop og funktionsgenerator. Disse udstyr har projektgruppens medlemmer selv anskaffet, se den samlede pris for disse komponenter i \nameref{bilag13}. \\
+\pagebreak
+For at afgøre, om kredsløbet kan bruges til at detektere et synk, har gruppen bygget kredsløbet på et fumlebræt, og efterfølgende testet det på en af gruppens medlemmer som måleobjekt. Figur \ref{fig:testopstilling1} og \ref{fig:celler} viser, hvordan testopstillingen og implementeringen af BI kredsløbet ser ud:
 
 \begin{figure}[H]
 \centering
@@ -45,4 +53,4 @@ Som konsekvens af det manglende synk, besluttede projektgruppen at designe et al
 \label{fig:konklusiondiagram}
 \end{figure} 
 
-Med prisen og forhåndskendskab for øje er der valgt at opbygge overstående system  med kendte  komponenter, som enten findes i skolens elektronik værksted eller som kan købes billigt. Design og valg af hver blok på \ref{fig:konklusiondiagram} henvises der til \nameref{bilag5} og \nameref{bilag3} 
+Med prisen og forhåndskendskabet til nogle disse komponenter for øje er der valgt at opbygge overstående system  med komponenter, som enten findes på skolens elektronik værksted eller som kan købes billigt. Design og funktionalitet af hver blok på \ref{fig:konklusiondiagram} henvises der til \nameref{bilag4} og \nameref{bilag5}. Testresultaterne af BI kredsløbet på figur \ref{fig:BIdiagram} kan læses i   \nameref{bilag3}. 
