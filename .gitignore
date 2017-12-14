@@ -1,5 +1,6 @@
-*.pdf
-Bfiler/library.bib
+Bfiler\*.pdf
+Rfiler\*.pdf
+Bfiler\library.bib
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
