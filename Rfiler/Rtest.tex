@@ -1,1 +1,18 @@
 \chapter{Test}
+
+I dette kapitel beskrives de tests, der er foretaget undervejs i udvikling af SRM'ens software og hardware. Der er i løbet dette projekt udført en modultest, en integrations og en accept test. I det følgende beskrives kort, hvordan hver af disse tests er udført. 
+
+
+\section{Modultest} 
+\subsection{Hardware}
+Modultesten af hver hardware komponent gennemgik to modultests. En simulerede modultests ved hjælp af simuleringsværktøjet Multisim og en praktisk test, hvor modulet, der er under test blev implementeret og efterfølgende testet. Formålet med modultesten var at verificere, om de designede resultater under designfasen kunne genskabes i både simulering og praktiske tests. Nogle komponenter gennemgik kun praktiske tests, da det ikke var muligt at simulere dem i Multisim. De fulde testbeskrivelse af hver hardware komponent kan læses i \nameref{bilag6}. 
+\subsection{Software}
+Modultesten af softwaren er udført på en alternativ måde end man normalt gøre, når man modul/enhedstester software programmer. Normalt, lige som i $C\#$ programmering, bruger man unit-test- framework til at teste funktionerne udfører deres arbejde. Ved at anvende sådan en framework, kan man autogenerere en testrapport som dokumentation for testudførelsen. Da ingen af gruppens medlemmer er bekendt med test framworks til Matlab, er det valgt at teste koden til hver funktion vha. debugging. Med debugging sikres det, at hver funktion fungerer efter hensigten.
+
+
+\section{Integrationstest}
+Hvor modultesten bruges til at teste at hver modul fungerer for sig selv, benyttes integrationstesten til at validere at delelementer i systemet fungerer sammen. Her testes både hardware og software sammen.  I Denne del af testen har gruppen anvendt top-down approach, se \nameref{bilag6}, hvordan dette er udført.  
+
+\pagebreak
+\section{Accepttest}
+Accepttesten skal vise om produktet lever op til de funktionelle og ikke-funktionelle krav, der er udspecificeret under kravspecifikationen. Der er kun udført accepttest for \textit{Must og Could} krav.  Sammen med hovedvejlederen og bivejlederen har gruppen gennemført accepttesten. Hovedvejlederen noterede testens resultat dvs. om testen var ej testbart, fail eller godkendt. Hvis et testscenarie består testen sættes der et flueben ved Godkendt ellers noteres der ej testbart eller fail ved resultatet.  
