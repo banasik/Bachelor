@@ -97,10 +97,88 @@ Her foretages to yderligere udregninger slew rate og GBWP for at bestemme den ko
 
 \section{Software}
 
-Dette afsnit omhandler designet af softwaren, som anvendes til at håndtere AD, dataopsamling, analysering og visning af bioimpedans og EMG-signaler.
+Dette afsnit omhandler designet af softwaren, som anvendes til at håndtere AD, dataopsamling, analysering og visning af bioimpedans og EMG-signaler. Denne designprocess
+er til for at det bliver klart hvor den tilhørende Matlab kode kan skrives i den senere
+implementering af SRM.
 
 
- 
-Desuden indeholder bilaget et sekvens
-diagram, der giver en detaljeret beskrivelse af udvalgte funktioner/metoder, som styrer
-SRM hardware del.
+\subsection{Funktioner}
+Softwaren indeholder en række funktioner. Funktionerne har bestemte opgaver, hvilket funktionsnavnene afspejler af. I \ref{tab:funktioner} er der vist tre funktioner med navn, type og en beskrivelse af hver funktion. Alle funktionerne og deres beskrivelse står beskrevet i \nameref{bilag5}. 
+
+\begin{table}[H]
+
+\begin{tabularx}{\textwidth}{l l X}
+     Navn	&	Type		&	Beskrivelse \\ \midrule
+     Generate\_SineWave	&	Funktion	&	Funktionen opretter forbindelse til Analog Discovery, tilføjer funktionsgeneratoren samt dens indstillinger, amplitude 2 V og frekvens 20 kHz.\\   \addlinespace[2mm]
+     Read\_Measurements	&	Funktion	&	Funktionen tilføjder de to analog input som bruges til måling af BI og EMG. Yderligere sættes samplingfrekvensen til 500 kHz og at en måling skal vare 10 sekunder.\\   \addlinespace[2mm]
+     Process\_Measurements	&	Funktion	&	Her bliver der foretaget envelope af BI målingen. Dette sker ved at dobbeltensrette BI-signalet og lavpasfiltrere det ved 500 Hz.   \\   \addlinespace[2mm]
+     \bottomrule                                                                                                                   
+    \end{tabularx}
+    \caption {Tabellen viser beskrivelse om tre funktioner der er designet for SRM's software del.}
+    \label{tab:funktioner}
+	
+\end{table}
+
+Udover funktioneres beskrivelse er der også en beskrivelse af oprettelsen af attributterne for hver funktion. Attributterne repræsenterer bl.a. de målte signaler og analyseringen af disse. I tabel \ref{tab:SWinputoutput} er der vist tre funktioners input og output. Alle funktionerne og deres input/output står nærmere beskrevet i \nameref{bilag5}.
+
+
+\begin{table}[H]
+\center
+\begin{tabularx}{\linewidth}{l  X  X}
+     \textbf{Funktion}	&	\textbf{Input}		&	\textbf{Output} \\ \midrule
+     Generate\_SineWave   	&		&	handles.GS\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+Read\_Measurements	&	handles.GS	&	handles.BI\\   \addlinespace[2mm]
+			    &		&	handles.EMG\\   \addlinespace[2mm]
+			    &		&	handles.timestamps\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+			    Process\_Measurements    &	handles.BI	&	handles.locs\_synk\\   \addlinespace[2mm]
+						&	handles.EMG	&	handles.BIsignal\\   \addlinespace[2mm]
+						&	handles.timestamps	&	handles.EMGsignal\\   \addlinespace[2mm]
+						&	& handles.TID	\\   \addlinespace[2mm]\hline\addlinespace[2mm]
+						 \bottomrule                                                                                                                   
+    \end{tabularx}
+    \caption {Tabellen tre funktioners vigtigste input og output parametre.}
+    \label{tab:SWinputoutput}
+	
+\end{table}
+
+På figur \ref{fig:designSWenvelope} er der vist logikken bag behandlingen af BI signalet. Da signalet nu ligger i det digitale domæne, er det nu muligt at arbejde videre med dette BI signal vha. digitale værktøjer såsom filtrering. I denne behandling af BI signalet sker der flere ting i en bestemt rækkefølge. Først behandles signalet vha. envelope, ved at dobbelt ensrette og lavpas filtrere BI signalet (knækfrekvens på 500 Hz og dæmpning på 40dB pr. dekade). Dette resulterer i en konstant amplitude og samtidig flyttet BI signalet ned fra den 20 kHz bærebølge. Efterfølgende bliver BI signalet detrended, hvilket gør at BI signalet nu ligger pænt vandret over den best fittet linje i BI signalet. Dette giver mulighed for en nemmere analysering af BI signalet. 
+
+Da BI signalet er samplet med 500 kHz, bliver det også downsamplet, da det giver en meget mindre mængde data at analysere og arbejde med. Derudover bliver BI signalet smooth, for at få fremhæve synket. Til slut findes der "peaks" (BI signalets bakke dale), som kan bruges til at tælle antal synk i BI signalet. Resultatet af denne logik er et pænt BI signal som vises i en graf og de fundne antal synk i BI signalet. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/designSWenvelope}}
+\caption{Figuren viser den interne logik i funktionen \textit{Process\_Measurements}, hvor BI signalet bliver behandlet. }
+\label{fig:designSWenvelope}
+\end{figure}
+
+
+\subsection{Sekvens Diagram}
+
+Programmet startes ved at åbne m-filen Synkerefleksmonitor. Sundhedspersonalet kan herfra vælge at igangsætte en måling ved at trykke knappen \textit{"Btn\_Start\_Measurements"}. Gemme målingerne ved knappen \textit{"Btn\_Save\_Measurements"} og hente tidligere målinger via knappen \textit{"Btn\_Load\_Measurements"}. Disse knapper, samt resten af koden, kan vises i et sekvensdiagram med deres rækkefølge af kodeeksekvering. Sekvensdiagrammet kan ses på figur \ref{Fig:SekevensDiagram}.
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/SekevensDiagram}}
+\caption{Figuren viser sekvensen af programmets kode}
+\label{Fig:SekevensDiagram}
+\end{figure} 
+
+
+\subsection{GUI}
+
+Softwaren til SRM består også af en GUI hvor sundhedspersonalet interagere med. På figur \ref{Fig:designGUI} kan GUI'en ses. Her har sundhedspersonalet mulighed for at foretagen en måling gemme en måling eller hente en tidligere måling. Designet af GUI er holdt meget simple og kræver ikke nogen yderligere introduktion af funktionaliteten, før programmet kan bruges. 
+
+Der har også været i designfasen, fokus på feedback fra systemet til bruger. Da en måling fylder meget vil dette også tage tid at gemme, men under denne proces bliver der informeret, mens der gemmes og når CSV-filen er oprettet og gemt på computeren. En detaljeret beskrivelse af alle GUI'ens funktionaliteter kan ses i \nameref{bilag5}.
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/designGUI}}
+\caption{Figuren viser designet af GUI til SRM.}
+\label{Fig:designGUI}
+\end{figure} 
