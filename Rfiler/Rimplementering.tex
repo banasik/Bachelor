@@ -11,6 +11,10 @@ I dette kapitel beskrives kort, hvordan SRM'ens hardware og software komponenter
 \label{fig:integrationstestDiagram}
 \end{figure}
 
+\pagebreak
+Den overstående testopstilling blev efterfølgende bygget på fumlebrættet. På figur \ref{fig:integrationstestBilleder1} ses det fumlebrættet, et multimeter,  BI kredsløbet, EMG-måleren, forsyningsspændingen til kredsløbet, elektrode ledninger til hhv. BI kredsløbet og EMG-måleren. Fumlebrættet er tilkoblet til Analog Discovery'en, som bruges til både at forsyne BI kredsløbet og til dataopsamling. 
+
+
 \begin{figure}[H]
 \centering
 {\includegraphics[width=12cm]
@@ -20,11 +24,11 @@ I dette kapitel beskrives kort, hvordan SRM'ens hardware og software komponenter
 \end{figure} 
 
 
-
+Figur \ref{aaspectrumimplementering} viser delsystemer, som er bygget på fumlebrættet. Her er der forsøgt at gøre ledninger så pæne så muligt. 
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=12cm]
+{\includegraphics[width=10cm]
 {Figure/aaspectrumimplementering}}
 \caption{Et nært billede af, hvordan SRM'en er bygget på et fumlebræt.}
 \label{aaspectrumimplementering}
@@ -47,7 +51,7 @@ På baggrund af designfasen for SRM'ens software kan implementeringen påbegynde
 \end{itemize}
    
 Med disse fordele var det oplagt at vælge Matlab som både udviklingsmiljø og programmeringssprog.  
-Kodeimplementeringen er organiseret i små funktioner, som kan kaldes på tværs af hinanden. Implementering af koden tager højde for at koden kan udvides uden at det påvirker andre dele af systemet. Nedenunder ses en Callback knap, der indeholder en række funktioner, som er implementeret i hver sin script-fil og kaldes, når knappen aktiveres af brugeren ved at trykke på den. Én af disse funktioner er funktionen $"Process-Measurements"$, som indeholder kodestykker, der behandler data. Behandlingen af data sker i en bestemt sekvens, som kan udtrykkes vha. en aktivitets diagram, se \ref{Fig:designUML}. 
+Kodeimplementeringen er organiseret i små funktioner, som kan kaldes på tværs af hinanden. Implementering af koden tager højde for at koden kan udvides uden at det påvirker andre dele af systemet. Nedenunder ses en Callback knap, der indeholder en række funktioner, som er implementeret i hver sin script-fil og kaldes, når knappen aktiveres af brugeren ved at trykke på den. Én af disse funktioner er funktionen $"Process-Measurements"$, som indeholder kodestykker, der behandler data. Behandlingen af data sker i en bestemt sekvens, som kan udtrykkes vha. et aktivitets diagram, se \ref{Fig:designUML}. 
 
 \lstinputlisting[frame=single, firstline=96, lastline=105]{matlabkode/Synkerefleksmonitor.m}
 
