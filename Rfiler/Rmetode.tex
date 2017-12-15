@@ -1,112 +1,78 @@
 \chapter{Metode og proces}
 
-\section{Udviklingsværktøjer}
+I dette kapitel er der beskrevet kort hvilken analyse- og designmetode der er anvendt i bachelorprojektet. 
 
-\subsection{Analyse og designmetode}
+\section{Analyse og designmetode}
 
 Dette afsnit har til formål at beskrive hvilke tekniske metoder, der er benyttet af udarbejdelsen af bachelorprojektet. Primært er der tale om metoder fra faget ISE. I dette afsnit bliver der også beskrevet hvilke arbejdsredskaber, der er benyttet til udførelse af bachelorprojektet og rapporten.\\
 
-Udviklingsforløbet er udarbejdet efter V-modellen og ASE-modellen \cite{IngeniorhojskolenAarhusUniversiteta} som er udviklet af Aarhus Ingeniørskole. ASE-modellen anvendes til udvikling af software og hardware, som er delt op i faser. For hver fase kommer en række artefakter som tilsammen resulterer i et veldokumenteret bachelorprojekt. Disse faser kombineres med V-modellen. I dette bachelorprojekt er der udført modultest på alle moduller opført i både hardware og software. Efter at kunne godkende modultestene, er en integrationstest blevet udført, hvor det bygget hardware og software er sammensat og testet som et samlet system. Her gøres det klart at systemet fungerer som intentionen, inden accepttesten nåes. Accepttesten er undersøger om alle krav i specificeret i kravspecifikationen er overholdt. Vejleder, Thomas Nielsen, lærer ved Aarhus Ingeniør Højskole, har deltaget i udførelsen af accepttesen, godkendt og underskrevet den. 
-Brugen af ASE-modellen og kombinationen af V-modellen har resulteret i denne veldokumenteret rapport.   
+Udviklingsforløbet er udarbejdet efter V-modellen, figur \ref{fig:vmodel} og ASE-modellen figur \ref{fig:asemodel} \cite{IngeniorhojskolenAarhusUniversiteta}, som er udviklet af Aarhus Ingeniørskole. ASE-modellen anvendes til udvikling af software og hardware, som er delt op i faser. For hver fase kommer en række artefakter som tilsammen resulterer i et veldokumenteret bachelorprojekt. Disse faser kombineres med V-modellen. I dette bachelorprojekt er der udført modultest på alle moduller opført i både hardware og software. Efter at kunne godkende modultestene, er en integrationstest blevet udført, hvor det bygget hardware og software er sammensat og testet som et samlet system. Her gøres det klart at systemet fungerer som intentionen, inden accepttesten nåes. Accepttesten undersøger om alle krav specificeret i kravspecifikationen er overholdt. Vejleder, Thomas Nielsen, lærer ved Aarhus Ingeniør Højskole, har deltaget i udførelsen af accepttesen, godkendt og underskrevet den. 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\textwidth]
 {Figure/asemodel}}
-\caption{V-modellen}
-\label{asemodel}
+\caption{ASE-modellen\cite{IngeniorhojskolenAarhusUniversiteta}}
+\label{fig:asemodel}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/vmodel}}
+\caption{V-modellens udviklingsfaser\cite{IngeniorhojskolenAarhusUniversiteta}}
+\label{fig:vmodel}
+\end{figure}
+
+Da bachelorprojektet kræver yderligere test og undersøgelser vil denne ASE-model blive modificeret. Der er tilføjet en ekstra fase, analysefasen. Hvilket resulterer i en modificeret ASEmodel
+til bachelorprojektet, som kan ses i figur \ref{fig:procesVoresASE}.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/procesVoresASE}}
 \caption{Den modificeret ASE-model.}
-\label{procesVoresASE}
+\label{fig:procesVoresASE}
 \end{figure}
 
+Bachelorprojektets udvikling blev gennemført kan deles op i faserne 0 til 6. Fase nul bestod i et forprojekt, hvor der blev udarbejdet en projektformulering på baggrund af en udleveret projektbeskrivelse og i samarbejde med vejleder. Her blev der udarbejdet udkast til kravspecifikation (MoSCoW analyse) og projektplan. Disse kan ses i \nameref{bilag10.}
 
+Fase et bestod i at finde videnskabelige litteratur om emnet dysfagi og udvikling af en måler til at detektere synk. Søgeprotokolen kan ses i \nameref{bilag12}. Dette resulteret i en ny projektformulering.
 
+Ved fase to var nu muligt at opdatere MoSCoW kravene fra forprojektet med de nye krav. Dette resulteret i dokumenterne kravspecifikation og acceptestspecifikation. Kan læses i \nameref{bilag1} og \nameref{bilag2}.
 
+Den tredje fase begyndte, vha. af den nye viden og de nye krav, med at udføre analysen. Første del af analysen bestod af at realisere og teste det udleveret kredsløb fra artiklen. Der blev derudover bl.a. undersøgt muligheden for anvendelse af A/D-konverter. Test og undersøgelser blev til dokumentet Analyse, hvilket kan ses i \nameref{bilag3}.
 
-%Udover ASE-modellen blev metoden fra af V-modellen også brugt. Som det kan ses i figur \ref{vmodel} består V-modellen af udviklingsfaser hvor hver fase bliver testet og valideret inden næste fase påbegynder. Dette sikre at man får lavet den højest kvalitet for hver fase og projektet.
-%
-%Ved udvikling af prototypen blev der er i første fase, udviklet en kravspecifikation fra vores MoSCow analyse. Denne analyse indeholdte alt fra de krav som skulle med i projektet, dem som vi måske kunne nå og dem som vi ikke ville udføre, men kunne perspektivere til og videreudvikles på. Til disse krav blev der forbedret en accepttest, som skal teste det færdige produkts funktioner og egenskaber.
-%
-%Anden fase er system design. Hvor der undersøges hvilke hardware komponenter som kan bruges til understøtte kravene. Hertil laves en system test, som tester sammenspillet mellem de forskellige systemer efterhånden som de bliver integreret. 
-%
-%Tredje fase:\\
-%fjerde fase:\\
-%implementering:\\
+Den fjerde fase blev arkitekturen til software og hardware udført, i forlængelse af analysen. Arkitekturen blev dokumenteret ved hjælp af sysML, hvor BDD og IBD diagrammer blev oprettet. Diagrammerne viste hvilke blokke SRM skulle bestå af. Arkitekturen kan læses i \nameref{bilag4}.
 
+I femte iterative design fase, blev software og hardware designet. Hardwaren blev dokumenteret med diagrammer, udregninger og stykliste. Software blev dokumenteret med funktions beskrivelser, et sekvensdiagram og et UML-aktivitetsdiagram. Detaljerne kan læses i \nameref{bilag5}.
 
-
-
-
-
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\textwidth]
-{Figure/vmodel}}
-\caption{V-modellens udviklingsfaser\cite{IngenirhjskolenAarhusUniversitetDevelopmentASE}}
-\label{vmodel}
-\end{figure}
-
-
-
-
-
-
-
-
-Til beskrivelse samt opbygning af Synkerefleksmonitor er der fra ISE benyttet metoden SysML. SysML er brugt til diagramanalyse, specifikation, design og verificerer Synkerefleksmonitor. Hvilket resulterer i en beskrivelse af systemets opbygning og kommunikation. Dernæst er der lavet en applikationsmodel, som giver det samlet overblik over Synkerefleksmonitor. Applikationsmodellen består af en domænemodel, hvor alle aktiviterne i synkerefleksmonitor er beskrevet samt tilhørende klassediagrammer med metoder fra sekvensdiagrammer som beskriver systemets virkning og interaktionen mellem de forskellige dele, som er specifikt for hvert use case.\\
-
-Programmet Visio er blevet brugt til udvikling af alle SysML- og UML-diagrammer. Koden og GUI er skrevet og udviklet i Matlab. Rapporten, bilag, mødereferater og logbog er skrevet i tekstsproget Latex på hjemmesiden Overleaf. 
+Til sidst i den sjette fase blev software og hardware implementeret, modultestet og samlet til en integrationstest. Til slut blev acceptest udført. Denne fase er samlet i \nameref{bilag6}.
 
 \section{Den gennemførte proces}
 
-Bachelorprojektet startede med at få lavet en tidsplan over hele forløbet, med udkast fra bachelorforprojektet. Her blev der der brugt TeamGantt som projektstyringsværktøj, til oprettelse af tidsplanen, som er en online portal hvor alle gruppedeltager har mulighed for at se og rette i tidsplanen. Siden er bygget op om et Gantt-skeam som viser aktivterne i kalenderformat, som bruges til at dokumenterer planlægningen\cite[s. 297]{IntroductionCompendium}.Ved brug af versionshistorik af tidsplanen, var det muligt at følge ændringer undervejs i projektet. \textit{Se Bilag 2 for versionshistorik af tidsplanen}. Projektet brugte TeamGantt kun til grovplaner med strukturen efter ASE-modellen. Udførelsen af de enkelte elementer fra ASE-modellen blev udført ved brug af V-modellen, for at opretholde en høj kvalitet i projektet. V-modellen sikre at hver fase er færdig og giver mulighed for at test løbende før næste fase begynder\cite[s. 12]{IngenirhjskolenAarhusUniversitetDevelopmentASE}. 
+Dette afsnit beskriver den ikke-tekniske del af bachelorprojektet.
 
+\textbf{Gruppedannelse}\\
+Gruppen består af to sundhedsteknologistuderende, der er dannet udefra en fælles interesse for projektets beskrivelse. Begge medlemmer har, inden valget af projektet, talt sammen om mulige gruppedannelse, hvis der kommer et projekt, hvor begge medlemmer finder det interessant. Det kan siges at gruppen er dannet udefra interessen for projektets indhold og en kendskab til hinanden i forvejen. 
 
+\textbf{Samarbejdsaftale}\\
+I dette bachelorprojekt er der genanvendt en samarbejdsaftale fra tidligere semestre med få ændringer. Denne samarbejdsaftale kan læses i \nameref{bilag7}. Her er der beskrevet i bestemte punkter, hvordan gruppen skal arbejde og skal forholde sig under hvert punkt. Den blev godkendt og underskrevet af alle gruppens medlemmer. Udbyttet af at anvende samarbejdsaftalen var positivt for gruppen. Især det benyttet ugeskema gjorde, at man kunne administrere sin tid bedre med fag udover bachelor projektet. 
 
+\textbf{Arbejdsfordeling}\\
+Arbejdesbyrden var ligeligt fordelt i mellem gruppemedlemmerne. Hvor den generelle rapportskrivning af afsnit blev tildelt efter hvem der havde tid og hvad der var bedst for bachelorprojektet. Administrationen  af opgaver blev oprettet og styret fra online portalen Pivotal Tracker, som er et Scrum værktøj. Her blev der i fællesskab oprettet opgaver efter pointsystem om hvor vigtig opgaven var. Det var så muligt at tage opgaver og udføre dem, indenfor for et sprint på en uge. Efter en uge ville man kunne få et overblik over afsluttet opgave i det pågældende sprint. En nærmere beskrivelse og brugen af Pivotal Tracker findes i \nameref{bilag16}.
 
-Undervejs er de specifikke opgaver oprettet, for hvert sprint, i programmet Pivotal Tracker. Når en opgave blev oprettet blev der taget op i gruppen hvilken prioritering opgaven skulle have ved brug af en terning fra 1 til 8 point. Hvert medlem viste sine valgte point. Ved uoverensstemmelse af point skulle hvert medlem argumentere og der blev diskuteret i gruppen om en fælles prioritering af opgaven.  
+\textbf{Planlægning}\\
+I den overordnet planlægning blev der bruget online portalen Teamgantt. Her blev der oprettet en kalender over hele forløbet delt op i forskellige områder fra ASE-modellen. Denne kalender havde hele gruppen adgang til og mulighed for at rette løbende gennem hele projektet. Gruppens brugen af Teamgantt og indstillinger kan læses nærmere i \nameref{bilag16}. For at opreteholde en historik over tidsplanen blev der oprettet en versions historik af tidsplanen, denne kan ses i \nameref{bilag17}.
 
+Det daglige arbejde blev nedskrevet i logbogen ved dagens slutning. Logbogen blev også brugt til at notere beslutninger, ændringer og større arbejde ifm. projektet. For at læse den komplette logbog ses i \nameref{bilag14}.
 
+\textbf{Møder}\\
+For at opretholde overblikket og en fast struktur i projektet var der faste møder i gruppen. Hver morgen startet med scrum møde, hvor hvert gruppe medlem fremførte igangværende opgaver og problematikker. Fredagsmødet blev holdt for at kigge tilbage på ugen og det afsluttede sprint. En gang om ugen var der vejledermødet, med en fast dagsorden og de aktuelle emner der blev diskuteret. Alle møder kan læses i \nameref{bilag18}.
 
+\textbf{Projektledelse}\\
+I dette bachelor projekt var der valgt ikke at have en projektleder. Der var i stedet valgt en ligefordelt og kollektiv ledelse. Det har gjort at hele gruppen har skulle have overblik i hele projektet. Samtidig har det været med til at alle i gruppen kender målet og retningen og der er tydelige kommunikation og opfølgninger med faste møder og scrum møder hver dag hvor alle deltager i gruppen. Den fælles ledelsesstil har gjort at alle deltagerne er engageret og hele tiden kender målet og er klar til at ændre sådan, at målet opnåes på den bedste mulige måde. Da der er mange praktiske opgaver i bachelorprojekt, er der lavet rollefordeling og ansvarsområder igennem hele projektet. De specifikke roller og ansvarsområder kan ses i \nameref{bilag7}.
 
-
-
-\begin{itemize}
-\item SysML og UML
-\item Husk referncer til litteratur, samt afvigelser fra teoriens metoder
-\end{itemize}
-
-\section{Beskriv Processen 1-2 sider - ikke tekniske del}
-\begin{itemize}
-\item Gruppedannelser\\
-Bachelorprojekt gruppen 
-
-
-
-
-\item Anvendelse af samarbejdsaftaler\\
-Der er udarbejdet en samarbjdsaftale som kan ses i Bilag XX. Den er udarbejdet på bag grund af erfaringer fra tideligere projekter og hvad dette projekt kræver.
-\item Arbejdsfordeling\\
-Arbejdsfordelingen af de praktiskeopgaver og ansvarlige områder er beskrevet i samarbejdsaftalen. se bilag XX. Alle opgaver har været lagt ind i Pivotal Tracker hvor hvert medlem har kunne vælge opgaver efter interesse og efter den overordnet planlægning.
-\item Planlægning\\
-Teamgantt er den overordnet planlægning som bliver diskuteret og redigeret hver fredag efter et sprint er fuldendt.  
-\item Møder\\
-Scrum møder hver dag kl. 8:30 som omhandler igangværende opgaver og status og fremgangen på disse. Møde hver fredag. 14 omhandlende ugens sprint og status sprintes opgaver. 
-\item Projektledelse\\
-Der er en ligefordelt ledelse i gruppen, med et fælles ansvar, med roller, opgave planlægning og organisering. Se samarbejdskontrakt bilag XX.
-
-\item Projektsadministation\\
-Der er opdelt ansvarsopgaver i gruppen i mellem såsom, dokument ansvar og referant ved møder. Se den nærmere oversigt i samarbejdsaftalen Bilag XX.
-\item Sprints (Scrum)\\
-Gruppen har valgt at køre med ugentlige scrum sprints med værktøjet Pivotal Tracker. 
-\end{itemize}
-Den gennemførte proces beskrives nærmere i procesbeskrivelsen i projektets bilag.
-
+\textbf{Projektadministration}\\
+Rapporten og bilag er skrevet i tekstsproget Latex. Hvor alle afsnit er delt op i selvstændige .tex filer. Disse afsnit er delt op i en rapport og bilags mappe. Figurer brugt i projektet har også en selvstændig mappe. Møder, referater og logbog er skrevet i Google Docs. Tidsplan og opgaver er oprettet og ligger i selvstændige online værktøjer: Teamgantt og Pivotal Tracker.    
 
