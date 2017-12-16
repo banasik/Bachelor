@@ -1,1 +1,24 @@
 \chapter{Fremtidigt arbejde}
+
+Dette kapitel beskriver, hvad en videreudvikling af SRM'en fra proof-of-concept produkt til et produkt, der kan anvendes til kliniske undersøgelser, bør indeholde. 
+
+
+\section{Færdiggørelsen af de funktionelle krav}
+\textit{Could og Would} kravene i dette projekt er nedprioriteret i forhold til \textit{Must og Should} kravene , da det er vurderet at disse krav ikke er kritiske for at realisere en funktionsdygtigt SRM. Implementering af disse krav vil for eksempel øge muligheden for at at diskriminere, vha. machine learning, imellem bevægelse, der er forårsaget af et synk eller andre bevægelser som hovedbevægelser eller hoste. Implementering af et sådan krav vil øge målingernes troværdighed. En videreudvikling af SRM'en burde derfor indeholde opfyldelsen af \textit{Could og Would}.   
+\section{Risikoanalyse}
+ Risikoanalyse spiller en essentiel rolle ved udviklingen af medicinsk udstyr, da den belyser potentielle farer, der er forbundet med produktet. Hvis SRM'en skal bruges til kliniske undersøgelser er det nødvendigt at produktet går igennem en risikoanalyse efterfulgt af en risikohåndteringsplan. Man kan med fordel følge den harmoniserede standard DS/EN ISO 14971 når man udfører en risikohåndtering. Ved at følge denne standard, kan man være sikker på at SRM'en opfylder de love, der gælder for medicinsk udstyr. Der er hverken, i dette projekt, foretaget en risikoanalyse eller risikohåndtering. Dette diskvalificerer SRM'en til at blive anvendt i kliniske undersøgelser. Det skal også nævnes, at det aldrig har været planen at udføre sådan nogle analyser, da SRM'en kun er et proof-of-concept, men dette er uundgåeligt, hvis produktet skal bruges som et medicinsk udstyr. Derfor burde en videreudvikling af dette produkt indeholde både en risikoanalyse og en risikohåndteringsplan.     
+
+\section{Mere test}
+Under udviklingen af  SRM'en har der i flere omgange været uforklarlig udfald, hvor SRM'en ikke kunne detektere et synk. Om disse udfald skyldes systemet eller interfacet mellem systemet og måleobjektet, burde flere tests afdække. Der også brug for at teste SRM'en på flere raske objekter, hvor man variere måleobjekternes køn, vægt og race. Der er kun foretaget tests på to raske objekter under udvikling af SRM'en, hvilken ikke er nok til at vurdere, hvordan SRM'en virker på større populationer. Det er derfor nødvendigt at teste systemet mere for at identificere de uforklarlige udfald, der er omtalt, samt mere tests på flere raske personer for at estimere, hvordan SRM'en virker på forskellige gruppe personer.  
+ 
+ 
+\section{Validering}
+
+SRM'en skal valideres op imod kommerciel bioimpedans måler for at verificere, om SRM'en er troværdig. Gruppen har forsøgt, som beskrevet i kapitel 7, at validere SRM'en op imod en kommerciel bioimpedans måler uden held. Dette bør ikke opgives, da sådan en validering kan give en indikation om SRM'en fungerer efter hensigten. Derfor vil det være oplagt at sammenligne det to apparater ved videreudvikling af SRM'en. 
+
+\section{Wearable device}
+En oplagt mulighed til en fremtidig videreudvikling er at gøre SRM'en wearable. Første trin i den retning vil være at opbygge BI kredsløbet med dens tilhørende komponenter på et print. Dette betyder bl.a. at Analog Discoverys opgaver i systemet flyttes til printet ved at man bygger delesystemerne som funktionsgeneratoren og ADC'en på printet. Desuden skal man enten bygge en ny emg-måler kredsløb på det sammen print eller montere den kommercielle EMG-måler på printet sammen BI-måler kredsløbet. Fordelen ved et sådan en wearable device er at man ikke behøver at begrænse brugeren af systemet til en målestation.   
+
+
+\section{Anvendelsesmuligheder}
+En fremtidig anvendelsesmulighed i SRM'en er at man fremover kan få et apparat, der kan erstatte eller supplere de nuværende apparater, der bruges at undersøge syne-spisevanskeligheder på dysfagipatienter. En anden anvendelsesmulighed er at brugeren kan tage devicet med hjem og måle sig selv uden supervision. Devicet vil også kunne bruges på  patienter med trachealtube. SRM'en kan være med til at evaluere, hvornår trachealtuberen kan fjernes.    
