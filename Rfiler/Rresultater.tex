@@ -1,8 +1,58 @@
 \chapter{Resultater}
 
-I denne del af rapporten fremlægges projektets resultater fra accepttesten.  I accepttesen er der testet de funktionelle og ikke-funktionelle krav, der er defineret i \nameref{bilag1}. De observerede resultater i denne test præsenteres kort ved anvendelse af tabeller. 
+I denne del af rapporten fremlægges projektets resultater fra modultesten, integrationstesten og  accepttesten. Der fokuses på kun få udvalgt resultater, der er vigtige for produktets funktionsdygtighed,  fra hver af de nævnte testtyper. De fulde resultater, der er opnåede under disse tests henvises der til de pågældende bilage. I det følgende præsenteres første hardware resultaterne, der er opnåede i modultesten og integrationstesten efterfulgt af software resultaterne, der opnåede inden for det samme testtype. Tilslut fremvises accepttestens resultater.     
 
-\section{Funktionelle krav}
+\section{Hardware resultater}
+\subsection{Modul resultater}
+Under modultesten af hardwaredelen er der opnåede resultater for hver af de testede moduler, se disse resultater i \nameref{bilag6}. En af de kritiske opnåede resultater for hele systemet var resultatet fra strømgeneratoren. Figur \ref{fig:Stromgeneratorload} viser strømproduktion af strømgeneratoren. Her ses at strømmen er konstant, når belastningen varieres op til $10k \Omega$, hvilken er den højeste impedans som et menneskevæv kan levere. Til variering af belastningen er der brugt en variabel modstand.        
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=12cm]
+{Figure/Stromgeneratorload}}
+\caption{Output-strømmen af strømgeneratoren, når belastningen varieres fra $1 - 10k\Omega$}
+\label{fig:Stromgeneratorload}
+\end{figure}
+
+
+\pagebreak 
+
+Et andet vigtigt resultatet for hele systemet var resultatet af systemets AA filter. For at afgøre, hvor meget filteret dæmpning skal være, sammensættes alle systemets komponenter for at lave en spektrumanalyse. På \ref{fig:aaspectrum1} kan man aflæse amplituden på den målte signal, samt hvor meget amplituden er dæmpet ved 250kHz, som er den halve samplingfrekvens. Det kan aflæses at signalet er aftaget med 75dB. Dette betyder at systemets AA-filter skal dæmpe signalet yderligere med 15dB  for at opfylde ADC'ens bit range, som 90dB.   
+
+       
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/aaspectrum1}}
+\caption{Det implementeret frekvensspektrum, som viser at der er en samlet dæmpning på ca. 75dB som skal yderligere dæmpes til 90dB med et 2.ordens lavpasfilter.}
+\label{fig:aaspectrum1}
+\end{figure}
+
+\pagebreak
+
+Da man nu kender, hvor meget signalet skal dæmpes, designes der en 2. ordens lavpasfilter. På figur \ref{fig:aafiltermodultest} ses at filteret er i stand til at dæmpe et signal med mere end 15dB. 
+
+
+\begin{figure}[H] 
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/aafiltermodultest}}
+\caption{Resultat om filterets virkning fra Network Analyzer i waveforms.}
+\label{fig:aafiltermodultest}
+\end{figure}
+
+
+
+\subsection{Integrationstest}
+
+
+
+\section{Software}
+\subsection{Modultest}
+\subsection{Integrationstest}
+
+
+\section{Accepttest}
 
 De funktionelle krav som dette projekt har prioriteret højst er de krav, der er defineret i \textit{Must og Should}. Til opfyldelsen af disse krav, er der benyttet use cases, der sammen definerer, hvordan disse krav opnås. De detaljeret testudførsel og resultater kan læses i \nameref{bilag6}. I tabel \ref{AT_UC1} præsenteres use casens resultat udfald. 
   
