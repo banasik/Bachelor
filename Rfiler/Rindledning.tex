@@ -30,7 +30,16 @@ Under væske- og/eller fødeindtagelse samt vejrtrækning ændres forholdet mell
 \caption{Illustration af, hvodan emg-og bioimpedans signaler opfører sig under vejrtrækning og mad/drikke indtagelse\cite{Schultheiss2014}}
 \label{EMGBIGraph} 
 \end{figure}
+\pagebreak
 
+BI-måler anvendes til at måle kroppens modstand mod strømmen af en konstant AC strøm. Det biologiske væv, der skal måles kan illustreres som et elektrisk kredsløb, der består af tre elektriske komponenter (to modstande og en kondensator). Den ene modstand sammen med en kondensator repræsenterer målregionens intracellulærvæske, hvorimod den anden modstand repræsenterer modstanden i ekstracellulærvæsken. I dette projekt sendes en konstant strøm med frekvens på 20kHz igennem måleobjektets væv. I \nameref{bilag3} kan man læse, hvilken betydning frekvens størrelse har for måleresultatet. 
+\begin{figure}[H]
+\centering
+{\includegraphics[width=10cm]
+{Figure/vaevsmodel}}
+\caption{Figuren viser et biologisk væv repræsenteret som et elektrisk kredsløb. Intracellulærvæsken består af modstanden  R\textsubscript{I} og kondensatoren X\textsubscript{C}, der har kapacitive egenskaber. R\textsubscript{E} er modstanden i ekstracellulærvæsken}
+\label{fig:vaevsmodel}
+\end{figure}
 \section{Problemformulering}
 
 Dette projekt undersøger muligheden for at udvikle et device, der består af en bioimpedans sensor og en EMG-måler, der tilsammen kan monitorere og detektere synkefrekvensen hos raske personer. Devicet bliver fremover omtalt som synkerefleksmonitor(SRM). Dette Projekt vil søge svar på følgende spørgsmål: 

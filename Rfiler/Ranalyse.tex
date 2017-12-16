@@ -33,24 +33,34 @@ For at afgøre, om kredsløbet kan bruges til at detektere et synk, har gruppen 
 \label{fig:celler}
 \end{figure}
 
-Efter testen af kredsløbet, kunne det konstateres at kredsløbet ikke er i stand til at detektere et synk.  At systemet ikke er i stand til at detektere et synk kan det fortolkes med følgende forklaringer:
+Efter testen af kredsløbet, kunne det konstateres at kredsløbet ikke er i stand til at detektere et synk. Se testresultaterne af BI kredsløbet på figur \ref{fig:BIdiagram} kan læses i   \nameref{bilag3}.\\
+
+\pagebreak
+At systemet ikke er i stand til at detektere et synk kan det forklares med følgende:
 
 
  
 \begin{itemize}
 \item at kredsløbet er designede til et andet formål end at detektere et synk
 \item at de målte spændinger er så svage at forstærkning af dem er nødvendige
-\item at anvendelsen af kun to elektroder påvirker målingens resultater.  
+\item at anvendelsen af kun to elektroder påvirker målingernes resultater.  
 \end{itemize}
 
-Som konsekvens af det manglende synk, besluttede projektgruppen at designe et alternativt BI kredsløb, der skal detektere et synk. Det nye kredsløb kan ses på figur \ref{fig:konklusiondiagram}
+Som konsekvens af det manglende synk, besluttede projektgruppen at designe et alternativt BI kredsløb, der skal detektere et synk. Det nye system skal indeholde følgende komponenter:
 
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\linewidth]
-{Figure/konklusiondiagram}}
-\caption{Det nye system, som BI-måleren kommer til at bestå af. De nederste blokke til sammen transporterer strøm til måleobjektet, hvorimod de øverste blokke måler biosignal fra måleobjektet }
-\label{fig:konklusiondiagram}
-\end{figure} 
+\begin{itemize}
+\item En funktionsgenerator til simulering af kredsløbet
+\item To instrumentationsforstærker, der bruges til at forstærke signalet fra funktionsgenerator og biosignal fra måleobjektet. De to  instrumentationsforstærker anvendes desuden til at fjerne 50 Hz brum. 
+\item En strømgenerator 
+\item 4 Ag/AgCl elektroder til transmittering af strøm og måling af spændinger.
+\item En operationsforstærker til at forstærke signalet yderligere for at udnytte ADC'ens spændingsområde mest muligt.
 
-Med prisen og forhåndskendskabet til nogle disse komponenter for øje er der valgt at opbygge overstående system  med komponenter, som enten findes på skolens elektronik værksted eller som kan købes billigt. Design og funktionalitet af hver blok på \ref{fig:konklusiondiagram} henvises der til \nameref{bilag4} og \nameref{bilag5}. Testresultaterne af BI kredsløbet på figur \ref{fig:BIdiagram} kan læses i   \nameref{bilag3}. 
+\item En anti-aliaseringsfilter til at undertrykke aliasering. 
+\item En dataopsamlingsenhed
+
+\end{itemize}
+
+
+ 
+
+Med prisen og forhåndskendskabet til nogle disse komponenter for øje er der valgt at opbygge overstående system  med komponenter, som enten findes på skolens elektronik værksted eller som kan købes billigt. Design og relation mellem overstående komponenter henvises der til \nameref{bilag4} og \nameref{bilag5}. 

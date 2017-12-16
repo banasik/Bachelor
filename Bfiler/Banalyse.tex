@@ -579,15 +579,19 @@ Som konsekvens af det manglende synk besluttede projektgruppens medlemmer at des
 
 \chapter{Konklusion}
 
-I dette bilag er der gennemgået indholdet af et kredsløb fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Formålet med denne gennemgang var at undersøge om kredsløbet er i stand til at detektere et synk hos raske objekter. Under gennemgangen er der i flere trin testet strømgeneratoren for at sikre at måleobjektet kun forsynes med en uskadelig strøm. Tilslut blev måleobjektet koblet sammen med systemet for at teste om kredsløbet kan anvendes til at detektere et synk. På baggrund af denne test kunne det konstateres at systemet ikke er i stand til at detekteret et synk og vi dermed er nødt til at designe et alternativ system som kan anvendes til det ønskede formål. Arkitekturen til det nye system kan ses på figur \ref{fig:konklusiondiagram}. Her ses de kritiske komponenter som det nye system skal bestå af.
+I dette bilag er der gennemgået indholdet af et kredsløb fra artiklen \textit{"Bioimpedance Analysis: A Guide to Simple Design and Implementation"}. Formålet med denne gennemgang var at undersøge om kredsløbet er i stand til at detektere et synk hos raske objekter. Under gennemgangen er der i flere trin testet strømgeneratoren for at sikre at måleobjektet kun forsynes med en uskadelig strøm. Tilslut blev måleobjektet koblet sammen med systemet for at teste om kredsløbet kan anvendes til at detektere et synk. På baggrund af denne test kunne det konstateres at systemet ikke er i stand til at detekteret et synk og vi dermed er nødt til at designe et alternativ system som kan anvendes til det ønskede formål. Delkomponenterne til det nye system er som følgende: 
 
-\begin{figure}[H]
-\centering
-{\includegraphics[width=\linewidth]
-{Figure/konklusiondiagram}}
-\caption{Det nye system, som BI-måleren kommer til at bestå af. De nederste blokke til sammen transporterer strøm til måleobjektet, hvorimod de øverste blokke måler biosignal fra måleobjektet. }
-\label{fig:konklusiondiagram}
-\end{figure}
+\begin{itemize}
+\item En funktionsgenerator til simulering af kredsløbet
+\item To instrumentationsforstærker, der bruges til at forstærke signalet fra funktionsgenerator og biosignal fra måleobjektet. De to  instrumentationsforstærker anvendes desuden til at fjerne 50 Hz brum. 
+\item En strømgenerator 
+\item 4 Ag/AgCl elektroder til transmittering af strøm og måling af spændinger.
+\item En operationsforstærker til at forstærke signalet yderligere for at udnytte ADC'ens spændingsområde mest muligt.
+
+\item En anti-aliaseringsfilter til at undertrykke aliasering. 
+\item En dataopsamlingsenhed
+
+\end{itemize}
 
 Design og valg af disse komponenter henvises der til \textit{Bilag 5 - Design}. \\
 Det er også valgt at kombinere overstående BI-måler system med en EMG måler. Dette er valgt, da kombinationen af de to målesystemer giver et mere retvisende billede af, hvornår et synk optræder \cite{Schultheiss2014}    \citep{ChristensenElisabeth;LundbakStrand2017}. 
