@@ -2,8 +2,8 @@
 
 I denne del af rapporten fremlægges projektets resultater fra modultesten, integrationstesten og  accepttesten. Der fokuseres på kun få udvalgt resultater, der er vigtige for produktets funktionsdygtighed,  fra hver af de nævnte testtyper. De fulde resultater, der er opnåede under disse tests henvises der til de pågældende bilag. I det følgende præsenteres første hardware resultaterne, der er opnåede i modultesten og integrationstesten efterfulgt af software resultaterne, der opnåede inden for det samme testtype. Tilslut fremvises accepttestens resultater.     
 
-\section{Hardware resultater}
-\subsection{Modul resultater}
+\section{Modultest}
+\subsection{Hardware}
 Under modultesten af hardwaredelen er der opnåede resultater for hver af de testede moduler, se disse resultater i \nameref{bilag6}. En af de kritiske opnåede resultater for hele systemet var resultatet fra strømgeneratoren. Figur \ref{fig:Stromgeneratorload} viser strømproduktion af strømgeneratoren. Her ses at strømmen er konstant, når belastningen varieres op til $10k \Omega$, hvilken er den højeste impedans som et menneskevæv kan levere\cite[s. 49]{Chester2014}. Til at skabe en ohmsk ændring, er der anvendt en variabel modstand.        
 
 \begin{figure}[H] 
@@ -43,8 +43,8 @@ Da man nu kender, hvor meget signalet skal dæmpes, designes der et 2. ordens la
 
 
 
-\section{Software}
-\subsection{Modultest}
+
+\subsection{Software}
 
 Under modultesten af softwaredelen er der opnåede resultater for hver af de testede moduler, se disse resultater i \nameref{bilag6}. En af de kritiske opnåede resultater for hele systemet var resultatet fra funktionen \textit{"Read\_Measurements"}. Dette resultat kan ses på figur \ref{fig:modultestshow}. Resultatet viser den ønskede simultane måling af to signaler. 
 
@@ -124,21 +124,21 @@ Efter AA filter er blevet tilføjet var det muligt at lave en ny spektrum analys
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/integrationstestAAspectrum}}
-\caption{Resultatet efter BI signalet er blevet lavpas filteret}
+\caption{Resultatet af den nye spektrumanalyse.}
 \label{fig:integrationstestAAspectrum}
 \end{figure}
 
 
-Da MyoWare Muscle Sensor blev tilføjet, aflæses den konstante strøm til at være 283 $\mu A$ igen, se figur \ref{fig:integrationstestVCCSud2}.
+Da MyoWare Muscle Sensor blev tilføjet, aflæses den konstante strøm til at være 283 $\mu A$, se figur \ref{fig:integrationstestVCCSud2}.
 
-
-\begin{figure}[H] 
-\centering
-{\includegraphics[width=4cm]
-{Figure/myoware}}
-\caption{Resultatet efter BI signalet er blevet lavpas filteret}
-\label{fig:myoware}
-\end{figure}
+ 
+%\begin{figure}[H] 
+%\centering
+%{\includegraphics[width=4cm]
+%{Figure/myoware}}
+%\caption{MyoWare Muscle Sensor }
+%\label{fig:myoware}
+%\end{figure}
 
 \begin{figure}[H] 
 \centering
@@ -148,25 +148,20 @@ Da MyoWare Muscle Sensor blev tilføjet, aflæses den konstante strøm til at v�
 \label{fig:integrationstestVCCSud2}
 \end{figure}
 
-
-
-
+Figur \ref{fig:guiDone} viser resultatet af den sidste del af integrationstesten. Resultatet viser et målt BI signal og EMG signal simultant. Det kan også ses at hvert synk i BI signalet har samtidig udslag i EMG målingen. Det kan også ses at antal synk bliver registeret og vist. 
 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/guiDone}}
-\caption{Resultatet efter BI signalet er blevet lavpas filteret}
+\caption{Resultatet af integrationen af hardware og software.}
 \label{fig:guiDone}
 \end{figure}
 
 
 
-
-
-
 \section{Accepttest}
-
+\subsection{Funktionelle krav}
 De funktionelle krav som dette projekt har prioriteret højst er de krav, der er defineret i \textit{Must og Should}. Til opfyldelsen af disse krav, er der benyttet use cases, der sammen definerer, hvordan disse krav opnås. De detaljeret testudførsel og resultater kan læses i \nameref{bilag6}. I tabel \ref{AT_UC1} præsenteres use casens resultat udfald. 
   
 \begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
@@ -189,7 +184,7 @@ De funktionelle krav som dette projekt har prioriteret højst er de krav, der er
 De tre use cases tilsammen opfylder kravene i \textit{Must og Should} i kravspecifikationen med undtagelse krav nummer 9. Se kapitel 7, hvorfor dette krav ikke er opfyldt. 
 
 \pagebreak
-\section{Ikke-funktionelle krav}
+\subsection{Ikke-funktionelle krav}
 
 Tilforskel fra de funktionelle krav er de ikke-funktionelle krav ikke organiseret i use cases. De ikke-funktionelle krav består af punkter, der definerer produktets kvalitetsaspekter. Disse skal være testbart. Herunder opsummeres resultaterne af accepttesen for de ikke-funktionelle krav. 
 
