@@ -40,7 +40,7 @@ Figur \ref{aaspectrumimplementering} viser delsystemer, som er bygget på fumleb
 
 \section{Software}
 
-På baggrund af designfasen for SRM'ens software kan implementeringen påbegyndes. Til implementering  af systemet software-del benyttes  udviklingsværktøjet/scriptsproget  Matlab pga. følgende fordele:
+På baggrund af designfasen for SRM'ens software kan implementeringen påbegyndes. Til implementering  af systemet software-del benyttes  udviklingsværktøjet/scriptsproget  Matlab R2017b pga. følgende fordele:
 
 
 \begin{itemize}
@@ -51,19 +51,19 @@ På baggrund af designfasen for SRM'ens software kan implementeringen påbegynde
 \end{itemize}
    
 Med disse fordele var det oplagt at vælge Matlab som både udviklingsmiljø og programmeringssprog.  
-Kodeimplementeringen er organiseret i små funktioner, som kan kaldes på tværs af hinanden. Implementering af koden tager højde for at koden kan udvides uden at det påvirker andre dele af systemet. Nedenunder ses en Callback knap, der indeholder en række funktioner, som er implementeret i hver sin script-fil og kaldes, når knappen aktiveres af brugeren ved at trykke på den. Én af disse funktioner er funktionen $"Process-Measurements"$, som indeholder kodestykker, der behandler data. Behandlingen af data sker i en bestemt sekvens, som kan udtrykkes vha. et aktivitets diagram, se \ref{Fig:designUML}. 
+Kodeimplementeringen er organiseret i små funktioner, som kan kaldes på tværs af hinanden. Implementering af koden tager højde for at koden kan udvides uden at det påvirker andre dele af systemet. Ved en måling trykkes knappen "Start\_Measurements" hvilket kalder en række funktioner. Én af disse funktioner er funktionen \textit{"Process\_Measurements"}, som indeholder kodestykker, der behandler bl.a. BI signalet.
 
-\lstinputlisting[frame=single, firstline=96, lastline=105]{matlabkode/Synkerefleksmonitor.m}
+%\lstinputlisting[frame=single, firstline=96, lastline=105]{matlabkode/Synkerefleksmonitor.m}
 
 
-\lstinputlisting[frame=single]{matlabkode/Process_Measurements.m}
+\lstinputlisting[frame=single, firstline=1, lastline=38]{matlabkode/Process_Measurements.m}
 
-\begin{figure}[H]
-\centering
-{\includegraphics[width=8cm]
-{Figure/designUML}}
-\caption{Figuren viser indholdet af kodeeksekvering i funktionen \textit{"Process\_Measurements"} i den del hvor der udføres envelope af det rå BI-signal. Først bliver det rå BI signal dobbeltensrettet og dernæst filtreret vha. digital lavpasfilter med knækfrekvens = 500 Hz og dæmper med 40 dB over en dekade. Til sidst bliver signalet detrended, downsampled og synk detekteres.}
-\label{Fig:designUML}
-\end{figure} 
+%\begin{figure}[H]
+%\centering
+%{\includegraphics[width=8cm]
+%{Figure/designUML}}
+%\caption{Figuren viser indholdet af kodeeksekvering i funktionen \textit{"Process\_Measurements"} i den del hvor der udføres envelope af det rå BI-signal. Først bliver det rå BI signal dobbeltensrettet og dernæst filtreret vha. digital lavpasfilter med knækfrekvens = 500 Hz og dæmper med 40 dB over en dekade. Til sidst bliver signalet detrended, downsampled og synk detekteres.}
+%\label{Fig:designUML}
+%\end{figure} 
 
 Yderligere beskrivelse af de resterende Callbacks og funktioner, henvises der til \nameref{bilag6}. 
