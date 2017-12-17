@@ -27,8 +27,7 @@
 
 
 \chapter{Indledning}
-På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, hvor udfordringer med nuværende behandling og udredning af dysfagipatienter blev diskuteret, er der udarbejdet en kravspecifikation til et system ved navnet synkerefleksmonitor(SRM). Dette system er tiltænkt til at supplere de nuværende systemer, der bruges til at udrede synke-spise problemer hos dysfagipatienter. Det skal dog for god ordens skyld understreges at systemet, der realiseres i dette projekt er på Proof-of-Concept stadie og dermed må ikke anvendes til kliniske brug. Kravet til dette system er udspecificeret af projektgruppens medlemmer uden at der er indgået en kontrakt med Hammel Neurocenter som kunde. Med andre ord er projektgruppens medlemmer ikke forpligtet til at levere et produkt til nogen. \\
-
+På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, hvor udfordringer med nuværende behandling og udredning af dysfagipatienter blev diskuteret, er der udarbejdet en kravspecifikation til et system ved navnet synkerefleksmonitor(SRM). Dette system er tiltænkt til at supplere de nuværende systemer, der bruges til at udrede synke-spise problemer hos dysfagipatienter. Det skal dog for god ordens skyld understreges at systemet, der realiseres i dette projekt er på Proof-of-Concept stadie og dermed må ikke anvendes til kliniske brug. Kravet til dette system er udspecificeret af projektgruppens medlemmer uden at der er indgået en kontrakt med Hammel Neurocenter som kunde. 
 
 Kravspecifikationen har til formål at specificere
 kravene til SRM. SRM'en består af en bioimpedans måler(BI) og en EMG måler. Kravene til SRM'en er blevet prioriteret i MoSCoW analyse, hvor "must kravet" prioriteres højst. Kravspecifikationen indeholder en beskrivelse af projektets funktionelle krav, en aktør-kontekstdiagram, systemets use-cases og ikke-funktionelle krav. Til  kravspecifikationen er der lavet en accepttest, som primært har til formål at teste
@@ -165,15 +164,15 @@ Nedenstående tabel \ref{tab:moscow} beskriver funktionelle krav, der stilles ti
 \subsubsection{Version 1.0} 
 
 For at opfylde de overstående krav, skal systemet have usecases, der bidrager til opfyldelsen af disse krav.
-Figur \ref{UseCaseV1} viser systemets fire  usecases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. De fire usecases udtrykker antallet af muligheder som brugeren til programmet kan interagerer med på brugergrænsefladen.  Nedenstående er der detaljeret beskrivelse af de enkelte usecases gennem et fully-dressed skema. Det skal bemærkes at denne version 1.0 af use case diagrammerne ikke implementeres, men derimod version 1.1, som kommer på side 10.  
+Figur \ref{usecaseDiaV1} viser systemets fire  usecases: Start BI-måling, Start EMG-måling, Beregn BI, Vis BI og EMG. De fire usecases udtrykker antallet af muligheder som brugeren til programmet kan interagerer med på brugergrænsefladen.  Nedenstående er der detaljeret beskrivelse af de enkelte usecases gennem et fully-dressed skema. Det skal bemærkes at denne version 1.0 af use case diagrammerne ikke implementeres, men derimod version 1.1, som kommer på side 9.  
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/usecaseDiaV1}}
-\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af 4 usecases, der tilsammen igangsætter, beregner og viser to målinger}
-\label{UseCaseV1}
+\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af funktionelle krav delt op 4 usecases, der tilsammen igangsætter, beregner og viser to målinger}
+\label{usecaseDiaV1}
 \end{figure}
 
 

@@ -38,7 +38,7 @@ Denne instrumentationsforstærker er tiltænkt til at forstærke et AC signal p�
 \centering
 {\includegraphics[width=10cm]
 {Figure/INA128IM}}
-\caption{Figuren viser, hvordan INA128 er implementeret på et fumlebræt  }
+\caption{Figuren viser, hvordan INA128 er implementeret på et fumlebræt. Der yderligere påsat en afkoblings kondensator på 0.1$\mu F$.  }
 \label{figScrip}
 \end{figure}
 
@@ -336,26 +336,24 @@ Der er brugt værktøjet Network Analyzer i programmet Waveforms, for at teste f
 \subsection{Funktioner}
 \subsubsection{Synkerefleksmonitor\_OpeningFcn}
 
-
-
-
-
-
+Funktionen \textit{Start\_GUI} bliver kørt når programmet startes. Den knap er de aktiveret når GUI'en startes.
 
 
 \subsubsection{Btn\_Start\_Measurement}
 
+Dette callback kører de funktioner som bruges når en måling skal foretages. 
 \begin{figure}[H] 
 \centering
 {\includegraphics[width=10cm]
 {Figure/modultestStart}}
-\caption{Oprettelse af dato og tid.}
+\caption{Knappen \textit{Start\_Measurement} bliver deaktiveret når GUI'en startes. Det bruges til at undgå at der trykkes på knappen når en måling er startet.}
 \label{fig:modultestStart}
 \end{figure}
 
 
 \subsubsection{Btn\_Save\_Measurement}
 
+Dette callback kører de funktioner som bruges når en måling gemmes. 
 
 \subsubsection{Start\_GUI}
 
@@ -393,7 +391,7 @@ Resultatet af dennes funktions modultest kan ses på figur \ref{fig:modulteststa
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/modultestGUI}}
-\caption{Resultat fra koden i "Start\_GUI"}
+\caption{Resultat fra koden i "Start\_GUI". Dato og tid vises, knappen \textit{Save\_Measurement} deaktiveres og billede vises.}
 \label{fig:modultestGUI}
 \end{figure}
 
