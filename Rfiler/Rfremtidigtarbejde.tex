@@ -1,14 +1,23 @@
 \chapter{Fremtidigt arbejde}
 
-Dette kapitel beskriver, hvad en videreudvikling af SRM'en fra proof-of-concept produkt til et produkt, der kan anvendes til kliniske undersøgelser, bør indeholde. 
+Dette kapitel beskrives og prioriteres en række fremtidige indsatsområder som er oplagt at arbejde videre med i en videreudvikling af SRM'en. Disse indsatsområder består af nødvendige forbedringer af produktet og færdiggørelse af de krav, som står specificeret i projektets kravspecifikation, men ikke er nået implementeret.  
 
 
-\section{Færdiggørelsen af de funktionelle krav}
+\section{Færdiggørelse af de funktionelle krav}
 \textit{Could og Would} kravene i dette projekt er nedprioriteret i forhold til \textit{Must og Should} kravene, da det er vurderet at disse krav ikke er kritiske for at realisere en funktionsdygtigt SRM. Implementering af disse krav vil for eksempel øge muligheden for at diskriminere, vha. machine learning, imellem bevægelse, der er forårsaget af et synk eller andre bevægelser som hovedbevægelser eller hoste. Implementering af et sådan krav vil også øge målingernes troværdighed. En videreudvikling af SRM'en burde derfor indeholde opfyldelsen af \textit{Could og Would}.   
-\section{Risikoanalyse}
- Risikoanalyse spiller en essentiel rolle ved udviklingen af medicinsk udstyr, da den belyser potentielle farer, der er forbundet med produktet. Hvis SRM'en skal bruges til kliniske undersøgelser er det nødvendigt at produktet går igennem en risikoanalyse efterfulgt af en risikohåndteringsplan. Man kan med fordel følge den harmoniserede standard DS/EN ISO 14971 når man udfører en risikohåndtering. Ved at følge denne standard, kan man være sikker på at SRM'en opfylder de love, der gælder for medicinsk udstyr. Der er hverken, i dette projekt, foretaget en risikoanalyse eller risikohåndtering. Dette diskvalificerer SRM'en til at blive anvendt i kliniske undersøgelser. Det skal også nævnes, at det aldrig har været planen at udføre sådan nogle analyser, da SRM'en kun er et proof-of-concept, men dette er uundgåeligt, hvis produktet skal bruges som et medicinsk udstyr. Derfor burde en videreudvikling af dette produkt indeholde både en risikoanalyse og en risikohåndteringsplan.     
 
-\section{Mere test}
+\section{Færdiggørelse af de ikke-funktionelle krav}
+Der er under de ikke-funktionelle krav medtaget en række krav som under accepttesten er mærkeret som ikke testbart. I en videreudvikling af SRM'en bør derfor indeholde realisering og forbedring af disse ikke testbare krav. Hvis disse krav bliver gjort testbare vil det betyde at SRM'en kvalitet bliver forøget.    
+
+\section{Risikoanalyse}
+ Risikoanalyse spiller en essentiel rolle ved udviklingen af medicinsk udstyr, da den belyser potentielle farer, der er forbundet med produktet. Hvis SRM'en skal bruges til kliniske undersøgelser er det nødvendigt at produktet går igennem en risikoanalyse efterfulgt af en risikohåndteringsplan. Man kan med fordel følge den harmoniserede standard DS/EN ISO 14971 når man udfører en risikohåndtering. Ved at følge denne standard, kan man være sikker på at SRM'en opfylder de love, der gælder for medicinsk udstyr. Der er hverken, i dette projekt, foretaget en risikoanalyse eller risikohåndtering. Dette diskvalificerer SRM'en til at blive anvendt i kliniske undersøgelser. Det skal også nævnes, at det aldrig har været planen at udføre sådan nogle analyser, da SRM'en kun er et proof-of-concept, men dette er uundgåeligt, hvis produktet skal bruges som et medicinsk udstyr. Derfor burde en videreudvikling af dette produkt indeholde både en risikoanalyse og en risikohåndteringsplan.    
+ 
+ 
+\section{Algoritme forbedringer}
+
+Et indsatsområde som er oplagt at arbejde med i en videreudvikling af SRM'en er at forbedre behandling af de målte signaler. Det udviklet algoritme til databehandling under dette projekt fokuserer på kun basale funktionaliteter, der skal til for at behandle et signal. En forbedring af algoritmen kan bl.a medføre reducering hardware komponenterne på fumlebrættet ved at fjerner EMG-måleren og nøjes kun med BI kredsløbet. Dette betyder ikke at man eksludere emg signalet. Det man i stedet gøre er at benytte BI kredsløbet til at måle både bioimpedans og emg. Dette kan lade sig gøre, ved at man under databehandlingen af det målte signal, vha. BI kredsløbet, udtrækker både bioimpedans og emg  fra det samme data. Denne teknik er forsøgt eksperimenteret kort under dette projektet, men droppet efterfølgende til fordel for den nuværende løsning. Yderligere beskrivelse om den nævnte teknik henvises til artiklen  \cite{Nahrstaedt2012}.      
+
+\section{Flere test}
 Under udviklingen af  SRM'en har der i flere omgange været uforklarlig udfald, hvor SRM'en ikke kunne detektere et synk. Om disse udfald skyldes systemet eller interfacet mellem systemet og måleobjektet, burde flere tests afdække. Der også brug for at teste SRM'en på flere raske objekter, hvor man variere måleobjekternes køn, vægt og race. Der er kun foretaget tests på to raske objekter under udvikling af SRM'en, hvilken ikke er nok til at vurdere, hvordan SRM'en virker på større populationer. Det er derfor nødvendigt at teste systemet mere for at identificere de uforklarlige udfald, der er omtalt, samt mere tests på flere raske personer for at estimere, hvordan SRM'en virker på forskellige gruppe personer.  
  
  
@@ -21,4 +30,4 @@ En oplagt mulighed til en fremtidig videreudvikling er at gøre SRM'en wearable.
 
 
 \section{Anvendelsesmuligheder}
-En fremtidig anvendelsesmulighed i SRM'en kan være at man fremover kan få et apparat, der kan erstatte eller supplere de nuværende apparater, der bruges at undersøge syne-spisevanskeligheder på dysfagipatienter. En anden anvendelsesmulighed er at brugeren kan tage devicet med hjem og måle sig selv uden supervision. Devicet vil også kunne bruges på  patienter med trachealtube. SRM'en kan være med til at evaluere, hvornår trachealtuberen kan fjernes. Disse anvendelsesmuligheder kan kun blive realistiske, hvis produktet forbedres med bl.a de nævnte punkter i dette kapitel.     
+En fremtidig anvendelsesmulighed i SRM'en kan være at man fremover kan få et apparat, der kan erstatte eller supplere de nuværende apparater, der bruges at undersøge syne-spisevanskeligheder på dysfagipatienter. En anden anvendelsesmulighed er at brugeren kan tage devicet med hjem og måle sig selv uden professionel supervision. Devicet vil også kunne bruges på  patienter med trachealtube. SRM'en kan være med til at evaluere, hvornår trachealtuberen kan fjernes. Disse anvendelsesmuligheder kan kun blive realistiske, hvis produktet forbedres med bl.a de nævnte indsatsområder i dette kapitel.     
