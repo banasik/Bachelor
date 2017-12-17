@@ -52,6 +52,7 @@ det, at den ikke er godkendt.
     0.1 		&  	27-09-2017 	&   MBA 	&   Oprettelse af Accepttestspecifikation \\
 	0.2			&	27-09-2017	&	MBA \& MOH	&	Udfyldning af UC2 - UC4 og aktør kontekstdiagram tilføjet\\
     0.3			&	29-09-2017	&	MBA \& MOH	&	Udfyldning af ikke-funktionelle\\
+    0.4			&	15-12-2017	&	MBA	&	Tilføjelse af Acceptest ver. 1.1\\
     
 \label{version_Systemark}
 \end{longtabu}
@@ -60,7 +61,7 @@ det, at den ikke er godkendt.
 \end{table}
 	
 
-\section{Accepttest af funktionelle krav}
+\section{Accepttest af funktionelle krav ver. 1.0}
 
 
 
@@ -165,7 +166,7 @@ det, at den ikke er godkendt.
 
 \newpage
 
-\section{Accepttest af ikke-funktionelle krav}
+\section{Accepttest af ikke-funktionelle krav ver. 1.0}
 \subsection{Usability} 
 \begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] X[j] l@{}}
 	Krav nr. & Krav & Test & Forventet resultat & Faktiske observationer & Godkendt
@@ -238,6 +239,118 @@ det, at den ikke er godkendt.
 	\bottomrule
 \caption{Supportability test}
 \end{longtabu}
+
+\section{Accepttest af funktionelle krav ver. 1.1}
+
+%Use case 1 acceptest
+\subsection{Use Case 1}
+Det forventes for Use Case 1, at sundhedspersonalet har fået tilsluttet BI-måleren, EMG-måleren og påsat elektroder på måleobjektet. 
+
+\begin{longtabu} to \linewidth{@{}l r X[j]@{}} %UC1%
+	\toprule
+	Test af Use Case 1  				&&	Start Measurements\\
+	Scenarie 							&&	Hovedscenarie\\
+	Prækondition 						&&	Synkerefleksmonitor er monteret korrekt. BI-måleren og EMG-måleren er ledige og operationelle.
+Elektroderne påsat måleobjektet og GUI-vinduet er åbent\\ \midrule
+\end{longtabu}
+
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
+    ~ &	\textbf{Handling} &    \textbf{Forventet observation/resultat} &		\textbf{Faktisk observation/resultat} &    \textbf{Godkendt}\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+    1. & Sundhedspersonalet trykker på knappen "Start
+Measurements" &   Systemet foretager en måling, hvorefter målingerne vises simultant i graf. &       &		
+ \\ \bottomrule
+ 
+\caption{Accepttest af Use Case 1}\\
+\label{AT_UC1}
+\end{longtabu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Use Case 2}
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC2%
+	\toprule
+	Test af Use Case 2  				&&	Save Measurements\\
+	Scenarie 							&&	Hovedscenarie\\
+	Prækondition 						&&	Use Case 1 er kørt succesfuldt. 
+\\ \midrule
+\end{longtabu}
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
+
+\setlength{\textfloatsep}{10pt plus 1.0pt minus 2.0pt}
+    ~ &	\textbf{Handling} &    \textbf{Forventet observation/resultat} &		\textbf{Faktisk observation/resultat} &    \textbf{Godkendt}\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+   	1. 	& 	Sundhedspersonalet trykker på knappen "Save
+Measurements"	&  Målingerne er gemt i CSV-fil &   &	%
+    \\
+    
+ \\ \bottomrule
+ 
+\caption{Accepttest af Use Case 2}\\
+\label{AT_UC2}
+\end{longtabu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Use Case 3}
+\begin{longtabu} to \linewidth{@{}l r X[l]@{}} %UC2%
+	\toprule
+	Test af Use Case 3  				&&	Load Measurements\\
+	Scenarie 							&&	Hovedscenarie\\
+	Prækondition 						&&	Use Case 1 og 2 er kørt succesfuldt
+
+\\ \midrule
+\end{longtabu}
+
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] c@{}}
+    ~ &	\textbf{Handling} &    \textbf{Forventet observation/resultat} &		\textbf{Faktisk observation/resultat} &    \textbf{Godkendt}\\[-1ex]
+    \midrule
+    ~ &\textit{Hovedscenarie} & ~ & ~ &
+    \\ \midrule
+    1. & Sundhedspersonalet trykker på knappen "Load
+Measurements " &   Systemet henter målinger og viser i graf  &      & %{\Huge \checkmark}
+
+ \\ 
+ \bottomrule
+ 
+\caption{Accepttest af Use Case 3}\\
+\label{AT_UC3}
+\end{longtabu}
+
+
+\newpage
+\section{Accepttest af ikke-funktionelle krav ver. 1.1}
+
+\begin{longtabu} to \linewidth{@{} c X[l] X[l] X[j] X[j] c@{}}
+	Krav nr. & Krav & Test & Forventet resultat & Resultat & Godkendt
+	\\[-1ex] \midrule
+	
+	1. & Sundheds-personalet skal kunne anvende synkerefleksmonitoren efter 10 minutters instruktion. & Introducér synkerefleksmonitoren & Efter 10 minutter kan Sundhedspersonalet anvende synkerefleksmonitoren &  & 	\\
+2. & Sundheds-personalet skal kunne efter endt introduktion til synkerefleksmonitoren foretage en måling uden stor fejl & Kør Use Case 1 & En måling uden fejl & & 	\\ 
+3. & Sundheds-personalet skal kunne efter en periode, på 3 måneder væk fra synkerefleksmonitoren, foretage en måling uden fejl & Vent 3 måneder og kør Use Case 1 & En måling uden fejl & & 	\\ 
+4. & Sundheds-personalet skal kunne aflæse et synk på graferne fra GUI'en på 2 meters afstand. & Sundheds-personalet Sundheds-personalet skal stå to meter væk fra Pc-skærmen & Synket kan ses fra 2 meters afstand&  & 	\\ 
+
+5.& Det skal maksimalt tage 10 minutter(0.17h) at gendanne Synkerefleksmonitor (MTTR - Mean Time To Restore). & Afmontér synkerefleks-monitoren og gendan synkerefleks-monitoren indenfor  10 minutter  & Systemet er funktionelt indenfor 10 minutter & & 	\\ 
+6. & Synkerefleks-monitoren skal have en oppetid uden nedbrud på minimum 1 dag (24 timer)
+(MTBF - Mean Time Between Failure)& Tilslut Synkerefleks-monitoren og kør Use case 1,2 og 3 hver time i 24 timer  & Ingen nedbrud efter 1 dag &  & 	\\ 
+7. & Synkerefleks-monitoren skal have en oppetid/køretid på: $Availability = \frac{MTBF}{MTBF+MTTR}\cdot100 = \frac{24}{24+5}\cdot100 = 82,76 \%$& &  &  & 	\\ 
+
+8. &GUI'ens objekter skal maksimum have en responstid på 30 sekunder & Tryk rundt i GUI og registrer responstid & Responstiden er tilfredsstillende &  & 	\\
+9. & Synkerefleks-monitorens hardware skal kunne fungere under temperatur mellem \ang{10}C til \ang{40}C & Synkerefleks-monitorens hardware placeres i \ang{10}C og \ang{40}C  & Synkerefleks-monitoren fungerer&  & 	\\ 
+10. & Sundheds-personalet skal kunne udskifte batterierne til hardwaren inden for 2 minutter &  Sundheds-personalet fjerner batterierne og i sætter nye mens der tages tid & Batterierne er skiftet under 2 minnutter &  & 	\\ 
+11. & Sundheds-personalet skal kunne udskifte elektroderne inden for 4 minutter &  Sundheds-personalet fjerner elektroderne og påsætter nye mens der tages tid & Elektroderne er skiftet under 4 minnutter &  & 	\\ 
+
+	\bottomrule
+\caption{Accepttest af Ikke-funktionelle krav}
+\end{longtabu}
+
+
 
 
 \end{document}
