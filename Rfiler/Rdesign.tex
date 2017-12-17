@@ -17,7 +17,7 @@ Dette afsnit omhandler designet af hardwaren, som anvendes til at måle  bioimpe
 \label{fig:Blokaede}
 \end{figure}
 
-\subsubsection{Analog Discovery}
+\subsection{Analog Discovery}
 
 AD har i dette bachelorprojekt to formål, at fungerer som funktionsgenerator og som dataopsamlingsmodul. Figur \ref{fig:ADogINA128} viser disse to formål. Det ene formål er at funktionsgeneratoren laver et AC signal med ampiltuden på 2 V og 20 kHz, som sendes til indgangen af instrumentationsforstærkeren INA128. Signalet bliver brugt til at generere en konstant strøm ud af operationsforstærkeren LM318N. Det andet formål er at AD modtager signal fra anti-aliaseringsfilter, som bliver konverteret fra analogt til digitalt signal.
 
@@ -42,7 +42,7 @@ Derfor er det besluttet at bruge AD, da den har følgende fordele:
 
 
 
-\subsubsection{Instrumentationsforstærker}
+\subsection{Instrumentationsforstærker}
 
 Instrumentationsforstærkeren i dette bachelorprojekt, har til formål at undertrykke støj fra måleobjekt og efterfølgende forstærke signalet, men også forstærke indgangssignalet fra AD's funktionsgenerator. Derfor anvendes i dette
 projekt to instrumentationsforstærker af typen INA128P. INA128P specifikationer kan læses i \nameref{bilag15}. INA128P giver mulighed for at forstærke signalet vha. kun en modstand. Fordelene ved anvendelse af instrumentationsforstærker, når det ønskes at måle elektrofysiologiske signaler er\cite{PeterJohansen2014}:
@@ -96,7 +96,7 @@ For at forstærkningen på 100 gange kan lade sig gøre, er det nødvendigt at s
 
  
  
-\subsubsection{Strømgenerator}
+\subsection{Strømgenerator}
 Strømgeneratoren i dette bachelorprojekt, har til formål at generere en strøm til måleobjektet gennem elektroderne. Dette er et krav for at kunne udføre en bioimpedans måling på et måleobjekt\cite{Brantlov2017}. Diagram over strømgenerator kan ses på figur \ref{fig:StromgeneratorLM318}.
 
 \begin{figure}[H]
@@ -110,7 +110,7 @@ Strømgeneratoren i dette bachelorprojekt, har til formål at generere en strøm
 Strømgeneratoren også kaldet VCCS er designet efter en basis Howland pumpe. Ved udvælgelse af operationsforstærker kigges der på slewrate som skal overholdes. For at udregne slewrate bruges 20 kHz og 4 V. Slewrate udregnes til 0,503 V/$\mu$s. Her vælges operationsforstærkeren LM318, da den oplyses i databladet til at have en slewrate på 70 V/$\mu$s og den består kun en operationsforstærker. Den forventet strøm blev udregnet til 283 $\mu$A. Udregning af Howland pumpen, slew rate og stykliste kan læses i \nameref{bilag5}.
 
 
-\subsubsection{OP-AMP}
+\subsection{OP-AMP}
 OP-AMP i dette bachelorprojekt, har til formål at forstærke output signalet fra Instrumentationsforstærker 2. Der er valgt at benytte en ikke-inverterende operationsforstærker. Det ønskes at den forstærker op for at udnytte AD inputområde, som ligger mellem $\pm$25 V. Diagram over OP-AMP kan ses på figur \ref{fig:IkkeInviterendeOpAmp}.
 
 
