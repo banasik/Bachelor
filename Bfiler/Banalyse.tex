@@ -222,7 +222,7 @@ Der er også eksperimenteret med en anden dataopsamlingsenhed kaldet NI USB-6259
 \label{fig:elektroder}
 \end{figure}
 
-Ved måling af BI benyttes EKG-elektroder af typen Blue sensor electrodes. Disse elektroder indeholder meget gel, som giver en optimal kontakt til huden, men fysiske fylder de meget. EMG-elektroderne har mindre gel og fylder mindre. Elektrodernes placering er inspireret af denne artikel\cite{Nahrstaedt2012a}, se figur \ref{fig:elektrodeplaceringREF}. 
+Ved måling af BI benyttes EKG-elektroder af typen Blue sensor electrodes. Disse elektroder indeholder meget gel, som giver en optimal kontakt til huden, men fysiske fylder de meget. EMG-elektroderne har mindre gel og fylder mindre. Elektrodernes placering er inspireret af denne artikel\cite{Nahrstaedt2012a}, se figur \ref{fig:elektrodeplaceringREF}. Begge type elektroder er af typen Ag/AgCI.
 
 Det skal bemærkes at emg-elektroderne første anvendes senere i dette projekt. Valget om at kombinere BI måling med emg realiseres kun , hvis BI kredsløbet, som er angivet i den omtalte artikel fungerer alene dvs. kan detektere et synk. Derfor testes BI kredsløbet alene til at starte med. 
 
@@ -244,7 +244,7 @@ Det skal bemærkes at emg-elektroderne første anvendes senere i dette projekt. 
 \section{Software}
 \subsection{Waveforms}
 
-Til styring af Analog Discovery er der brugt "single purpose"  programmet  Waveforms. \\ I dette program har brugeren mulighed for at generere et signal op til 5V. Der er også mulighed for at indstille signalets frekvens op til 10MHz. Programmet indeholder også et oscilloskop, se figur \ref{fig:waveforms}. 
+Til styring af Analog Discovery er der brugt "single purpose"  programmet  Waveforms. \\ I dette program har brugeren mulighed for at generere et signal op til 5V. Der er også mulighed for at indstille signalets frekvens op til 10MHz. Programmet indeholder også et oscilloskop og spectrum analyzer, se figur \ref{fig:waveforms}. 
 
 \begin{figure}[H]
 \centering
@@ -346,7 +346,7 @@ Det konstateres at strømmen er konstant mellem 1kHz til 1MHz. Dette betyder at 
 
 \pagebreak
 \subsubsection{Simulering af vævsmodel}
-Figur \ref{fig:testopstilling1multisimvaevs} illustrer en vævsmodel, som består 3 elektriske komponenter. Denne vævsmodel får en kendt strøm og varierende frekvenser. Vævsmodellens impedans kan efterfølgende beregnes ved at dividere de målte spændinger med den kendte strøm. 
+Figur \ref{fig:testopstilling1multisimvaevs} illustrer en vævsmodel, som består 3 elektriske komponenter. Værdierne for modstande og kondensator stammer fra samme vævsmodel brugt i artiklen. Denne vævsmodel får en kendt strøm og varierende frekvenser. Vævsmodellens impedans kan efterfølgende beregnes ved at dividere de målte spændinger med den kendte strøm. 
 
 
 \begin{figure}[H]
@@ -395,7 +395,7 @@ De målte spændinger som er vist i tabel \ref{table:frekvenservrms} er målt fr
 \centering
 {\includegraphics[width=10cm]
 {Figure/testopstilling1multisimVRMSgraf}}
-\caption{Grafen viser spænding i rms og skiftende frekvenser på x-aksen} 
+\caption{Resultatet fra vævsmodellen. Grafen viser spænding i rms og skiftende frekvenser på x-aksen} 
 \label{fig:testopstilling1multisimVRMSgraf}
 \end{figure}
 

@@ -49,7 +49,7 @@ Analog Discovery (AD) bruges i dette projekt til to formål. Det første er at A
 {\includegraphics[width=10cm]
 {Figure/ADogINA128}}
 \caption{Figuren viser ADs funktion i det samlede system. AD fungerer som funktionsgenerator og som dataopsamlingsmodul}
-\label{analogOgINA}
+\label{ADogINA128}
 \end{figure}
 
 
@@ -349,7 +349,7 @@ I dette projekt vælges samplingfrekvensen til 500 kHz. Den halve samplingfrekve
 
 På baggrund af modultesten i \textit{Bilag 6 - Implementering \& Test} kan det aflæses at signalet i sig selv allerede er dæmpet med ca. 75 dB, derfor skal der som minimum tilføres en yderligere dæmpning på 20 dB.
 
-Derfor skal der designes et anti-aliaseringsfilter som tillader passering af frekvenser, der er mindre end Nyquist frekvensen og dæmper frekvenser, som er højere end Nyquist frekvensen. Dette anti-aliaseringsfilter skal give en minimum dæmpning på 20 dB ved 250 kHz. Dette kan lade sig gøre med et første ordens filter, da det dæmper med 20 dB pr. dekade. Der vælges i stedet for et 2. ordens filter, der vil dæmpe 40 dB pr. dekade, for at tage højde for variationer i det optagede signal.
+Derfor skal der designes et anti-aliaseringsfilter som tillader passering af frekvenser, der er mindre end Nyquist frekvensen og dæmper frekvenser, som er højere end Nyquist frekvensen. Dette anti-aliaseringsfilter skal give en minimum dæmpning på 20 dB ved 250 kHz. Dette kan lade sig gøre med et første ordens filter, da det dæmper med 20 dB pr. dekade. Der vælges i stedet for et 2. ordens filter, der vil dæmpe 40 dB pr. dekade, for at tage højde for variationer i det optagede signal og knækfrekvensen lægges en dekade under Nyquist frekvensen.
 
 Samtidig er der taget højde for det amplitude moduleret signal som stadig ligger indenfor passbåndet ved 20 kHz, således at synkesignalet ikke bliver filteret væk.
 
@@ -506,14 +506,14 @@ Show\_Measurements	    &	handles.TID&	Subplot measurements\\   \addlinespace[2mm
 \end{table}
 
 
-
+Figur \ref{Fig:designSWenvelope} viser logikken i \textit{Process\_Measurements} hvor BI signalet behandles. 
 
 \begin{figure}[H]
 \centering
-{\includegraphics[width=8cm]
-{Figure/designUML}}
-\caption{Figuren viser indholdet af kodeeksekvering i funktionen \textit{"Process\_Measurements"} i den del hvor der udføres envelope af det rå BI-signal. Først bliver det rå BI signal dobbeltensrettet og dernæst filtreret vha. digital lavpasfilter med knækfrekvens = 500 Hz og dæmper med 40 dB over en dekade. Til sidst bliver signalet detrended, downsampled og synk detekteres.}
-\label{Fig:designUML}
+{\includegraphics[width=10cm]
+{Figure/designSWenvelope}}
+\caption{Figuren viser et UML-aktivitetsdiagram over indholdet af kodeeksekvering i funktionen \textit{"Process\_Measurements"} i den del hvor der udføres envelope af det rå BI-signal. Først bliver det rå BI signal dobbeltensrettet og dernæst filtreret vha. digital lavpasfilter med knækfrekvens = 500 Hz og dæmper med 40 dB over en dekade. Til sidst bliver signalet detrended, downsampled og synk detekteres.}
+\label{Fig:designSWenvelope}
 \end{figure} 
 
 
