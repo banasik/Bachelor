@@ -26,33 +26,98 @@ filterer
 
 \section{GUI - simultane signaler, kan se synk og der tælles synk}
 
+Figur \ref{fig:synkfraGUI} og \ref{fig:synkfraArtikel} viser et synk, optaget med SRM og fra en anden BI måler. Når disse to synk bliver stillet op imod hinianden ligner de meget godt hinanden. Både længden af synket og selv synkets bakkedal er sammenlignelige. Længden af synket kan i begge tilfældet aflæses til at vare ca. et sekund. Synkets bakkedal målt med SRM har også samme signatur. På dette grundlag er der argumenter for at det er muligt at detektere og vise et synk med SRM sammenlignet med en tilsvarende prototype BI måler.
 
 \begin{figure}[H]
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{Figure/synkfraGUI}
-  \captionof{figure}{Strømmen uden påsatte elektroder}
-  \label{fig:integrationstestVCCSud}
+  \captionof{figure}{Et synk målt med SRM}
+  \label{fig:synkfraGUI}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{Figure/synkfraArtikel}
-  \captionof{figure}{Strømmen med påsatte elektroder}
-  \label{fig:integrationstestINA2udstrom}
+  \captionof{figure}{Et synk målt i en artikel\cite{Schultheiss2014}.}
+  \label{fig:synkfraArtikel}
 \end{minipage}
 \end{figure}
 
+Variationen i et synk består af en ændring på 5$\Omega$ \cite[s. 49]{Chester2014}. I figur \ref{Fig:synkfraGUI5ohm} kan et synk målt med SRM aflæses til at gå ned til ca. 5$\Omega$. Den målte ændring lægger sig fint og af hvad litteraturen oplyser. Ved en yderligere fintuning af den digitale signal behandling af BI signalet, ville man kunne få endnu bedre synk. Her er det parametrene såsom lavpas filter, downsample og smooth man ville kunne ændre på, for at for endnu bedre synk.
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=4cm]
 {Figure/synkfraGUI5ohm}}
-\caption{Figuren viser designet af GUI til SRM.}
-\label{Fig:designGUI}
+\caption{Et synk målt med SRM, hvor synket er droppet til ca. 5$\Omega$. Dette er indenfor området for ændringen af synkets impedans.}
+\label{Fig:synkfraGUI5ohm}
 \end{figure} 
 
-\section{Relation til problemformulering}
+Algoritmen der finder peaks, altså i dette tilfælde synk, kan ses på figur \ref{Fig:synkfundet}. Disse synk illustrere med blå prikker. I Algoritimen er der sat en minimum størrelse for bakkedalen og afstanden i mellem hvert synk. Da dette er en meget forsimplet algoritme, vil der ikke blive fundet synk eller forkerte synk.
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/synkfundet}}
+\caption{Algoritmen der finder antal synk i en måling og informere sundhedspersonalet om antallet i GUI.}
+\label{Fig:synkfundet}
+\end{figure} 
+
+
+
+\section{EMG måler}
+
+På figur \ref{Fig:emgmaling} er EMG målingen vist. EMG måleren består af hardware der selv sørge for envelope og yderligere udglatning af EMG signalet. Da EMG signalet også er samplet ved 500 kHz giver det en mængde data man ønsker at reducere. Den nuværdende signalbehandling består i at downsample EMG signal og efterfølgende smooth. Dette er måske ikke nødvendigt og men disse parametre kan der også justeres på til man får et det ønskede resultat. 
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/emgmaling}}
+\caption{En EMG måling med SRM. Her kan der aflæses fire udsving på EMG signalet.}
+\label{Fig:emgmaling}
+\end{figure} 
+
+Det målte EMG signal kan sammenlignes med et EMG signal fra MyoWare Muscle Sensor's datablad \nameref{bilag15}. EMG signalet ser ud til at have samme træk, ved hvert EMG aktivitet. Udforingen med EMG måleren, var at optil det første sekund af en måling, genererede den en høj peak. Hvilken kan muligvis relateres til når funktionsgeneratoren starter, når der foretages en måling. Dog påvirker det ikke resten af målingen.
+
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/emgsignal}}
+\caption{Et eksampel på EMG signal fra MyoWare Muscle Sensor's datablad.}
+\label{Fig:emgsignal}
+\end{figure} 
+
+
+
+
+\section{Samlet vurdering af de opnåede resultater med relation til problemformulering}
+Den samlet vurdering af de opnåede resultater med relation til problemformuleringen kan opstilles i punktform.
+
+\begin{center}
+\begin{large}
+\begin{tabular}{l l}
+Bioimpedansmåler&\checkmark \\[+2ex]
+prisbillig & \checkmark \\[+2ex]
+monitorere synkefrekvensen  & \checkmark \\[+2ex]
+detektere synkefrekvenseng & \checkmark \\[+2ex]
+EMG måler & \checkmark \\[+2ex]
+simultan måling & \checkmark \\[+2ex]
+Dysfagi patienter & {{X mark big}} \\
+\end{tabular}
+\end{large}
+\end{center}
+
+\begin{figure}[H]
+\centering
+{\includegraphics[width=\linewidth]
+{Figure/guiDone}}
+\caption{Det færdige interface af SRM.}
+\label{Fig:guiDone2}
+\end{figure} 
+
+
 
 \section{Resultat vi særlig stolte af}
 
