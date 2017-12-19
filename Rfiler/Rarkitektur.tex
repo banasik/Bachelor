@@ -1,20 +1,18 @@
 \chapter{Arkitektur}
 
-I dette kapitel beskrives systemets arkitektur for hardware og software. Arkitekturens formål er at tildele roller til de enkelte hardware og software komponenter. Når denne arkitektur er fast sat er det muligt at designe systemet i detaljer. Arkitekturen illustreres i hardware-delen i Blok definition diagram (BDD), Internal blok diagram (IBD) og en blokbeskrivelse, der indeholder uddybende beskrivelse af blokkene i BDD'et. For Software-delen anvendes også et BDD, som bruges til at illustrere hovedblokkene.
+I dette kapitel beskrives systemets arkitektur for hardware og software. Arkitekturens formål er at tildele roller til de enkelte hardware og software komponenter. Når denne arkitektur er fastsat er det muligt at designe systemet i detaljer. Arkitekturen illustreres i hardware-delen i Blok definition diagram (BDD), Internal blok diagram (IBD), en signaltabel og en blokbeskrivelse, der indeholder uddybende beskrivelse af blokkene i BDD'et. For Software-delens vedkommende anvendes også et BDD, som bruges til at illustrere hovedblokkene.
 
 \section{Hardware}
 \subsection{Blok definition diagram}
 
-Dette afsnit omhandler arkitekturen af hardwaren, som anvendes til måling, analysering
-og visning af bioimpedans- og EMG-målinger. Blok definition diagrammet på figur \ref{fig:arkitekturBDD} viser det overordnet system for SRM, som består af en HW-blok med tilhørende to HW-blokke. Disse to HW-blokke består af BI-måler og EMG-måler. EMG-måleren består af to komponenter og BI-måleren består af syv blokke. Derudover er der en PC-blok og Analog Discovery blok. Disse blokke tilsammen udgør SRM.
+Dette afsnit omhandler arkitekturen af hardwaren, som anvendes til måling, analysering og visning af BI- og EMG-målinger. BDD'et på figur \ref{fig:arkitekturBDD} viser det overordnet system for SRM, som består af en HW-blok med tilhørende to HW-blokke. Disse to HW-blokke består af BI-sensor og EMG-sensor. EMG-sensoren består af to komponenter og BI-sensor består af seks blokke. Derudover er der en PC-blok og Analog Discovery blok. Disse blokke tilsammen udgør SRM.
 
 \begin{figure}[H] 
 \centering
-{\includegraphics[width=\linewidth]
+{\includegraphics[width=13cm]
 {Figure/BDD}}
 \caption{Figuren viser de enkelte komponenter, som hardware-delen består af. Overordnet består
-systemet af en Bioimpedansmåler, en EMG-måler og enhed som både bruges til som
-dataopsamlingsenhed og funktionsgenerator. Udover det er der en PC blok.}
+systemet af en BI-sensor, en EMG-sensor og Analog Discovery, der bruges til dataopsamling og som funktionsgenerator. Udover det er der en PC blok.}
 \label{fig:arkitekturBDD}
 \end{figure}
 
@@ -22,29 +20,29 @@ dataopsamlingsenhed og funktionsgenerator. Udover det er der en PC blok.}
 
 \subsection{Internal blok diagram}
 
-Internal blok diagram bruges til at vise den interne struktur og kommunikation mellem delsystemerne, denne kan ses på figur \ref{fig:ibdfigur}. SRM indeholder to uafhængige blokke - BI-måler og EMG-måler. De to blokke har kommunikation med blokken Analog Discovery og PC. 
+IBD bruges til at vise den interne struktur og kommunikation mellem delsystemerne, se figur \ref{fig:ibdfigur}. SRM indeholder to uafhængige blokke, BI-sensoren og EMG-sensoren. De to blokke har kommunikation med blokken Analog Discovery og PC. 
 
-Kommunikationsflowet for BI-måleren, starter ved at Analog Discovery generer et AC signal på 2 V til indgangen på Instrumentationsforstærker 1. Instrumentationsforstærker 1 forstærker signalet med faktor 2. Det forstærkede signal sendes videre til strømgeneratoren (VCCS), som genererer en konstant strøm. Denne strøm sendes ud via to elektroder (Blue Sensor Electrodes), som er påsat måleobjektet. 
+Kommunikationsflowet for BI-sensor, starter ved at Analog Discovery generer et AC signal på 2 V til indgangen på Instrumentationsforstærker 1. Instrumentationsforstærker 1 forstærker signalet med faktor 2. Det forstærkede signal sendes videre til strømgeneratoren (VCCS), som genererer en konstant strøm. Denne strøm sendes til måleobjektet via to elektroder (Blue Sensor Electrodes). 
 
-To yderligere elektroder (Blue Sensor Electrodes) påsættes på måleobjektet, for at måle en spændingsforskel. Biosignalet (spændingsforskellen) er svagt og støjfyldt (common mode støj), hvilke kræver at det bliver forstærket samt støjen reduceres. Selve forstærkningen forløber sig over en instrumentationsforstærker (fjerner common mode støj og forstærker) efterfulgt af en opamp (forstærker). Efter forstærkning bliver signalet filtreret i et anti-aliaseringsfilter, der dæmper frekvenskomponenter over Nyquist-frekvensen. 
+To yderligere elektroder (Blue Sensor Electrodes) påsættes på måleobjektet, for at måle en spændingsforskel. Biosignalet (spændingsforskellen) er svagt og støjfyldt (common mode støj), hvilket kræver at det bliver forstærket samt støjen reduceres. Signalet fra måleobjekt bliver forstærket af instrumentationsforstærkeren samtidig med, at der fjernes common mode støj. Herefter bliver signalet yderligere forstærket af en opamp. Efter denne forstærkning bliver signalet filtreret i et anti-aliaseringsfilter, der dæmper frekvenskomponenter over Nyquist-frekvensen. 
 
-Til sidst sendes signalet til dataopsamlingsenheden Analog Discovery, der kommunikerer med en PC, hvor signalet bliver analyseret og vist. BI-måleren bliver forsynet med en eksitationsspænding på $\pm$18 V.
+Til sidst sendes signalet til dataopsamlingsenheden Analog Discovery, der kommunikerer med en PC, hvor signalet bliver analyseret og vist. BI-sensoren bliver forsynet med en eksitationsspænding på $\pm$18 V.
 
-EMG-måleren består af en Myoware Muscle Sensor og tre elektroder, der måler muskelaktiviteten over det valgte segment på måleobjekt. Det målte signal opsamles også vha. Analog Discovery. Myoware Muscle Sensor forsynes med en eksitationsspænding på $+$4,5 V.
+EMG-sensoren består af en Myoware Muscle Sensor og tre elektroder, der måler muskelaktiviteten over det valgte segment på måleobjektet. Det målte signal opsamles også vha. Analog Discovery. Myoware Muscle Sensor forsynes med en eksitationsspænding på $+$4,5 V.
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=\linewidth]
 {Figure/IBD}}
-\caption{Figuren viser et internt blokdiagram, der illustrer den interne relation og signalflow mellem delsystemer for SRM. Hver port repræsenterer en fysisk grænseflade på blokken. Overordnet set indeholder diagrammet to hovedblokke med hver deres subkomponenter. Den ene af de store blokke repræsenter en bioimpedansmåler-apparat og den anden blok repræsenter en elektromyografi-apparat.}
+\caption{Figuren viser et internt blokdiagram, der illustrer den interne relation og signalflow mellem delsystemer for SRM. Hver port repræsenterer en fysisk grænseflade på blokken. Overordnet set indeholder diagrammet to hovedblokke med hver deres subkomponenter. Den ene af de store blokke repræsenter en BI-sensor og den anden blok repræsenter en EMG-sensor.}
 \label{fig:ibdfigur}
 \end{figure}
 
 
 \subsection{Blokbeskrivelse}
 
-Da BDD og IBD ikke alene kan forklare blokkenes og signalernes funktionalitet, kan disse forklares præcist vha. af forklarende teskst i tabeller. Tabel \ref{tab:BlokBeskr} viser blokbeskrivelsen for to blokke, samt deres signaltyper og navne. Funktionerne for alle blokkene kan læses i  \nameref{bilag4}.
+Da BDD og IBD ikke alene kan forklare blokkenes og signalernes funktionalitet, kan disse forklares præcist vha. af forklarende tekst i tabeller. Tabel \ref{tab:BlokBeskr} viser blokbeskrivelsen for to blokke, samt deres signaltyper og navne. Funktionerne for alle blokkene kan læses i  \nameref{bilag4}.
 
 
 \begin{table}[H]
@@ -66,12 +64,13 @@ Analog Discovery & Fungerer som funktionsgenerator, og  A/D-konverter. Den kommu
  	 &  & $   ${0V} & Reference  \\ \cline{3-4} \hline
  	 
 \end{tabularx}
-\caption{Tabellen viser blokbeskrivelse for to blokke for SRM.} 
+\caption{Tabellen viser blokbeskrivelse for to blokke.} 
 \label{tab:BlokBeskr}
 \end{table}
 
+\pagebreak
 
-Til slut for at fuldende grænsefladebeskrivelsen, vil signalerne blive behandlet detaljeret i en signaltabel, tabel \ref{tab:signaltabel}. Signaltabellens anvendelse er tiltænkt når grænsefladerne skal designes. Da dette kun er et udpluk henvises der til den komplette signaltabel i \nameref{bilag4}.
+Til slut fuldendes grænsefladebeskrivelsen i en detaljeret signaltabel, tabel \ref{tab:signaltabel}. Signaltabellens anvendelse er tiltænkt når grænsefladerne skal designes. Da dette kun er et udpluk henvises der til den komplette signaltabel i \nameref{bilag4}.
 
 
 
@@ -93,7 +92,7 @@ Til slut for at fuldende grænsefladebeskrivelsen, vil signalerne blive behandle
 4,5V & Forsynings- spænding til MyoWare Muscle Sensor  &  4,0-4,5 V & Analog Discovery, A2 & MyoWare Muscle Sensor, S2&     \\ \cline{4-6}	\hline
 
 \end{tabularx}
-\caption{Figuren viser signalbeskrivelsen for to signaler for SRM}
+\caption{Figuren viser signalbeskrivelsen for to signaler.}
 \label{tab:signaltabel}
 \end{table}
 
@@ -102,12 +101,11 @@ Til slut for at fuldende grænsefladebeskrivelsen, vil signalerne blive behandle
 \section{Software}
 \subsection{Blok definition diagram}
 
-Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering
-og visning af bioimpedans- og EMG-målinger. Softwarens arkitektur er drevet af de usecases, som er beskrevet i \nameref{bilag1}. Derfor udformes et BDD på baggrund af disse usecases, som består af en parent-blok og fire child-blokke, se figur \ref{fig:SWIBD}. 
+Dette afsnit omhandler arkitekturen af softwaren, som anvendes til måling, analysering og visning af BI- og EMG-målinger. Softwarens arkitektur er drevet af de use cases, som er beskrevet i \nameref{bilag1}. Derfor udformes et BDD på baggrund af disse use cases, som består af en parent-blok og fire child-blokke, se figur \ref{fig:SWIBD}. 
 
-I dette bachelorprojekt anvendes udviklingsværktøjet Matlab til at realisere projektes software-del. Udover Matlab kode udvikles en GUI i selv samme udviklingsværktøj. Denne GUI får ligeledes objekter f.eks. knapper, tekstfelter og tekstbokse. Når Matlab GUI anvendes, skrives programmets funktionaliteter i funktioner, som så kaldes fra objekternes autogeneret callback funktioner, når de skal anvendes. Child-blokkene repræsenterer callback funktionerne og de er oprettet i hovedfilen synkerefleksmonitor.m. Funktionerne i child-blokkene består af selvstændige m-filer. Hver funktion behandler bestemte opgaver, samt interagere med de andre funktioner.
+I dette bachelorprojekt anvendes udviklingsværktøjet Matlab til at realisere projektes software-del. Udover Matlab kode udvikles en GUI i selv samme udviklingsværktøj. Denne GUI indeholder objekter f.eks. knapper, tekstfelter og tekstbokse m.m. Når Matlab GUI anvendes, skrives programmets funktionaliteter i funktioner, som så kaldes fra objekternes autogeneret callback funktioner, når de skal anvendes. Child-blokkene repræsenterer callback funktionerne og de er oprettet i hovedfilen synkerefleksmonitor.m. Funktionerne i child-blokkene består af selvstændige m-filer. Hver funktion behandler bestemte opgaver, samt interagere med de andre funktioner.
 
-Softwaren fungerer ved at sundhedspersonalet initialiserer kodeeksekveringen ved at starte programmet Synkerefleksmonitor. Ved at trykke knappen \textit{"Start Measurements"}, foretages der to målinger simultant. Disse målinger analyseres og vises i en graf til sundhedspersonalet. Nu er det muligt at få målingerne gemt via knappen \textit{"Save Measurements"}. Målingerne bliver gemt lokalt på computeren. De gemte målingerne kan hentes frem via knappen \textit{"Load Measurements"}. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram, som kan læses i \nameref{bilag5}.
+Softwaren fungerer, ved at sundhedspersonalet initialiserer kodeeksekveringen, ved at starte programmet Synkerefleksmonitor. Ved at aktivere knappen \textit{"Start Measurements"}, foretages der to målinger simultant. Disse målinger analyseres og vises i en graf til sundhedspersonalet. Nu er det muligt at få målingerne gemt via knappen \textit{"Save Measurements"}. Målingerne bliver gemt lokalt på computeren. De gemte målingerne kan hentes frem via knappen \textit{"Load Measurements"}. Rækkefølgen hvori programmets kode eksekveres beskrives vha. et sekvens diagram, som kan læses i \nameref{bilag5}.
 
 
 

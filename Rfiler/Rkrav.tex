@@ -1,6 +1,6 @@
 \chapter{Krav} \label{Af:Krav}
 
-På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, som er projektets udbyder, hvor udfordringer med nuværende behandlinger og udredninger af dysfagipatienter blev diskuteret, er der udarbejdet en kravspecifikation til et system kaldet Synkerefleksmonitor (SRM). Formålet med mødet var ikke at etablere kunde/leverandør- relation, hvor krav til et kommende produkt skal forhandles på plads. Mødet havde i stedet en uformel karakter, hvor Hammel Neurocenter frivilligt er gået med til at mødes med gruppens medlemmer for at bidrage med deres ekspertise indenfor behandling og udredning af dysfagipatienter. Kravene til produktet som skal realiseres under dette projekt, er suverænt udspecificeret af gruppens medlemmer uden indblanding af projektets udbyder. Fra udbydernes side var der kun et ønske om at bidrage med udvikling af nye metoder til udredning af dysfagipatienter, hvilken dette projekt også har intentioner om. \\
+På baggrund af et møde med Jim Jensen fra Hammel Neurocenter, som er projektets udbyder, er der udarbejdet en kravspecifikation til et system kaldet Synkerefleksmonitor (SRM). På mødet blev der diskuteret udfordringer med nuværende behandlinger og udredninger af dysfagipatienter. Formålet med mødet var ikke at etablere kunde/leverandør-relation, hvor krav til et kommende produkt skal forhandles på plads. Mødet havde i stedet en uformel karakter, hvor Hammel Neurocenter frivilligt er gået med til at mødes med gruppens medlemmer for at bidrage med deres ekspertise indenfor behandling og udredning af dysfagipatienter. Kravene til produktet som skal realiseres under dette projekt, er suverænt udspecificeret af gruppens medlemmer uden indblanding af projektets udbyder. Fra udbydernes side var der kun et ønske om at bidrage med udvikling af nye metoder til udredning af dysfagipatienter, hvilken dette projekt også har intentioner om. \\
 
 I det følgende beskrives kort det overordnede system, efterfulgt af funktionelle og ikke funktionelle krav.  
 
@@ -8,7 +8,7 @@ I det følgende beskrives kort det overordnede system, efterfulgt af funktionell
 
 
 
-Figur \ref{fig:sysbeskrivelse} illustrer systembeskrivelsen for SRM'en. Systemet igangsættes af et sundhedspersonale, ved at tilkoble elektroder fra SRM'en til et måleobjekt. Ved hjælp af en funktionsgenerator i systemet sendes en konstant strøm til måleobjektet via. elektroderne. På måleobjektets måleregionen måles spændinger, som opstår, når forholdet mellem spænding og strøm ændrer sig. De målte spændinger omdannes til digitale værdier vha.  en A/D-konverter. Tilslut vises disse værdier på en PC-skærm i form af en graf. Sundhedspersonalet har hermed mulighed for at evaluere måleobjektets synkefrekvens. I SRM'en eksisterer der delsystemer. Detaljer omkring, hvordan disse er byggede og designede, henvises der til \nameref{bilag4} og \nameref{bilag5}. 
+Figur \ref{fig:sysbeskrivelse} illustrer systembeskrivelsen for SRM'en. Systemet igangsættes af et sundhedspersonale, ved at tilkoble elektroder fra SRM'en til et måleobjekt. Ved hjælp af en funktionsgenerator i systemet sendes en konstant strøm til måleobjektet via. elektroderne. På måleobjektets måleregion måles spændingsfaldet, som opstår, når forholdet mellem spænding og strøm ændrer sig. De målte spændinger omdannes til digitale værdier vha.  en A/D-konverter. Til slut vises disse værdier på en PC-skærm i form af en graf. Sundhedspersonalet har hermed mulighed for at evaluere måleobjektets synkefrekvens. I SRM'en eksisterer der delsystemer. Detaljer omkring, hvordan disse er byggede og designede, henvises der til \nameref{bilag4} og \nameref{bilag5}. 
 
  
 
@@ -19,7 +19,7 @@ Figur \ref{fig:sysbeskrivelse} illustrer systembeskrivelsen for SRM'en. Systemet
 \centering
 {\includegraphics[width=10cm]
 {Figure/AktoerKontextDiagram}}
-\caption{Aktør-kontekst diagrammet illustrer det overordnet system. Her ses to aktører, der direkte interagerer med SRM'en. Den tredje aktør er en Offstage-aktør, der kommunikerer med systemet igennem en anden aktør.      }
+\caption{Aktør-kontekst diagrammet illustrer det overordnet system. Her ses to aktører, der direkte interagerer med SRM'en. Den tredje aktør er en offstage-aktør, der kommunikerer med systemet igennem elektrodeaktør.      }
 \label{fig:sysbeskrivelse}
 \end{figure}  
 
@@ -33,7 +33,7 @@ Til aktør-kontekst diagrammet følger der en en aktør beskrivelse, der beskriv
      Sundhedspersonale   	&  	Primær  	& 	Sundhedspersonalet tilkobler SRM'en til måleobjektet vha. elektroder, samt starter og evaluerer målingerne.     \\ 			  \addlinespace[2mm]
      Elektroder	&	Sekundær	& Elektroder anvendes til at måle bioimpedans og emg signaler fra måleobjektet  	 \\   \addlinespace[2mm]
 
-Måleobjekt	&	Offstage Actor	& Måleobjektet   leverer biosignaler, som elektroderne kan måle.   	 \\   \addlinespace[2mm]
+Måleobjekt	&	Offstage-aktør	& Måleobjektet   leverer biosignaler, som elektroderne kan måle.   	 \\   \addlinespace[2mm]
      
    
      \bottomrule                                                                                                                   
@@ -46,7 +46,7 @@ Måleobjekt	&	Offstage Actor	& Måleobjektet   leverer biosignaler, som elektrod
 \pagebreak
 \section{Funktionelle krav}
 
-Tabel \ref{tab:moscow} beskriver de funktionelle krav, der stilles til applikationen SRM'en. Nogle krav er vigtigere end andre, og de prioriteres vha. MosCow-metoden. Kravene i \textit{Must og Should} kategorien prioriteres højest.  I dette projekt bestræbes det at opfylde kravene i \textit{Must og Should}. 
+Tabel \ref{tab:moscow} beskriver de funktionelle krav, der stilles til applikationen SRM'en. Nogle krav er vigtigere end andre, og de prioriteres vha. MoSCoW-metoden. Kravene i \textit{Must og Should} kategorien prioriteres højest.  I dette projekt bestræbes først og fremmest at opfylde kravene i \textit{Must og Should}. 
 
 \begin{table}[H]
 
@@ -57,7 +57,7 @@ Tabel \ref{tab:moscow} beskriver de funktionelle krav, der stilles til applikati
 \hline \\
 \textbf{1. }Systemet skal have en bioimpedans sensor (BI), der kan måle bioimpedans signaler & \textbf{7. }Matlab GUI, der kan præsentere BI og EMG signaler \\[4ex]
 \textbf{2. }Systemet skal have EMG sensor, der kan måle EMG signaler & \textbf{8. }Både BI og EMG målinger skal køre simultant\\[4ex]
-\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \textbf{9. }Validere bioimpedans sensoren op imod kommerciel BI måler \\[4ex]
+\textbf{3. }Systemet skal kunne vise BI og EMG signaler over tid på en graf (offline) i Matlab  & \textbf{9. }Validere bioimpedans sensoren op imod kommerciel BI-sensor \\[4ex]
 \textbf{4. }Systemet skal kunne beregne BI på baggrund af målte spændinger & \\[4ex]
 \textbf{5. }Systemet skal kunne gemme BI og EMG målingerne & \\[4ex]
 \textbf{6. }Systemet skal kunne hente tidligere BI og EMG målinger & \\[4ex]
@@ -71,7 +71,7 @@ Tabel \ref{tab:moscow} beskriver de funktionelle krav, der stilles til applikati
 \textbf{11. }Machine Learning for at diskriminere mellem synkerefleks og støj (tale og hoste) & \textbf{15. }EMG og BI signalerne overføres til EPJ  \\[4ex]
 \textbf{12. }Systemt skal udføres på et færdigt print& \textbf{16. }Tage højde for anatomiske forskelle mellem kønnene\\[4ex]
 & \\
-\textbf{13. }Systemet gemmer BI og EMG målingerne i en Database& \\[4ex]
+\textbf{13. }Systemet gemmer BI og EMG målingerne i en database& \\[4ex]
 & \\
 
 \end{tabularx}
@@ -110,22 +110,22 @@ Tabel \ref{tab:moscow} beskriver de funktionelle krav, der stilles til applikati
 %\end{table}
 
 \pagebreak
-For at realisere \textit{Must og Should } kravene, er der udviklet use cases, der bidrager til opfyldelsen  af disse krav. Brugergrænsefladen til applikationen er forsøgt forsimplet, således at brugeren kun behøver at forholde sig til behandlede data og ikke rådata. På Figur \ref{UseCaseV1} ses det to aktører, der interagerer med tre use cases.  Herunder beskrives funktionaliteten af disse use cases. 
+For at realisere \textit{Must og Should } kravene, er der udviklet use cases, der bidrager til opfyldelsen af disse krav. Brugergrænsefladen til applikationen er forsøgt forsimplet, således at brugeren kun behøver at forholde sig til behandlede data og ikke rådata. På Figur \ref{UseCaseV1} ses de to aktører, der interagerer med tre use cases.  Herunder beskrives funktionaliteten af disse use cases. 
 
 
 \begin{figure}[H]
 \centering
 {\includegraphics[width=10cm]
 {Figure/usecasediagram}}
-\caption{UseCase diagram for synkerefleksmonitoren. Systemet består af tre usecases, der tilsammen bruges til at starte, måle, oploade tidligere målinger og gemme BI og EMG målinger}
+\caption{Use case diagram for synkerefleksmonitoren. Systemet består af tre usecases, der tilsammen bruges til at starte, måle, oploade tidligere målinger og gemme BI og EMG målinger}
 \label{UseCaseV1}
 \end{figure}
 
 \textbf{Use Case 1 - Start Measurements:}
-Denne use case bruges bl.a. til at igangsætte en måling. Når sundhedspersonalet trykker på denne knap, køres der en række funktioner, der til sammen, starter, måler, behandler og visualisere to målinger. I  \nameref{bilag6} kan du bl.a. læse om de underliggende funktioner, som eksekveres, når denne knap aktiveres af brugeren.\\
+Denne use case bruges bl.a. til at igangsætte en måling. Når sundhedspersonalet interagerer med use casen, køres der en række funktioner, der tilsammen, starter, måler, behandler og visualisere to målinger. I  \nameref{bilag6} kan der bl.a. læses om de underliggende funktioner, som eksekveres, når denne use case aktiveres af brugeren.\\
 
 \textbf{Use Case 2 - Save Measurements:}
-Denne use case muliggør at brugeren kan gemme to målinger lokalt på computeren i en csv-fil. Her gemmes de to målinger, som brugeren har taget simultant i use case 1 \\
+Denne use case muliggør at brugeren kan gemme to målinger lokalt på computeren i en CSV-fil. Her gemmes de to målinger, som brugeren har taget simultant i use case 1. \\
  
 \textbf{Use Case 3  - Load Measurements:} 
 Denne use case tillader indlæsning af tidligere målinger, som er gemt lokalt på pc'en.  
@@ -147,11 +147,11 @@ Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. 
 	Navn 					&& 	Start Measurements\\
 	Mål 					&& 	At måle to signaler simultant \\
 	Initiering 				&& 	Startes af Sundhedspersonalet\\
-	Aktører 				&& 	Sundhedspersonale (primær)\\
+	Aktører 				&& 	Sundhedspersonale (primær), Elektroder (sekundær)\\
 	
 	Samtidige forekomster  	&& 	1 måling pr. kørsel \\
-	Forudsætninger 			&&	BI-måleren og EMG-måleren er ledige og operationelle. Elektroderne påsat måleobjektet og GUI-vinduet er åbent \\ 
-	Resultat 				&& 	To målinger foretages og vises til brugeren\\ \midrule
+	Forudsætninger 			&&	BI-sensoren og EMG-sensoren er ledige og operationelle. Elektroderne påsat måleobjektet og GUI-vinduet er åbent \\ 
+	Resultat 				&& 	To målinger foretages og vises til sundhedspersonalet\\ \midrule
 	Hovedscenarie 			&    1. 	&	Sundhedspersonalet trykker på knappen "Start Measurements "\\				 	
 							&    2. 	& 	En række funktioner køres automatisk og systemet sørger for at to målinger foretages simultant\\
 	
@@ -168,27 +168,31 @@ Nedenunder er der en fully dressed for \textit{"Start Measurements"} use casen. 
 \pagebreak
 \section{Ikke-funktionelle krav}
 
-Hvor de funktionelle krav kortlægger applikationens specifikke adfærd, fokuserer ikke-funktionelle krav applikationens kvalitetsaspekter \cite{ISELektioner}.
-Der benyttes en model kaldet $(F)URPS$ til at sætte ord på, hvad kunden, i dette projektets tilfælde gruppen, opfatter som kvalitet. Ved brug $(F)URPS$ skal man tage stilling til produktets funktionalitet, brugervenlighed, pålidelighed, ydeevne og supportering \cite{ISELektioner}. Man kan vælge at udvide  modellen til  $(F)URPS^{+}$. Her skal man yderligere forholde sig til flere kvalitetsbegreber. Lige som i de funktionelle krav er de ikke-funktionelle krav prioriteret ved brug af Moscow-metoden. Der er valgt at inddrage kun \textit{must-kategorien}. I dette projekt anvendes kun $(F)URPS$ med undtagelse af  elementet funktionalitet. Det vurderes af gruppen at  dette element er afdækket i de funktionelle krav, og derfor er der ingen grund til at gentage det under de ikke-funktionelle krav. De resterende krav der stilles til produktet under ikke-funktionelle krav fokuserer på kvaliteter, der er vurderet nødvendige for produktets bruger. Nedenunder ses et udvalg af de krav, der  er stillet under $(F)URPS$ elementerne brugervenlighed, pålidelighed, ydeevne og supportering. 
+Hvor de funktionelle krav kortlægger applikationens specifikke adfærd, fokuserer ikke-funktionelle krav på applikationens kvalitetsaspekter \cite{ISELektioner}.
+Der benyttes en model kaldet $(F)URPS$ til at sætte ord på, hvad kunden, i dette projektets tilfælde gruppen, opfatter som kvalitet. Ved brug $(F)URPS$ skal man tage stilling til produktets funktionalitet, brugervenlighed, pålidelighed, ydeevne og supportering \cite{ISELektioner}. Man kan vælge at udvide  modellen til  $(F)URPS^{+}$. Her skal man yderligere forholde sig til flere kvalitetsbegreber. Lige som i de funktionelle krav er de ikke-funktionelle krav prioriteret ved brug af MoSCoW-metoden. Der er valgt at inddrage kun \textit{must-kategorien}. 
+
+I dette bachelorprojekt anvendes kun $(F)URPS$ med undtagelse af  elementet funktionalitet. Det vurderes af gruppen at  dette element er afdækket i de funktionelle krav, og derfor er der ingen grund til at gentage det under de ikke-funktionelle krav. De resterende krav der stilles til produktet under ikke-funktionelle krav fokuserer på kvaliteter, der er vurderet nødvendige for produktets bruger. 
+
+Nedenunder ses et udvalg af de krav, der  er stillet under $(F)URPS$ elementerne brugervenlighed, pålidelighed, ydeevne og supportering. 
 
 \begin{itemize}
 \item Sundhedspersonalet skal kunne aflæse et synk på graferne fra GUI'en på 2 meters afstand
 
-\item Det skal maksimalt tage 10 minutter(0.17h) at gendanne Synkerefleksmonitor (MTTR - Mean Time To Restore)
+\item Det skal maksimalt tage 10 minutter(0.17 timer) at gendanne Synkerefleksmonitor (MTTR - Mean Time To Restore)
 
 \item GUI'ens objekter skal maksimum have en responstid på 30 sekunder. 
 
 \item Sundhedspersonalet skal kunne udskifte elektroderne inden for 4 minutter.
 \end{itemize}
 
-Det skal oplyses at under de ikke-funktionelle krav er der medtaget nogle krav, som er svært at teste under dette projektets rammer. Herunder ses et pr. af dem:
+Det skal oplyses at under de ikke-funktionelle krav er der medtaget nogle krav, som er svære at teste under dette projektets rammer. Herunder ses et udvalg af dem:
 
 \begin{itemize}
 \item  Synkerefeksmonitorens hardware skal kunne fungere under et temperaturforhold, der ligger mellem 10 til 40°C.
 \item Synkerefleksmonitor skal have en oppetid uden nedbrud på minimum 1 dag (24 timer) (MTBF - Mean Time Between Failure)
 \end{itemize}
 
-Selvom disse krav ikke kan testes, er det valgt at inkludere dem, da det er vigtigt at oplyse kunden, at produktet ikke er testet under de nævnte forhold. I \nameref{bilag1} kan man læse de detaljerede ikke-funktionelle krav.
+Selvom disse krav som nævnt ikke kan testes, er det valgt at inkludere dem, da det er vigtigt at oplyse kunden, at produktet ikke er testet under de nævnte forhold. I \nameref{bilag1} kan man læse de detaljerede ikke-funktionelle krav.
 
  
 
