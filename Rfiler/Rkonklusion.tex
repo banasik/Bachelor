@@ -1,13 +1,32 @@
 \chapter{Konklusion}
 
-Formålet med bachelorprojektet var at udvikle et device bestående af en prisbillig BI-sensor og EMG-sensor. Devicet kan monitorere og detektere synkefrekvensen hos personer der har en normal synkefunktion. Dette device har resulteret i et proof-of-concept system kaldet SRM. Bachelorprojektet startede med en analyse om Dysfagi, og samtidig opbygning af en BI-sensor. Dette resulterede i en række krav som blev prioriteret vha. MoSCoW-metoden. SRM har gennem accepttesten vist sig at opfylde alle \textit{Must} krav samt de fleste \textit{Should} krav i kravspecifikationen. Dog var det ikke muligt at validere SRM op imod en kommerciel BI-sensor, selvom gruppen var besiddelse af denne.
+Det er lykkedes gennem projektperioden at arbejde efter den overordnede plan for, hvordan vi vil strukturere arbejdet.  Ligeledes af det lykkes at overholde gruppens samarbejdskontrakt. Den strukturmæssige del af projektet, med hensyn til mødeindkaldelser og referater er også overholdt. 
 
-Resultaterne fra tests af SRM har vist, at det er muligt at monitorere både BI- og EMG-signaler simultant, samtidig med at antal registeres af en algoritme. Det var ikke muligt at foretage tests på personer med dysfagi, da der ikke ønskes at påføre yderligere traume på et i forvejen ramt vævssegment. De resultater SRM har kunne producere har været til tider fine og andre gange ikke brugbare. Det skyldes bl.a. at SRM er implementeret på et fumlebræt, som gør at det kan være svært at reproducere resultater, da det er følsomt over for berøring og støj fra nærliggende kilder såsom computer.
+Gruppen har i fællesskab formået at udarbejde en analysefase, der har undersøgt et kendt og dokumenteret kredsløb fra en videnskabelig artikel. I analysefasen er det konstateret at det undersøgt kredsløb ikke kan anvendes til at detektere et synk i dens nuværende form, som er beskrevet i artiklen. På baggrund af denne konstatering, er der udarbejdet en række krav, samt arkitektur og design til en prisvenlig alternativ løsning. Løsningen består af delsystemer fra det undersøgte kredsløb og en udvidelse med en række nye komponenter.  Der blev herefter udført en modultest, integrationstest og accepttest på den nye løsning. Resultaterne af disse tests er dokumenteret i et samlede testdokument, se \nameref{bilag6}.
+ 
+Under integrationstesten og accepttesten blev det udviklet system koblet sammen med et testobjekt, der har en normal synkefunktion.  Det kunne observereres at systemet er i stand til at detektere og monitorere måleobjektets synkefrekvens.  Denne observation bestod i at aflæse et BI-signal og et EMG-signal. Begge signal tilsammen siger noget om måleobjektets synkefunktion. 
+
+Med disse observerede resultater, kan det siges at systemet opfylder de funktionelle krav til produktet på nær ét krav. Ligeledes kan det konkluderes at systemet opfylder nogle af de ikke-funktionelle krav. 
+
+Selvom systemet opfylder de omtalte krav er det også observeret at systemet er ustabilt. Der er under kapitlet fremtidigt arbejde foreslået en række aktionspunkter, som kan forbedre systemet som helhed.
+
+I henhold til problemformuleringen kan det konkluderes at dette bachelorprojekt har udviklet et prisbilligt proof-of-concept produkt, der kombinerer BI-sensor med EMG-sensor og kan på nuværende stadie detektere synkefunktionen hos raske objekter.  
 
 
-Bachelorprojektet har omhandlet en del hardware udvikling. Dette resulterede i en projektstart, hvor der var mange ting som skulle undersøges i hvordan BI måles og bygges. Det at have mulighed for at bygge videre på de tidligere semesters læring, hjalp dog en hel del. Bachelorprojektet har givet et større kendskab om hardware og udviklingen af software til at styre en måleenhed. 
 
-Der er dog stadig en del yderligere udviklingsarbejde for at SRM bliver mere stabil og nøjagtig. SRM vil kunne senere blive anvendt til klinisk brug på patienter som et objektiv beslutningsunderstøttene værktøj for klinikeren.
+
+
+
+
+
+%Formålet med bachelorprojektet var at udvikle et device bestående af en prisbillig BI-sensor og EMG-sensor. Devicet kan monitorere og detektere synkefrekvensen hos personer der har en normal synkefunktion. Dette device har resulteret i et proof-of-concept system kaldet SRM. Bachelorprojektet startede med en analyse om Dysfagi, og samtidig opbygning af en BI-sensor. Dette resulterede i en række krav som blev prioriteret vha. MoSCoW-metoden. SRM har gennem accepttesten vist sig at opfylde alle \textit{Must} krav samt de fleste \textit{Should} krav i kravspecifikationen. Dog var det ikke muligt at validere SRM op imod en kommerciel BI-sensor, selvom gruppen var besiddelse af denne.
+%
+%Resultaterne fra tests af SRM har vist, at det er muligt at monitorere både BI- og EMG-signaler simultant, samtidig med at antal registeres af en algoritme. Det var ikke muligt at foretage tests på personer med dysfagi, da der ikke ønskes at påføre yderligere traume på et i forvejen ramt vævssegment. De resultater SRM har kunne producere har været til tider fine og andre gange ikke brugbare. Det skyldes bl.a. at SRM er implementeret på et fumlebræt, som gør at det kan være svært at reproducere resultater, da det er følsomt over for berøring og støj fra nærliggende kilder såsom computer.
+%
+%
+%Bachelorprojektet har omhandlet en del hardware udvikling. Dette resulterede i en projektstart, hvor der var mange ting som skulle undersøges i hvordan BI måles og bygges. Det at have mulighed for at bygge videre på de tidligere semesters læring, hjalp dog en hel del. Bachelorprojektet har givet et større kendskab om hardware og udviklingen af software til at styre en måleenhed. 
+%
+%Der er dog stadig en del yderligere udviklingsarbejde for at SRM bliver mere stabil og nøjagtig. SRM vil kunne senere blive anvendt til klinisk brug på patienter som et objektiv beslutningsunderstøttene værktøj for klinikeren.
 
 
 
