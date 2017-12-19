@@ -3,7 +3,7 @@
 I dette kapitel vil der blive diskuteret relevante dele af de opnåede resultater og deres betydning for bachelorprojektet, samt hvilke muligheder og begrænsninger der er ved anvendelse af SRM. Til slut opsummeres der med den samlet vurdering af de opnåede resultater med relation til problemformuleringen.
 
 \section{Konstant strøm}
-Ud fra de forløbende tests kom strømmen til at ændre sig. Ønsket var en konstant strøm på 283 $\mu A$. Problemet ved ikke at have en fast strøm er at det ikke bliver valide BI-signaler, da denne faste strøm bruges til at udregne impedansen af BI-signalet. Strømmen faldt til 104 $\mu A$, da elektroderne blev påmonteret måleobjektet, hvilket ikke stemmer overens med den beregnede/målte 283 $\mu A$. Da MyoWare Muscle Sensor blev tilføjet steg strømmen igen til 283 $\mu A$. Det kan skyldes det at MyoWare Muscle Sensor bruger en reference elektrode, som nu har fælles stel med BI-sensoren. Dette er ikke med i designet af BI-sensoren og derfor er der ikke taget høje for dette. Det kan være en mulig tilføjelse til BI-sensoren, da referance elektrode bliver brugt hvor man ønsker at måle BI-signaler simultant med EMG-signaler\cite{Nahrstaedt2012a}. 
+Ud fra de forløbende tests kom strømmen til at ændre sig. Ønsket var en konstant strøm på 283 $\mu A$. Problemet ved ikke at have en fast strøm er, at BI-signalet ikke bliver valide, da denne faste strøm bruges til at udregne impedansen af BI-signalet. Strømmen faldt til 104 $\mu A$, da elektroderne blev påmonteret måleobjektet, hvilket ikke stemmer overens med den beregnede/målte 283 $\mu A$. Da MyoWare Muscle Sensor blev tilføjet steg strømmen igen til 283 $\mu A$. Det kan skyldes at MyoWare Muscle Sensor bruger en reference elektrode, som nu har fælles stel med BI-sensoren. Dette er ikke med i designet af BI-sensoren, og derfor er der ikke taget høje for dette. En mulig tilføjelse til BI-sensoren, kunne være en reference elektrode til at stabilisere strømmen. Denne referance elektrode er også anvendt i nogle litteratur. Se denne artikel\cite{Nahrstaedt2012a}. 
 
 \section{AA filter}
 BI-signalet afhænger af et AA filter der er korrekt bygget og fungerer efter hensigten. Ellers vil den efterfølgende signalbehandling og visning af signalet være ubrugeligt pga. aliasering. Testene viser at AA filter fungerer efter hensigten ved at blive dæmpet ned til 95 dB ved 250 kHz. 
@@ -16,7 +16,7 @@ Ved brug af de store EKG elektroder var der begrænset fleksibilitet mht. placer
 
 
 \section{Digital signal behandling}
-Da signalerne er samplet med en forholdsvis høj samplingrate på 500 kHz, giver det en stor mængde data. Med fordel kan denne store mængde data være med til at det er muligt at signal behandle BI-signalet i det digitale domæne. Behandlingen af envelope i det digitale domæne, gjorde at det nu ikke var nødvendigt med yderligere hardware komponenter, såsom ensretter og et lavpas filter.
+Da signalerne er samplet med en forholdsvis høj samplingrate på 500 kHz, giver det en stor mængde data. Med fordel kan denne store mængde data være med til, at med til at muliggør at signalbehandling af BI-signalet kan foregår  digitale domæne. Behandlingen af envelope i det digitale domæne, gjorde at det nu ikke var nødvendigt med yderligere hardware komponenter, såsom ensretter og et lavpas filter.
 
 \section{GUI}
 
@@ -95,7 +95,7 @@ Det færdige resultat af SRM kan ses på figur \ref{Fig:guiDone2}. Resultatet er
 
 
 
-Den samlet vurdering af de opnåede resultater med relation til problemformuleringen kan opstilles i punktform. Disse punkter er samtidig resultater som vi er særlig stolte af. 
+Den samlet vurdering af de opnåede resultater med relation til problemformuleringen kan opstilles i punktform. Disse punkter opsummerer resultater som vi er særlig stolte af. 
 
 \begin{center}
 \begin{large}
